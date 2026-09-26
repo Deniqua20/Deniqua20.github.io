@@ -7,15 +7,605 @@
   <title>Labs & Projects | Dee's Cyber Corner</title>
 
   <meta name="description"
-        content="Explore hands-on cybersecurity labs and projects from Dee's Cyber Corner, including security monitoring, detection engineering, cloud security, IAM, vulnerability management, and more.">
+        content="Cybersecurity labs and case studies documenting hands-on work across security operations, cloud security, IAM, vulnerability management, network security, and digital forensics.">
 
-<link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=4">
+
+  <style>
+
+    /* ==========================================
+       LABS PAGE — EDITORIAL REDESIGN
+       ========================================== */
+
+    .labs-page {
+      width: 100%;
+    }
+
+
+    /* ---------- PAGE INTRO ---------- */
+
+    .lab-intro {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 105px 7% 75px;
+    }
+
+    .lab-kicker {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+
+      margin-bottom: 24px;
+
+      color: var(--gold);
+
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+    }
+
+    .lab-kicker::after {
+      content: "";
+
+      width: 70px;
+      height: 1px;
+
+      background: var(--gold);
+      opacity: .55;
+    }
+
+    .lab-intro h1 {
+      max-width: 850px;
+
+      margin: 0;
+
+      font-family: var(--serif);
+      font-size: clamp(4rem, 8vw, 7rem);
+      font-weight: 500;
+      line-height: .92;
+
+      color: var(--cream);
+    }
+
+    .lab-intro h1 em {
+      color: var(--pink);
+      font-weight: 500;
+    }
+
+    .lab-intro-copy {
+      max-width: 660px;
+
+      margin-top: 30px;
+
+      color: var(--soft-cream);
+
+      font-size: 1.02rem;
+      line-height: 1.8;
+    }
+
+    .lab-disciplines {
+      margin-top: 42px;
+      padding-top: 22px;
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 24px;
+
+      border-top: 1px solid var(--border);
+
+      color: #9e8c7e;
+
+      font-size: .67rem;
+      font-weight: 500;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .lab-disciplines span::before {
+      content: "✦";
+
+      margin-right: 10px;
+
+      color: var(--pink);
+      font-size: .55rem;
+    }
+
+
+    /* ---------- FEATURED CASE STUDY ---------- */
+
+    .featured-case {
+      padding: 80px 7% 95px;
+
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(179, 29, 61, .055),
+          transparent 45%
+        );
+    }
+
+    .featured-case-inner {
+      max-width: 1180px;
+      margin: auto;
+    }
+
+    .case-heading-row {
+      margin-bottom: 36px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 30px;
+    }
+
+    .archive-label {
+      color: var(--gold);
+
+      font-size: .66rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    .archive-number {
+      font-family: var(--serif);
+      font-size: 1rem;
+
+      color: #796754;
+    }
+
+
+    /* ---------- MAIN PROJECT ---------- */
+
+    .case-study {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(280px, .7fr);
+
+      border-top: 1px solid rgba(237,47,117,.55);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .case-main {
+      padding: 48px 55px 50px 0;
+    }
+
+    .case-category {
+      margin-bottom: 17px;
+
+      color: var(--pink);
+
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .case-main h2 {
+      max-width: 760px;
+
+      margin: 0;
+
+      font-family: var(--serif);
+      font-size: clamp(2.7rem, 5vw, 4.8rem);
+      font-weight: 500;
+      line-height: 1;
+
+      color: var(--cream);
+    }
+
+    .case-description {
+      max-width: 700px;
+
+      margin-top: 26px;
+
+      color: #b9a89a;
+
+      font-size: .96rem;
+      line-height: 1.8;
+    }
+
+
+    /* ---------- TOOLS ---------- */
+
+    .case-tools {
+      margin-top: 32px;
+
+      color: var(--gold);
+
+      font-size: .67rem;
+      letter-spacing: .1em;
+      line-height: 2;
+      text-transform: uppercase;
+    }
+
+    .case-tools span {
+      color: #77685e;
+      margin: 0 8px;
+    }
+
+
+    /* ---------- PROJECT FACTS ---------- */
+
+    .case-facts {
+      border-left: 1px solid var(--border);
+    }
+
+    .case-fact {
+      padding: 25px 0 25px 32px;
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .case-fact:last-child {
+      border-bottom: none;
+    }
+
+    .case-fact span {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #796d64;
+
+      font-size: .59rem;
+      font-weight: 600;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+    }
+
+    .case-fact strong {
+      display: block;
+
+      color: var(--cream);
+
+      font-family: var(--serif);
+      font-size: 1.08rem;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+
+    /* ---------- CASE STUDY LINK ---------- */
+
+    .case-action {
+      margin-top: 35px;
+    }
+
+    .case-action a {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+
+      color: var(--pink);
+
+      font-size: .69rem;
+      font-weight: 600;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+
+      transition: gap .25s ease;
+    }
+
+    .case-action a:hover {
+      gap: 20px;
+    }
+
+
+    /* ---------- PROJECT ARCHIVE ---------- */
+
+    .project-archive {
+      max-width: 1180px;
+
+      margin: auto;
+      padding: 100px 7% 120px;
+    }
+
+    .archive-header {
+      margin-bottom: 48px;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      gap: 40px;
+    }
+
+    .archive-header h2 {
+      margin-top: 10px;
+
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .archive-header p {
+      max-width: 500px;
+
+      justify-self: end;
+
+      color: #9e8c7e;
+
+      font-size: .9rem;
+      line-height: 1.7;
+    }
+
+
+    /* ---------- ARCHIVE ROWS ---------- */
+
+    .project-list {
+      border-top: 1px solid var(--border);
+    }
+
+    .project-row {
+      min-height: 155px;
+      padding: 30px 0;
+
+      display: grid;
+      grid-template-columns: 70px minmax(260px, 1fr) 1fr 120px;
+      align-items: center;
+      gap: 30px;
+
+      border-bottom: 1px solid var(--border);
+
+      transition:
+        padding-left .25s ease,
+        background .25s ease;
+    }
+
+    a.project-row:hover {
+      padding-left: 12px;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(237,47,117,.055),
+          transparent 70%
+        );
+    }
+
+    .project-index {
+      color: var(--gold);
+
+      font-family: var(--serif);
+      font-size: 1rem;
+    }
+
+    .project-title small {
+      display: block;
+
+      margin-bottom: 8px;
+
+      color: var(--pink);
+
+      font-size: .58rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .project-title h3 {
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      font-weight: 500;
+      line-height: 1.15;
+    }
+
+    .project-summary {
+      color: #9f8e80;
+
+      font-size: .82rem;
+      line-height: 1.65;
+    }
+
+    .project-status {
+      text-align: right;
+
+      color: #74665d;
+
+      font-size: .59rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    a.project-row .project-status {
+      color: var(--pink);
+    }
+
+    .project-row.pending {
+      opacity: .63;
+    }
+
+
+    /* ---------- METHOD ---------- */
+
+    .lab-method {
+      padding: 90px 7%;
+
+      border-top: 1px solid var(--border);
+
+      background: rgba(18,11,8,.45);
+    }
+
+    .method-inner {
+      max-width: 1180px;
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: .7fr 1.3fr;
+      gap: 70px;
+    }
+
+    .method-title h2 {
+      margin-top: 10px;
+
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 4vw, 3.7rem);
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .method-copy {
+      max-width: 650px;
+
+      color: #aa998b;
+
+      font-size: .92rem;
+      line-height: 1.8;
+    }
+
+    .method-steps {
+      margin-top: 30px;
+
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+
+      border-top: 1px solid var(--border);
+    }
+
+    .method-step {
+      padding: 18px 18px 0 0;
+    }
+
+    .method-step span {
+      display: block;
+
+      margin-bottom: 6px;
+
+      color: var(--pink);
+
+      font-family: var(--serif);
+      font-size: .7rem;
+    }
+
+    .method-step strong {
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+
+    /* ---------- TABLET ---------- */
+
+    @media (max-width: 900px) {
+
+      .case-study {
+        grid-template-columns: 1fr;
+      }
+
+      .case-main {
+        padding-right: 0;
+      }
+
+      .case-facts {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        border-top: 1px solid var(--border);
+        border-left: none;
+      }
+
+      .case-fact {
+        padding: 22px;
+
+        border-right: 1px solid var(--border);
+      }
+
+      .project-row {
+        grid-template-columns: 50px 1fr 1fr;
+      }
+
+      .project-status {
+        display: none;
+      }
+
+      .method-inner {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+    }
+
+
+    /* ---------- MOBILE ---------- */
+
+    @media (max-width: 650px) {
+
+      .lab-intro {
+        padding: 70px 7% 60px;
+      }
+
+      .lab-intro h1 {
+        font-size: clamp(3.5rem, 17vw, 5rem);
+      }
+
+      .featured-case {
+        padding-top: 65px;
+        padding-bottom: 70px;
+      }
+
+      .case-heading-row {
+        align-items: center;
+      }
+
+      .case-main {
+        padding: 35px 0;
+      }
+
+      .case-main h2 {
+        font-size: 2.7rem;
+      }
+
+      .case-facts {
+        grid-template-columns: 1fr;
+      }
+
+      .case-fact {
+        padding: 20px 0;
+
+        border-right: none;
+      }
+
+      .archive-header {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .archive-header p {
+        justify-self: start;
+      }
+
+      .project-row {
+        padding: 28px 0;
+
+        grid-template-columns: 38px 1fr;
+        gap: 18px;
+      }
+
+      .project-summary {
+        grid-column: 2;
+      }
+
+      .method-steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+    }
+
+  </style>
 </head>
+
 
 <body>
 
   <!-- NAVIGATION -->
   <header class="navbar">
+
     <a href="index.html" class="logo">
       <span class="logo-butterfly">🦋</span>
       <span>Dee</span>
@@ -31,275 +621,343 @@
       <a href="certifications.html">Certs</a>
       <a href="about.html">About</a>
     </nav>
+
   </header>
 
 
-  <main>
+  <main class="labs-page">
 
-    <!-- LABS HERO -->
-    <section class="labs-hero">
 
-      <p class="section-label">HANDS-ON CYBERSECURITY</p>
+    <!-- INTRO -->
+
+    <section class="lab-intro">
+
+      <div class="lab-kicker">
+        Project Archive / 2026
+      </div>
 
       <h1>
-        Labs <span>& Projects</span>
+        Labs <em>& Projects</em>
       </h1>
 
-      <p class="labs-intro">
-        This is where learning becomes practice. Explore the
-        environments I've built, problems I've investigated,
-        security concepts I've applied, and lessons I've
-        learned along the way.
+      <p class="lab-intro-copy">
+        A working archive of the environments I've built,
+        security problems I've investigated, and concepts I've
+        applied through hands-on cybersecurity work.
       </p>
 
-      <div class="labs-philosophy">
-        <span>LEARN</span>
-        <span>✦</span>
-        <span>BUILD</span>
-        <span>✦</span>
-        <span>ANALYZE</span>
-        <span>✦</span>
-        <span>IMPROVE</span>
+      <div class="lab-disciplines">
+        <span>Security Operations</span>
+        <span>Cloud Security</span>
+        <span>IAM</span>
+        <span>Network Security</span>
+        <span>Vulnerability Management</span>
+        <span>Digital Forensics</span>
       </div>
 
     </section>
 
 
-    <!-- FEATURED PROJECT -->
-    <section class="featured-projects">
+    <!-- FEATURED CASE STUDY -->
 
-      <div class="labs-section-heading">
+    <section class="featured-case">
 
-        <p class="section-label">FEATURED PROJECT</p>
+      <div class="featured-case-inner">
 
-        <h2>From Concept to Detection.</h2>
+        <div class="case-heading-row">
 
-        <p>
-          A closer look at one of my end-to-end cybersecurity
-          projects — from identifying the problem to building,
-          testing, and improving the solution.
-        </p>
+          <span class="archive-label">
+            Featured Case Study
+          </span>
 
-      </div>
+          <span class="archive-number">
+            01 / SOC
+          </span>
+
+        </div>
 
 
-      <a href="projects/azure-sentinel-soc.html"
-         class="featured-lab-card">
+        <article class="case-study">
 
-        <div class="featured-lab-top">
+          <div class="case-main">
 
-          <div>
-            <span class="project-type">
-              SECURITY OPERATIONS · CLOUD SECURITY
-            </span>
+            <p class="case-category">
+              Security Operations / Cloud Security
+            </p>
 
-            <h3>
+            <h2>
               Cloud-Based SOC Monitoring
               & Threat Detection
-            </h3>
-          </div>
+            </h2>
 
-          <span class="project-number">01</span>
-
-        </div>
-
-
-        <p class="featured-description">
-          Built and tested a cloud-based security monitoring
-          environment using Microsoft Azure and Microsoft Sentinel
-          to detect unauthorized login attempts and brute-force
-          activity.
-        </p>
-
-
-        <div class="project-tags">
-          <span>Microsoft Azure</span>
-          <span>Microsoft Sentinel</span>
-          <span>KQL</span>
-          <span>Log Analytics</span>
-          <span>SIEM</span>
-          <span>Detection Engineering</span>
-        </div>
-
-
-        <div class="project-preview">
-
-          <div>
-            <span class="preview-number">01</span>
-            <strong>Build</strong>
-            <p>
-              Deployed a Windows honeypot environment
-              in Microsoft Azure.
+            <p class="case-description">
+              Built and tested a cloud-based security monitoring
+              environment using Microsoft Azure and Microsoft Sentinel
+              to identify unauthorized authentication activity.
+              Windows security events were centralized for analysis,
+              queried with KQL, and used to generate Sentinel incidents.
+              Detection logic was then refined to improve alert quality.
             </p>
-          </div>
 
-          <div>
-            <span class="preview-number">02</span>
-            <strong>Monitor</strong>
-            <p>
-              Centralized Windows security events
-              for visibility and analysis.
+            <p class="case-tools">
+              Microsoft Azure
+              <span>/</span>
+              Sentinel
+              <span>/</span>
+              KQL
+              <span>/</span>
+              Log Analytics
             </p>
+
+            <div class="case-action">
+              <a href="projects/azure-sentinel-soc.html">
+                View Full Case Study →
+              </a>
+            </div>
+
           </div>
 
-          <div>
-            <span class="preview-number">03</span>
-            <strong>Detect</strong>
-            <p>
-              Created KQL detection logic for
-              failed authentication activity.
-            </p>
-          </div>
 
-          <div>
-            <span class="preview-number">04</span>
-            <strong>Improve</strong>
-            <p>
-              Tuned detection filters and thresholds
-              to improve alert quality.
-            </p>
-          </div>
+          <aside class="case-facts">
 
-        </div>
+            <div class="case-fact">
+              <span>Problem</span>
+              <strong>
+                Limited visibility into unauthorized login activity
+              </strong>
+            </div>
 
+            <div class="case-fact">
+              <span>Environment</span>
+              <strong>
+                Azure + Windows
+              </strong>
+            </div>
 
-        <div class="featured-project-link">
-          VIEW FULL CASE STUDY →
-        </div>
+            <div class="case-fact">
+              <span>Detection</span>
+              <strong>
+                Event ID 4625 + KQL
+              </strong>
+            </div>
 
-      </a>
+            <div class="case-fact">
+              <span>Outcome</span>
+              <strong>
+                Sentinel incidents generated and detection tuned
+              </strong>
+            </div>
+
+          </aside>
+
+        </article>
+
+      </div>
 
     </section>
 
 
-    <!-- PROJECT LIBRARY -->
-    <section class="project-library">
+    <!-- PROJECT ARCHIVE -->
 
-      <div class="labs-section-heading">
+    <section class="project-archive">
 
-        <p class="section-label">PROJECT LIBRARY</p>
+      <div class="archive-header">
 
-        <h2>Explore the Lab.</h2>
+        <div>
+
+          <span class="archive-label">
+            Project Library
+          </span>
+
+          <h2>
+            The Archive.
+          </h2>
+
+        </div>
 
         <p>
-          My project library will continue growing as I build,
-          investigate, test, and document new security concepts.
+          Each case study documents the problem, environment,
+          implementation, evidence, results, and what I learned
+          through the process.
         </p>
 
       </div>
 
 
-      <div class="lab-grid">
+      <div class="project-list">
 
-        <!-- ACTIVE PROJECT -->
+
+        <!-- PROJECT 01 -->
+
         <a href="projects/azure-sentinel-soc.html"
-           class="lab-card">
+           class="project-row">
 
-          <div class="lab-card-header">
-            <span class="lab-category">SOC / SIEM</span>
-            <span class="lab-status complete">COMPLETE</span>
+          <span class="project-index">
+            01
+          </span>
+
+          <div class="project-title">
+
+            <small>
+              SOC / SIEM
+            </small>
+
+            <h3>
+              Microsoft Sentinel SOC Monitoring
+            </h3>
+
           </div>
 
-          <h3>Microsoft Sentinel SOC Monitoring</h3>
-
-          <p>
-            Cloud-based monitoring and detection environment
-            focused on unauthorized authentication activity.
+          <p class="project-summary">
+            Azure-based monitoring and detection environment
+            focused on failed authentication and unauthorized
+            login activity.
           </p>
 
-          <div class="mini-tags">
-            <span>Azure</span>
-            <span>Sentinel</span>
-            <span>KQL</span>
-          </div>
-
-          <span class="lab-link">
-            View Project →
+          <span class="project-status">
+            Case Study →
           </span>
 
         </a>
 
 
-        <!-- PLACEHOLDER -->
-        <article class="lab-card coming-soon">
+        <!-- PROJECT 02 -->
 
-          <div class="lab-card-header">
-            <span class="lab-category">NETWORK SECURITY</span>
-            <span class="lab-status">DOCUMENTING</span>
+        <article class="project-row pending">
+
+          <span class="project-index">
+            02
+          </span>
+
+          <div class="project-title">
+
+            <small>
+              Network Security
+            </small>
+
+            <h3>
+              Network & Vulnerability Analysis
+            </h3>
+
           </div>
 
-          <h3>Network & Vulnerability Analysis</h3>
-
-          <p>
-            Asset discovery, network traffic analysis,
-            vulnerability identification, and remediation.
+          <p class="project-summary">
+            Asset discovery, traffic analysis, vulnerability
+            identification, security findings, and remediation.
           </p>
 
-          <div class="mini-tags">
-            <span>Wireshark</span>
-            <span>Networking</span>
-            <span>Vulnerability Analysis</span>
-          </div>
-
-          <span class="lab-link muted">
-            Case Study Coming Soon
+          <span class="project-status">
+            Documenting
           </span>
 
         </article>
 
 
-        <!-- PLACEHOLDER -->
-        <article class="lab-card coming-soon">
+        <!-- PROJECT 03 -->
 
-          <div class="lab-card-header">
-            <span class="lab-category">DIGITAL FORENSICS</span>
-            <span class="lab-status">PLANNED</span>
+        <article class="project-row pending">
+
+          <span class="project-index">
+            03
+          </span>
+
+          <div class="project-title">
+
+            <small>
+              Digital Forensics
+            </small>
+
+            <h3>
+              Digital Forensics Investigation
+            </h3>
+
           </div>
 
-          <h3>Digital Forensics Investigation</h3>
-
-          <p>
-            Evidence acquisition, artifact analysis,
-            timeline development, and forensic reporting.
+          <p class="project-summary">
+            Evidence handling, artifact analysis, timeline
+            development, investigative reasoning, and reporting.
           </p>
 
-          <div class="mini-tags">
-            <span>Forensics</span>
-            <span>Evidence</span>
-            <span>Investigation</span>
-          </div>
-
-          <span class="lab-link muted">
-            Lab In Development
+          <span class="project-status">
+            Planned
           </span>
 
         </article>
+
 
       </div>
 
     </section>
 
 
-    <!-- PORTFOLIO APPROACH -->
-    <section class="lab-approach">
+    <!-- METHOD -->
 
-      <p class="section-label">HOW I LEARN</p>
+    <section class="lab-method">
 
-      <h2>Learn. Practice. Apply. Reflect.</h2>
+      <div class="method-inner">
 
-      <p>
-        I don't want this portfolio to simply show what I've
-        completed. I want it to show how I think, how I approach
-        problems, what I've learned, and how my skills continue
-        to develop.
-      </p>
+        <div class="method-title">
+
+          <span class="archive-label">
+            My Approach
+          </span>
+
+          <h2>
+            Learn.<br>
+            Practice.<br>
+            Apply.<br>
+            Reflect.
+          </h2>
+
+        </div>
+
+
+        <div>
+
+          <p class="method-copy">
+            This portfolio isn't intended to be a collection of
+            completed assignments. I document what I understand,
+            how I applied it, the evidence behind the work, what
+            changed as I tested the solution, and what I would
+            improve with what I know now.
+          </p>
+
+          <div class="method-steps">
+
+            <div class="method-step">
+              <span>01</span>
+              <strong>Learn</strong>
+            </div>
+
+            <div class="method-step">
+              <span>02</span>
+              <strong>Practice</strong>
+            </div>
+
+            <div class="method-step">
+              <span>03</span>
+              <strong>Apply</strong>
+            </div>
+
+            <div class="method-step">
+              <span>04</span>
+              <strong>Reflect</strong>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
 
     </section>
+
 
   </main>
 
 
   <!-- FOOTER -->
+
   <footer>
 
     <div class="footer-brand">
