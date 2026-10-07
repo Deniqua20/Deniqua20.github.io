@@ -2744,3 +2744,60 @@ svg.line-icon {
     animation: none;
   }
 }
+
+/* A separate butterfly layer keeps the room still while its wings gently sway. */
+.hero-only .hero-art {
+  background-image: none;
+  container-type: size;
+}
+.home-art-scene {
+  position: absolute;
+  width: max(100cqw, 150cqh);
+  height: max(100cqh, 66.6667cqw);
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -60%);
+  background: url("../images/hero-moving-background.webp") center / 100% 100%
+    no-repeat;
+}
+.home-main-butterfly {
+  position: absolute;
+  left: 50%;
+  top: 33%;
+  width: 22%;
+  height: 28%;
+  object-fit: contain;
+  transform-origin: 65% 65%;
+  animation: home-butterfly-sway 5s ease-in-out infinite;
+}
+@keyframes home-butterfly-sway {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg) scaleX(1);
+  }
+  50% {
+    transform: translateY(-6px) rotate(2deg) scaleX(0.96);
+  }
+}
+@media (min-width: 601px) and (max-width: 850px) {
+  .home-art-scene {
+    left: 60%;
+    top: 50%;
+    transform: translate(-60%, -50%);
+  }
+}
+@media (max-width: 600px) {
+  .home-art-scene {
+    width: 900px;
+    height: 600px;
+    left: 68%;
+    top: auto;
+    bottom: 0;
+    transform: translateX(-68%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-main-butterfly {
+    animation: none;
+  }
+}
