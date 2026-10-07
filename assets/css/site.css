@@ -2050,3 +2050,227 @@ svg.line-icon {
 .hero-only .hero-art {
   background-image: url("../images/hero-butterfly-laptop.webp");
 }
+/* About Dee: portrait-led editorial composition from the supplied reference. */
+.about-page {
+  background: #0a0806;
+}
+.about-page .site-header {
+  max-width: none;
+  background: #0a0806;
+}
+.about-editorial {
+  display: grid;
+  grid-template-columns: 1.02fr 1fr;
+  max-width: 1800px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+.about-portrait {
+  margin: 0;
+  position: relative;
+  min-height: 710px;
+  overflow: hidden;
+  background: #171411;
+}
+.about-portrait img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  object-position: 50% 35%;
+}
+.about-story {
+  padding: 28px 6% 24px 7%;
+  align-self: center;
+}
+.about-label {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  letter-spacing: 3px;
+  font-size: 11px;
+}
+.about-label:after {
+  content: "";
+  height: 1px;
+  width: 60px;
+  background: var(--gold);
+}
+.about-story h1 {
+  font-size: clamp(72px, 7.5vw, 130px);
+  line-height: 0.95;
+  margin: 8px 0 6px;
+  letter-spacing: -2px;
+}
+.about-story h1 em {
+  color: var(--pink);
+  font-weight: 500;
+}
+.about-greeting {
+  font-size: 20px;
+  line-height: 1.35;
+  margin-bottom: 12px;
+}
+.about-greeting strong {
+  font-weight: 500;
+  color: #ff6c9f;
+}
+.about-body {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #e8e2da;
+}
+.about-body p + p {
+  margin-top: 13px;
+}
+.about-body strong {
+  color: var(--cream);
+  font-weight: 600;
+}
+.about-signature {
+  font:
+    clamp(28px, 3.15vw, 50px)/1.25 "Great Vibes",
+    cursive;
+  color: #ff6c9f;
+  margin-top: 14px;
+  white-space: nowrap;
+}
+.about-connect {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-top: 1px solid var(--line);
+  margin-top: 0;
+}
+.about-connect > p:not(.eyebrow) {
+  margin-top: 8px;
+  color: var(--muted);
+}
+.about-connect .actions {
+  margin-top: 16px;
+}
+.about-page .site-footer {
+  margin-top: 0;
+}
+@media (min-width: 1600px) {
+  .about-portrait {
+    min-height: 800px;
+  }
+  .about-body {
+    font-size: 18px;
+  }
+  .about-story {
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+  .about-greeting {
+    font-size: 24px;
+  }
+}
+@media (max-width: 1100px) and (min-width: 851px) {
+  .about-story {
+    padding: 30px 6%;
+  }
+  .about-body {
+    font-size: 14px;
+  }
+  .about-greeting {
+    font-size: 18px;
+  }
+  .about-story h1 {
+    font-size: 80px;
+  }
+  .about-signature {
+    font-size: 31px;
+  }
+  .about-portrait {
+    min-height: 770px;
+  }
+}
+@media (max-width: 850px) {
+  .about-editorial {
+    grid-template-columns: 1fr;
+  }
+  .about-portrait {
+    min-height: 0;
+    aspect-ratio: 4 / 4.5;
+    max-height: 760px;
+  }
+  .about-portrait img {
+    object-position: 50% 30%;
+  }
+  .about-story {
+    padding: 35px 7% 38px;
+  }
+  .about-story h1 {
+    font-size: 90px;
+  }
+  .about-body {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .about-signature {
+    font-size: 43px;
+    white-space: normal;
+  }
+  .about-greeting {
+    font-size: 20px;
+  }
+}
+@media (max-width: 600px) {
+  .about-portrait {
+    aspect-ratio: 4 / 4.7;
+  }
+  .about-story {
+    padding: 30px 6%;
+  }
+  .about-story h1 {
+    font-size: 76px;
+  }
+  .about-label {
+    font-size: 10px;
+  }
+  .about-greeting {
+    font-size: 18px;
+  }
+  .about-body {
+    font-size: 15px;
+  }
+  .about-signature {
+    font-size: 34px;
+  }
+  .about-connect .button {
+    font-size: 10px;
+  }
+}
+@media (min-width: 851px) {
+  .about-page .site-header nav a {
+    font-size: 14px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .about-page .site-header nav {
+    gap: 32px;
+  }
+  .about-page .site-header .wordmark > span {
+    font-size: 62px;
+  }
+  .about-page .site-header .connect {
+    font-size: 12px;
+  }
+}
+@media (max-width: 1100px) and (min-width: 851px) {
+  .about-page .site-header nav {
+    gap: 18px;
+  }
+  .about-page .site-header nav a {
+    font-size: 12px;
+  }
+  .about-page .site-header .wordmark > span {
+    font-size: 50px;
+  }
+  .about-page .site-header .connect {
+    font-size: 10px;
+    padding: 10px 13px;
+  }
+}

@@ -16,7 +16,7 @@ Open the server in your own browser. No dependency installation, compilation, en
 
 - `index.html`: single botanical hero homepage; navigation leads to separate portfolio, story, blog, and resources pages
 - `labs.html`: preserved technical portfolio content with shared navigation
-- `about.html`: introduction and future contact information
+- `about.html`: portrait-led introduction using the owner-supplied story and design reference
 - `resources.html`: resources from Dee’s journey, coming soon
 - `learn.html`: compatibility redirect to Resources
 - `blog.html`: clearly marked previews of forthcoming articles
@@ -36,3 +36,5 @@ Fonts: Cormorant Garamond, DM Sans, and Great Vibes, distributed under the licen
 ## Validation
 
 The site was rendered with Chromium at 1440, 1024, 768, and 390 pixels wide. Local navigation paths and anchor targets were audited; the mobile menu and navigation were exercised. There is no build or package manifest to maintain.
+
+The About portrait artwork is an AI-assisted composite based on the owner’s supplied portrait and mockup; it is not an untouched photograph.
