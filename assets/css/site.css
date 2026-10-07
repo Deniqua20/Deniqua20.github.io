@@ -2802,15 +2802,40 @@ svg.line-icon {
   }
 }
 
-.hero-only .home-motto {
-  margin: 20px 0 0;
-  color: #f2c477;
-  font: 500 20px/1.5 var(--serif);
-  text-shadow: 0 2px 6px #080503;
+/* Let the motto rest in the open space above the butterfly. */
+.hero-only .home-scene-motto {
+  position: absolute;
+  top: 22%;
+  right: 8%;
+  width: 31%;
+  margin: 0;
+  text-align: center;
+  color: #f2d3a0;
+  font: italic 500 clamp(23px, 2.3vw, 34px)/1.5 var(--serif);
+  text-shadow:
+    0 2px 8px #080503,
+    0 0 20px #080503;
+  pointer-events: none;
+}
+@media (min-width: 601px) and (max-width: 850px) {
+  .hero-only .home-scene-motto {
+    top: 21%;
+    right: 5%;
+    width: 38%;
+    font-size: 24px;
+  }
 }
 @media (max-width: 600px) {
-  .hero-only .home-motto {
-    margin-top: 16px;
-    font-size: 18px;
+  .hero-only .home-scene-motto {
+    top: 455px;
+    right: 6%;
+    width: 88%;
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-main-butterfly {
+    top: 38%;
   }
 }
