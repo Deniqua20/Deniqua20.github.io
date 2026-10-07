@@ -2801,3 +2801,16 @@ svg.line-icon {
     animation: none;
   }
 }
+
+.hero-only .home-motto {
+  margin: 20px 0 0;
+  color: #f2c477;
+  font: 500 20px/1.5 var(--serif);
+  text-shadow: 0 2px 6px #080503;
+}
+@media (max-width: 600px) {
+  .hero-only .home-motto {
+    margin-top: 16px;
+    font-size: 18px;
+  }
+}
