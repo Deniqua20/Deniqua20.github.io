@@ -1570,3 +1570,86 @@ svg.line-icon {
     height: 36px;
   }
 }
+
+/* A quieter editorial rhythm while the blog is being prepared. */
+.blog-teaser {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 28px 0;
+  background: none;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px 30px;
+  align-items: center;
+}
+.blog-teaser .eyebrow,
+.blog-teaser p {
+  grid-column: 1;
+}
+.blog-teaser h3 {
+  font-size: 32px;
+}
+.blog-teaser p {
+  color: var(--muted);
+  font-size: 14px;
+}
+.blog-teaser .button {
+  grid-column: 2;
+  grid-row: 2 / 4;
+}
+.blog-coming-soon {
+  min-height: 65vh;
+  padding-top: 90px;
+  padding-bottom: 90px;
+}
+.blog-coming-soon .status {
+  display: block;
+  margin-bottom: 20px;
+}
+.blog-coming-soon .button {
+  margin-top: 30px;
+}
+.closing {
+  background: #130b08;
+  min-height: 145px;
+}
+.closing p {
+  max-width: 650px;
+}
+.spotlights {
+  padding-top: 35px;
+}
+.project-art {
+  box-shadow: none;
+}
+@media (max-width: 600px) {
+  .blog-teaser {
+    grid-template-columns: 1fr;
+  }
+  .blog-teaser .button {
+    grid-column: 1;
+    grid-row: auto;
+    width: fit-content;
+  }
+  .blog-coming-soon {
+    padding-top: 55px;
+  }
+  .blog-teaser h3 {
+    font-size: 30px;
+  }
+}
+
+/* Reserve a quiet personal feature until the original portrait is accessible. */
+.faith-art {
+  background: linear-gradient(145deg, #23130e, #100a08);
+  border: 1px solid var(--line);
+  min-height: 270px;
+  margin-bottom: 24px;
+}
+.faith-art p {
+  color: var(--gold) !important;
+  text-shadow: none;
+  transform: none;
+  font-size: 36px !important;
+  top: 0;
+}
