@@ -14,7 +14,7 @@ Open the server in your own browser. No dependency installation, compilation, en
 
 ## Structure
 
-- `index.html`: personal homepage with links to the portfolio, story, blog, and resources
+- `index.html`: single botanical hero homepage; navigation leads to separate portfolio, story, blog, and resources pages
 - `labs.html`: preserved technical portfolio content with shared navigation
 - `about.html`: introduction and future contact information
 - `resources.html`: resources from Dee’s journey, coming soon
