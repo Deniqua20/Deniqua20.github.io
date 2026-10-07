@@ -1,23 +1,222 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Projects & Labs | Dee's Cyber Corner</title>
-<meta name="description" content="Explore hands-on cybersecurity projects and lab write-ups from Dee's Cyber Corner.">
-<link rel="stylesheet" href="style.css?v=11">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Sacramento&display=swap" rel="stylesheet">
-<style>
-:root{--black:#060504;--cream:#f7ead7;--muted:#b9aaa0;--pink:#ff2b7a;--gold:#e0a62f;--line:rgba(224,166,47,.8);--sans:"DM Sans",sans-serif;--serif:"Playfair Display",serif;--script:"Sacramento",cursive}*{box-sizing:border-box}body{margin:0;background:var(--black);color:var(--cream);font-family:var(--sans)}a{text-decoration:none;color:inherit}.labs-nav{min-height:88px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(224,166,47,.7);background:#050403;gap:30px;position:sticky;top:0;z-index:50}.brand{color:var(--gold);line-height:.85;min-width:210px}.brand-top{font:italic 2.6rem var(--serif);display:flex;align-items:center;gap:10px}.brand-sub{display:block;margin-top:10px;font-size:.72rem;letter-spacing:.38em;text-transform:uppercase}.brand-butterfly{font-style:normal;font-size:1.7rem}.labs-nav nav{display:flex;align-items:center;gap:38px}.labs-nav nav a{font-size:.9rem;color:#eee;white-space:nowrap}.labs-nav nav a.active{color:var(--pink);font-weight:600;position:relative}.labs-nav nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:-15px;height:2px;background:var(--pink)}.connect{padding:12px 22px;border:2px solid transparent;border-radius:999px;background:linear-gradient(#050403,#050403) padding-box,linear-gradient(90deg,var(--pink),var(--gold)) border-box;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}.connect span{color:var(--gold);margin-left:8px}.labs-main{width:min(1440px,92%);margin:auto;padding:38px 0 60px}.intro{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:55px;align-items:center}.eyebrow{color:var(--gold);font-size:.76rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;display:flex;align-items:center;gap:18px}.eyebrow:after{content:"";width:105px;height:2px;background:var(--gold)}h1{font:500 clamp(3.8rem,6vw,6.7rem)/.95 var(--serif);margin:10px 0 8px;color:#fff}h1 em{color:var(--pink);font-weight:500}.subtitle{font-size:1.65rem;font-weight:500;margin:0 0 10px;color:#fff}.intro-copy{max-width:850px;margin:0;color:#ded8d3;font-size:1rem;line-height:1.55}.quote{border-left:2px solid var(--pink);padding:4px 0 4px 45px;min-height:190px;display:flex;align-items:center;gap:20px}.quote-text{font:3rem/1 var(--script);color:#fff;transform:rotate(-3deg)}.quote-text strong{display:block;color:var(--pink);font-weight:400}.quote-butterfly{font-size:4rem;color:var(--gold)}.filters{display:flex;gap:14px;margin:28px 0 20px;flex-wrap:wrap}.filter{appearance:none;border:1px solid #59616a;background:transparent;color:#fff;border-radius:12px;padding:13px 27px;font:600 .72rem var(--sans);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:.2s}.filter:hover,.filter.active{border-color:var(--pink);background:var(--pink);color:#070504}.filter.active{min-width:120px}.project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.project-card{min-height:245px;border:1px solid var(--line);border-radius:8px;padding:24px 28px;display:grid;grid-template-columns:110px 1fr;position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(16,11,8,.8),rgba(3,3,3,.98));transition:.25s}.project-card:hover{transform:translateY(-3px);border-color:var(--pink);box-shadow:0 12px 30px rgba(0,0,0,.28)}.project-num{font:500 4.9rem/1 var(--serif);color:rgba(247,234,215,.18);padding-top:2px}.project-body{border-left:1px solid rgba(224,166,47,.35);padding-left:24px}.category{color:var(--gold);font-size:.69rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase}.project-card h2{font:500 1.65rem/1.08 var(--serif);margin:9px 0 13px;color:#fff}.project-card p{color:#d0c8c2;font-size:.86rem;line-height:1.5;margin:0 0 24px;max-width:370px}.writeup{color:var(--pink);font-weight:600;font-size:.92rem}.circle-arrow{position:absolute;right:18px;bottom:16px;width:48px;height:48px;border:2px solid var(--pink);border-radius:50%;display:grid;place-items:center;color:var(--pink);font-size:1.5rem}.coming{opacity:.82}@media(max-width:1100px){.labs-nav nav{gap:18px}.project-grid{grid-template-columns:repeat(2,1fr)}.intro{grid-template-columns:1fr 280px}}@media(max-width:820px){.labs-nav{align-items:flex-start;padding-top:18px;padding-bottom:18px;flex-wrap:wrap}.labs-nav nav{order:3;width:100%;overflow-x:auto;padding-bottom:8px}.connect{margin-left:auto}.intro{grid-template-columns:1fr}.quote{min-height:120px}.project-grid{grid-template-columns:1fr}}@media(max-width:560px){.labs-main{width:88%}.brand-top{font-size:2rem}.brand-sub{font-size:.58rem}.connect{padding:10px 14px;font-size:.64rem}h1{font-size:3.6rem}.subtitle{font-size:1.25rem}.project-card{grid-template-columns:70px 1fr;padding:20px 16px}.project-num{font-size:3.5rem}.project-body{padding-left:16px}.filter{padding:10px 14px}}
-</style></head><body>
-<header class="labs-nav"><a class="brand" href="index.html"><span class="brand-top">Dee's <span class="brand-butterfly">🦋</span></span><span class="brand-sub">Cyber Corner</span></a><nav aria-label="Main navigation"><a href="index.html">Home</a><a href="about.html">About</a><a class="active" href="labs.html">Projects & Labs</a><a href="learn.html">Resources</a><a href="books.html">Books</a><a href="blog.html">Blog</a></nav><a class="connect" href="#contact">Connect with Dee <span>🦋 →</span></a></header>
-<main class="labs-main"><section class="intro"><div><div class="eyebrow">Projects & Labs</div><h1>Explore <em>My Labs.</em></h1><p class="subtitle">Built to learn. Documented to share.</p><p class="intro-copy">These are hands-on projects I've completed while building my skills across different areas of cybersecurity. Each write-up walks through what I built, what I learned, and the resources that helped me along the way.</p></div><aside class="quote"><div class="quote-text">Progress over <strong>perfection.</strong></div><div class="quote-butterfly">🦋</div></aside></section>
-<div class="filters"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="security-operations">Security Operations</button><button class="filter" data-filter="iam">IAM</button><button class="filter" data-filter="cloud">Cloud</button><button class="filter" data-filter="vulnerability">Vulnerability</button><button class="filter" data-filter="network">Network</button><button class="filter" data-filter="forensics">Forensics</button></div>
-<section class="project-grid" id="projects">
-<article class="project-card" data-category="security-operations"><div class="project-num">01</div><div class="project-body"><span class="category">Security Operations</span><h2>Microsoft Sentinel SIEM Honeypot</h2><p>Azure-based honeypot to analyze failed authentication activity using KQL and map findings to MITRE ATT&CK.</p><a class="writeup" href="https://github.com/Deniqua20/Azure-security-monitoring-honeypot">View Write-Up →</a></div><a class="circle-arrow" href="https://github.com/Deniqua20/Azure-security-monitoring-honeypot">→</a></article>
-<article class="project-card" data-category="iam"><div class="project-num">02</div><div class="project-body"><span class="category">Identity & Access</span><h2>Identity & Access Management Lab</h2><p>Identity lifecycle, conditional access, least privilege, MFA, and hands-on access security practice.</p><a class="writeup" href="https://github.com/Deniqua20/Azure-Entra-ID-Identity-Lifecycle-Conditional-Access-Lab">View Write-Up →</a></div><a class="circle-arrow" href="https://github.com/Deniqua20/Azure-Entra-ID-Identity-Lifecycle-Conditional-Access-Lab">→</a></article>
-<article class="project-card coming" data-category="cloud"><div class="project-num">03</div><div class="project-body"><span class="category">Cloud Security</span><h2>Secure Azure Environment</h2><p>Cloud security practice focused on access controls, logging, monitoring, and secure configuration.</p><span class="writeup">More Coming Soon</span></div><span class="circle-arrow">→</span></article>
-<article class="project-card" data-category="vulnerability"><div class="project-num">04</div><div class="project-body"><span class="category">Vulnerability Management</span><h2>Security Risk Assessment & Remediation</h2><p>Risk analysis, security controls, remediation planning, and practical security recommendations.</p><a class="writeup" href="https://github.com/Deniqua20/Security-Risk-Assessment-Compliance-Lab">View Write-Up →</a></div><a class="circle-arrow" href="https://github.com/Deniqua20/Security-Risk-Assessment-Compliance-Lab">→</a></article>
-<article class="project-card coming" data-category="network"><div class="project-num">05</div><div class="project-body"><span class="category">Network Security</span><h2>Network Traffic Analysis Lab</h2><p>Network traffic analysis, segmentation, firewall concepts, secure connectivity, and network-based investigation.</p><span class="writeup">More Coming Soon</span></div><span class="circle-arrow">→</span></article>
-<article class="project-card coming" data-category="forensics"><div class="project-num">06</div><div class="project-body"><span class="category">Digital Forensics</span><h2>Digital Forensics Investigation</h2><p>Evidence preservation, forensic process, artifact analysis, investigation, and technical reporting.</p><span class="writeup">More Coming Soon</span></div><span class="circle-arrow">→</span></article>
-</section></main><script>const filters=document.querySelectorAll('.filter'),cards=document.querySelectorAll('.project-card');filters.forEach(b=>b.addEventListener('click',()=>{filters.forEach(x=>x.classList.remove('active'));b.classList.add('active');const s=b.dataset.filter;cards.forEach(c=>c.style.display=s==='all'||c.dataset.category===s?'':'none')}));</script></body></html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Projects &amp; Labs | Dee’s Cyber Corner</title>
+    <meta
+      name="description"
+      content="A place where cybersecurity, faith, and purpose meet. Explore Dee’s projects, learning resources, and journey."
+    />
+    <meta name="theme-color" content="#0b0705" />
+    <link rel="stylesheet" href="assets/css/site.css?v=project-grid-1" />
+    <script src="assets/js/site.js?v=project-grid-1" defer></script>
+  </head>
+  <body class="interior lab-gallery">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="wordmark" href="index.html" aria-label="Dee’s Cyber Corner home"
+        ><span
+          >Dee’s<small class="brand-butterfly" aria-hidden="true"></small></span
+        ><b>CYBER CORNER</b></a
+      ><button
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="navigation"
+      >
+        Menu <span aria-hidden="true">☰</span>
+      </button>
+      <nav id="navigation" aria-label="Main navigation">
+        <a href="index.html">Home</a><a href="about.html">About</a
+        ><a href="labs.html" aria-current="page">Projects &amp; Labs</a
+        ><a href="resources.html">Resources</a><a href="books.html">Books</a
+        ><a href="blog.html">Blog</a>
+      </nav>
+      <a class="button connect" href="about.html#connect"
+        >Let’s connect <span aria-hidden="true">⟶</span></a
+      >
+    </header>
+    <main id="main">
+      <section class="lab-introduction gallery-shell">
+        <div>
+          <p class="eyebrow lab-kicker">Projects &amp; Labs</p>
+          <h1>Explore <em>My Labs.</em></h1>
+          <h2>Built to learn. Documented to share.</h2>
+          <p>
+            These are hands-on projects from my cybersecurity journey. Explore
+            what I’ve built, what I’m learning, and the write-ups I’m preparing
+            across different areas of security.
+          </p>
+        </div>
+        <aside class="progress-flourish" aria-label="Progress over perfection">
+          <p>Progress<br />over<br /><em>perfection.</em></p>
+          <img
+            src="assets/images/lab-butterfly.webp"
+            alt=""
+            width="160"
+            height="160"
+          />
+        </aside>
+      </section>
+      <section class="lab-library gallery-shell" aria-label="Project library">
+        <div
+          class="lab-filters"
+          role="group"
+          aria-label="Filter projects by area"
+        >
+          <button type="button" data-lab-filter="all" aria-pressed="true">
+            All</button
+          ><button type="button" data-lab-filter="soc" aria-pressed="false">
+            Security Operations</button
+          ><button type="button" data-lab-filter="iam" aria-pressed="false">
+            IAM</button
+          ><button type="button" data-lab-filter="cloud" aria-pressed="false">
+            Cloud</button
+          ><button
+            type="button"
+            data-lab-filter="vulnerability"
+            aria-pressed="false"
+          >
+            Vulnerability</button
+          ><button type="button" data-lab-filter="network" aria-pressed="false">
+            Network</button
+          ><button
+            type="button"
+            data-lab-filter="forensics"
+            aria-pressed="false"
+          >
+            Forensics
+          </button>
+        </div>
+        <p
+          id="lab-filter-result"
+          class="visually-hidden"
+          role="status"
+          aria-live="polite"
+        ></p>
+        <div class="lab-card-grid">
+          <article class="lab-card" data-lab-category="soc">
+            <span class="lab-card-number" aria-hidden="true">01</span>
+            <div class="lab-card-content">
+              <p class="eyebrow">Security Operations</p>
+              <h3>Microsoft Sentinel<br />SIEM Honeypot</h3>
+              <p class="lab-card-description">
+                Azure-based security monitoring, failed authentication logs, KQL
+                detection, and incident investigation.
+              </p>
+              <a class="lab-writeup" href="projects/azure-sentinel-soc.html"
+                >View Write-Up <span aria-hidden="true">⟶</span
+                ><span class="lab-round-arrow" aria-hidden="true">→</span
+                ><span class="visually-hidden"
+                  >: Microsoft Sentinel SIEM Honeypot</span
+                ></a
+              >
+            </div>
+          </article>
+          <article class="lab-card" data-lab-category="iam">
+            <span class="lab-card-number" aria-hidden="true">02</span>
+            <div class="lab-card-content">
+              <p class="eyebrow">Identity &amp; Access</p>
+              <h3>Automated Identity<br />Lifecycle Lab</h3>
+              <p class="lab-card-description">
+                Event-driven offboarding with Microsoft Entra ID, Logic Apps,
+                Azure Automation, and Microsoft Graph.
+              </p>
+              <a
+                class="lab-writeup"
+                href="https://github.com/Deniqua20/Automated-JML-Identity-Lifecycle-Microsoft-Entra-ID"
+                >View Write-Up <span aria-hidden="true">⟶</span
+                ><span class="lab-round-arrow" aria-hidden="true">→</span
+                ><span class="visually-hidden"
+                  >: Automated Identity Lifecycle Lab</span
+                ></a
+              >
+            </div>
+          </article>
+          <article class="lab-card" data-lab-category="cloud">
+            <span class="lab-card-number" aria-hidden="true">03</span>
+            <div class="lab-card-content">
+              <p class="eyebrow">Cloud Security</p>
+              <h3>Azure Cloud<br />Security Monitoring</h3>
+              <p class="lab-card-description">
+                Deploying Microsoft Sentinel and Log Analytics to establish
+                centralized cloud security logging.
+              </p>
+              <a
+                class="lab-writeup"
+                href="https://github.com/Deniqua20/azure-sentinel-security-monitoring"
+                >View Write-Up <span aria-hidden="true">⟶</span
+                ><span class="lab-round-arrow" aria-hidden="true">→</span
+                ><span class="visually-hidden"
+                  >: Azure Cloud Security Monitoring</span
+                ></a
+              >
+            </div>
+          </article>
+          <article class="lab-card" data-lab-category="vulnerability">
+            <span class="lab-card-number" aria-hidden="true">04</span>
+            <div class="lab-card-content">
+              <p class="eyebrow">Vulnerability Management</p>
+              <h3>Vulnerability Assessment<br />&amp; Remediation</h3>
+              <p class="lab-card-description">
+                A place for my vulnerability-management work. A detailed
+                write-up will be added here.
+              </p>
+              <a
+                class="lab-writeup"
+                href="https://github.com/Deniqua20/Security-Risk-Assessment-Compliance-Lab"
+                >View Write-Up <span aria-hidden="true">→</span></a
+              >
+            </div>
+          </article>
+          <article class="lab-card" data-lab-category="network">
+            <span class="lab-card-number" aria-hidden="true">05</span>
+            <div class="lab-card-content">
+              <p class="eyebrow">Network Security</p>
+              <h3>Network Security<br />Lab</h3>
+              <p class="lab-card-description">
+                A place for my networking work and findings. A detailed write-up
+                will be added here.
+              </p>
+              <span class="lab-card-status">Write-up coming soon</span>
+            </div>
+          </article>
+          <article class="lab-card" data-lab-category="forensics">
+            <span class="lab-card-number" aria-hidden="true">06</span>
+            <div class="lab-card-content">
+              <p class="eyebrow">Digital Forensics</p>
+              <h3>Digital Forensics<br />Investigation</h3>
+              <p class="lab-card-description">
+                A place for my digital-forensics work. A detailed write-up will
+                be added here.
+              </p>
+              <span class="lab-card-status">Write-up coming soon</span>
+            </div>
+          </article>
+        </div>
+        <noscript
+          ><p class="lab-noscript">
+            All projects are shown. Enable JavaScript to use the category
+            filters.
+          </p></noscript
+        >
+      </section>
+    </main>
+    <footer class="site-footer">
+      <a class="wordmark" href="index.html"
+        ><span>Dee’s</span><b>CYBER CORNER</b></a
+      >
+      <nav aria-label="Footer navigation">
+        <a href="index.html">Home</a><a href="about.html">About</a
+        ><a href="labs.html">Projects &amp; Labs</a
+        ><a href="resources.html">Resources</a><a href="books.html">Books</a
+        ><a href="blog.html">Blog</a>
+      </nav>
+      <p>
+        © 2026 Dee’s Cyber Corner<br /><small
+          >Learning. Building. Sharing. Growing.</small
+        >
+      </p>
+    </footer>
+  </body>
+</html>
