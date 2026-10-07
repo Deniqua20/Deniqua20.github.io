@@ -2,373 +2,2781 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Dee's Cyber Corner | Learn. Build. Grow.</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Dee's Cyber Corner | Cybersecurity, Learning & Growth</title>
 
   <meta name="description"
-        content="Dee's Cyber Corner is a cybersecurity learning space featuring hands-on labs, coursework, CTFs, certifications, and lessons learned along the way.">
+        content="Dee's Cyber Corner — cybersecurity projects, learning, career growth, resources, and reflections from Dee.">
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
+        rel="stylesheet">
+
+  <style>
+
+    /* =========================================================
+       DEE'S CYBER CORNER
+       HOMEPAGE — FIRST BUILD
+       ========================================================= */
+
+    :root {
+      --black: #080605;
+      --espresso: #120b08;
+      --brown: #24130e;
+
+      --cream: #f7ead7;
+      --soft-cream: #d8c6b1;
+
+      --pink: #ed2f75;
+      --hot-pink: #ff3b86;
+      --hibiscus: #b31d3d;
+      --orange: #ef6b2e;
+      --gold: #d8a24c;
+
+      --border: rgba(216, 162, 76, .28);
+      --pink-border: rgba(237, 47, 117, .32);
+
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+
+      --shell: 1180px;
+    }
+
+
+    /* =========================================================
+       RESET
+       ========================================================= */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(
+          circle at 15% 12%,
+          rgba(179, 29, 61, .13),
+          transparent 25%
+        ),
+        radial-gradient(
+          circle at 85% 22%,
+          rgba(239, 107, 46, .08),
+          transparent 25%
+        ),
+        #080605;
+
+      color: var(--cream);
+
+      font-family: var(--sans);
+      line-height: 1.6;
+
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .shell {
+      width: min(var(--shell), 88%);
+      margin: 0 auto;
+    }
+
+
+    /* =========================================================
+       NAVIGATION
+       ========================================================= */
+
+    .site-header {
+      min-height: 82px;
+
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+
+      display: flex;
+      align-items: center;
+
+      background: rgba(8, 6, 5, .90);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      border-bottom: 1px solid rgba(216, 162, 76, .18);
+    }
+
+    .nav-inner {
+      width: min(var(--shell), 88%);
+      margin: 0 auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 40px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+
+      flex-shrink: 0;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+
+      position: relative;
+
+      display: grid;
+      place-items: center;
+    }
+
+    /*
+       Clean butterfly mark.
+       NOT an emoji.
+    */
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+
+      position: absolute;
+      top: 8px;
+
+      width: 14px;
+      height: 20px;
+
+      border: 1px solid var(--gold);
+    }
+
+    .brand-mark::before {
+      left: 3px;
+
+      border-radius: 80% 35% 65% 35%;
+      transform: rotate(-25deg);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(237,47,117,.45),
+          rgba(239,107,46,.12)
+        );
+    }
+
+    .brand-mark::after {
+      right: 3px;
+
+      border-radius: 35% 80% 35% 65%;
+      transform: rotate(25deg);
+
+      background:
+        linear-gradient(
+          215deg,
+          rgba(239,107,46,.40),
+          rgba(237,47,117,.12)
+        );
+    }
+
+    .brand-name {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.35rem;
+      color: var(--cream);
+
+      white-space: nowrap;
+    }
+
+    .brand-name span {
+      color: var(--gold);
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .site-nav a {
+      position: relative;
+
+      color: var(--soft-cream);
+
+      font-size: .70rem;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+
+      transition: color .25s ease;
+    }
+
+    .site-nav a::after {
+      content: "";
+
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+
+      width: 0;
+      height: 1px;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--pink),
+          var(--orange)
+        );
+
+      transition: width .25s ease;
+    }
+
+    .site-nav a:hover,
+    .site-nav a.active {
+      color: var(--cream);
+    }
+
+    .site-nav a:hover::after,
+    .site-nav a.active::after {
+      width: 100%;
+    }
+
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+    .hero {
+      min-height: calc(100vh - 82px);
+
+      position: relative;
+
+      display: flex;
+      align-items: center;
+
+      overflow: hidden;
+
+      border-bottom: 1px solid var(--border);
+
+      background:
+        radial-gradient(
+          circle at 78% 38%,
+          rgba(237,47,117,.18),
+          transparent 20%
+        ),
+        radial-gradient(
+          circle at 88% 58%,
+          rgba(239,107,46,.15),
+          transparent 23%
+        ),
+        radial-gradient(
+          circle at 68% 70%,
+          rgba(179,29,61,.13),
+          transparent 28%
+        ),
+        linear-gradient(
+          110deg,
+          #050403 0%,
+          #0c0705 48%,
+          #120805 100%
+        );
+    }
+
+    /*
+       Very subtle cyber-grid.
+       It stays behind the artwork/content.
+    */
+
+    .hero::before {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      opacity: .12;
+
+      background-image:
+        linear-gradient(
+          rgba(216,162,76,.18) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(216,162,76,.18) 1px,
+          transparent 1px
+        );
+
+      background-size: 85px 85px;
+
+      mask-image:
+        linear-gradient(
+          90deg,
+          transparent,
+          transparent 40%,
+          black 75%,
+          transparent
+        );
+
+      -webkit-mask-image:
+        linear-gradient(
+          90deg,
+          transparent,
+          transparent 40%,
+          black 75%,
+          transparent
+        );
+    }
+
+    .hero::after {
+      content: "";
+
+      position: absolute;
+
+      width: 520px;
+      height: 520px;
+
+      right: -170px;
+      bottom: -250px;
+
+      border-radius: 50%;
+
+      border: 1px solid rgba(216,162,76,.15);
+
+      box-shadow:
+        0 0 120px rgba(237,47,117,.12),
+        inset 0 0 100px rgba(239,107,46,.05);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+
+      width: min(var(--shell), 88%);
+      margin: 0 auto;
+
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+
+      gap: 70px;
+
+      padding: 100px 0;
+    }
+
+    .eyebrow {
+      margin-bottom: 22px;
+
+      color: var(--gold);
+
+      font-size: .68rem;
+      font-weight: 600;
+
+      letter-spacing: .28em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 650px;
+
+      font-family: var(--serif);
+      font-size: clamp(4.2rem, 7.5vw, 7.8rem);
+      font-weight: 500;
+
+      line-height: .84;
+      letter-spacing: -.045em;
+    }
+
+    .hero h1 .dee {
+      display: block;
+
+      color: var(--cream);
+    }
+
+    .hero h1 .corner {
+      display: block;
+
+      margin-top: 14px;
+
+      color: var(--pink);
+
+      font-style: italic;
+    }
+
+    .hero-tagline {
+      margin-top: 32px;
+
+      color: var(--soft-cream);
+
+      font-size: .72rem;
+      font-weight: 600;
+
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    .hero-tagline span {
+      color: var(--gold);
+      padding: 0 10px;
+    }
+
+    .hero-copy {
+      max-width: 570px;
+
+      margin-top: 27px;
+
+      color: #e7d8c4;
+
+      font-family: var(--serif);
+      font-size: clamp(1.08rem, 1.8vw, 1.38rem);
+      font-style: italic;
+
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      margin-top: 38px;
+
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 14px;
+    }
+
+    .button {
+      min-height: 48px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 0 25px;
+
+      border: 1px solid var(--border);
+
+      font-size: .68rem;
+      font-weight: 700;
+
+      letter-spacing: .13em;
+      text-transform: uppercase;
+
+      transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .button-primary {
+      border-color: var(--pink);
+
+      background:
+        linear-gradient(
+          110deg,
+          var(--hibiscus),
+          var(--pink)
+        );
+
+      color: white;
+
+      box-shadow:
+        0 14px 45px rgba(237,47,117,.17);
+    }
+
+    .button-secondary {
+      background: rgba(18,11,8,.48);
+      color: var(--cream);
+    }
+
+    .button-secondary:hover {
+      border-color: var(--gold);
+    }
+
+
+    /* =========================================================
+       HERO ART AREA
+       ========================================================= */
+
+    .hero-art {
+      min-height: 560px;
+
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .art-orbit {
+      width: min(430px, 90%);
+      aspect-ratio: 1;
+
+      position: relative;
+
+      border-radius: 50%;
+
+      border:
+        1px solid rgba(216,162,76,.22);
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(237,47,117,.12),
+          rgba(18,11,8,.05) 46%,
+          transparent 70%
+        );
+
+      box-shadow:
+        0 0 100px rgba(237,47,117,.09);
+    }
+
+    .art-orbit::before {
+      content: "";
+
+      position: absolute;
+      inset: 9%;
+
+      border-radius: 50%;
+
+      border:
+        1px dashed rgba(216,162,76,.20);
+
+      transform: rotate(-12deg);
+    }
+
+    .art-orbit::after {
+      content: "";
+
+      position: absolute;
+
+      width: 14px;
+      height: 14px;
+
+      top: 12%;
+      right: 15%;
+
+      border-radius: 50%;
+
+      background: var(--pink);
+
+      box-shadow:
+        0 0 24px var(--pink);
+    }
+
+
+    /*
+       Decorative butterfly built as a brand symbol,
+       not an emoji and not a fake project screenshot.
+    */
+
+    .butterfly {
+      width: 280px;
+      height: 230px;
+
+      position: absolute;
+      z-index: 3;
+
+      top: 24%;
+      left: 50%;
+
+      transform: translateX(-50%);
+    }
+
+    .wing {
+      position: absolute;
+
+      width: 126px;
+      height: 170px;
+
+      top: 10px;
+
+      border: 2px solid rgba(216,162,76,.72);
+
+      overflow: hidden;
+
+      box-shadow:
+        inset 0 0 35px rgba(0,0,0,.55),
+        0 0 35px rgba(237,47,117,.15);
+    }
+
+    .wing::before {
+      content: "";
+
+      position: absolute;
+      inset: 18px;
+
+      border:
+        1px solid rgba(247,234,215,.40);
+
+      border-radius: inherit;
+    }
+
+    .wing::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background-image:
+        linear-gradient(
+          90deg,
+          transparent 48%,
+          rgba(216,162,76,.35) 50%,
+          transparent 52%
+        ),
+        linear-gradient(
+          transparent 48%,
+          rgba(216,162,76,.25) 50%,
+          transparent 52%
+        );
+
+      background-size: 34px 34px;
+
+      opacity: .45;
+    }
+
+    .wing-left {
+      left: 4px;
+
+      border-radius:
+        80% 24% 60% 40%;
+
+      transform: rotate(-24deg);
+
+      background:
+        radial-gradient(
+          circle at 35% 28%,
+          var(--hot-pink),
+          transparent 15%
+        ),
+        radial-gradient(
+          circle at 64% 60%,
+          var(--orange),
+          transparent 22%
+        ),
+        linear-gradient(
+          145deg,
+          #551126,
+          #ed2f75 45%,
+          #ef6b2e
+        );
+    }
+
+    .wing-right {
+      right: 4px;
+
+      border-radius:
+        24% 80% 40% 60%;
+
+      transform: rotate(24deg);
+
+      background:
+        radial-gradient(
+          circle at 65% 28%,
+          var(--hot-pink),
+          transparent 15%
+        ),
+        radial-gradient(
+          circle at 36% 60%,
+          var(--orange),
+          transparent 22%
+        ),
+        linear-gradient(
+          215deg,
+          #551126,
+          #ed2f75 45%,
+          #ef6b2e
+        );
+    }
+
+    .butterfly-body {
+      width: 13px;
+      height: 132px;
+
+      position: absolute;
+
+      top: 43px;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          var(--gold),
+          #26130d
+        );
+
+      box-shadow:
+        0 0 18px rgba(216,162,76,.32);
+    }
+
+    .butterfly-body::before,
+    .butterfly-body::after {
+      content: "";
+
+      position: absolute;
+
+      width: 65px;
+      height: 1px;
+
+      top: -15px;
+
+      background: var(--gold);
+    }
+
+    .butterfly-body::before {
+      right: 5px;
+      transform: rotate(38deg);
+      transform-origin: right;
+    }
+
+    .butterfly-body::after {
+      left: 5px;
+      transform: rotate(-38deg);
+      transform-origin: left;
+    }
+
+
+    /* botanical framing */
+
+    .botanical {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .botanical-one {
+      width: 240px;
+      height: 240px;
+
+      right: -45px;
+      bottom: -25px;
+
+      opacity: .85;
+    }
+
+    .botanical-two {
+      width: 175px;
+      height: 175px;
+
+      left: -35px;
+      top: 45px;
+
+      opacity: .55;
+
+      transform: rotate(160deg);
+    }
+
+    .botanical::before,
+    .botanical::after {
+      content: "";
+
+      position: absolute;
+
+      width: 100px;
+      height: 165px;
+
+      border:
+        1px solid rgba(216,162,76,.30);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(64,55,24,.65),
+          rgba(14,23,12,.15)
+        );
+
+      border-radius:
+        100% 0 100% 0;
+    }
+
+    .botanical::before {
+      left: 20px;
+      top: 15px;
+
+      transform: rotate(-30deg);
+    }
+
+    .botanical::after {
+      right: 20px;
+      bottom: 5px;
+
+      transform: rotate(35deg) scale(.75);
+    }
+
+
+    /* =========================================================
+       FAITH STRIP
+       ========================================================= */
+
+    .faith-strip {
+      position: relative;
+
+      padding: 38px 5%;
+
+      text-align: center;
+
+      border-bottom: 1px solid var(--border);
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(18,11,8,.95),
+          rgba(50,13,22,.72),
+          rgba(18,11,8,.95)
+        );
+    }
+
+    .faith-strip p {
+      max-width: 850px;
+      margin: 0 auto;
+
+      color: var(--cream);
+
+      font-family: var(--serif);
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-style: italic;
+
+      line-height: 1.7;
+    }
+
+    .faith-strip strong {
+      display: block;
+
+      margin-top: 9px;
+
+      color: var(--gold);
+
+      font-family: var(--sans);
+      font-size: .63rem;
+      font-style: normal;
+
+      letter-spacing: .20em;
+      text-transform: uppercase;
+    }
+
+
+    /* =========================================================
+       GENERAL SECTION STYLES
+       ========================================================= */
+
+    .section {
+      position: relative;
+
+      padding: 120px 0;
+
+      border-bottom: 1px solid rgba(216,162,76,.16);
+    }
+
+    .section-kicker {
+      margin-bottom: 16px;
+
+      color: var(--gold);
+
+      font-size: .66rem;
+      font-weight: 700;
+
+      letter-spacing: .25em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5vw, 4.7rem);
+      font-weight: 500;
+
+      line-height: 1;
+
+      letter-spacing: -.035em;
+    }
+
+    .section-title em {
+      color: var(--pink);
+      font-weight: 500;
+    }
+
+    .section-copy {
+      color: var(--soft-cream);
+
+      font-size: .98rem;
+      line-height: 1.85;
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+
+      margin-top: 25px;
+
+      padding-bottom: 5px;
+
+      color: var(--cream);
+
+      border-bottom:
+        1px solid var(--pink);
+
+      font-size: .69rem;
+      font-weight: 700;
+
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+
+    /* =========================================================
+       MEET DEE
+       ========================================================= */
+
+    .meet {
+      background:
+        radial-gradient(
+          circle at 15% 50%,
+          rgba(179,29,61,.10),
+          transparent 30%
+        ),
+        #0a0605;
+    }
+
+    .meet-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+
+      gap: 100px;
+
+      align-items: center;
+    }
+
+    .meet-art {
+      min-height: 410px;
+
+      position: relative;
+
+      border-left:
+        1px solid var(--gold);
+
+      border-bottom:
+        1px solid var(--pink);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(36,19,14,.82),
+          rgba(8,6,5,.20)
+        );
+
+      overflow: hidden;
+    }
+
+    .meet-art::before {
+      content: "DEE";
+
+      position: absolute;
+
+      left: 30px;
+      bottom: -18px;
+
+      color: rgba(247,234,215,.035);
+
+      font-family: var(--serif);
+      font-size: 9rem;
+      line-height: 1;
+    }
+
+    .meet-art::after {
+      content: "";
+
+      position: absolute;
+
+      width: 220px;
+      height: 220px;
+
+      top: 60px;
+      left: 50%;
+
+      transform: translateX(-50%) rotate(45deg);
+
+      border:
+        1px solid rgba(216,162,76,.22);
+
+      box-shadow:
+        0 0 60px rgba(237,47,117,.08);
+    }
+
+    .meet-art-label {
+      position: absolute;
+      z-index: 2;
+
+      top: 28px;
+      left: 30px;
+
+      color: var(--gold);
+
+      font-size: .61rem;
+      font-weight: 700;
+
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    /*
+       HEADSHOT WILL GO HERE LATER.
+       We are intentionally leaving this editable.
+    */
+
+    .headshot-later {
+      position: absolute;
+      z-index: 3;
+
+      left: 30px;
+      right: 30px;
+      bottom: 32px;
+
+      color: rgba(216,198,177,.42);
+
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: .88rem;
+    }
+
+    .meet-copy {
+      max-width: 650px;
+    }
+
+    .meet-copy .section-copy {
+      max-width: 590px;
+
+      margin-top: 28px;
+    }
+
+
+    /* =========================================================
+       FEATURED PROJECT
+       ========================================================= */
+
+    .featured {
+      background:
+        radial-gradient(
+          circle at 80% 40%,
+          rgba(237,47,117,.08),
+          transparent 28%
+        ),
+        #080605;
+    }
+
+    .featured-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+
+      gap: 40px;
+
+      margin-bottom: 55px;
+    }
+
+    .project-feature {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+
+      border-top:
+        1px solid rgba(216,162,76,.55);
+
+      border-bottom:
+        1px solid rgba(216,162,76,.25);
+    }
+
+    .project-content {
+      padding: 60px 60px 60px 0;
+    }
+
+    .project-number {
+      color: var(--pink);
+
+      font-family: var(--serif);
+      font-size: 1rem;
+    }
+
+    .project-content h3 {
+      max-width: 700px;
+
+      margin-top: 22px;
+
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.8rem);
+      font-weight: 500;
+
+      line-height: 1.06;
+    }
+
+    .project-content p {
+      max-width: 640px;
+
+      margin-top: 24px;
+
+      color: var(--soft-cream);
+
+      line-height: 1.85;
+    }
+
+    .project-tags {
+      margin-top: 28px;
+
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 9px;
+    }
+
+    .project-tags span {
+      padding: 7px 11px;
+
+      color: var(--gold);
+
+      border:
+        1px solid rgba(216,162,76,.27);
+
+      font-size: .60rem;
+      font-weight: 600;
+
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .project-visual {
+      min-height: 510px;
+
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-left:
+        1px solid rgba(216,162,76,.22);
+
+      overflow: hidden;
+
+      background:
+        radial-gradient(
+          circle at 50% 50%,
+          rgba(237,47,117,.13),
+          transparent 36%
+        ),
+        linear-gradient(
+          145deg,
+          #130a08,
+          #080605
+        );
+    }
+
+    .architecture {
+      width: 82%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 12px;
+
+      position: relative;
+      z-index: 2;
+    }
+
+    .arch-node {
+      min-width: 76px;
+
+      padding: 16px 10px;
+
+      text-align: center;
+
+      border:
+        1px solid rgba(216,162,76,.34);
+
+      background:
+        rgba(8,6,5,.80);
+
+      color: var(--cream);
+
+      font-size: .58rem;
+      font-weight: 600;
+
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .arch-line {
+      flex: 1;
+      min-width: 18px;
+
+      height: 1px;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--gold),
+          var(--pink)
+        );
+    }
+
+    .project-visual::before {
+      content: "SECURITY MONITORING";
+
+      position: absolute;
+
+      right: -35px;
+      top: 50%;
+
+      transform:
+        translateY(-50%)
+        rotate(90deg);
+
+      color: rgba(247,234,215,.12);
+
+      font-size: .60rem;
+
+      letter-spacing: .35em;
+    }
+
+
+    /* =========================================================
+       FROM DEE'S CORNER / BLOG
+       ========================================================= */
+
+    .journal {
+      background:
+        linear-gradient(
+          180deg,
+          #0b0705,
+          #100807
+        );
+    }
+
+    .journal-intro {
+      max-width: 700px;
+
+      margin-bottom: 65px;
+    }
+
+    .journal-intro .section-copy {
+      max-width: 580px;
+      margin-top: 22px;
+    }
+
+    .journal-list {
+      border-top:
+        1px solid rgba(216,162,76,.30);
+    }
+
+    .journal-item {
+      min-height: 150px;
+
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      align-items: center;
+
+      gap: 35px;
+
+      border-bottom:
+        1px solid rgba(216,162,76,.18);
+
+      transition:
+        background .25s ease,
+        padding .25s ease;
+    }
+
+    .journal-item:hover {
+      padding-left: 18px;
+
+      background:
+        rgba(237,47,117,.035);
+    }
+
+    .journal-number {
+      color: var(--gold);
+
+      font-family: var(--serif);
+      font-size: 1rem;
+    }
+
+    .journal-text small {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: var(--pink);
+
+      font-size: .58rem;
+      font-weight: 700;
+
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .journal-text h3 {
+      font-family: var(--serif);
+      font-size: clamp(1.35rem, 2.5vw, 2rem);
+      font-weight: 500;
+    }
+
+    .journal-status {
+      color: var(--soft-cream);
+
+      font-size: .60rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+
+    /* =========================================================
+       LEARN WITH DEE
+       ========================================================= */
+
+    .learn {
+      background:
+        radial-gradient(
+          circle at 25% 30%,
+          rgba(237,47,117,.09),
+          transparent 26%
+        ),
+        #080605;
+    }
+
+    .learn-header {
+      max-width: 740px;
+      margin-bottom: 60px;
+    }
+
+    .learn-header .section-copy {
+      max-width: 600px;
+      margin-top: 22px;
+    }
+
+    .learn-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+
+      border-top:
+        1px solid var(--border);
+
+      border-left:
+        1px solid var(--border);
+    }
+
+    .learn-item {
+      min-height: 250px;
+
+      position: relative;
+
+      padding: 42px;
+
+      border-right:
+        1px solid var(--border);
+
+      border-bottom:
+        1px solid var(--border);
+
+      overflow: hidden;
+
+      transition:
+        background .25s ease;
+    }
+
+    .learn-item:hover {
+      background:
+        rgba(237,47,117,.045);
+    }
+
+    .learn-item small {
+      color: var(--gold);
+
+      font-size: .60rem;
+      font-weight: 700;
+
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .learn-item h3 {
+      margin-top: 30px;
+
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 500;
+    }
+
+    .learn-item p {
+      max-width: 430px;
+
+      margin-top: 13px;
+
+      color: var(--soft-cream);
+
+      font-size: .90rem;
+      line-height: 1.75;
+    }
+
+    .learn-item::after {
+      content: "";
+
+      width: 75px;
+      height: 1px;
+
+      position: absolute;
+
+      right: 35px;
+      bottom: 35px;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--pink),
+          var(--orange)
+        );
+    }
+
+
+    /* =========================================================
+       CURRENTLY
+       ========================================================= */
+
+    .currently {
+      background:
+        linear-gradient(
+          110deg,
+          #130806,
+          #080605 55%,
+          #100706
+        );
+    }
+
+    .currently-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+
+      gap: 100px;
+
+      align-items: start;
+    }
+
+    .current-list {
+      border-top:
+        1px solid rgba(216,162,76,.30);
+    }
+
+    .current-row {
+      padding: 24px 0;
+
+      display: grid;
+      grid-template-columns: 130px 1fr;
+
+      gap: 25px;
+
+      border-bottom:
+        1px solid rgba(216,162,76,.16);
+    }
+
+    .current-row span {
+      color: var(--gold);
+
+      font-size: .59rem;
+      font-weight: 700;
+
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .current-row strong {
+      color: var(--cream);
+
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 500;
+    }
+
+
+    /* =========================================================
+       CLOSING NOTE
+       ========================================================= */
+
+    .closing {
+      min-height: 520px;
+
+      position: relative;
+
+      display: flex;
+      align-items: center;
+
+      text-align: center;
+
+      overflow: hidden;
+
+      background:
+        radial-gradient(
+          circle at 50% 50%,
+          rgba(179,29,61,.14),
+          transparent 35%
+        ),
+        #070403;
+    }
+
+    .closing::before,
+    .closing::after {
+      content: "";
+
+      position: absolute;
+
+      width: 340px;
+      height: 340px;
+
+      border:
+        1px solid rgba(216,162,76,.12);
+
+      border-radius: 50%;
+    }
+
+    .closing::before {
+      left: -180px;
+      bottom: -140px;
+    }
+
+    .closing::after {
+      right: -180px;
+      top: -140px;
+    }
+
+    .closing-inner {
+      max-width: 800px;
+      margin: 0 auto;
+
+      position: relative;
+      z-index: 2;
+    }
+
+    .closing p {
+      margin-top: 25px;
+
+      color: var(--soft-cream);
+
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+
+      line-height: 1.8;
+    }
+
+    .closing-mantra {
+      margin-top: 40px;
+
+      color: var(--gold);
+
+      font-size: .66rem;
+      font-weight: 700;
+
+      letter-spacing: .24em;
+      text-transform: uppercase;
+    }
+
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
+    .footer {
+      padding: 60px 0 35px;
+
+      background: #050302;
+
+      border-top:
+        1px solid rgba(216,162,76,.22);
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 40px;
+
+      padding-bottom: 35px;
+
+      border-bottom:
+        1px solid rgba(216,162,76,.14);
+    }
+
+    .footer-brand {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-style: italic;
+    }
+
+    .footer-brand span {
+      color: var(--pink);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 25px;
+    }
+
+    .footer-links a {
+      color: var(--soft-cream);
+
+      font-size: .62rem;
+      font-weight: 600;
+
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .footer-bottom {
+      padding-top: 27px;
+
+      display: flex;
+      justify-content: space-between;
+
+      gap: 30px;
+
+      color: rgba(216,198,177,.60);
+
+      font-size: .65rem;
+    }
+
+    .footer-verse {
+      color: var(--gold);
+    }
+
+
+    /* =========================================================
+       TABLET
+       ========================================================= */
+
+    @media (max-width: 1000px) {
+
+      .site-header {
+        position: relative;
+      }
+
+      .nav-inner {
+        padding: 20px 0;
+
+        flex-direction: column;
+
+        gap: 20px;
+      }
+
+      .site-nav {
+        width: 100%;
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+
+        gap: 16px 24px;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+
+        padding: 90px 0 70px;
+      }
+
+      .hero-art {
+        min-height: 460px;
+      }
+
+      .meet-grid,
+      .currently-grid {
+        grid-template-columns: 1fr;
+
+        gap: 55px;
+      }
+
+      .meet-art {
+        min-height: 300px;
+      }
+
+      .project-feature {
+        grid-template-columns: 1fr;
+      }
+
+      .project-content {
+        padding-right: 0;
+      }
+
+      .project-visual {
+        border-left: 0;
+
+        border-top:
+          1px solid rgba(216,162,76,.22);
+      }
+
+      .featured-heading {
+        align-items: start;
+        flex-direction: column;
+      }
+
+    }
+
+
+    /* =========================================================
+       MOBILE
+       ========================================================= */
+
+    @media (max-width: 650px) {
+
+      .shell,
+      .nav-inner,
+      .hero-inner {
+        width: 88%;
+      }
+
+      .site-nav {
+        gap: 13px 17px;
+      }
+
+      .site-nav a {
+        font-size: .59rem;
+      }
+
+      .hero-inner {
+        padding-top: 75px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3.7rem, 19vw, 5.8rem);
+      }
+
+      .hero-tagline {
+        line-height: 2;
+      }
+
+      .hero-tagline span {
+        padding: 0 4px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .hero-art {
+        min-height: 350px;
+      }
+
+      .art-orbit {
+        width: 300px;
+      }
+
+      .butterfly {
+        transform:
+          translateX(-50%)
+          scale(.72);
+      }
+
+      .section {
+        padding: 85px 0;
+      }
+
+      .meet-grid {
+        gap: 40px;
+      }
+
+      .project-content {
+        padding: 45px 0;
+      }
+
+      .project-visual {
+        min-height: 360px;
+      }
+
+      .architecture {
+        width: 88%;
+
+        flex-direction: column;
+
+        gap: 8px;
+      }
+
+      .arch-node {
+        width: 100%;
+      }
+
+      .arch-line {
+        width: 1px;
+        min-width: 1px;
+
+        height: 18px;
+        min-height: 18px;
+
+        flex: none;
+
+        background:
+          linear-gradient(
+            var(--gold),
+            var(--pink)
+          );
+      }
+
+      .journal-item {
+        min-height: 175px;
+
+        grid-template-columns: 40px 1fr;
+
+        gap: 20px;
+      }
+
+      .journal-status {
+        display: none;
+      }
+
+      .learn-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .learn-item {
+        min-height: 220px;
+
+        padding: 32px;
+      }
+
+      .current-row {
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+      }
+
+      .footer-top,
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+    }
+
+  </style>
 </head>
+
 
 <body>
 
-  <!-- NAVIGATION -->
-  <header class="navbar">
-    <a href="index.html" class="logo">
-      <span class="logo-butterfly">🦋</span>
-      <span>Dee</span>
-    </a>
 
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#why">My Why</a>
-      <a href="learn.html">Learn</a>
-      <a href="labs.html">Labs</a>
-      <a href="coursework.html">Coursework</a>
-      <a href="ctf.html">CTFs</a>
-      <a href="certifications.html">Certs</a>
-      <a href="#about">About</a>
-    </nav>
+  <!-- =======================================================
+       NAVIGATION
+       ======================================================= -->
+
+  <header class="site-header">
+
+    <div class="nav-inner">
+
+      <a href="index.html"
+         class="brand"
+         aria-label="Dee's Cyber Corner Home">
+
+        <span class="brand-mark"
+              aria-hidden="true"></span>
+
+        <span class="brand-name">
+          Dee's <span>Cyber Corner</span>
+        </span>
+
+      </a>
+
+
+      <nav class="site-nav"
+           aria-label="Main navigation">
+
+        <a href="index.html"
+           class="active">
+          Home
+        </a>
+
+        <a href="about.html">
+          About
+        </a>
+
+        <a href="labs.html">
+          Projects
+        </a>
+
+        <a href="learn.html">
+          Learn
+        </a>
+
+        <a href="blog.html">
+          Blog
+        </a>
+
+      </nav>
+
+    </div>
+
   </header>
 
 
-  <!-- HERO -->
   <main>
 
-    <section class="hero" id="home">
 
-      <div class="hero-content">
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
 
-        <p class="eyebrow">WELCOME TO</p>
+    <section class="hero">
 
-        <h1>
-          DEE'S
-          <span>CYBER CORNER</span>
-        </h1>
+      <div class="hero-inner">
 
-        <p class="tagline">
-          LEARNING ✦ DOCUMENTING ✦ GROWING
-        </p>
 
-        <p class="intro">
-          A space where cybersecurity, curiosity,
-          and real life meet.
-        </p>
+        <div class="hero-copy-wrap">
 
-        <div class="hero-buttons">
-          <a href="#explore" class="button primary">
-            EXPLORE MY CYBER WORLD →
-          </a>
+          <p class="eyebrow">
+            Welcome to my corner of cybersecurity
+          </p>
 
-          <a href="#why" class="button secondary">
-            READ MY WHY
-          </a>
+
+          <h1>
+
+            <span class="dee">
+              Dee's
+            </span>
+
+            <span class="corner">
+              Cyber Corner
+            </span>
+
+          </h1>
+
+
+          <p class="hero-tagline">
+
+            Learning
+
+            <span>•</span>
+
+            Documenting
+
+            <span>•</span>
+
+            Growing
+
+          </p>
+
+
+          <p class="hero-copy">
+
+            A space where cybersecurity, curiosity,
+            career growth, faith, and real life meet.
+
+          </p>
+
+
+          <div class="hero-actions">
+
+            <a href="#featured-project"
+               class="button button-primary">
+
+              Explore My Work
+
+            </a>
+
+
+            <a href="#meet-dee"
+               class="button button-secondary">
+
+              Meet Dee
+
+            </a>
+
+          </div>
+
         </div>
 
-      </div>
 
-      <div class="hero-art">
-        <!-- Our custom cyber butterfly artwork will go here -->
+        <!--
+          Decorative homepage artwork.
+          This is branding only — never project evidence.
+        -->
+
+        <div class="hero-art"
+             aria-hidden="true">
+
+          <div class="art-orbit">
+
+
+            <div class="butterfly">
+
+              <span class="wing wing-left"></span>
+
+              <span class="wing wing-right"></span>
+
+              <span class="butterfly-body"></span>
+
+            </div>
+
+
+            <span class="botanical botanical-one"></span>
+
+            <span class="botanical botanical-two"></span>
+
+          </div>
+
+        </div>
+
+
       </div>
 
     </section>
 
 
-    <!-- QUICK INTRO -->
-    <section class="quick-stats">
+    <!-- =====================================================
+         FAITH
+         ===================================================== -->
 
-      <div>
-        <span class="stat-icon">⌘</span>
-        <strong>Hands-On</strong>
-        <p>Labs & Projects</p>
-      </div>
+    <section class="faith-strip">
 
-      <div>
-        <span class="stat-icon">◇</span>
-        <strong>Certified</strong>
-        <p>Always Learning</p>
-      </div>
+      <p>
 
-      <div>
-        <span class="stat-icon">✦</span>
-        <strong>Real-World</strong>
-        <p>Cyber Experience</p>
-      </div>
+        “If you have faith as small as a mustard seed,
+        you can say to this mountain, ‘Move from here to there,’
+        and it will move.”
 
-      <div>
-        <span class="stat-icon">♡</span>
-        <strong>Continuous</strong>
-        <p>Growth</p>
+        <strong>
+          Matthew 17:20
+        </strong>
+
+      </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         MEET DEE
+         ===================================================== -->
+
+    <section class="section meet"
+             id="meet-dee">
+
+      <div class="shell meet-grid">
+
+
+        <div class="meet-art">
+
+          <span class="meet-art-label">
+            The person behind the corner
+          </span>
+
+          <!--
+            HEADSHOT LATER:
+
+            When you're ready, this area can become:
+
+            <img
+              src="assets/dee-headshot.jpg"
+              alt="Dee"
+              class="dee-headshot"
+            >
+
+            We are intentionally NOT adding it yet.
+          -->
+
+          <p class="headshot-later">
+            Personal photography will live here later.
+          </p>
+
+        </div>
+
+
+        <div class="meet-copy">
+
+          <p class="section-kicker">
+            Meet Dee
+          </p>
+
+
+          <h2 class="section-title">
+
+            My path wasn't
+            <em>perfectly linear.</em>
+
+          </h2>
+
+
+          <p class="section-copy">
+
+            Dee's Cyber Corner is where I document the
+            journey — what I'm learning, what I'm building,
+            the lessons I've picked up along the way, and
+            where I'm headed next.
+
+          </p>
+
+
+          <p class="section-copy">
+
+            This space isn't only about showing finished
+            work. It's about growth, curiosity, hands-on
+            learning, and sharing something useful with
+            the person coming behind me.
+
+          </p>
+
+
+          <a href="about.html"
+             class="text-link">
+
+            Read My Story →
+
+          </a>
+
+        </div>
+
+
       </div>
 
     </section>
 
 
-    <!-- MY WHY -->
-    <section class="my-why" id="why">
+    <!-- =====================================================
+         FEATURED PROJECT
+         ===================================================== -->
 
-      <div class="why-decoration">
-        <span>LEARN</span>
-        <span>BUILD</span>
-        <span>GROW</span>
-        <span>INSPIRE</span>
+    <section class="section featured"
+             id="featured-project">
+
+      <div class="shell">
+
+
+        <div class="featured-heading">
+
+          <div>
+
+            <p class="section-kicker">
+              From the Lab
+            </p>
+
+            <h2 class="section-title">
+              Featured <em>Project.</em>
+            </h2>
+
+          </div>
+
+
+          <a href="labs.html"
+             class="text-link">
+
+            View All Projects →
+
+          </a>
+
+        </div>
+
+
+        <article class="project-feature">
+
+
+          <div class="project-content">
+
+            <span class="project-number">
+              01
+            </span>
+
+
+            <h3>
+
+              Cloud-Based SOC Monitoring
+              & Threat Detection
+
+            </h3>
+
+
+            <p>
+
+              Built and tested a cloud-based security
+              monitoring environment using Microsoft Azure
+              and Microsoft Sentinel to detect unauthorized
+              login attempts and brute-force activity.
+
+            </p>
+
+
+            <div class="project-tags">
+
+              <span>Microsoft Azure</span>
+
+              <span>Microsoft Sentinel</span>
+
+              <span>KQL</span>
+
+              <span>Log Analytics</span>
+
+              <span>SIEM</span>
+
+              <span>Detection Engineering</span>
+
+            </div>
+
+
+            <a href="projects/azure-sentinel-soc.html"
+               class="text-link">
+
+              View Case Study →
+
+            </a>
+
+          </div>
+
+
+          <div class="project-visual"
+               aria-label="Simplified Sentinel project architecture">
+
+            <div class="architecture">
+
+              <div class="arch-node">
+                Windows VM
+              </div>
+
+              <span class="arch-line"></span>
+
+              <div class="arch-node">
+                Security Logs
+              </div>
+
+              <span class="arch-line"></span>
+
+              <div class="arch-node">
+                Sentinel
+              </div>
+
+              <span class="arch-line"></span>
+
+              <div class="arch-node">
+                KQL
+              </div>
+
+              <span class="arch-line"></span>
+
+              <div class="arch-node">
+                Incident
+              </div>
+
+            </div>
+
+          </div>
+
+
+        </article>
+
       </div>
 
-      <div class="why-content">
+    </section>
 
-        <p class="section-label">MY WHY ✦</p>
 
-        <h2>More Than Cybersecurity.</h2>
+    <!-- =====================================================
+         FROM DEE'S CORNER
+         ===================================================== -->
+
+    <section class="section journal">
+
+      <div class="shell">
+
+
+        <div class="journal-intro">
+
+          <p class="section-kicker">
+            From Dee's Corner
+          </p>
+
+
+          <h2 class="section-title">
+
+            More than a
+            <em>portfolio.</em>
+
+          </h2>
+
+
+          <p class="section-copy">
+
+            Thoughts on cybersecurity, breaking into tech,
+            navigating the job market, learning in public,
+            career growth, and the things I wish someone
+            had told me sooner.
+
+          </p>
+
+        </div>
+
+
+        <div class="journal-list">
+
+
+          <a href="blog.html"
+             class="journal-item">
+
+            <span class="journal-number">
+              01
+            </span>
+
+            <div class="journal-text">
+
+              <small>
+                My Journey
+              </small>
+
+              <h3>
+                How I Broke Into Cybersecurity
+              </h3>
+
+            </div>
+
+            <span class="journal-status">
+              Coming Soon
+            </span>
+
+          </a>
+
+
+          <a href="blog.html"
+             class="journal-item">
+
+            <span class="journal-number">
+              02
+            </span>
+
+            <div class="journal-text">
+
+              <small>
+                Career
+              </small>
+
+              <h3>
+                What the Cybersecurity Job Market Taught Me
+              </h3>
+
+            </div>
+
+            <span class="journal-status">
+              Coming Soon
+            </span>
+
+          </a>
+
+
+          <a href="blog.html"
+             class="journal-item">
+
+            <span class="journal-number">
+              03
+            </span>
+
+            <div class="journal-text">
+
+              <small>
+                Resources
+              </small>
+
+              <h3>
+                Resources That Actually Helped Me
+              </h3>
+
+            </div>
+
+            <span class="journal-status">
+              Coming Soon
+            </span>
+
+          </a>
+
+
+        </div>
+
+
+        <a href="blog.html"
+           class="text-link">
+
+          Visit the Blog →
+
+        </a>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         LEARN WITH DEE
+         ===================================================== -->
+
+    <section class="section learn">
+
+      <div class="shell">
+
+
+        <div class="learn-header">
+
+          <p class="section-kicker">
+            Learn With Dee
+          </p>
+
+
+          <h2 class="section-title">
+
+            Cybersecurity doesn't have to
+            <em>sound complicated.</em>
+
+          </h2>
+
+
+          <p class="section-copy">
+
+            I'm building the kind of learning corner I
+            would've wanted while figuring things out:
+            concepts in plain language, interactive practice,
+            study notes, and resources I actually used.
+
+          </p>
+
+        </div>
+
+
+        <div class="learn-grid">
+
+
+          <a href="learn.html"
+             class="learn-item">
+
+            <small>
+              Interactive
+            </small>
+
+            <h3>
+              Cyber Terms
+            </h3>
+
+            <p>
+
+              Acronyms, terminology, and an interactive
+              practice experience designed to make the
+              language of cybersecurity easier to remember.
+
+            </p>
+
+          </a>
+
+
+          <a href="learn.html"
+             class="learn-item">
+
+            <small>
+              Study With Me
+            </small>
+
+            <h3>
+              Notes & Guides
+            </h3>
+
+            <p>
+
+              Concepts I'm learning translated into my own
+              words, with useful notes I can return to later.
+
+            </p>
+
+          </a>
+
+
+          <a href="learn.html"
+             class="learn-item">
+
+            <small>
+              Understand
+            </small>
+
+            <h3>
+              Security Basics
+            </h3>
+
+            <p>
+
+              Straightforward explanations of security
+              operations, IAM, cloud security, detection,
+              incident response, and more.
+
+            </p>
+
+          </a>
+
+
+          <a href="blog.html"
+             class="learn-item">
+
+            <small>
+              Give Back
+            </small>
+
+            <h3>
+              Career Resources
+            </h3>
+
+            <p>
+
+              Resources, lessons, and experiences that helped
+              me navigate learning, certifications, interviews,
+              and breaking into cybersecurity.
+
+            </p>
+
+          </a>
+
+
+        </div>
+
+
+        <a href="learn.html"
+           class="text-link">
+
+          Enter the Learning Corner →
+
+        </a>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CURRENTLY
+         ===================================================== -->
+
+    <section class="section currently">
+
+      <div class="shell currently-grid">
+
+
+        <div>
+
+          <p class="section-kicker">
+            Currently in My Cyber World
+          </p>
+
+
+          <h2 class="section-title">
+
+            Always
+            <em>growing.</em>
+
+          </h2>
+
+        </div>
+
+
+        <div class="current-list">
+
+
+          <div class="current-row">
+
+            <span>
+              Learning
+            </span>
+
+            <strong>
+              Graduate-level cybersecurity studies
+            </strong>
+
+          </div>
+
+
+          <div class="current-row">
+
+            <span>
+              Exploring
+            </span>
+
+            <strong>
+              Security Engineering + AI Security
+            </strong>
+
+          </div>
+
+
+          <div class="current-row">
+
+            <span>
+              Building
+            </span>
+
+            <strong>
+              Dee's Cyber Corner
+            </strong>
+
+          </div>
+
+
+          <div class="current-row">
+
+            <span>
+              Documenting
+            </span>
+
+            <strong>
+              Labs, technical learning & career lessons
+            </strong>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CLOSING
+         ===================================================== -->
+
+    <section class="section closing">
+
+      <div class="shell closing-inner">
+
+
+        <p class="section-kicker">
+          A Note From Dee
+        </p>
+
+
+        <h2 class="section-title">
+
+          Learn something.
+          <br>
+
+          <em>Build something.</em>
+          <br>
+
+          Share something.
+
+        </h2>
+
 
         <p>
-          When I started learning cybersecurity, I realized
-          that sometimes the hardest part wasn't the concept
-          itself — it was how the concept was explained.
+
+          I created this corner to document my growth,
+          but also to leave something useful behind.
+          If something I've learned can make someone else's
+          path a little easier, then this space is doing
+          exactly what I created it to do.
+
         </p>
 
-        <p>
-          I created this space to document what I'm learning,
-          what confused me, what finally made it click, and
-          how I would explain it to someone else who's
-          learning too.
-        </p>
 
-        <p class="why-highlight">
-          I'm still learning too — and that's the point. ♡
-        </p>
+        <div class="closing-mantra">
 
-        <a href="about.html" class="button secondary">
-          READ MY STORY →
-        </a>
+          Faith • Curiosity • Growth • Community
 
-      </div>
+        </div>
 
-    </section>     
-<!-- VALUE SECTION -->
-<section class="value-section">
-
-  <p class="section-label">WHAT I BRING TO THE TABLE</p>
-
-  <h2>Knowledge Into Action.</h2>
-
-  <p class="value-intro">
-    Learning the concepts is only the beginning.
-    I focus on understanding how security works,
-    applying what I learn, and communicating what I find.
-  </p>
-
-  <div class="value-grid">
-
-    <article class="value-card">
-      <span class="value-number">01</span>
-      <h3>Investigate</h3>
-      <p>
-        Analyze alerts, logs, authentication activity,
-        and network or endpoint telemetry to understand
-        what happened and determine the next step.
-      </p>
-      <span class="value-tags">SIEM · EDR · LOG ANALYSIS</span>
-    </article>
-
-    <article class="value-card">
-      <span class="value-number">02</span>
-      <h3>Secure</h3>
-      <p>
-        Apply security concepts across identity,
-        endpoints, networks, systems, and access controls.
-      </p>
-      <span class="value-tags">IAM · ENDPOINT · NETWORK</span>
-    </article>
-
-    <article class="value-card">
-      <span class="value-number">03</span>
-      <h3>Assess</h3>
-      <p>
-        Identify vulnerabilities and security gaps,
-        evaluate risk, and connect findings to security
-        controls and remediation.
-      </p>
-      <span class="value-tags">RISK · VULNERABILITIES · CONTROLS</span>
-    </article>
-
-    <article class="value-card">
-      <span class="value-number">04</span>
-      <h3>Automate</h3>
-      <p>
-        Explore scripting, APIs, and automation to
-        improve security administration and reduce
-        repetitive work.
-      </p>
-      <span class="value-tags">POWERSHELL · APIs · AUTOMATION</span>
-    </article>
-
-    <article class="value-card">
-      <span class="value-number">05</span>
-      <h3>Communicate</h3>
-      <p>
-        Translate technical work into clear documentation,
-        recommendations, runbooks, and effective handoffs.
-      </p>
-      <span class="value-tags">DOCUMENTATION · RUNBOOKS · REPORTING</span>
-    </article>
-
-  </div>
-
-</section>
-
-    <!-- LEARNING HUB -->
-    <section class="explore" id="explore">
-
-      <p class="section-label">✦ START EXPLORING ✦</p>
-
-      <h2>Explore My Cyber World</h2>
-
-      <p class="section-intro">
-        Pick a path and learn with me.
-      </p>
-
-
-      <div class="card-grid">
-
-        <a href="labs.html" class="cyber-card">
-          <span class="card-icon">⌬</span>
-          <h3>Labs</h3>
-          <p>
-            Hands-on labs, home projects,
-            experiments, and real-world practice.
-          </p>
-          <span class="card-link">Explore Labs →</span>
-        </a>
-
-
-        <a href="learn.html" class="cyber-card">
-          <span class="card-icon">♡</span>
-          <h3>Learn</h3>
-          <p>
-            Cybersecurity concepts explained
-            simply and in my own words.
-          </p>
-          <span class="card-link">Start Learning →</span>
-        </a>
-
-
-        <a href="coursework.html" class="cyber-card">
-          <span class="card-icon">✎</span>
-          <h3>Coursework</h3>
-          <p>
-            Coursework, concepts, notes,
-            and the lessons I took away.
-          </p>
-          <span class="card-link">View Coursework →</span>
-        </a>
-
-
-        <a href="ctf.html" class="cyber-card">
-          <span class="card-icon">⚑</span>
-          <h3>CTFs</h3>
-          <p>
-            Challenges, problem solving,
-            techniques, and what I learned.
-          </p>
-          <span class="card-link">View CTFs →</span>
-        </a>
-
-
-        <a href="tryhackme.html" class="cyber-card">
-          <span class="card-icon">&gt;_</span>
-          <h3>TryHackMe</h3>
-          <p>
-            Rooms, learning paths,
-            hands-on practice, and takeaways.
-          </p>
-          <span class="card-link">View Journey →</span>
-        </a>
-
-
-        <a href="certifications.html" class="cyber-card">
-          <span class="card-icon">✦</span>
-          <h3>Certifications</h3>
-          <p>
-            My certification journey,
-            study resources, and lessons learned.
-          </p>
-          <span class="card-link">View Certifications →</span>
-        </a>
 
       </div>
 
     </section>
 
-
-    <!-- CURRENTLY LEARNING -->
-    <section class="currently-learning">
-
-      <p class="section-label">CURRENTLY LEARNING</p>
-
-      <h2>What's on my screen lately?</h2>
-
-      <div class="learning-tags">
-        <span>Security Engineering</span>
-        <span>Detection Engineering</span>
-        <span>IAM Security</span>
-        <span>Cloud Security</span>
-      </div>
-
-      <blockquote>
-        “I'm still learning too — and that's the point.”
-      </blockquote>
-
-    </section>
-
-
-    <!-- LATEST CONTENT -->
-    <section class="latest">
-
-      <p class="section-label">LATEST FROM DEE</p>
-
-      <h2>Fresh From the Lab</h2>
-
-      <div class="latest-grid">
-
-        <article>
-          <span>LAB</span>
-          <h3>Microsoft Sentinel Honeypot</h3>
-          <p>
-            Exploring SIEM monitoring, KQL,
-            attack activity, and detection.
-          </p>
-        </article>
-
-        <article>
-          <span>LAB</span>
-          <h3>Splunk SOC Lab</h3>
-          <p>
-            Practicing log analysis,
-            investigation, and threat hunting.
-          </p>
-        </article>
-
-        <article>
-          <span>NOTES</span>
-          <h3>Security Notes</h3>
-          <p>
-            IAM, SIEM, EDR, networking,
-            and concepts that finally clicked.
-          </p>
-        </article>
-
-      </div>
-
-    </section>
 
   </main>
 
 
-  <!-- FOOTER -->
-  <footer>
+  <!-- =======================================================
+       FOOTER
+       ======================================================= -->
 
-    <div class="footer-brand">
-      <span>🦋</span>
-      <strong>Dee's Cyber Cor
+  <footer class="footer">
+
+    <div class="shell">
+
+
+      <div class="footer-top">
+
+        <a href="index.html"
+           class="footer-brand">
+
+          Dee's <span>Cyber Corner</span>
+
+        </a>
+
+
+        <div class="footer-links">
+
+          <a href="index.html">
+            Home
+          </a>
+
+          <a href="about.html">
+            About
+          </a>
+
+          <a href="labs.html">
+            Projects
+          </a>
+
+          <a href="learn.html">
+            Learn
+          </a>
+
+          <a href="blog.html">
+            Blog
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <span>
+          © 2026 Dee's Cyber Corner
+        </span>
+
+        <span class="footer-verse">
+          Faith as small as a mustard seed • Matthew 17:20
+        </span>
+
+      </div>
+
+
+    </div>
+
+  </footer>
+
+
+</body>
+</html>
