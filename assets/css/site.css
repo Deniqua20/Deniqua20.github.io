@@ -2034,3 +2034,19 @@ svg.line-icon {
     min-height: 850px;
   }
 }
+/* Let the motto sit directly on the artwork, without a visible panel. */
+.hero-only .hero-verse {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.hero-only .hero-verse p {
+  color: #fff0d4;
+  text-shadow:
+    0 2px 4px #080503,
+    0 0 16px #080503,
+    0 0 30px #080503;
+}
+.hero-only .hero-art {
+  background-image: url("../images/hero-butterfly-laptop.webp");
+}
