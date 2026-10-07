@@ -2274,3 +2274,31 @@ svg.line-icon {
     padding: 10px 13px;
   }
 }
+/* A native butterfly cursor on devices with a mouse or trackpad. */
+@media (hover: hover) and (pointer: fine) {
+  body,
+  body a,
+  body button,
+  body summary,
+  body [role="button"] {
+    cursor:
+      url("../images/butterfly-cursor.png") 16 16,
+      auto;
+  }
+  body a,
+  body button,
+  body summary,
+  body [role="button"] {
+    cursor:
+      url("../images/butterfly-cursor.png") 16 16,
+      pointer;
+  }
+  body input,
+  body textarea,
+  [contenteditable="true"] {
+    cursor: text;
+  }
+  body button:disabled {
+    cursor: not-allowed;
+  }
+}
