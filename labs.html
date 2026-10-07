@@ -1,1618 +1,1391 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Projects & Technical Work | Dee's Cyber Corner</title>
+    <title>Projects & Technical Work | Dee's Cyber Corner</title>
 
-  <meta name="description"
-        content="Explore cybersecurity projects and technical work from Dee's Cyber Corner across security operations, IAM, cloud security, vulnerability management, network security, and digital forensics.">
+    <meta
+      name="description"
+      content="Explore cybersecurity projects and technical work from Dee's Cyber Corner across security operations, IAM, cloud security, vulnerability management, network security, and digital forensics."
+    />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
-        rel="stylesheet">
-
-  <style>
-
-    /* =========================================================
+    <style>
+      /* =========================================================
        DEE'S CYBER CORNER
        PROJECTS & TECHNICAL WORK
        ========================================================= */
 
-    :root {
-      --black: #080605;
-      --espresso: #120b08;
-      --brown: #24130e;
+      :root {
+        --black: #080605;
+        --espresso: #120b08;
+        --brown: #24130e;
 
-      --cream: #f7ead7;
-      --soft-cream: #d8c6b1;
+        --cream: #f7ead7;
+        --soft-cream: #d8c6b1;
 
-      --pink: #ed2f75;
-      --hot-pink: #ff3b86;
-      --hibiscus: #b31d3d;
-      --orange: #ef6b2e;
-      --gold: #d8a24c;
+        --pink: #ed2f75;
+        --hot-pink: #ff3b86;
+        --hibiscus: #b31d3d;
+        --orange: #ef6b2e;
+        --gold: #d8a24c;
 
-      --border: rgba(216, 162, 76, .25);
-      --border-soft: rgba(247, 234, 215, .10);
+        --border: rgba(216, 162, 76, 0.25);
+        --border-soft: rgba(247, 234, 215, 0.1);
 
-      --serif: "Playfair Display", Georgia, serif;
-      --sans: "DM Sans", Arial, sans-serif;
+        --serif: "Playfair Display", Georgia, serif;
+        --sans: "DM Sans", Arial, sans-serif;
 
-      --shell: 1180px;
-    }
+        --shell: 1180px;
+      }
 
-
-    /* =========================================================
+      /* =========================================================
        RESET
        ========================================================= */
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    html {
-      scroll-behavior: smooth;
-    }
+      html {
+        scroll-behavior: smooth;
+      }
 
-    body {
-      background:
-        radial-gradient(
-          circle at 90% 10%,
-          rgba(237, 47, 117, .07),
-          transparent 24%
-        ),
-        #080605;
+      body {
+        background:
+          radial-gradient(
+            circle at 90% 10%,
+            rgba(237, 47, 117, 0.07),
+            transparent 24%
+          ),
+          #080605;
 
-      color: var(--cream);
+        color: var(--cream);
 
-      font-family: var(--sans);
-      line-height: 1.6;
+        font-family: var(--sans);
+        line-height: 1.6;
 
-      overflow-x: hidden;
-    }
+        overflow-x: hidden;
+      }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
 
-    .shell {
-      width: min(var(--shell), 88%);
-      margin: 0 auto;
-    }
+      .shell {
+        width: min(var(--shell), 88%);
+        margin: 0 auto;
+      }
 
-
-    /* =========================================================
+      /* =========================================================
        NAVIGATION
        ========================================================= */
 
-    .site-header {
-      min-height: 82px;
-
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-
-      display: flex;
-      align-items: center;
-
-      background: rgba(8, 6, 5, .94);
-
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-
-      border-bottom:
-        1px solid rgba(216, 162, 76, .18);
-    }
-
-    .nav-inner {
-      width: min(var(--shell), 88%);
-      margin: 0 auto;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 40px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-
-      flex-shrink: 0;
-    }
-
-    .brand-mark {
-      width: 38px;
-      height: 38px;
-
-      position: relative;
-    }
-
-    .brand-mark::before,
-    .brand-mark::after {
-      content: "";
-
-      position: absolute;
-      top: 8px;
-
-      width: 14px;
-      height: 20px;
-
-      border: 1px solid var(--gold);
-    }
-
-    .brand-mark::before {
-      left: 3px;
-
-      border-radius: 80% 35% 65% 35%;
-
-      transform: rotate(-25deg);
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(237,47,117,.42),
-          rgba(239,107,46,.10)
-        );
-    }
-
-    .brand-mark::after {
-      right: 3px;
-
-      border-radius: 35% 80% 35% 65%;
-
-      transform: rotate(25deg);
-
-      background:
-        linear-gradient(
-          215deg,
-          rgba(239,107,46,.35),
-          rgba(237,47,117,.10)
-        );
-    }
-
-    .brand-name {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 1.35rem;
-
-      white-space: nowrap;
-    }
-
-    .brand-name span {
-      color: var(--gold);
-    }
-
-    .site-nav {
-      display: flex;
-      align-items: center;
-
-      gap: 34px;
-    }
-
-    .site-nav a {
-      position: relative;
-
-      color: var(--soft-cream);
-
-      font-size: .70rem;
-      font-weight: 500;
-
-      letter-spacing: .14em;
-      text-transform: uppercase;
-
-      transition: color .25s ease;
-    }
-
-    .site-nav a::after {
-      content: "";
-
-      position: absolute;
-
-      left: 0;
-      bottom: -8px;
-
-      width: 0;
-      height: 1px;
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--pink),
-          var(--orange)
-        );
-
-      transition: width .25s ease;
-    }
-
-    .site-nav a:hover,
-    .site-nav a.active {
-      color: var(--cream);
-    }
-
-    .site-nav a:hover::after,
-    .site-nav a.active::after {
-      width: 100%;
-    }
-
-
-    /* =========================================================
-       PROJECTS HERO
-       ========================================================= */
-
-    .projects-hero {
-      position: relative;
-
-      padding: 130px 0 105px;
-
-      overflow: hidden;
-
-      border-bottom: 1px solid var(--border);
-
-      background:
-        radial-gradient(
-          circle at 82% 50%,
-          rgba(237,47,117,.09),
-          transparent 25%
-        ),
-        linear-gradient(
-          115deg,
-          #070403,
-          #0d0705 58%,
-          #100706
-        );
-    }
-
-    .projects-hero::before {
-      content: "";
-
-      position: absolute;
-
-      top: 0;
-      right: 0;
-
-      width: 48%;
-      height: 100%;
-
-      opacity: .14;
-
-      background-image:
-        linear-gradient(
-          rgba(216,162,76,.25) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(216,162,76,.25) 1px,
-          transparent 1px
-        );
-
-      background-size: 80px 80px;
-
-      mask-image:
-        linear-gradient(
-          90deg,
-          transparent,
-          black
-        );
-
-      -webkit-mask-image:
-        linear-gradient(
-          90deg,
-          transparent,
-          black
-        );
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 2;
-
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-
-      gap: 80px;
-
-      align-items: end;
-    }
-
-    .eyebrow {
-      margin-bottom: 20px;
-
-      color: var(--gold);
-
-      font-size: .66rem;
-      font-weight: 700;
-
-      letter-spacing: .25em;
-      text-transform: uppercase;
-    }
-
-    .projects-hero h1 {
-      max-width: 780px;
-
-      font-family: var(--serif);
-      font-size: clamp(3.8rem, 7vw, 7rem);
-      font-weight: 500;
-
-      line-height: .94;
-
-      letter-spacing: -.045em;
-    }
-
-    .projects-hero h1 em {
-      color: var(--pink);
-
-      font-weight: 500;
-    }
-
-    .hero-side {
-      padding-left: 32px;
-
-      border-left:
-        1px solid rgba(216,162,76,.35);
-    }
-
-    .hero-side p {
-      color: var(--soft-cream);
-
-      line-height: 1.9;
-    }
-
-    .hero-side strong {
-      display: block;
-
-      margin-top: 25px;
-
-      color: var(--cream);
-
-      font-family: var(--serif);
-      font-size: 1.15rem;
-      font-weight: 500;
-    }
-
-
-    /* =========================================================
-       TECHNICAL FOCUS BAR
-       ========================================================= */
-
-    .focus-bar {
-      border-bottom:
-        1px solid rgba(216,162,76,.18);
-
-      background: #0b0605;
-    }
-
-    .focus-inner {
-      min-height: 78px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 25px;
-
-      overflow-x: auto;
-    }
-
-    .focus-inner span {
-      flex-shrink: 0;
-
-      color: var(--soft-cream);
-
-      font-size: .62rem;
-      font-weight: 600;
-
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-
-    .focus-inner i {
-      width: 3px;
-      height: 3px;
-
-      flex-shrink: 0;
-
-      border-radius: 50%;
-
-      background: var(--pink);
-    }
-
-
-    /* =========================================================
-       GENERAL
-       ========================================================= */
-
-    .section {
-      padding: 115px 0;
-
-      border-bottom:
-        1px solid rgba(216,162,76,.15);
-    }
-
-    .section-kicker {
-      margin-bottom: 16px;
-
-      color: var(--gold);
-
-      font-size: .64rem;
-      font-weight: 700;
-
-      letter-spacing: .23em;
-      text-transform: uppercase;
-    }
-
-    .section-title {
-      font-family: var(--serif);
-      font-size: clamp(2.6rem, 5vw, 4.8rem);
-      font-weight: 500;
-
-      line-height: 1;
-
-      letter-spacing: -.035em;
-    }
-
-    .section-title em {
-      color: var(--pink);
-
-      font-weight: 500;
-    }
-
-    .section-intro {
-      max-width: 650px;
-
-      margin-top: 22px;
-
-      color: var(--soft-cream);
-
-      line-height: 1.85;
-    }
-
-    .text-link {
-      display: inline-flex;
-      align-items: center;
-
-      margin-top: 30px;
-
-      padding-bottom: 5px;
-
-      border-bottom:
-        1px solid var(--pink);
-
-      color: var(--cream);
-
-      font-size: .67rem;
-      font-weight: 700;
-
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-
-
-    /* =========================================================
-       FEATURED CASE STUDY
-       ========================================================= */
-
-    .featured {
-      background:
-        radial-gradient(
-          circle at 82% 35%,
-          rgba(237,47,117,.07),
-          transparent 27%
-        ),
-        #080605;
-    }
-
-    .featured-header {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-
-      gap: 50px;
-
-      margin-bottom: 55px;
-    }
-
-    .featured-label {
-      color: var(--pink);
-
-      font-family: var(--serif);
-      font-size: 1rem;
-      font-style: italic;
-    }
-
-    .featured-project {
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-
-      border-top:
-        1px solid rgba(216,162,76,.55);
-
-      border-bottom:
-        1px solid rgba(216,162,76,.28);
-    }
-
-    .project-info {
-      padding: 60px 60px 60px 0;
-    }
-
-    .project-type {
-      color: var(--gold);
-
-      font-size: .60rem;
-      font-weight: 700;
-
-      letter-spacing: .18em;
-      text-transform: uppercase;
-    }
-
-    .project-info h2 {
-      max-width: 720px;
-
-      margin-top: 20px;
-
-      font-family: var(--serif);
-      font-size: clamp(2.3rem, 4vw, 4rem);
-      font-weight: 500;
-
-      line-height: 1.05;
-
-      letter-spacing: -.025em;
-    }
-
-    .project-summary {
-      max-width: 650px;
-
-      margin-top: 25px;
-
-      color: var(--soft-cream);
-
-      line-height: 1.9;
-    }
-
-    .project-meta {
-      margin-top: 35px;
-
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-
-      gap: 25px;
-    }
-
-    .meta-block {
-      padding-top: 16px;
-
-      border-top:
-        1px solid rgba(216,162,76,.22);
-    }
-
-    .meta-block span {
-      display: block;
-
-      margin-bottom: 7px;
-
-      color: var(--pink);
-
-      font-size: .57rem;
-      font-weight: 700;
-
-      letter-spacing: .15em;
-      text-transform: uppercase;
-    }
-
-    .meta-block strong {
-      color: var(--cream);
-
-      font-size: .85rem;
-      font-weight: 500;
-
-      line-height: 1.6;
-    }
-
-    .project-tools {
-      margin-top: 35px;
-
-      display: flex;
-      flex-wrap: wrap;
-
-      gap: 8px;
-    }
-
-    .project-tools span {
-      padding: 7px 11px;
-
-      border:
-        1px solid rgba(216,162,76,.28);
-
-      color: var(--gold);
-
-      font-size: .58rem;
-      font-weight: 600;
-
-      letter-spacing: .07em;
-      text-transform: uppercase;
-    }
-
-
-    /* =========================================================
-       ARCHITECTURE VISUAL
-       ========================================================= */
-
-    .project-evidence {
-      min-height: 620px;
-
-      position: relative;
-
-      padding: 50px;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-
-      border-left:
-        1px solid rgba(216,162,76,.22);
-
-      background:
-        linear-gradient(
-          145deg,
-          #110806,
-          #070403
-        );
-    }
-
-    .evidence-label {
-      margin-bottom: 35px;
-
-      color: var(--gold);
-
-      font-size: .58rem;
-      font-weight: 700;
-
-      letter-spacing: .18em;
-      text-transform: uppercase;
-    }
-
-    .architecture {
-      display: flex;
-      flex-direction: column;
-
-      gap: 0;
-    }
-
-    .arch-row {
-      display: grid;
-      grid-template-columns: 72px 1fr;
-
-      gap: 22px;
-
-      min-height: 90px;
-    }
-
-    .arch-number {
-      position: relative;
-
-      color: var(--pink);
-
-      font-family: var(--serif);
-      font-size: .9rem;
-    }
-
-    .arch-number::after {
-      content: "";
-
-      position: absolute;
-
-      top: 30px;
-      left: 5px;
-
-      width: 1px;
-      height: 60px;
-
-      background:
-        linear-gradient(
-          var(--gold),
-          rgba(216,162,76,.10)
-        );
-    }
-
-    .arch-row:last-child .arch-number::after {
-      display: none;
-    }
-
-    .arch-content {
-      padding-bottom: 25px;
-    }
-
-    .arch-content strong {
-      display: block;
-
-      color: var(--cream);
-
-      font-family: var(--serif);
-      font-size: 1.12rem;
-      font-weight: 500;
-    }
-
-    .arch-content p {
-      margin-top: 5px;
-
-      color: rgba(216,198,177,.72);
-
-      font-size: .78rem;
-      line-height: 1.65;
-    }
-
-    .evidence-note {
-      margin-top: 35px;
-
-      padding-top: 20px;
-
-      border-top:
-        1px solid rgba(216,162,76,.20);
-
-      color: rgba(216,198,177,.68);
-
-      font-size: .72rem;
-      line-height: 1.7;
-    }
-
-
-    /* =========================================================
-       PROJECT LIBRARY
-       ========================================================= */
-
-    .library {
-      background:
-        linear-gradient(
-          180deg,
-          #0b0605,
-          #080605
-        );
-    }
-
-    .library-header {
-      max-width: 720px;
-
-      margin-bottom: 65px;
-    }
-
-    .project-list {
-      border-top:
-        1px solid rgba(216,162,76,.35);
-    }
-
-    .project-row {
-      min-height: 190px;
-
-      display: grid;
-      grid-template-columns: 80px 1.1fr 1fr 120px;
-      align-items: center;
-
-      gap: 30px;
-
-      border-bottom:
-        1px solid rgba(216,162,76,.17);
-
-      transition:
-        background .25s ease,
-        padding .25s ease;
-    }
-
-    .project-row:hover {
-      padding-left: 14px;
-
-      background:
-        rgba(237,47,117,.03);
-    }
-
-    .project-index {
-      color: var(--gold);
-
-      font-family: var(--serif);
-      font-size: 1rem;
-    }
-
-    .project-name small {
-      display: block;
-
-      margin-bottom: 8px;
-
-      color: var(--pink);
-
-      font-size: .57rem;
-      font-weight: 700;
-
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-
-    .project-name h3 {
-      font-family: var(--serif);
-      font-size: clamp(1.35rem, 2.4vw, 2rem);
-      font-weight: 500;
-
-      line-height: 1.2;
-    }
-
-    .project-description {
-      color: var(--soft-cream);
-
-      font-size: .85rem;
-      line-height: 1.75;
-    }
-
-    .project-status {
-      justify-self: end;
-
-      color: var(--gold);
-
-      font-size: .56rem;
-      font-weight: 700;
-
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-
-    .project-status.active {
-      color: var(--pink);
-    }
-
-
-    /* =========================================================
-       SECURITY DOMAINS
-       ========================================================= */
-
-    .domains {
-      background: #080605;
-    }
-
-    .domains-header {
-      max-width: 700px;
-
-      margin-bottom: 60px;
-    }
-
-    .domain-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-
-      border-top:
-        1px solid var(--border);
-
-      border-left:
-        1px solid var(--border);
-    }
-
-    .domain {
-      min-height: 280px;
-
-      padding: 38px;
-
-      position: relative;
-
-      border-right:
-        1px solid var(--border);
-
-      border-bottom:
-        1px solid var(--border);
-
-      transition:
-        background .25s ease;
-    }
-
-    .domain:hover {
-      background:
-        rgba(237,47,117,.035);
-    }
-
-    .domain-number {
-      color: var(--gold);
-
-      font-size: .57rem;
-      font-weight: 700;
-
-      letter-spacing: .15em;
-    }
-
-    .domain h3 {
-      margin-top: 45px;
-
-      font-family: var(--serif);
-      font-size: 1.55rem;
-      font-weight: 500;
-    }
-
-    .domain p {
-      margin-top: 15px;
-
-      color: var(--soft-cream);
-
-      font-size: .83rem;
-      line-height: 1.75;
-    }
-
-    .domain::after {
-      content: "";
-
-      position: absolute;
-
-      left: 38px;
-      bottom: 32px;
-
-      width: 55px;
-      height: 1px;
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--pink),
-          var(--orange)
-        );
-    }
-
-
-    /* =========================================================
-       PROCESS
-       ========================================================= */
-
-    .process {
-      background:
-        radial-gradient(
-          circle at 15% 40%,
-          rgba(179,29,61,.08),
-          transparent 28%
-        ),
-        #0a0504;
-    }
-
-    .process-grid {
-      margin-top: 60px;
-
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    .process-step {
-      min-height: 220px;
-
-      padding: 35px;
-
-      border-top:
-        1px solid var(--border);
-
-      border-right:
-        1px solid var(--border);
-
-      border-bottom:
-        1px solid var(--border);
-    }
-
-    .process-step:first-child {
-      border-left:
-        1px solid var(--border);
-    }
-
-    .process-step span {
-      color: var(--pink);
-
-      font-family: var(--serif);
-      font-size: .9rem;
-    }
-
-    .process-step h3 {
-      margin-top: 32px;
-
-      font-family: var(--serif);
-      font-size: 1.35rem;
-      font-weight: 500;
-    }
-
-    .process-step p {
-      margin-top: 12px;
-
-      color: var(--soft-cream);
-
-      font-size: .79rem;
-      line-height: 1.7;
-    }
-
-
-    /* =========================================================
-       CLOSING
-       ========================================================= */
-
-    .closing {
-      padding: 110px 0;
-
-      text-align: center;
-
-      background:
-        radial-gradient(
-          circle at 50% 50%,
-          rgba(237,47,117,.09),
-          transparent 35%
-        ),
-        #070403;
-    }
-
-    .closing-inner {
-      max-width: 780px;
-      margin: 0 auto;
-    }
-
-    .closing p {
-      max-width: 650px;
-
-      margin: 25px auto 0;
-
-      color: var(--soft-cream);
-
-      line-height: 1.85;
-    }
-
-
-    /* =========================================================
-       FOOTER
-       ========================================================= */
-
-    .footer {
-      padding: 60px 0 35px;
-
-      background: #050302;
-
-      border-top:
-        1px solid rgba(216,162,76,.22);
-    }
-
-    .footer-top {
-      padding-bottom: 35px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 40px;
-
-      border-bottom:
-        1px solid rgba(216,162,76,.14);
-    }
-
-    .footer-brand {
-      font-family: var(--serif);
-      font-size: 1.5rem;
-      font-style: italic;
-    }
-
-    .footer-brand span {
-      color: var(--pink);
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-
-      gap: 25px;
-    }
-
-    .footer-links a {
-      color: var(--soft-cream);
-
-      font-size: .62rem;
-      font-weight: 600;
-
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .footer-bottom {
-      padding-top: 27px;
-
-      display: flex;
-      justify-content: space-between;
-
-      gap: 30px;
-
-      color: rgba(216,198,177,.60);
-
-      font-size: .65rem;
-    }
-
-    .footer-bottom span:last-child {
-      color: var(--gold);
-    }
-
-
-    /* =========================================================
-       TABLET
-       ========================================================= */
-
-    @media (max-width: 1000px) {
-
       .site-header {
+        min-height: 82px;
+
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+
+        display: flex;
+        align-items: center;
+
+        background: rgba(8, 6, 5, 0.94);
+
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+
+        border-bottom: 1px solid rgba(216, 162, 76, 0.18);
+      }
+
+      .nav-inner {
+        width: min(var(--shell), 88%);
+        margin: 0 auto;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 40px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+
+        flex-shrink: 0;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+
         position: relative;
       }
 
-      .nav-inner {
-        padding: 20px 0;
+      .brand-mark::before,
+      .brand-mark::after {
+        content: "";
 
-        flex-direction: column;
+        position: absolute;
+        top: 8px;
 
-        gap: 20px;
+        width: 14px;
+        height: 20px;
+
+        border: 1px solid var(--gold);
+      }
+
+      .brand-mark::before {
+        left: 3px;
+
+        border-radius: 80% 35% 65% 35%;
+
+        transform: rotate(-25deg);
+
+        background: linear-gradient(
+          145deg,
+          rgba(237, 47, 117, 0.42),
+          rgba(239, 107, 46, 0.1)
+        );
+      }
+
+      .brand-mark::after {
+        right: 3px;
+
+        border-radius: 35% 80% 35% 65%;
+
+        transform: rotate(25deg);
+
+        background: linear-gradient(
+          215deg,
+          rgba(239, 107, 46, 0.35),
+          rgba(237, 47, 117, 0.1)
+        );
+      }
+
+      .brand-name {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 1.35rem;
+
+        white-space: nowrap;
+      }
+
+      .brand-name span {
+        color: var(--gold);
       }
 
       .site-nav {
-        width: 100%;
+        display: flex;
+        align-items: center;
 
-        justify-content: center;
-        flex-wrap: wrap;
-
-        gap: 16px 24px;
-      }
-
-      .hero-inner {
-        grid-template-columns: 1fr;
-
-        gap: 45px;
-      }
-
-      .hero-side {
-        max-width: 650px;
-      }
-
-      .featured-project {
-        grid-template-columns: 1fr;
-      }
-
-      .project-info {
-        padding-right: 0;
-      }
-
-      .project-evidence {
-        border-left: 0;
-
-        border-top:
-          1px solid rgba(216,162,76,.22);
-      }
-
-      .project-row {
-        grid-template-columns: 60px 1fr 1fr;
-      }
-
-      .project-status {
-        display: none;
-      }
-
-      .domain-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .process-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .process-step:nth-child(3) {
-        border-left:
-          1px solid var(--border);
-      }
-
-    }
-
-
-    /* =========================================================
-       MOBILE
-       ========================================================= */
-
-    @media (max-width: 650px) {
-
-      .shell,
-      .nav-inner {
-        width: 88%;
-      }
-
-      .site-nav {
-        gap: 13px 17px;
+        gap: 34px;
       }
 
       .site-nav a {
-        font-size: .59rem;
+        position: relative;
+
+        color: var(--soft-cream);
+
+        font-size: 0.7rem;
+        font-weight: 500;
+
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+
+        transition: color 0.25s ease;
       }
 
+      .site-nav a::after {
+        content: "";
+
+        position: absolute;
+
+        left: 0;
+        bottom: -8px;
+
+        width: 0;
+        height: 1px;
+
+        background: linear-gradient(90deg, var(--pink), var(--orange));
+
+        transition: width 0.25s ease;
+      }
+
+      .site-nav a:hover,
+      .site-nav a.active {
+        color: var(--cream);
+      }
+
+      .site-nav a:hover::after,
+      .site-nav a.active::after {
+        width: 100%;
+      }
+
+      /* =========================================================
+       PROJECTS HERO
+       ========================================================= */
+
       .projects-hero {
-        padding: 85px 0 70px;
+        position: relative;
+
+        padding: 130px 0 105px;
+
+        overflow: hidden;
+
+        border-bottom: 1px solid var(--border);
+
+        background:
+          radial-gradient(
+            circle at 82% 50%,
+            rgba(237, 47, 117, 0.09),
+            transparent 25%
+          ),
+          linear-gradient(115deg, #070403, #0d0705 58%, #100706);
+      }
+
+      .projects-hero::before {
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+        right: 0;
+
+        width: 48%;
+        height: 100%;
+
+        opacity: 0.14;
+
+        background-image:
+          linear-gradient(rgba(216, 162, 76, 0.25) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(216, 162, 76, 0.25) 1px, transparent 1px);
+
+        background-size: 80px 80px;
+
+        mask-image: linear-gradient(90deg, transparent, black);
+
+        -webkit-mask-image: linear-gradient(90deg, transparent, black);
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 2;
+
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+
+        gap: 80px;
+
+        align-items: end;
+      }
+
+      .eyebrow {
+        margin-bottom: 20px;
+
+        color: var(--gold);
+
+        font-size: 0.66rem;
+        font-weight: 700;
+
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
       }
 
       .projects-hero h1 {
-        font-size: clamp(3.5rem, 17vw, 5.4rem);
+        max-width: 780px;
+
+        font-family: var(--serif);
+        font-size: clamp(3.8rem, 7vw, 7rem);
+        font-weight: 500;
+
+        line-height: 0.94;
+
+        letter-spacing: -0.045em;
+      }
+
+      .projects-hero h1 em {
+        color: var(--pink);
+
+        font-weight: 500;
       }
 
       .hero-side {
-        padding-left: 20px;
+        padding-left: 32px;
+
+        border-left: 1px solid rgba(216, 162, 76, 0.35);
+      }
+
+      .hero-side p {
+        color: var(--soft-cream);
+
+        line-height: 1.9;
+      }
+
+      .hero-side strong {
+        display: block;
+
+        margin-top: 25px;
+
+        color: var(--cream);
+
+        font-family: var(--serif);
+        font-size: 1.15rem;
+        font-weight: 500;
+      }
+
+      /* =========================================================
+       TECHNICAL FOCUS BAR
+       ========================================================= */
+
+      .focus-bar {
+        border-bottom: 1px solid rgba(216, 162, 76, 0.18);
+
+        background: #0b0605;
       }
 
       .focus-inner {
-        justify-content: flex-start;
+        min-height: 78px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 25px;
+
+        overflow-x: auto;
       }
 
+      .focus-inner span {
+        flex-shrink: 0;
+
+        color: var(--soft-cream);
+
+        font-size: 0.62rem;
+        font-weight: 600;
+
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .focus-inner i {
+        width: 3px;
+        height: 3px;
+
+        flex-shrink: 0;
+
+        border-radius: 50%;
+
+        background: var(--pink);
+      }
+
+      /* =========================================================
+       GENERAL
+       ========================================================= */
+
       .section {
-        padding: 85px 0;
+        padding: 115px 0;
+
+        border-bottom: 1px solid rgba(216, 162, 76, 0.15);
+      }
+
+      .section-kicker {
+        margin-bottom: 16px;
+
+        color: var(--gold);
+
+        font-size: 0.64rem;
+        font-weight: 700;
+
+        letter-spacing: 0.23em;
+        text-transform: uppercase;
+      }
+
+      .section-title {
+        font-family: var(--serif);
+        font-size: clamp(2.6rem, 5vw, 4.8rem);
+        font-weight: 500;
+
+        line-height: 1;
+
+        letter-spacing: -0.035em;
+      }
+
+      .section-title em {
+        color: var(--pink);
+
+        font-weight: 500;
+      }
+
+      .section-intro {
+        max-width: 650px;
+
+        margin-top: 22px;
+
+        color: var(--soft-cream);
+
+        line-height: 1.85;
+      }
+
+      .text-link {
+        display: inline-flex;
+        align-items: center;
+
+        margin-top: 30px;
+
+        padding-bottom: 5px;
+
+        border-bottom: 1px solid var(--pink);
+
+        color: var(--cream);
+
+        font-size: 0.67rem;
+        font-weight: 700;
+
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      /* =========================================================
+       FEATURED CASE STUDY
+       ========================================================= */
+
+      .featured {
+        background:
+          radial-gradient(
+            circle at 82% 35%,
+            rgba(237, 47, 117, 0.07),
+            transparent 27%
+          ),
+          #080605;
       }
 
       .featured-header {
-        align-items: flex-start;
-        flex-direction: column;
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+
+        gap: 50px;
+
+        margin-bottom: 55px;
+      }
+
+      .featured-label {
+        color: var(--pink);
+
+        font-family: var(--serif);
+        font-size: 1rem;
+        font-style: italic;
+      }
+
+      .featured-project {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+
+        border-top: 1px solid rgba(216, 162, 76, 0.55);
+
+        border-bottom: 1px solid rgba(216, 162, 76, 0.28);
       }
 
       .project-info {
-        padding: 45px 0;
+        padding: 60px 60px 60px 0;
+      }
+
+      .project-type {
+        color: var(--gold);
+
+        font-size: 0.6rem;
+        font-weight: 700;
+
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .project-info h2 {
+        max-width: 720px;
+
+        margin-top: 20px;
+
+        font-family: var(--serif);
+        font-size: clamp(2.3rem, 4vw, 4rem);
+        font-weight: 500;
+
+        line-height: 1.05;
+
+        letter-spacing: -0.025em;
+      }
+
+      .project-summary {
+        max-width: 650px;
+
+        margin-top: 25px;
+
+        color: var(--soft-cream);
+
+        line-height: 1.9;
       }
 
       .project-meta {
-        grid-template-columns: 1fr;
+        margin-top: 35px;
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 25px;
       }
 
-      .project-evidence {
-        min-height: auto;
+      .meta-block {
+        padding-top: 16px;
 
-        padding: 40px 25px;
+        border-top: 1px solid rgba(216, 162, 76, 0.22);
+      }
+
+      .meta-block span {
+        display: block;
+
+        margin-bottom: 7px;
+
+        color: var(--pink);
+
+        font-size: 0.57rem;
+        font-weight: 700;
+
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+
+      .meta-block strong {
+        color: var(--cream);
+
+        font-size: 0.85rem;
+        font-weight: 500;
+
+        line-height: 1.6;
+      }
+
+      .project-tools {
+        margin-top: 35px;
+
+        display: flex;
+        flex-wrap: wrap;
+
+        gap: 8px;
+      }
+
+      .project-tools span {
+        padding: 7px 11px;
+
+        border: 1px solid rgba(216, 162, 76, 0.28);
+
+        color: var(--gold);
+
+        font-size: 0.58rem;
+        font-weight: 600;
+
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+      }
+
+      /* =========================================================
+       ARCHITECTURE VISUAL
+       ========================================================= */
+
+      .project-evidence {
+        min-height: 620px;
+
+        position: relative;
+
+        padding: 50px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        border-left: 1px solid rgba(216, 162, 76, 0.22);
+
+        background: linear-gradient(145deg, #110806, #070403);
+      }
+
+      .evidence-label {
+        margin-bottom: 35px;
+
+        color: var(--gold);
+
+        font-size: 0.58rem;
+        font-weight: 700;
+
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .architecture {
+        display: flex;
+        flex-direction: column;
+
+        gap: 0;
+      }
+
+      .arch-row {
+        display: grid;
+        grid-template-columns: 72px 1fr;
+
+        gap: 22px;
+
+        min-height: 90px;
+      }
+
+      .arch-number {
+        position: relative;
+
+        color: var(--pink);
+
+        font-family: var(--serif);
+        font-size: 0.9rem;
+      }
+
+      .arch-number::after {
+        content: "";
+
+        position: absolute;
+
+        top: 30px;
+        left: 5px;
+
+        width: 1px;
+        height: 60px;
+
+        background: linear-gradient(var(--gold), rgba(216, 162, 76, 0.1));
+      }
+
+      .arch-row:last-child .arch-number::after {
+        display: none;
+      }
+
+      .arch-content {
+        padding-bottom: 25px;
+      }
+
+      .arch-content strong {
+        display: block;
+
+        color: var(--cream);
+
+        font-family: var(--serif);
+        font-size: 1.12rem;
+        font-weight: 500;
+      }
+
+      .arch-content p {
+        margin-top: 5px;
+
+        color: rgba(216, 198, 177, 0.72);
+
+        font-size: 0.78rem;
+        line-height: 1.65;
+      }
+
+      .evidence-note {
+        margin-top: 35px;
+
+        padding-top: 20px;
+
+        border-top: 1px solid rgba(216, 162, 76, 0.2);
+
+        color: rgba(216, 198, 177, 0.68);
+
+        font-size: 0.72rem;
+        line-height: 1.7;
+      }
+
+      /* =========================================================
+       PROJECT LIBRARY
+       ========================================================= */
+
+      .library {
+        background: linear-gradient(180deg, #0b0605, #080605);
+      }
+
+      .library-header {
+        max-width: 720px;
+
+        margin-bottom: 65px;
+      }
+
+      .project-list {
+        border-top: 1px solid rgba(216, 162, 76, 0.35);
       }
 
       .project-row {
-        min-height: 230px;
+        min-height: 190px;
 
-        padding: 30px 0;
+        display: grid;
+        grid-template-columns: 80px 1.1fr 1fr 120px;
+        align-items: center;
 
-        grid-template-columns: 35px 1fr;
+        gap: 30px;
 
-        align-items: start;
+        border-bottom: 1px solid rgba(216, 162, 76, 0.17);
 
-        gap: 18px;
+        transition:
+          background 0.25s ease,
+          padding 0.25s ease;
+      }
+
+      .project-row:hover {
+        padding-left: 14px;
+
+        background: rgba(237, 47, 117, 0.03);
+      }
+
+      .project-index {
+        color: var(--gold);
+
+        font-family: var(--serif);
+        font-size: 1rem;
+      }
+
+      .project-name small {
+        display: block;
+
+        margin-bottom: 8px;
+
+        color: var(--pink);
+
+        font-size: 0.57rem;
+        font-weight: 700;
+
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .project-name h3 {
+        font-family: var(--serif);
+        font-size: clamp(1.35rem, 2.4vw, 2rem);
+        font-weight: 500;
+
+        line-height: 1.2;
       }
 
       .project-description {
-        grid-column: 2;
+        color: var(--soft-cream);
+
+        font-size: 0.85rem;
+        line-height: 1.75;
+      }
+
+      .project-status {
+        justify-self: end;
+
+        color: var(--gold);
+
+        font-size: 0.56rem;
+        font-weight: 700;
+
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .project-status.active {
+        color: var(--pink);
+      }
+
+      /* =========================================================
+       SECURITY DOMAINS
+       ========================================================= */
+
+      .domains {
+        background: #080605;
+      }
+
+      .domains-header {
+        max-width: 700px;
+
+        margin-bottom: 60px;
       }
 
       .domain-grid {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+
+        border-top: 1px solid var(--border);
+
+        border-left: 1px solid var(--border);
       }
 
       .domain {
-        min-height: 245px;
+        min-height: 280px;
+
+        padding: 38px;
+
+        position: relative;
+
+        border-right: 1px solid var(--border);
+
+        border-bottom: 1px solid var(--border);
+
+        transition: background 0.25s ease;
+      }
+
+      .domain:hover {
+        background: rgba(237, 47, 117, 0.035);
+      }
+
+      .domain-number {
+        color: var(--gold);
+
+        font-size: 0.57rem;
+        font-weight: 700;
+
+        letter-spacing: 0.15em;
+      }
+
+      .domain h3 {
+        margin-top: 45px;
+
+        font-family: var(--serif);
+        font-size: 1.55rem;
+        font-weight: 500;
+      }
+
+      .domain p {
+        margin-top: 15px;
+
+        color: var(--soft-cream);
+
+        font-size: 0.83rem;
+        line-height: 1.75;
+      }
+
+      .domain::after {
+        content: "";
+
+        position: absolute;
+
+        left: 38px;
+        bottom: 32px;
+
+        width: 55px;
+        height: 1px;
+
+        background: linear-gradient(90deg, var(--pink), var(--orange));
+      }
+
+      /* =========================================================
+       PROCESS
+       ========================================================= */
+
+      .process {
+        background:
+          radial-gradient(
+            circle at 15% 40%,
+            rgba(179, 29, 61, 0.08),
+            transparent 28%
+          ),
+          #0a0504;
       }
 
       .process-grid {
-        grid-template-columns: 1fr;
+        margin-top: 60px;
+
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
       }
 
-      .process-step,
-      .process-step:nth-child(3) {
-        border-left:
-          1px solid var(--border);
+      .process-step {
+        min-height: 220px;
+
+        padding: 35px;
+
+        border-top: 1px solid var(--border);
+
+        border-right: 1px solid var(--border);
+
+        border-bottom: 1px solid var(--border);
       }
 
-      .footer-top,
+      .process-step:first-child {
+        border-left: 1px solid var(--border);
+      }
+
+      .process-step span {
+        color: var(--pink);
+
+        font-family: var(--serif);
+        font-size: 0.9rem;
+      }
+
+      .process-step h3 {
+        margin-top: 32px;
+
+        font-family: var(--serif);
+        font-size: 1.35rem;
+        font-weight: 500;
+      }
+
+      .process-step p {
+        margin-top: 12px;
+
+        color: var(--soft-cream);
+
+        font-size: 0.79rem;
+        line-height: 1.7;
+      }
+
+      /* =========================================================
+       CLOSING
+       ========================================================= */
+
+      .closing {
+        padding: 110px 0;
+
+        text-align: center;
+
+        background:
+          radial-gradient(
+            circle at 50% 50%,
+            rgba(237, 47, 117, 0.09),
+            transparent 35%
+          ),
+          #070403;
+      }
+
+      .closing-inner {
+        max-width: 780px;
+        margin: 0 auto;
+      }
+
+      .closing p {
+        max-width: 650px;
+
+        margin: 25px auto 0;
+
+        color: var(--soft-cream);
+
+        line-height: 1.85;
+      }
+
+      /* =========================================================
+       FOOTER
+       ========================================================= */
+
+      .footer {
+        padding: 60px 0 35px;
+
+        background: #050302;
+
+        border-top: 1px solid rgba(216, 162, 76, 0.22);
+      }
+
+      .footer-top {
+        padding-bottom: 35px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 40px;
+
+        border-bottom: 1px solid rgba(216, 162, 76, 0.14);
+      }
+
+      .footer-brand {
+        font-family: var(--serif);
+        font-size: 1.5rem;
+        font-style: italic;
+      }
+
+      .footer-brand span {
+        color: var(--pink);
+      }
+
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+
+        gap: 25px;
+      }
+
+      .footer-links a {
+        color: var(--soft-cream);
+
+        font-size: 0.62rem;
+        font-weight: 600;
+
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
       .footer-bottom {
-        flex-direction: column;
-        align-items: flex-start;
+        padding-top: 27px;
+
+        display: flex;
+        justify-content: space-between;
+
+        gap: 30px;
+
+        color: rgba(216, 198, 177, 0.6);
+
+        font-size: 0.65rem;
       }
 
-    }
+      .footer-bottom span:last-child {
+        color: var(--gold);
+      }
 
-  </style>
-</head>
+      /* =========================================================
+       TABLET
+       ========================================================= */
 
+      @media (max-width: 1000px) {
+        .site-header {
+          position: relative;
+        }
 
-<body>
+        .nav-inner {
+          padding: 20px 0;
 
+          flex-direction: column;
 
-  <!-- =======================================================
+          gap: 20px;
+        }
+
+        .site-nav {
+          width: 100%;
+
+          justify-content: center;
+          flex-wrap: wrap;
+
+          gap: 16px 24px;
+        }
+
+        .hero-inner {
+          grid-template-columns: 1fr;
+
+          gap: 45px;
+        }
+
+        .hero-side {
+          max-width: 650px;
+        }
+
+        .featured-project {
+          grid-template-columns: 1fr;
+        }
+
+        .project-info {
+          padding-right: 0;
+        }
+
+        .project-evidence {
+          border-left: 0;
+
+          border-top: 1px solid rgba(216, 162, 76, 0.22);
+        }
+
+        .project-row {
+          grid-template-columns: 60px 1fr 1fr;
+        }
+
+        .project-status {
+          display: none;
+        }
+
+        .domain-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .process-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .process-step:nth-child(3) {
+          border-left: 1px solid var(--border);
+        }
+      }
+
+      /* =========================================================
+       MOBILE
+       ========================================================= */
+
+      @media (max-width: 650px) {
+        .shell,
+        .nav-inner {
+          width: 88%;
+        }
+
+        .site-nav {
+          gap: 13px 17px;
+        }
+
+        .site-nav a {
+          font-size: 0.59rem;
+        }
+
+        .projects-hero {
+          padding: 85px 0 70px;
+        }
+
+        .projects-hero h1 {
+          font-size: clamp(3.5rem, 17vw, 5.4rem);
+        }
+
+        .hero-side {
+          padding-left: 20px;
+        }
+
+        .focus-inner {
+          justify-content: flex-start;
+        }
+
+        .section {
+          padding: 85px 0;
+        }
+
+        .featured-header {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .project-info {
+          padding: 45px 0;
+        }
+
+        .project-meta {
+          grid-template-columns: 1fr;
+        }
+
+        .project-evidence {
+          min-height: auto;
+
+          padding: 40px 25px;
+        }
+
+        .project-row {
+          min-height: 230px;
+
+          padding: 30px 0;
+
+          grid-template-columns: 35px 1fr;
+
+          align-items: start;
+
+          gap: 18px;
+        }
+
+        .project-description {
+          grid-column: 2;
+        }
+
+        .domain-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .domain {
+          min-height: 245px;
+        }
+
+        .process-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .process-step,
+        .process-step:nth-child(3) {
+          border-left: 1px solid var(--border);
+        }
+
+        .footer-top,
+        .footer-bottom {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <script src="assets/js/site.js" defer></script>
+  </head>
+
+  <body class="interior projects-page">
+    <!-- =======================================================
        NAVIGATION
        ======================================================= -->
 
-  <header class="site-header">
-
-    <div class="nav-inner">
-
-      <a href="index.html"
-         class="brand"
-         aria-label="Dee's Cyber Corner Home">
-
-        <span class="brand-mark"
-              aria-hidden="true"></span>
-
-        <span class="brand-name">
-          Dee's <span>Cyber Corner</span>
-        </span>
-
-      </a>
-
-
-      <nav class="site-nav"
-           aria-label="Main navigation">
-
-        <a href="index.html">
-          Home
-        </a>
-
-        <a href="about.html">
-          About
-        </a>
-
-        <a href="labs.html"
-           class="active">
-          Projects
-        </a>
-
-        <a href="learn.html">
-          Learn
-        </a>
-
-        <a href="blog.html">
-          Blog
-        </a>
-
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="wordmark" href="index.html" aria-label="Dee’s Cyber Corner home"
+        ><span
+          >Dee’s<small class="brand-butterfly" aria-hidden="true"></small></span
+        ><b>CYBER CORNER</b></a
+      ><button
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="navigation"
+      >
+        Menu <span aria-hidden="true">☰</span>
+      </button>
+      <nav id="navigation" aria-label="Main navigation">
+        <a href="index.html">Home</a><a href="about.html">About</a
+        ><a href="labs.html" aria-current="page">Projects</a
+        ><a href="learn.html">Learn</a><a href="blog.html">Blog</a>
       </nav>
+      <a class="button connect" href="about.html#connect"
+        >Let’s connect <span aria-hidden="true">⟶</span></a
+      >
+    </header>
 
-    </div>
-
-  </header>
-
-
-  <main>
-
-
-    <!-- =====================================================
+    <main id="main">
+      <!-- =====================================================
          HERO
          ===================================================== -->
 
-    <section class="projects-hero">
+      <section class="projects-hero">
+        <div class="shell hero-inner">
+          <div>
+            <p class="eyebrow">Projects • Labs • Technical Work</p>
 
-      <div class="shell hero-inner">
+            <h1>Building security through <em>practice.</em></h1>
+          </div>
 
+          <div class="hero-side">
+            <p>
+              This is where the technical side of Dee's Cyber Corner lives —
+              hands-on projects, investigations, security analysis, and the work
+              I've used to turn cybersecurity concepts into something I can
+              actually demonstrate.
+            </p>
 
-        <div>
-
-          <p class="eyebrow">
-            Projects • Labs • Technical Work
-          </p>
-
-
-          <h1>
-
-            Building security
-            through <em>practice.</em>
-
-          </h1>
-
+            <strong> Learn it. Practice it. Apply it. Reflect on it. </strong>
+          </div>
         </div>
+      </section>
 
-
-        <div class="hero-side">
-
-          <p>
-
-            This is where the technical side of
-            Dee's Cyber Corner lives — hands-on projects,
-            investigations, security analysis, and the work
-            I've used to turn cybersecurity concepts into
-            something I can actually demonstrate.
-
-          </p>
-
-
-          <strong>
-
-            Learn it. Practice it.
-            Apply it. Reflect on it.
-
-          </strong>
-
-        </div>
-
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
+      <!-- =====================================================
          FOCUS BAR
          ===================================================== -->
 
-    <section class="focus-bar">
+      <section class="focus-bar">
+        <div
+          class="shell focus-inner"
+          tabindex="0"
+          role="region"
+          aria-label="Project focus areas"
+        >
+          <span>Security Operations</span>
 
-      <div class="shell focus-inner">
+          <i></i>
 
-        <span>Security Operations</span>
+          <span>Identity & Access</span>
 
-        <i></i>
+          <i></i>
 
-        <span>Identity & Access</span>
+          <span>Cloud Security</span>
 
-        <i></i>
+          <i></i>
 
-        <span>Cloud Security</span>
+          <span>Vulnerability Management</span>
 
-        <i></i>
+          <i></i>
 
-        <span>Vulnerability Management</span>
+          <span>Network Security</span>
 
-        <i></i>
+          <i></i>
 
-        <span>Network Security</span>
+          <span>Digital Forensics</span>
+        </div>
+      </section>
 
-        <i></i>
-
-        <span>Digital Forensics</span>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
+      <!-- =====================================================
          FEATURED CASE STUDY
          ===================================================== -->
 
-    <section class="section featured">
+      <section class="section featured">
+        <div class="shell">
+          <div class="featured-header">
+            <div>
+              <p class="section-kicker">Featured Case Study</p>
 
-      <div class="shell">
-
-
-        <div class="featured-header">
-
-          <div>
-
-            <p class="section-kicker">
-              Featured Case Study
-            </p>
-
-
-            <h2 class="section-title">
-
-              From concept to
-              <em>detection.</em>
-
-            </h2>
-
-          </div>
-
-
-          <span class="featured-label">
-            Flagship Project
-          </span>
-
-        </div>
-
-
-        <article class="featured-project">
-
-
-          <div class="project-info">
-
-            <p class="project-type">
-              Security Operations • Cloud Security
-            </p>
-
-
-            <h2>
-
-              Cloud-Based SOC Monitoring
-              & Threat Detection
-
-            </h2>
-
-
-            <p class="project-summary">
-
-              Built and tested a cloud-based security
-              monitoring environment using Microsoft Azure
-              and Microsoft Sentinel to detect unauthorized
-              login attempts and brute-force activity.
-
-            </p>
-
-
-            <div class="project-meta">
-
-
-              <div class="meta-block">
-
-                <span>
-                  Security Problem
-                </span>
-
-                <strong>
-                  Visibility into unauthorized authentication
-                  attempts and suspicious login activity
-                </strong>
-
-              </div>
-
-
-              <div class="meta-block">
-
-                <span>
-                  Detection
-                </span>
-
-                <strong>
-                  Windows Event ID 4625 and KQL-based
-                  monitoring
-                </strong>
-
-              </div>
-
-
-              <div class="meta-block">
-
-                <span>
-                  Environment
-                </span>
-
-                <strong>
-                  Microsoft Azure + Windows virtual machine
-                </strong>
-
-              </div>
-
-
-              <div class="meta-block">
-
-                <span>
-                  Outcome
-                </span>
-
-                <strong>
-                  Security monitoring, detection logic,
-                  incident visibility and tuning
-                </strong>
-
-              </div>
-
-
+              <h2 class="section-title">
+                From concept to
+                <em>detection.</em>
+              </h2>
             </div>
 
-
-            <div class="project-tools">
-
-              <span>Azure</span>
-
-              <span>Microsoft Sentinel</span>
-
-              <span>KQL</span>
-
-              <span>Log Analytics</span>
-
-              <span>SIEM</span>
-
-              <span>Event 4625</span>
-
-            </div>
-
-
-            <a href="projects/azure-sentinel-soc.html"
-               class="text-link">
-
-              View Full Case Study →
-
-            </a>
-
+            <span class="featured-label"> Flagship Project </span>
           </div>
 
+          <article class="featured-project">
+            <div class="project-info">
+              <p class="project-type">Security Operations • Cloud Security</p>
 
-          <!--
+              <h2>Cloud-Based SOC Monitoring & Threat Detection</h2>
+
+              <p class="project-summary">
+                Built and tested a cloud-based security monitoring environment
+                using Microsoft Azure and Microsoft Sentinel to detect
+                unauthorized login attempts and brute-force activity.
+              </p>
+
+              <div class="project-meta">
+                <div class="meta-block">
+                  <span> Security Problem </span>
+
+                  <strong>
+                    Visibility into unauthorized authentication attempts and
+                    suspicious login activity
+                  </strong>
+                </div>
+
+                <div class="meta-block">
+                  <span> Detection </span>
+
+                  <strong>
+                    Windows Event ID 4625 and KQL-based monitoring
+                  </strong>
+                </div>
+
+                <div class="meta-block">
+                  <span> Environment </span>
+
+                  <strong> Microsoft Azure + Windows virtual machine </strong>
+                </div>
+
+                <div class="meta-block">
+                  <span> Outcome </span>
+
+                  <strong>
+                    Security monitoring, detection logic, incident visibility
+                    and tuning
+                  </strong>
+                </div>
+              </div>
+
+              <div class="project-tools">
+                <span>Azure</span>
+
+                <span>Microsoft Sentinel</span>
+
+                <span>KQL</span>
+
+                <span>Log Analytics</span>
+
+                <span>SIEM</span>
+
+                <span>Event 4625</span>
+              </div>
+
+              <a href="projects/azure-sentinel-soc.html" class="text-link">
+                View Full Case Study →
+              </a>
+            </div>
+
+            <!--
             This is NOT pretending to be a Sentinel screenshot.
             It is simply a project architecture overview.
 
@@ -1620,741 +1393,377 @@
             Sentinel case study.
           -->
 
-          <div class="project-evidence">
+            <div class="project-evidence">
+              <p class="evidence-label">Project Architecture</p>
 
+              <div class="architecture">
+                <div class="arch-row">
+                  <span class="arch-number"> 01 </span>
 
-            <p class="evidence-label">
-              Project Architecture
-            </p>
+                  <div class="arch-content">
+                    <strong> Azure Windows VM </strong>
 
-
-            <div class="architecture">
-
-
-              <div class="arch-row">
-
-                <span class="arch-number">
-                  01
-                </span>
-
-                <div class="arch-content">
-
-                  <strong>
-                    Azure Windows VM
-                  </strong>
-
-                  <p>
-                    Cloud-based Windows environment used
-                    to generate and observe security events.
-                  </p>
-
+                    <p>
+                      Cloud-based Windows environment used to generate and
+                      observe security events.
+                    </p>
+                  </div>
                 </div>
 
-              </div>
+                <div class="arch-row">
+                  <span class="arch-number"> 02 </span>
 
+                  <div class="arch-content">
+                    <strong> Windows Security Logs </strong>
 
-              <div class="arch-row">
-
-                <span class="arch-number">
-                  02
-                </span>
-
-                <div class="arch-content">
-
-                  <strong>
-                    Windows Security Logs
-                  </strong>
-
-                  <p>
-                    Authentication activity and failed
-                    logon events collected for analysis.
-                  </p>
-
+                    <p>
+                      Authentication activity and failed logon events collected
+                      for analysis.
+                    </p>
+                  </div>
                 </div>
 
-              </div>
+                <div class="arch-row">
+                  <span class="arch-number"> 03 </span>
 
+                  <div class="arch-content">
+                    <strong> Log Analytics + Sentinel </strong>
 
-              <div class="arch-row">
-
-                <span class="arch-number">
-                  03
-                </span>
-
-                <div class="arch-content">
-
-                  <strong>
-                    Log Analytics + Sentinel
-                  </strong>
-
-                  <p>
-                    Centralized log ingestion and
-                    security monitoring.
-                  </p>
-
+                    <p>Centralized log ingestion and security monitoring.</p>
+                  </div>
                 </div>
 
-              </div>
+                <div class="arch-row">
+                  <span class="arch-number"> 04 </span>
 
+                  <div class="arch-content">
+                    <strong> KQL Detection </strong>
 
-              <div class="arch-row">
-
-                <span class="arch-number">
-                  04
-                </span>
-
-                <div class="arch-content">
-
-                  <strong>
-                    KQL Detection
-                  </strong>
-
-                  <p>
-                    Query logic used to identify
-                    failed authentication patterns.
-                  </p>
-
+                    <p>
+                      Query logic used to identify failed authentication
+                      patterns.
+                    </p>
+                  </div>
                 </div>
 
-              </div>
+                <div class="arch-row">
+                  <span class="arch-number"> 05 </span>
 
+                  <div class="arch-content">
+                    <strong> Analytics Rule + Incident </strong>
 
-              <div class="arch-row">
-
-                <span class="arch-number">
-                  05
-                </span>
-
-                <div class="arch-content">
-
-                  <strong>
-                    Analytics Rule + Incident
-                  </strong>
-
-                  <p>
-                    Detection logic converted into
-                    actionable security visibility.
-                  </p>
-
+                    <p>
+                      Detection logic converted into actionable security
+                      visibility.
+                    </p>
+                  </div>
                 </div>
-
               </div>
 
-
+              <p class="evidence-note">
+                The full case study will contain real project screenshots, KQL,
+                detection evidence, results, lessons learned, and implementation
+                details.
+              </p>
             </div>
+          </article>
+        </div>
+      </section>
 
-
-            <p class="evidence-note">
-
-              The full case study will contain real project
-              screenshots, KQL, detection evidence, results,
-              lessons learned, and implementation details.
-
-            </p>
-
-
-          </div>
-
-
-        </article>
-
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
+      <!-- =====================================================
          PROJECT LIBRARY
          ===================================================== -->
 
-    <section class="section library">
+      <section class="section library">
+        <div class="shell">
+          <div class="library-header">
+            <p class="section-kicker">Project Library</p>
 
-      <div class="shell">
+            <h2 class="section-title">
+              Work that shows
+              <em>how I think.</em>
+            </h2>
 
+            <p class="section-intro">
+              Not everything I learn needs to become a portfolio project. This
+              library focuses on work that can demonstrate analysis,
+              implementation, investigation, problem solving, or security
+              decision-making.
+            </p>
+          </div>
 
-        <div class="library-header">
+          <div class="project-list">
+            <!-- PROJECT 01 -->
 
-          <p class="section-kicker">
-            Project Library
-          </p>
+            <a href="projects/azure-sentinel-soc.html" class="project-row">
+              <span class="project-index"> 01 </span>
 
+              <div class="project-name">
+                <small> Security Operations </small>
 
-          <h2 class="section-title">
+                <h3>Cloud-Based SOC Monitoring</h3>
+              </div>
 
-            Work that shows
-            <em>how I think.</em>
+              <p class="project-description">
+                Azure security monitoring, Windows event logs, KQL detection
+                logic, Sentinel analytics and incident visibility.
+              </p>
 
-          </h2>
+              <span class="project-status active"> Case Study </span>
+            </a>
 
+            <!-- PROJECT 02 -->
 
-          <p class="section-intro">
+            <div class="project-row">
+              <span class="project-index"> 02 </span>
 
-            Not everything I learn needs to become a portfolio
-            project. This library focuses on work that can
-            demonstrate analysis, implementation, investigation,
-            problem solving, or security decision-making.
+              <div class="project-name">
+                <small> Vulnerability Management </small>
 
-          </p>
+                <h3>Network & Vulnerability Analysis</h3>
+              </div>
 
+              <p class="project-description">
+                Security analysis focused on asset exposure, network risks,
+                vulnerabilities, controls and remediation recommendations.
+              </p>
+
+              <span class="project-status"> Documenting </span>
+            </div>
+
+            <!-- PROJECT 03 -->
+
+            <div class="project-row">
+              <span class="project-index"> 03 </span>
+
+              <div class="project-name">
+                <small> Identity & Access </small>
+
+                <h3>Identity & Access Security</h3>
+              </div>
+
+              <p class="project-description">
+                Access control concepts including RBAC, least privilege,
+                authentication controls, access lifecycle and identity security.
+              </p>
+
+              <span class="project-status"> Building </span>
+            </div>
+
+            <!-- PROJECT 04 -->
+
+            <div class="project-row">
+              <span class="project-index"> 04 </span>
+
+              <div class="project-name">
+                <small> Digital Forensics </small>
+
+                <h3>Forensic Investigation</h3>
+              </div>
+
+              <p class="project-description">
+                Evidence handling, forensic workflow, investigation methodology,
+                analysis and reporting.
+              </p>
+
+              <span class="project-status"> Planned </span>
+            </div>
+          </div>
         </div>
+      </section>
 
-
-        <div class="project-list">
-
-
-          <!-- PROJECT 01 -->
-
-          <a href="projects/azure-sentinel-soc.html"
-             class="project-row">
-
-            <span class="project-index">
-              01
-            </span>
-
-
-            <div class="project-name">
-
-              <small>
-                Security Operations
-              </small>
-
-              <h3>
-                Cloud-Based SOC Monitoring
-              </h3>
-
-            </div>
-
-
-            <p class="project-description">
-
-              Azure security monitoring, Windows event logs,
-              KQL detection logic, Sentinel analytics and
-              incident visibility.
-
-            </p>
-
-
-            <span class="project-status active">
-              Case Study
-            </span>
-
-          </a>
-
-
-          <!-- PROJECT 02 -->
-
-          <div class="project-row">
-
-            <span class="project-index">
-              02
-            </span>
-
-
-            <div class="project-name">
-
-              <small>
-                Vulnerability Management
-              </small>
-
-              <h3>
-                Network & Vulnerability Analysis
-              </h3>
-
-            </div>
-
-
-            <p class="project-description">
-
-              Security analysis focused on asset exposure,
-              network risks, vulnerabilities, controls and
-              remediation recommendations.
-
-            </p>
-
-
-            <span class="project-status">
-              Documenting
-            </span>
-
-          </div>
-
-
-          <!-- PROJECT 03 -->
-
-          <div class="project-row">
-
-            <span class="project-index">
-              03
-            </span>
-
-
-            <div class="project-name">
-
-              <small>
-                Identity & Access
-              </small>
-
-              <h3>
-                Identity & Access Security
-              </h3>
-
-            </div>
-
-
-            <p class="project-description">
-
-              Access control concepts including RBAC,
-              least privilege, authentication controls,
-              access lifecycle and identity security.
-
-            </p>
-
-
-            <span class="project-status">
-              Building
-            </span>
-
-          </div>
-
-
-          <!-- PROJECT 04 -->
-
-          <div class="project-row">
-
-            <span class="project-index">
-              04
-            </span>
-
-
-            <div class="project-name">
-
-              <small>
-                Digital Forensics
-              </small>
-
-              <h3>
-                Forensic Investigation
-              </h3>
-
-            </div>
-
-
-            <p class="project-description">
-
-              Evidence handling, forensic workflow,
-              investigation methodology, analysis and
-              reporting.
-
-            </p>
-
-
-            <span class="project-status">
-              Planned
-            </span>
-
-          </div>
-
-
-        </div>
-
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
+      <!-- =====================================================
          SECURITY DOMAINS
          ===================================================== -->
 
-    <section class="section domains">
+      <section class="section domains">
+        <div class="shell">
+          <div class="domains-header">
+            <p class="section-kicker">Areas I'm Building In</p>
 
-      <div class="shell">
+            <h2 class="section-title">
+              My growing
+              <em>security toolkit.</em>
+            </h2>
 
+            <p class="section-intro">
+              These areas organize the knowledge and technical skills I'm
+              continuing to develop through projects, professional experience,
+              study, and hands-on work.
+            </p>
+          </div>
 
-        <div class="domains-header">
+          <div class="domain-grid">
+            <article class="domain">
+              <span class="domain-number"> 01 </span>
 
-          <p class="section-kicker">
-            Areas I'm Building In
-          </p>
+              <h3>Security Operations</h3>
 
+              <p>
+                SIEM monitoring, detection logic, alert investigation, incident
+                analysis, event logs and security operations.
+              </p>
+            </article>
 
-          <h2 class="section-title">
+            <article class="domain">
+              <span class="domain-number"> 02 </span>
 
-            My growing
-            <em>security toolkit.</em>
+              <h3>Identity & Access</h3>
 
-          </h2>
+              <p>
+                RBAC, least privilege, authentication, authorization, identity
+                lifecycle and access security.
+              </p>
+            </article>
 
+            <article class="domain">
+              <span class="domain-number"> 03 </span>
 
-          <p class="section-intro">
+              <h3>Cloud Security</h3>
 
-            These areas organize the knowledge and technical
-            skills I'm continuing to develop through projects,
-            professional experience, study, and hands-on work.
+              <p>
+                Cloud environments, security monitoring, access controls,
+                logging and secure cloud architecture.
+              </p>
+            </article>
 
-          </p>
+            <article class="domain">
+              <span class="domain-number"> 04 </span>
 
+              <h3>Vulnerability Management</h3>
+
+              <p>
+                Vulnerability identification, risk analysis, remediation
+                planning and security recommendations.
+              </p>
+            </article>
+
+            <article class="domain">
+              <span class="domain-number"> 05 </span>
+
+              <h3>Network Security</h3>
+
+              <p>
+                Network traffic, segmentation, firewalls, secure connectivity,
+                monitoring and network-based security analysis.
+              </p>
+            </article>
+
+            <article class="domain">
+              <span class="domain-number"> 06 </span>
+
+              <h3>Digital Forensics</h3>
+
+              <p>
+                Evidence preservation, forensic process, investigation, artifact
+                analysis and technical reporting.
+              </p>
+            </article>
+          </div>
         </div>
+      </section>
 
-
-        <div class="domain-grid">
-
-
-          <article class="domain">
-
-            <span class="domain-number">
-              01
-            </span>
-
-            <h3>
-              Security Operations
-            </h3>
-
-            <p>
-
-              SIEM monitoring, detection logic,
-              alert investigation, incident analysis,
-              event logs and security operations.
-
-            </p>
-
-          </article>
-
-
-          <article class="domain">
-
-            <span class="domain-number">
-              02
-            </span>
-
-            <h3>
-              Identity & Access
-            </h3>
-
-            <p>
-
-              RBAC, least privilege, authentication,
-              authorization, identity lifecycle and
-              access security.
-
-            </p>
-
-          </article>
-
-
-          <article class="domain">
-
-            <span class="domain-number">
-              03
-            </span>
-
-            <h3>
-              Cloud Security
-            </h3>
-
-            <p>
-
-              Cloud environments, security monitoring,
-              access controls, logging and secure
-              cloud architecture.
-
-            </p>
-
-          </article>
-
-
-          <article class="domain">
-
-            <span class="domain-number">
-              04
-            </span>
-
-            <h3>
-              Vulnerability Management
-            </h3>
-
-            <p>
-
-              Vulnerability identification, risk analysis,
-              remediation planning and security
-              recommendations.
-
-            </p>
-
-          </article>
-
-
-          <article class="domain">
-
-            <span class="domain-number">
-              05
-            </span>
-
-            <h3>
-              Network Security
-            </h3>
-
-            <p>
-
-              Network traffic, segmentation, firewalls,
-              secure connectivity, monitoring and
-              network-based security analysis.
-
-            </p>
-
-          </article>
-
-
-          <article class="domain">
-
-            <span class="domain-number">
-              06
-            </span>
-
-            <h3>
-              Digital Forensics
-            </h3>
-
-            <p>
-
-              Evidence preservation, forensic process,
-              investigation, artifact analysis and
-              technical reporting.
-
-            </p>
-
-          </article>
-
-
-        </div>
-
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
+      <!-- =====================================================
          HOW I BUILD
          ===================================================== -->
 
-    <section class="section process">
+      <section class="section process">
+        <div class="shell">
+          <p class="section-kicker">How I Approach the Work</p>
 
-      <div class="shell">
+          <h2 class="section-title">
+            Learn. Practice.
+            <em>Apply. Reflect.</em>
+          </h2>
 
+          <div class="process-grid">
+            <article class="process-step">
+              <span> 01 </span>
 
-        <p class="section-kicker">
-          How I Approach the Work
-        </p>
+              <h3>Learn</h3>
 
+              <p>
+                Understand the security concept, technology, problem and
+                purpose.
+              </p>
+            </article>
 
-        <h2 class="section-title">
+            <article class="process-step">
+              <span> 02 </span>
 
-          Learn. Practice.
-          <em>Apply. Reflect.</em>
+              <h3>Practice</h3>
 
-        </h2>
+              <p>
+                Work with the concept through labs, scenarios, tools or
+                technical exercises.
+              </p>
+            </article>
 
+            <article class="process-step">
+              <span> 03 </span>
 
-        <div class="process-grid">
+              <h3>Apply</h3>
 
+              <p>
+                Use what I learned to investigate, build, configure, analyze or
+                solve a security problem.
+              </p>
+            </article>
 
-          <article class="process-step">
+            <article class="process-step">
+              <span> 04 </span>
 
-            <span>
-              01
-            </span>
+              <h3>Reflect</h3>
 
-            <h3>
-              Learn
-            </h3>
-
-            <p>
-
-              Understand the security concept,
-              technology, problem and purpose.
-
-            </p>
-
-          </article>
-
-
-          <article class="process-step">
-
-            <span>
-              02
-            </span>
-
-            <h3>
-              Practice
-            </h3>
-
-            <p>
-
-              Work with the concept through labs,
-              scenarios, tools or technical exercises.
-
-            </p>
-
-          </article>
-
-
-          <article class="process-step">
-
-            <span>
-              03
-            </span>
-
-            <h3>
-              Apply
-            </h3>
-
-            <p>
-
-              Use what I learned to investigate,
-              build, configure, analyze or solve
-              a security problem.
-
-            </p>
-
-          </article>
-
-
-          <article class="process-step">
-
-            <span>
-              04
-            </span>
-
-            <h3>
-              Reflect
-            </h3>
-
-            <p>
-
-              Document what worked, what I learned,
-              what mattered and what I would
-              improve next time.
-
-            </p>
-
-          </article>
-
-
+              <p>
+                Document what worked, what I learned, what mattered and what I
+                would improve next time.
+              </p>
+            </article>
+          </div>
         </div>
+      </section>
 
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
+      <!-- =====================================================
          CLOSING
          ===================================================== -->
 
-    <section class="closing">
+      <section class="closing">
+        <div class="shell closing-inner">
+          <p class="section-kicker">Still Building</p>
 
-      <div class="shell closing-inner">
+          <h2 class="section-title">
+            This portfolio grows
+            <em>with me.</em>
+          </h2>
 
+          <p>
+            As I build stronger evidence, complete new technical work, and
+            deepen my cybersecurity skills, this project library will continue
+            evolving with me.
+          </p>
+        </div>
+      </section>
+    </main>
 
-        <p class="section-kicker">
-          Still Building
-        </p>
-
-
-        <h2 class="section-title">
-
-          This portfolio grows
-          <em>with me.</em>
-
-        </h2>
-
-
-        <p>
-
-          As I build stronger evidence, complete new
-          technical work, and deepen my cybersecurity
-          skills, this project library will continue
-          evolving with me.
-
-        </p>
-
-
-      </div>
-
-    </section>
-
-
-  </main>
-
-
-  <!-- =======================================================
+    <!-- =======================================================
        FOOTER
        ======================================================= -->
 
-  <footer class="footer">
-
-    <div class="shell">
-
-
-      <div class="footer-top">
-
-        <a href="index.html"
-           class="footer-brand">
-
-          Dee's <span>Cyber Corner</span>
-
-        </a>
-
-
-        <div class="footer-links">
-
-          <a href="index.html">
-            Home
-          </a>
-
-          <a href="about.html">
-            About
-          </a>
-
-          <a href="labs.html">
-            Projects
-          </a>
-
-          <a href="learn.html">
-            Learn
-          </a>
-
-          <a href="blog.html">
-            Blog
-          </a>
-
-        </div>
-
-
-      </div>
-
-
-      <div class="footer-bottom">
-
-        <span>
-          © 2026 Dee's Cyber Corner
-        </span>
-
-        <span>
-          Learning • Building • Sharing • Growing
-        </span>
-
-      </div>
-
-
-    </div>
-
-  </footer>
-
-
-</body>
+    <footer class="site-footer">
+      <a class="wordmark" href="index.html"
+        ><span>Dee’s</span><b>CYBER CORNER</b></a
+      >
+      <nav aria-label="Footer navigation">
+        <a href="index.html">Home</a><a href="about.html">About</a
+        ><a href="labs.html">Projects</a><a href="learn.html">Learn</a
+        ><a href="blog.html">Blog</a>
+      </nav>
+      <p>
+        © 2026 Dee’s Cyber Corner<br /><small
+          >Learning. Building. Sharing. Growing.</small
+        >
+      </p>
+    </footer>
+  </body>
 </html>

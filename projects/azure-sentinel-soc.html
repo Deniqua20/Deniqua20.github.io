@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cloud-Based SOC Monitoring | Dee’s Cyber Corner</title>
+    <meta
+      name="description"
+      content="A place where cybersecurity, faith, and purpose meet. Explore Dee’s projects, learning resources, and journey."
+    />
+    <meta name="theme-color" content="#0b0705" />
+    <link rel="stylesheet" href="../assets/css/site.css" />
+    <script src="../assets/js/site.js" defer></script>
+  </head>
+  <body class="interior">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a
+        class="wordmark"
+        href="../index.html"
+        aria-label="Dee’s Cyber Corner home"
+        ><span
+          >Dee’s<small class="brand-butterfly" aria-hidden="true"></small></span
+        ><b>CYBER CORNER</b></a
+      ><button
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="navigation"
+      >
+        Menu <span aria-hidden="true">☰</span>
+      </button>
+      <nav id="navigation" aria-label="Main navigation">
+        <a href="../index.html">Home</a><a href="../about.html">About</a
+        ><a href="../labs.html" aria-current="page">Projects</a
+        ><a href="../learn.html">Learn</a><a href="../blog.html">Blog</a>
+      </nav>
+      <a class="button connect" href="../about.html#connect"
+        >Let’s connect <span aria-hidden="true">⟶</span></a
+      >
+    </header>
+    <main id="main">
+      <section class="interior-hero shell">
+        <a class="text-link" href="../labs.html">← All projects</a>
+        <p class="eyebrow">Security operations / Project overview</p>
+        <h1>
+          Cloud-Based SOC<br /><em>Monitoring &amp; Threat Detection.</em>
+        </h1>
+        <p class="lead">
+          A cloud-based security monitoring environment for unauthorized login
+          attempts and brute-force activity.
+        </p>
+        <div class="tags">
+          <span>Microsoft Azure</span><span>Microsoft Sentinel</span
+          ><span>KQL</span><span>Log Analytics</span>
+        </div>
+      </section>
+      <section class="shell prose">
+        <h2>The environment</h2>
+        <p>
+          I built and tested a cloud-based environment using a Windows virtual
+          machine in Microsoft Azure, Windows Security Logs, Log Analytics, and
+          Microsoft Sentinel. The monitoring focus is failed authentication
+          activity, including Windows Event ID 4625.
+        </p>
+        <h2>Monitoring architecture</h2>
+        <ol class="architecture-flow">
+          <li>
+            <strong>Azure Windows VM</strong
+            ><span>Generate and observe security events.</span>
+          </li>
+          <li>
+            <strong>Windows Security Logs</strong
+            ><span
+              >Collect authentication activity and failed logon events.</span
+            >
+          </li>
+          <li>
+            <strong>Log Analytics + Sentinel</strong
+            ><span>Centralize logs for security monitoring.</span>
+          </li>
+          <li>
+            <strong>KQL detection</strong
+            ><span>Identify failed authentication patterns.</span>
+          </li>
+          <li>
+            <strong>Analytics rule + incident</strong
+            ><span>Turn detection logic into security visibility.</span>
+          </li>
+        </ol>
+        <h2>Evidence &amp; findings</h2>
+        <p>
+          This overview reflects the project described in the portfolio. Real
+          screenshots, the implemented KQL, detection evidence, results, and
+          lessons learned have not yet been published here.
+        </p>
+        <p class="evidence-note">
+          Detailed case-study evidence is forthcoming. No simulated screenshots
+          or unverified results are presented.
+        </p>
+        <a class="button" href="../labs.html">Back to projects ⟶</a>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <a class="wordmark" href="../index.html"
+        ><span>Dee’s</span><b>CYBER CORNER</b></a
+      >
+      <nav aria-label="Footer navigation">
+        <a href="../index.html">Home</a><a href="../about.html">About</a
+        ><a href="../labs.html">Projects</a><a href="../learn.html">Learn</a
+        ><a href="../blog.html">Blog</a>
+      </nav>
+      <p>
+        © 2026 Dee’s Cyber Corner<br /><small
+          >Learning. Building. Sharing. Growing.</small
+        >
+      </p>
+    </footer>
+  </body>
+</html>
