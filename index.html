@@ -1,2781 +1,2217 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-  <title>Dee's Cyber Corner | Cybersecurity, Learning & Growth</title>
-
-  <meta name="description"
-        content="Dee's Cyber Corner — cybersecurity projects, learning, career growth, resources, and reflections from Dee.">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
-        rel="stylesheet">
-
-  <style>
-
-    /* =========================================================
-       DEE'S CYBER CORNER
-       HOMEPAGE — FIRST BUILD
-       ========================================================= */
-
-    :root {
-      --black: #080605;
-      --espresso: #120b08;
-      --brown: #24130e;
-
-      --cream: #f7ead7;
-      --soft-cream: #d8c6b1;
-
-      --pink: #ed2f75;
-      --hot-pink: #ff3b86;
-      --hibiscus: #b31d3d;
-      --orange: #ef6b2e;
-      --gold: #d8a24c;
-
-      --border: rgba(216, 162, 76, .28);
-      --pink-border: rgba(237, 47, 117, .32);
-
-      --serif: "Playfair Display", Georgia, serif;
-      --sans: "DM Sans", Arial, sans-serif;
-
-      --shell: 1180px;
-    }
-
-
-    /* =========================================================
-       RESET
-       ========================================================= */
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background:
-        radial-gradient(
-          circle at 15% 12%,
-          rgba(179, 29, 61, .13),
-          transparent 25%
-        ),
-        radial-gradient(
-          circle at 85% 22%,
-          rgba(239, 107, 46, .08),
-          transparent 25%
-        ),
-        #080605;
-
-      color: var(--cream);
-
-      font-family: var(--sans);
-      line-height: 1.6;
-
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    a {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .shell {
-      width: min(var(--shell), 88%);
-      margin: 0 auto;
-    }
-
-
-    /* =========================================================
-       NAVIGATION
-       ========================================================= */
-
-    .site-header {
-      min-height: 82px;
-
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-
-      display: flex;
-      align-items: center;
-
-      background: rgba(8, 6, 5, .90);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-
-      border-bottom: 1px solid rgba(216, 162, 76, .18);
-    }
-
-    .nav-inner {
-      width: min(var(--shell), 88%);
-      margin: 0 auto;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 40px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-
-      flex-shrink: 0;
-    }
-
-    .brand-mark {
-      width: 38px;
-      height: 38px;
-
-      position: relative;
-
-      display: grid;
-      place-items: center;
-    }
-
-    /*
-       Clean butterfly mark.
-       NOT an emoji.
-    */
-
-    .brand-mark::before,
-    .brand-mark::after {
-      content: "";
-
-      position: absolute;
-      top: 8px;
-
-      width: 14px;
-      height: 20px;
-
-      border: 1px solid var(--gold);
-    }
-
-    .brand-mark::before {
-      left: 3px;
-
-      border-radius: 80% 35% 65% 35%;
-      transform: rotate(-25deg);
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(237,47,117,.45),
-          rgba(239,107,46,.12)
-        );
-    }
-
-    .brand-mark::after {
-      right: 3px;
-
-      border-radius: 35% 80% 35% 65%;
-      transform: rotate(25deg);
-
-      background:
-        linear-gradient(
-          215deg,
-          rgba(239,107,46,.40),
-          rgba(237,47,117,.12)
-        );
-    }
-
-    .brand-name {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 1.35rem;
-      color: var(--cream);
-
-      white-space: nowrap;
-    }
-
-    .brand-name span {
-      color: var(--gold);
-    }
-
-    .site-nav {
-      display: flex;
-      align-items: center;
-      gap: 34px;
-    }
-
-    .site-nav a {
-      position: relative;
-
-      color: var(--soft-cream);
-
-      font-size: .70rem;
-      font-weight: 500;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-
-      transition: color .25s ease;
-    }
-
-    .site-nav a::after {
-      content: "";
-
-      position: absolute;
-      left: 0;
-      bottom: -8px;
-
-      width: 0;
-      height: 1px;
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--pink),
-          var(--orange)
-        );
-
-      transition: width .25s ease;
-    }
-
-    .site-nav a:hover,
-    .site-nav a.active {
-      color: var(--cream);
-    }
-
-    .site-nav a:hover::after,
-    .site-nav a.active::after {
-      width: 100%;
-    }
-
-
-    /* =========================================================
-       HERO
-       ========================================================= */
-
-    .hero {
-      min-height: calc(100vh - 82px);
-
-      position: relative;
-
-      display: flex;
-      align-items: center;
-
-      overflow: hidden;
-
-      border-bottom: 1px solid var(--border);
-
-      background:
-        radial-gradient(
-          circle at 78% 38%,
-          rgba(237,47,117,.18),
-          transparent 20%
-        ),
-        radial-gradient(
-          circle at 88% 58%,
-          rgba(239,107,46,.15),
-          transparent 23%
-        ),
-        radial-gradient(
-          circle at 68% 70%,
-          rgba(179,29,61,.13),
-          transparent 28%
-        ),
-        linear-gradient(
-          110deg,
-          #050403 0%,
-          #0c0705 48%,
-          #120805 100%
-        );
-    }
-
-    /*
-       Very subtle cyber-grid.
-       It stays behind the artwork/content.
-    */
-
-    .hero::before {
-      content: "";
-
-      position: absolute;
-      inset: 0;
-
-      opacity: .12;
-
-      background-image:
-        linear-gradient(
-          rgba(216,162,76,.18) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(216,162,76,.18) 1px,
-          transparent 1px
-        );
-
-      background-size: 85px 85px;
-
-      mask-image:
-        linear-gradient(
-          90deg,
-          transparent,
-          transparent 40%,
-          black 75%,
-          transparent
-        );
-
-      -webkit-mask-image:
-        linear-gradient(
-          90deg,
-          transparent,
-          transparent 40%,
-          black 75%,
-          transparent
-        );
-    }
-
-    .hero::after {
-      content: "";
-
-      position: absolute;
-
-      width: 520px;
-      height: 520px;
-
-      right: -170px;
-      bottom: -250px;
-
-      border-radius: 50%;
-
-      border: 1px solid rgba(216,162,76,.15);
-
-      box-shadow:
-        0 0 120px rgba(237,47,117,.12),
-        inset 0 0 100px rgba(239,107,46,.05);
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 3;
-
-      width: min(var(--shell), 88%);
-      margin: 0 auto;
-
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      align-items: center;
-
-      gap: 70px;
-
-      padding: 100px 0;
-    }
-
-    .eyebrow {
-      margin-bottom: 22px;
-
-      color: var(--gold);
-
-      font-size: .68rem;
-      font-weight: 600;
-
-      letter-spacing: .28em;
-      text-transform: uppercase;
-    }
-
-    .hero h1 {
-      max-width: 650px;
-
-      font-family: var(--serif);
-      font-size: clamp(4.2rem, 7.5vw, 7.8rem);
-      font-weight: 500;
-
-      line-height: .84;
-      letter-spacing: -.045em;
-    }
-
-    .hero h1 .dee {
-      display: block;
-
-      color: var(--cream);
-    }
-
-    .hero h1 .corner {
-      display: block;
-
-      margin-top: 14px;
-
-      color: var(--pink);
-
-      font-style: italic;
-    }
-
-    .hero-tagline {
-      margin-top: 32px;
-
-      color: var(--soft-cream);
-
-      font-size: .72rem;
-      font-weight: 600;
-
-      letter-spacing: .22em;
-      text-transform: uppercase;
-    }
-
-    .hero-tagline span {
-      color: var(--gold);
-      padding: 0 10px;
-    }
-
-    .hero-copy {
-      max-width: 570px;
-
-      margin-top: 27px;
-
-      color: #e7d8c4;
-
-      font-family: var(--serif);
-      font-size: clamp(1.08rem, 1.8vw, 1.38rem);
-      font-style: italic;
-
-      line-height: 1.65;
-    }
-
-    .hero-actions {
-      margin-top: 38px;
-
-      display: flex;
-      flex-wrap: wrap;
-
-      gap: 14px;
-    }
-
-    .button {
-      min-height: 48px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      padding: 0 25px;
-
-      border: 1px solid var(--border);
-
-      font-size: .68rem;
-      font-weight: 700;
-
-      letter-spacing: .13em;
-      text-transform: uppercase;
-
-      transition:
-        transform .25s ease,
-        border-color .25s ease,
-        background .25s ease;
-    }
-
-    .button:hover {
-      transform: translateY(-3px);
-    }
-
-    .button-primary {
-      border-color: var(--pink);
-
-      background:
-        linear-gradient(
-          110deg,
-          var(--hibiscus),
-          var(--pink)
-        );
-
-      color: white;
-
-      box-shadow:
-        0 14px 45px rgba(237,47,117,.17);
-    }
-
-    .button-secondary {
-      background: rgba(18,11,8,.48);
-      color: var(--cream);
-    }
-
-    .button-secondary:hover {
-      border-color: var(--gold);
-    }
-
-
-    /* =========================================================
-       HERO ART AREA
-       ========================================================= */
-
-    .hero-art {
-      min-height: 560px;
-
-      position: relative;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .art-orbit {
-      width: min(430px, 90%);
-      aspect-ratio: 1;
-
-      position: relative;
-
-      border-radius: 50%;
-
-      border:
-        1px solid rgba(216,162,76,.22);
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(237,47,117,.12),
-          rgba(18,11,8,.05) 46%,
-          transparent 70%
-        );
-
-      box-shadow:
-        0 0 100px rgba(237,47,117,.09);
-    }
-
-    .art-orbit::before {
-      content: "";
-
-      position: absolute;
-      inset: 9%;
-
-      border-radius: 50%;
-
-      border:
-        1px dashed rgba(216,162,76,.20);
-
-      transform: rotate(-12deg);
-    }
-
-    .art-orbit::after {
-      content: "";
-
-      position: absolute;
-
-      width: 14px;
-      height: 14px;
-
-      top: 12%;
-      right: 15%;
-
-      border-radius: 50%;
-
-      background: var(--pink);
-
-      box-shadow:
-        0 0 24px var(--pink);
-    }
-
-
-    /*
-       Decorative butterfly built as a brand symbol,
-       not an emoji and not a fake project screenshot.
-    */
-
-    .butterfly {
-      width: 280px;
-      height: 230px;
-
-      position: absolute;
-      z-index: 3;
-
-      top: 24%;
-      left: 50%;
-
-      transform: translateX(-50%);
-    }
-
-    .wing {
-      position: absolute;
-
-      width: 126px;
-      height: 170px;
-
-      top: 10px;
-
-      border: 2px solid rgba(216,162,76,.72);
-
-      overflow: hidden;
-
-      box-shadow:
-        inset 0 0 35px rgba(0,0,0,.55),
-        0 0 35px rgba(237,47,117,.15);
-    }
-
-    .wing::before {
-      content: "";
-
-      position: absolute;
-      inset: 18px;
-
-      border:
-        1px solid rgba(247,234,215,.40);
-
-      border-radius: inherit;
-    }
-
-    .wing::after {
-      content: "";
-
-      position: absolute;
-      inset: 0;
-
-      background-image:
-        linear-gradient(
-          90deg,
-          transparent 48%,
-          rgba(216,162,76,.35) 50%,
-          transparent 52%
-        ),
-        linear-gradient(
-          transparent 48%,
-          rgba(216,162,76,.25) 50%,
-          transparent 52%
-        );
-
-      background-size: 34px 34px;
-
-      opacity: .45;
-    }
-
-    .wing-left {
-      left: 4px;
-
-      border-radius:
-        80% 24% 60% 40%;
-
-      transform: rotate(-24deg);
-
-      background:
-        radial-gradient(
-          circle at 35% 28%,
-          var(--hot-pink),
-          transparent 15%
-        ),
-        radial-gradient(
-          circle at 64% 60%,
-          var(--orange),
-          transparent 22%
-        ),
-        linear-gradient(
-          145deg,
-          #551126,
-          #ed2f75 45%,
-          #ef6b2e
-        );
-    }
-
-    .wing-right {
-      right: 4px;
-
-      border-radius:
-        24% 80% 40% 60%;
-
-      transform: rotate(24deg);
-
-      background:
-        radial-gradient(
-          circle at 65% 28%,
-          var(--hot-pink),
-          transparent 15%
-        ),
-        radial-gradient(
-          circle at 36% 60%,
-          var(--orange),
-          transparent 22%
-        ),
-        linear-gradient(
-          215deg,
-          #551126,
-          #ed2f75 45%,
-          #ef6b2e
-        );
-    }
-
-    .butterfly-body {
-      width: 13px;
-      height: 132px;
-
-      position: absolute;
-
-      top: 43px;
-      left: 50%;
-
-      transform: translateX(-50%);
-
-      border-radius: 50%;
-
-      background:
-        linear-gradient(
-          var(--gold),
-          #26130d
-        );
-
-      box-shadow:
-        0 0 18px rgba(216,162,76,.32);
-    }
-
-    .butterfly-body::before,
-    .butterfly-body::after {
-      content: "";
-
-      position: absolute;
-
-      width: 65px;
-      height: 1px;
-
-      top: -15px;
-
-      background: var(--gold);
-    }
-
-    .butterfly-body::before {
-      right: 5px;
-      transform: rotate(38deg);
-      transform-origin: right;
-    }
-
-    .butterfly-body::after {
-      left: 5px;
-      transform: rotate(-38deg);
-      transform-origin: left;
-    }
-
-
-    /* botanical framing */
-
-    .botanical {
-      position: absolute;
-      pointer-events: none;
-    }
-
-    .botanical-one {
-      width: 240px;
-      height: 240px;
-
-      right: -45px;
-      bottom: -25px;
-
-      opacity: .85;
-    }
-
-    .botanical-two {
-      width: 175px;
-      height: 175px;
-
-      left: -35px;
-      top: 45px;
-
-      opacity: .55;
-
-      transform: rotate(160deg);
-    }
-
-    .botanical::before,
-    .botanical::after {
-      content: "";
-
-      position: absolute;
-
-      width: 100px;
-      height: 165px;
-
-      border:
-        1px solid rgba(216,162,76,.30);
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(64,55,24,.65),
-          rgba(14,23,12,.15)
-        );
-
-      border-radius:
-        100% 0 100% 0;
-    }
-
-    .botanical::before {
-      left: 20px;
-      top: 15px;
-
-      transform: rotate(-30deg);
-    }
-
-    .botanical::after {
-      right: 20px;
-      bottom: 5px;
-
-      transform: rotate(35deg) scale(.75);
-    }
-
-
-    /* =========================================================
-       FAITH STRIP
-       ========================================================= */
-
-    .faith-strip {
-      position: relative;
-
-      padding: 38px 5%;
-
-      text-align: center;
-
-      border-bottom: 1px solid var(--border);
-
-      background:
-        linear-gradient(
-          90deg,
-          rgba(18,11,8,.95),
-          rgba(50,13,22,.72),
-          rgba(18,11,8,.95)
-        );
-    }
-
-    .faith-strip p {
-      max-width: 850px;
-      margin: 0 auto;
-
-      color: var(--cream);
-
-      font-family: var(--serif);
-      font-size: clamp(1rem, 2vw, 1.3rem);
-      font-style: italic;
-
-      line-height: 1.7;
-    }
-
-    .faith-strip strong {
-      display: block;
-
-      margin-top: 9px;
-
-      color: var(--gold);
-
-      font-family: var(--sans);
-      font-size: .63rem;
-      font-style: normal;
-
-      letter-spacing: .20em;
-      text-transform: uppercase;
-    }
-
-
-    /* =========================================================
-       GENERAL SECTION STYLES
-       ========================================================= */
-
-    .section {
-      position: relative;
-
-      padding: 120px 0;
-
-      border-bottom: 1px solid rgba(216,162,76,.16);
-    }
-
-    .section-kicker {
-      margin-bottom: 16px;
-
-      color: var(--gold);
-
-      font-size: .66rem;
-      font-weight: 700;
-
-      letter-spacing: .25em;
-      text-transform: uppercase;
-    }
-
-    .section-title {
-      font-family: var(--serif);
-      font-size: clamp(2.5rem, 5vw, 4.7rem);
-      font-weight: 500;
-
-      line-height: 1;
-
-      letter-spacing: -.035em;
-    }
-
-    .section-title em {
-      color: var(--pink);
-      font-weight: 500;
-    }
-
-    .section-copy {
-      color: var(--soft-cream);
-
-      font-size: .98rem;
-      line-height: 1.85;
-    }
-
-    .text-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-
-      margin-top: 25px;
-
-      padding-bottom: 5px;
-
-      color: var(--cream);
-
-      border-bottom:
-        1px solid var(--pink);
-
-      font-size: .69rem;
-      font-weight: 700;
-
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-
-
-    /* =========================================================
-       MEET DEE
-       ========================================================= */
-
-    .meet {
-      background:
-        radial-gradient(
-          circle at 15% 50%,
-          rgba(179,29,61,.10),
-          transparent 30%
-        ),
-        #0a0605;
-    }
-
-    .meet-grid {
-      display: grid;
-      grid-template-columns: .8fr 1.2fr;
-
-      gap: 100px;
-
-      align-items: center;
-    }
-
-    .meet-art {
-      min-height: 410px;
-
-      position: relative;
-
-      border-left:
-        1px solid var(--gold);
-
-      border-bottom:
-        1px solid var(--pink);
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(36,19,14,.82),
-          rgba(8,6,5,.20)
-        );
-
-      overflow: hidden;
-    }
-
-    .meet-art::before {
-      content: "DEE";
-
-      position: absolute;
-
-      left: 30px;
-      bottom: -18px;
-
-      color: rgba(247,234,215,.035);
-
-      font-family: var(--serif);
-      font-size: 9rem;
-      line-height: 1;
-    }
-
-    .meet-art::after {
-      content: "";
-
-      position: absolute;
-
-      width: 220px;
-      height: 220px;
-
-      top: 60px;
-      left: 50%;
-
-      transform: translateX(-50%) rotate(45deg);
-
-      border:
-        1px solid rgba(216,162,76,.22);
-
-      box-shadow:
-        0 0 60px rgba(237,47,117,.08);
-    }
-
-    .meet-art-label {
-      position: absolute;
-      z-index: 2;
-
-      top: 28px;
-      left: 30px;
-
-      color: var(--gold);
-
-      font-size: .61rem;
-      font-weight: 700;
-
-      letter-spacing: .18em;
-      text-transform: uppercase;
-    }
-
-    /*
-       HEADSHOT WILL GO HERE LATER.
-       We are intentionally leaving this editable.
-    */
-
-    .headshot-later {
-      position: absolute;
-      z-index: 3;
-
-      left: 30px;
-      right: 30px;
-      bottom: 32px;
-
-      color: rgba(216,198,177,.42);
-
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: .88rem;
-    }
-
-    .meet-copy {
-      max-width: 650px;
-    }
-
-    .meet-copy .section-copy {
-      max-width: 590px;
-
-      margin-top: 28px;
-    }
-
-
-    /* =========================================================
-       FEATURED PROJECT
-       ========================================================= */
-
-    .featured {
-      background:
-        radial-gradient(
-          circle at 80% 40%,
-          rgba(237,47,117,.08),
-          transparent 28%
-        ),
-        #080605;
-    }
-
-    .featured-heading {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-
-      gap: 40px;
-
-      margin-bottom: 55px;
-    }
-
-    .project-feature {
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-
-      border-top:
-        1px solid rgba(216,162,76,.55);
-
-      border-bottom:
-        1px solid rgba(216,162,76,.25);
-    }
-
-    .project-content {
-      padding: 60px 60px 60px 0;
-    }
-
-    .project-number {
-      color: var(--pink);
-
-      font-family: var(--serif);
-      font-size: 1rem;
-    }
-
-    .project-content h3 {
-      max-width: 700px;
-
-      margin-top: 22px;
-
-      font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 3.8rem);
-      font-weight: 500;
-
-      line-height: 1.06;
-    }
-
-    .project-content p {
-      max-width: 640px;
-
-      margin-top: 24px;
-
-      color: var(--soft-cream);
-
-      line-height: 1.85;
-    }
-
-    .project-tags {
-      margin-top: 28px;
-
-      display: flex;
-      flex-wrap: wrap;
-
-      gap: 9px;
-    }
-
-    .project-tags span {
-      padding: 7px 11px;
-
-      color: var(--gold);
-
-      border:
-        1px solid rgba(216,162,76,.27);
-
-      font-size: .60rem;
-      font-weight: 600;
-
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .project-visual {
-      min-height: 510px;
-
-      position: relative;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-left:
-        1px solid rgba(216,162,76,.22);
-
-      overflow: hidden;
-
-      background:
-        radial-gradient(
-          circle at 50% 50%,
-          rgba(237,47,117,.13),
-          transparent 36%
-        ),
-        linear-gradient(
-          145deg,
-          #130a08,
-          #080605
-        );
-    }
-
-    .architecture {
-      width: 82%;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      gap: 12px;
-
-      position: relative;
-      z-index: 2;
-    }
-
-    .arch-node {
-      min-width: 76px;
-
-      padding: 16px 10px;
-
-      text-align: center;
-
-      border:
-        1px solid rgba(216,162,76,.34);
-
-      background:
-        rgba(8,6,5,.80);
-
-      color: var(--cream);
-
-      font-size: .58rem;
-      font-weight: 600;
-
-      letter-spacing: .06em;
-      text-transform: uppercase;
-    }
-
-    .arch-line {
-      flex: 1;
-      min-width: 18px;
-
-      height: 1px;
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--gold),
-          var(--pink)
-        );
-    }
-
-    .project-visual::before {
-      content: "SECURITY MONITORING";
-
-      position: absolute;
-
-      right: -35px;
-      top: 50%;
-
-      transform:
-        translateY(-50%)
-        rotate(90deg);
-
-      color: rgba(247,234,215,.12);
-
-      font-size: .60rem;
-
-      letter-spacing: .35em;
-    }
-
-
-    /* =========================================================
-       FROM DEE'S CORNER / BLOG
-       ========================================================= */
-
-    .journal {
-      background:
-        linear-gradient(
-          180deg,
-          #0b0705,
-          #100807
-        );
-    }
-
-    .journal-intro {
-      max-width: 700px;
-
-      margin-bottom: 65px;
-    }
-
-    .journal-intro .section-copy {
-      max-width: 580px;
-      margin-top: 22px;
-    }
-
-    .journal-list {
-      border-top:
-        1px solid rgba(216,162,76,.30);
-    }
-
-    .journal-item {
-      min-height: 150px;
-
-      display: grid;
-      grid-template-columns: 80px 1fr auto;
-      align-items: center;
-
-      gap: 35px;
-
-      border-bottom:
-        1px solid rgba(216,162,76,.18);
-
-      transition:
-        background .25s ease,
-        padding .25s ease;
-    }
-
-    .journal-item:hover {
-      padding-left: 18px;
-
-      background:
-        rgba(237,47,117,.035);
-    }
-
-    .journal-number {
-      color: var(--gold);
-
-      font-family: var(--serif);
-      font-size: 1rem;
-    }
-
-    .journal-text small {
-      display: block;
-
-      margin-bottom: 7px;
-
-      color: var(--pink);
-
-      font-size: .58rem;
-      font-weight: 700;
-
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-
-    .journal-text h3 {
-      font-family: var(--serif);
-      font-size: clamp(1.35rem, 2.5vw, 2rem);
-      font-weight: 500;
-    }
-
-    .journal-status {
-      color: var(--soft-cream);
-
-      font-size: .60rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-
-    /* =========================================================
-       LEARN WITH DEE
-       ========================================================= */
-
-    .learn {
-      background:
-        radial-gradient(
-          circle at 25% 30%,
-          rgba(237,47,117,.09),
-          transparent 26%
-        ),
-        #080605;
-    }
-
-    .learn-header {
-      max-width: 740px;
-      margin-bottom: 60px;
-    }
-
-    .learn-header .section-copy {
-      max-width: 600px;
-      margin-top: 22px;
-    }
-
-    .learn-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-
-      border-top:
-        1px solid var(--border);
-
-      border-left:
-        1px solid var(--border);
-    }
-
-    .learn-item {
-      min-height: 250px;
-
-      position: relative;
-
-      padding: 42px;
-
-      border-right:
-        1px solid var(--border);
-
-      border-bottom:
-        1px solid var(--border);
-
-      overflow: hidden;
-
-      transition:
-        background .25s ease;
-    }
-
-    .learn-item:hover {
-      background:
-        rgba(237,47,117,.045);
-    }
-
-    .learn-item small {
-      color: var(--gold);
-
-      font-size: .60rem;
-      font-weight: 700;
-
-      letter-spacing: .18em;
-      text-transform: uppercase;
-    }
-
-    .learn-item h3 {
-      margin-top: 30px;
-
-      font-family: var(--serif);
-      font-size: 2rem;
-      font-weight: 500;
-    }
-
-    .learn-item p {
-      max-width: 430px;
-
-      margin-top: 13px;
-
-      color: var(--soft-cream);
-
-      font-size: .90rem;
-      line-height: 1.75;
-    }
-
-    .learn-item::after {
-      content: "";
-
-      width: 75px;
-      height: 1px;
-
-      position: absolute;
-
-      right: 35px;
-      bottom: 35px;
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--pink),
-          var(--orange)
-        );
-    }
-
-
-    /* =========================================================
-       CURRENTLY
-       ========================================================= */
-
-    .currently {
-      background:
-        linear-gradient(
-          110deg,
-          #130806,
-          #080605 55%,
-          #100706
-        );
-    }
-
-    .currently-grid {
-      display: grid;
-      grid-template-columns: .9fr 1.1fr;
-
-      gap: 100px;
-
-      align-items: start;
-    }
-
-    .current-list {
-      border-top:
-        1px solid rgba(216,162,76,.30);
-    }
-
-    .current-row {
-      padding: 24px 0;
-
-      display: grid;
-      grid-template-columns: 130px 1fr;
-
-      gap: 25px;
-
-      border-bottom:
-        1px solid rgba(216,162,76,.16);
-    }
-
-    .current-row span {
-      color: var(--gold);
-
-      font-size: .59rem;
-      font-weight: 700;
-
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-
-    .current-row strong {
-      color: var(--cream);
-
-      font-family: var(--serif);
-      font-size: 1.15rem;
-      font-weight: 500;
-    }
-
-
-    /* =========================================================
-       CLOSING NOTE
-       ========================================================= */
-
-    .closing {
-      min-height: 520px;
-
-      position: relative;
-
-      display: flex;
-      align-items: center;
-
-      text-align: center;
-
-      overflow: hidden;
-
-      background:
-        radial-gradient(
-          circle at 50% 50%,
-          rgba(179,29,61,.14),
-          transparent 35%
-        ),
-        #070403;
-    }
-
-    .closing::before,
-    .closing::after {
-      content: "";
-
-      position: absolute;
-
-      width: 340px;
-      height: 340px;
-
-      border:
-        1px solid rgba(216,162,76,.12);
-
-      border-radius: 50%;
-    }
-
-    .closing::before {
-      left: -180px;
-      bottom: -140px;
-    }
-
-    .closing::after {
-      right: -180px;
-      top: -140px;
-    }
-
-    .closing-inner {
-      max-width: 800px;
-      margin: 0 auto;
-
-      position: relative;
-      z-index: 2;
-    }
-
-    .closing p {
-      margin-top: 25px;
-
-      color: var(--soft-cream);
-
-      font-family: var(--serif);
-      font-size: clamp(1.1rem, 2vw, 1.4rem);
-
-      line-height: 1.8;
-    }
-
-    .closing-mantra {
-      margin-top: 40px;
-
-      color: var(--gold);
-
-      font-size: .66rem;
-      font-weight: 700;
-
-      letter-spacing: .24em;
-      text-transform: uppercase;
-    }
-
-
-    /* =========================================================
-       FOOTER
-       ========================================================= */
-
-    .footer {
-      padding: 60px 0 35px;
-
-      background: #050302;
-
-      border-top:
-        1px solid rgba(216,162,76,.22);
-    }
-
-    .footer-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 40px;
-
-      padding-bottom: 35px;
-
-      border-bottom:
-        1px solid rgba(216,162,76,.14);
-    }
-
-    .footer-brand {
-      font-family: var(--serif);
-      font-size: 1.5rem;
-      font-style: italic;
-    }
-
-    .footer-brand span {
-      color: var(--pink);
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-
-      gap: 25px;
-    }
-
-    .footer-links a {
-      color: var(--soft-cream);
-
-      font-size: .62rem;
-      font-weight: 600;
-
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .footer-bottom {
-      padding-top: 27px;
-
-      display: flex;
-      justify-content: space-between;
-
-      gap: 30px;
-
-      color: rgba(216,198,177,.60);
-
-      font-size: .65rem;
-    }
-
-    .footer-verse {
-      color: var(--gold);
-    }
-
-
-    /* =========================================================
-       TABLET
-       ========================================================= */
-
-    @media (max-width: 1000px) {
-
-      .site-header {
-        position: relative;
-      }
-
-      .nav-inner {
-        padding: 20px 0;
-
-        flex-direction: column;
-
-        gap: 20px;
-      }
-
-      .site-nav {
-        width: 100%;
-
-        justify-content: center;
-
-        flex-wrap: wrap;
-
-        gap: 16px 24px;
-      }
-
-      .hero {
-        min-height: auto;
-      }
-
-      .hero-inner {
-        grid-template-columns: 1fr;
-
-        padding: 90px 0 70px;
-      }
-
-      .hero-art {
-        min-height: 460px;
-      }
-
-      .meet-grid,
-      .currently-grid {
-        grid-template-columns: 1fr;
-
-        gap: 55px;
-      }
-
-      .meet-art {
-        min-height: 300px;
-      }
-
-      .project-feature {
-        grid-template-columns: 1fr;
-      }
-
-      .project-content {
-        padding-right: 0;
-      }
-
-      .project-visual {
-        border-left: 0;
-
-        border-top:
-          1px solid rgba(216,162,76,.22);
-      }
-
-      .featured-heading {
-        align-items: start;
-        flex-direction: column;
-      }
-
-    }
-
-
-    /* =========================================================
-       MOBILE
-       ========================================================= */
-
-    @media (max-width: 650px) {
-
-      .shell,
-      .nav-inner,
-      .hero-inner {
-        width: 88%;
-      }
-
-      .site-nav {
-        gap: 13px 17px;
-      }
-
-      .site-nav a {
-        font-size: .59rem;
-      }
-
-      .hero-inner {
-        padding-top: 75px;
-      }
-
-      .hero h1 {
-        font-size: clamp(3.7rem, 19vw, 5.8rem);
-      }
-
-      .hero-tagline {
-        line-height: 2;
-      }
-
-      .hero-tagline span {
-        padding: 0 4px;
-      }
-
-      .hero-actions {
-        flex-direction: column;
-      }
-
-      .button {
-        width: 100%;
-      }
-
-      .hero-art {
-        min-height: 350px;
-      }
-
-      .art-orbit {
-        width: 300px;
-      }
-
-      .butterfly {
-        transform:
-          translateX(-50%)
-          scale(.72);
-      }
-
-      .section {
-        padding: 85px 0;
-      }
-
-      .meet-grid {
-        gap: 40px;
-      }
-
-      .project-content {
-        padding: 45px 0;
-      }
-
-      .project-visual {
-        min-height: 360px;
-      }
-
-      .architecture {
-        width: 88%;
-
-        flex-direction: column;
-
-        gap: 8px;
-      }
-
-      .arch-node {
-        width: 100%;
-      }
-
-      .arch-line {
-        width: 1px;
-        min-width: 1px;
-
-        height: 18px;
-        min-height: 18px;
-
-        flex: none;
-
-        background:
-          linear-gradient(
-            var(--gold),
-            var(--pink)
-          );
-      }
-
-      .journal-item {
-        min-height: 175px;
-
-        grid-template-columns: 40px 1fr;
-
-        gap: 20px;
-      }
-
-      .journal-status {
-        display: none;
-      }
-
-      .learn-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .learn-item {
-        min-height: 220px;
-
-        padding: 32px;
-      }
-
-      .current-row {
-        grid-template-columns: 1fr;
-
-        gap: 8px;
-      }
-
-      .footer-top,
-      .footer-bottom {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-    }
-
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dee's Cyber Corner | Cybersecurity, Faith & Growth</title>
+
+<meta name="description"
+content="Dee's Cyber Corner — cybersecurity projects, learning, career growth, resources and reflections.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
+rel="stylesheet">
+
+<style>
+
+/* ============================================================
+   DEE'S CYBER CORNER
+   HOME — DESIGN COMP BUILD
+   ============================================================ */
+
+:root{
+  --black:#050302;
+  --black2:#090504;
+  --espresso:#120806;
+  --espresso2:#1b0c08;
+  --cream:#f8ead6;
+  --cream2:#d8c5ae;
+  --pink:#ee2d75;
+  --pink2:#ff438a;
+  --red:#a91d3b;
+  --orange:#ef6c2f;
+  --gold:#d5a14b;
+  --gold2:#f0c675;
+  --green:#27311d;
+
+  --serif:"Playfair Display",Georgia,serif;
+  --sans:"DM Sans",Arial,sans-serif;
+  --script:"Great Vibes",cursive;
+
+  --max:1240px;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--black);
+  color:var(--cream);
+  font-family:var(--sans);
+  overflow-x:hidden;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+img,svg{
+  display:block;
+  max-width:100%;
+}
+
+.wrap{
+  width:min(var(--max),88%);
+  margin:auto;
+}
+
+
+/* ============================================================
+   NAV
+   ============================================================ */
+
+header{
+  position:relative;
+  z-index:100;
+  background:#060403;
+  border-bottom:1px solid rgba(213,161,75,.20);
+}
+
+.nav{
+  min-height:88px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.logo-butterfly{
+  width:31px;
+  height:26px;
+}
+
+.logo-copy{
+  line-height:1;
+}
+
+.logo-copy strong{
+  display:block;
+  font-family:var(--script);
+  font-size:1.65rem;
+  font-weight:400;
+  color:var(--cream);
+}
+
+.logo-copy span{
+  display:block;
+  margin-top:4px;
+  font-size:.52rem;
+  letter-spacing:.25em;
+  color:var(--gold);
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  gap:35px;
+}
+
+nav a{
+  position:relative;
+  padding:34px 0 31px;
+  font-size:.66rem;
+  font-weight:600;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:#cbbca9;
+}
+
+nav a:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:24px;
+  height:1px;
+  transform:scaleX(0);
+  background:var(--pink);
+  transition:.25s;
+}
+
+nav a:hover:after,
+nav a.active:after{
+  transform:scaleX(1);
+}
+
+.connect{
+  padding:13px 18px;
+  border:1px solid rgba(213,161,75,.55);
+  font-size:.59rem;
+  font-weight:700;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--cream);
+}
+
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.hero{
+  position:relative;
+  min-height:790px;
+  overflow:hidden;
+
+  background:
+    radial-gradient(circle at 82% 45%,
+      rgba(226,38,103,.19) 0,
+      rgba(160,25,57,.08) 22%,
+      transparent 43%),
+
+    radial-gradient(circle at 71% 77%,
+      rgba(239,108,47,.10),
+      transparent 30%),
+
+    linear-gradient(105deg,
+      #050302 0%,
+      #080403 43%,
+      #130706 100%);
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+
+  background:
+    linear-gradient(90deg,
+      rgba(5,3,2,.15),
+      transparent 45%,
+      rgba(5,3,2,.04));
+}
+
+.hero-grid{
+  position:relative;
+  z-index:5;
+
+  min-height:790px;
+
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  align-items:center;
+  gap:45px;
+}
+
+.hero-copy{
+  position:relative;
+  z-index:10;
+  padding:80px 0 90px;
+}
+
+.kicker{
+  margin-bottom:22px;
+  font-size:.63rem;
+  font-weight:700;
+  letter-spacing:.29em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+
+.hero h1{
+  font-family:var(--serif);
+  font-weight:500;
+  font-size:clamp(4.6rem,7.2vw,7.8rem);
+  letter-spacing:-.055em;
+  line-height:.82;
+}
+
+.hero h1 span{
+  display:block;
+}
+
+.hero h1 em{
+  display:block;
+  margin-top:17px;
+  font-weight:400;
+  color:var(--pink);
+}
+
+.tagline{
+  margin-top:34px;
+  font-size:.65rem;
+  font-weight:600;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:#d8c8b5;
+}
+
+.tagline b{
+  padding:0 9px;
+  color:var(--gold);
+  font-weight:400;
+}
+
+.intro{
+  max-width:590px;
+  margin-top:26px;
+
+  font-family:var(--serif);
+  font-size:1.15rem;
+  font-style:italic;
+  line-height:1.75;
+
+  color:#e5d4bf;
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:37px;
+}
+
+.btn{
+  min-height:50px;
+  padding:0 25px;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:.62rem;
+  font-weight:700;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+
+  transition:.25s;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+}
+
+.btn-primary{
+  background:linear-gradient(110deg,#b51e46,var(--pink));
+  border:1px solid var(--pink2);
+  color:white;
+  box-shadow:0 15px 40px rgba(238,45,117,.15);
+}
+
+.btn-outline{
+  border:1px solid rgba(213,161,75,.50);
+  background:rgba(6,4,3,.35);
+}
+
+
+/* ============================================================
+   HERO ART
+   ============================================================ */
+
+.hero-art{
+  position:absolute;
+  z-index:2;
+
+  width:min(720px,52vw);
+  height:100%;
+
+  right:-20px;
+  top:0;
+
+  pointer-events:none;
+}
+
+.hero-art svg{
+  width:100%;
+  height:100%;
+}
+
+.verse-card{
+  position:absolute;
+  z-index:8;
+
+  width:330px;
+
+  right:7%;
+  top:9%;
+
+  padding:20px 22px 18px;
+
+  border-left:1px solid rgba(213,161,75,.58);
+
+  background:
+    linear-gradient(90deg,
+      rgba(5,3,2,.74),
+      rgba(5,3,2,.28),
+      transparent);
+}
+
+.verse-card p{
+  font-family:var(--serif);
+  font-size:.91rem;
+  font-style:italic;
+  line-height:1.65;
+  color:#f0dfca;
+}
+
+.verse-card span{
+  display:block;
+  margin-top:10px;
+
+  font-size:.53rem;
+  font-weight:700;
+  letter-spacing:.19em;
+  color:var(--gold);
+}
+
+
+/* ============================================================
+   SECTION SHARED
+   ============================================================ */
+
+.section{
+  position:relative;
+  padding:115px 0;
+  border-top:1px solid rgba(213,161,75,.14);
+  overflow:hidden;
+}
+
+.section-label{
+  margin-bottom:16px;
+  font-size:.61rem;
+  font-weight:700;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+
+.section-title{
+  font-family:var(--serif);
+  font-size:clamp(2.7rem,5vw,4.8rem);
+  font-weight:500;
+  line-height:1.02;
+  letter-spacing:-.035em;
+}
+
+.section-title em{
+  color:var(--pink);
+  font-weight:400;
+}
+
+.body-copy{
+  color:var(--cream2);
+  font-size:.94rem;
+  line-height:1.9;
+}
+
+.link{
+  display:inline-block;
+  margin-top:28px;
+  padding-bottom:5px;
+
+  border-bottom:1px solid var(--pink);
+
+  font-size:.61rem;
+  font-weight:700;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+
+
+/* ============================================================
+   MEET DEE
+   ============================================================ */
+
+.meet{
+  background:
+    radial-gradient(circle at 12% 50%,
+      rgba(180,28,64,.11),
+      transparent 28%),
+    #090504;
+}
+
+.meet-grid{
+  display:grid;
+  grid-template-columns:.95fr 1.05fr;
+  gap:90px;
+  align-items:center;
+}
+
+.story-art{
+  position:relative;
+  min-height:470px;
+}
+
+.story-frame{
+  position:absolute;
+  inset:20px 35px 20px 0;
+
+  border:1px solid rgba(213,161,75,.32);
+
+  background:
+    radial-gradient(circle at 50% 70%,
+      rgba(238,45,117,.18),
+      transparent 32%),
+
+    linear-gradient(165deg,
+      #26100d 0%,
+      #120806 48%,
+      #070403 100%);
+}
+
+.story-frame:before{
+  content:"";
+  position:absolute;
+
+  width:260px;
+  height:260px;
+
+  left:50%;
+  top:50%;
+
+  transform:translate(-50%,-50%);
+
+  border-radius:50%;
+  border:1px solid rgba(213,161,75,.25);
+
+  box-shadow:
+    0 0 70px rgba(238,45,117,.10),
+    inset 0 0 50px rgba(239,108,47,.05);
+}
+
+.story-quote{
+  position:absolute;
+  z-index:3;
+
+  left:40px;
+  right:80px;
+  bottom:55px;
+
+  font-family:var(--serif);
+  font-size:2rem;
+  font-style:italic;
+  color:var(--cream);
+}
+
+.story-quote span{
+  color:var(--pink);
+}
+
+.meet-copy .body-copy{
+  max-width:600px;
+  margin-top:27px;
+}
+
+
+/* ============================================================
+   FEATURED PROJECT
+   ============================================================ */
+
+.featured{
+  background:
+    radial-gradient(circle at 82% 50%,
+      rgba(238,45,117,.09),
+      transparent 30%),
+    #060403;
+}
+
+.featured-top{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:40px;
+  margin-bottom:55px;
+}
+
+.project{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+
+  border-top:1px solid rgba(213,161,75,.55);
+  border-bottom:1px solid rgba(213,161,75,.25);
+}
+
+.project-copy{
+  padding:60px 60px 60px 0;
+}
+
+.project-category{
+  font-size:.58rem;
+  font-weight:700;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+  color:var(--pink);
+}
+
+.project h3{
+  max-width:620px;
+  margin-top:18px;
+
+  font-family:var(--serif);
+  font-size:clamp(2.2rem,4vw,3.8rem);
+  font-weight:500;
+  line-height:1.05;
+}
+
+.project-copy p{
+  max-width:590px;
+  margin-top:23px;
+  color:var(--cream2);
+  line-height:1.85;
+}
+
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:28px;
+}
+
+.tags span{
+  padding:7px 10px;
+  border:1px solid rgba(213,161,75,.28);
+
+  font-size:.55rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+
+.project-window{
+  position:relative;
+  min-height:520px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-left:1px solid rgba(213,161,75,.20);
+
+  background:
+    linear-gradient(rgba(8,4,3,.18),rgba(8,4,3,.18)),
+    radial-gradient(circle at center,
+      rgba(238,45,117,.15),
+      transparent 37%),
+    #0c0605;
+}
+
+.monitor{
+  width:78%;
+  padding:17px;
+
+  border:1px solid rgba(213,161,75,.35);
+  background:#080605;
+
+  box-shadow:
+    0 0 0 8px rgba(213,161,75,.025),
+    0 30px 80px rgba(0,0,0,.40);
+}
+
+.monitor-top{
+  display:flex;
+  gap:5px;
+  padding-bottom:12px;
+  border-bottom:1px solid rgba(213,161,75,.15);
+}
+
+.monitor-top i{
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:var(--gold);
+}
+
+.monitor-grid{
+  display:grid;
+  grid-template-columns:.32fr .68fr;
+  gap:12px;
+  padding-top:14px;
+}
+
+.monitor-side{
+  min-height:240px;
+  border-right:1px solid rgba(213,161,75,.15);
+}
+
+.monitor-line{
+  height:5px;
+  margin:13px 18px 0 0;
+  background:rgba(216,197,174,.10);
+}
+
+.monitor-line:nth-child(2){width:65%}
+.monitor-line:nth-child(3){width:80%}
+.monitor-line:nth-child(4){width:52%}
+.monitor-line:nth-child(5){width:72%}
+
+.chart{
+  position:relative;
+  min-height:240px;
+  overflow:hidden;
+}
+
+.chart:before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background-image:
+    linear-gradient(rgba(213,161,75,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(213,161,75,.08) 1px,transparent 1px);
+
+  background-size:34px 34px;
+}
+
+.chart svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+
+
+/* ============================================================
+   BLOG
+   ============================================================ */
+
+.blog{
+  background:#0b0605;
+}
+
+.blog-head{
+  max-width:720px;
+  margin-bottom:55px;
+}
+
+.blog-head .body-copy{
+  margin-top:22px;
+  max-width:600px;
+}
+
+.article-list{
+  border-top:1px solid rgba(213,161,75,.30);
+}
+
+.article{
+  display:grid;
+  grid-template-columns:70px 1fr auto;
+  align-items:center;
+  gap:30px;
+
+  min-height:145px;
+
+  border-bottom:1px solid rgba(213,161,75,.17);
+}
+
+.article .num{
+  color:var(--gold);
+  font-family:var(--serif);
+}
+
+.article small{
+  display:block;
+  margin-bottom:7px;
+
+  color:var(--pink);
+  font-size:.54rem;
+  font-weight:700;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+}
+
+.article h3{
+  font-family:var(--serif);
+  font-size:1.75rem;
+  font-weight:500;
+}
+
+.article .read{
+  font-size:.54rem;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--cream2);
+}
+
+
+/* ============================================================
+   CURRENTLY
+   ============================================================ */
+
+.current{
+  background:
+    radial-gradient(circle at 15% 40%,
+      rgba(239,108,47,.08),
+      transparent 27%),
+    #070403;
+}
+
+.current-grid{
+  display:grid;
+  grid-template-columns:.85fr 1.15fr;
+  gap:90px;
+}
+
+.current-list{
+  border-top:1px solid rgba(213,161,75,.28);
+}
+
+.current-row{
+  display:grid;
+  grid-template-columns:140px 1fr;
+  gap:25px;
+
+  padding:24px 0;
+
+  border-bottom:1px solid rgba(213,161,75,.15);
+}
+
+.current-row span{
+  font-size:.55rem;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+
+.current-row strong{
+  font-family:var(--serif);
+  font-size:1.1rem;
+  font-weight:500;
+}
+
+
+/* ============================================================
+   LEARN
+   ============================================================ */
+
+.learn{
+  background:#090504;
+}
+
+.learn-head{
+  max-width:780px;
+  margin-bottom:55px;
+}
+
+.learn-head .body-copy{
+  max-width:650px;
+  margin-top:22px;
+}
+
+.learn-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+
+  border-top:1px solid rgba(213,161,75,.25);
+  border-left:1px solid rgba(213,161,75,.25);
+}
+
+.learn-card{
+  position:relative;
+  min-height:285px;
+  padding:35px;
+
+  border-right:1px solid rgba(213,161,75,.25);
+  border-bottom:1px solid rgba(213,161,75,.25);
+}
+
+.learn-card small{
+  color:var(--gold);
+  font-size:.54rem;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.learn-card h3{
+  margin-top:42px;
+  font-family:var(--serif);
+  font-size:1.55rem;
+  font-weight:500;
+}
+
+.learn-card p{
+  margin-top:14px;
+  color:var(--cream2);
+  font-size:.80rem;
+  line-height:1.75;
+}
+
+.learn-card:after{
+  content:"";
+  position:absolute;
+  left:35px;
+  bottom:30px;
+
+  width:48px;
+  height:1px;
+
+  background:linear-gradient(90deg,var(--pink),var(--orange));
+}
+
+
+/* ============================================================
+   VERSE BAND
+   ============================================================ */
+
+.verse-band{
+  position:relative;
+  padding:90px 0;
+  overflow:hidden;
+
+  text-align:center;
+
+  background:
+    radial-gradient(circle at 50% 50%,
+      rgba(180,28,64,.15),
+      transparent 34%),
+    linear-gradient(90deg,#080403,#160807,#080403);
+
+  border-top:1px solid rgba(213,161,75,.20);
+  border-bottom:1px solid rgba(213,161,75,.20);
+}
+
+.verse-band blockquote{
+  max-width:880px;
+  margin:auto;
+
+  font-family:var(--serif);
+  font-size:clamp(1.45rem,2.6vw,2.25rem);
+  font-style:italic;
+  line-height:1.6;
+}
+
+.verse-band cite{
+  display:block;
+  margin-top:20px;
+
+  color:var(--gold);
+
+  font-family:var(--sans);
+  font-size:.58rem;
+  font-style:normal;
+  font-weight:700;
+  letter-spacing:.22em;
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+footer{
+  padding:55px 0 32px;
+  background:#040201;
+}
+
+.footer-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+
+  padding-bottom:30px;
+  border-bottom:1px solid rgba(213,161,75,.15);
+}
+
+.footer-logo{
+  font-family:var(--script);
+  font-size:1.8rem;
+}
+
+.footer-logo span{
+  color:var(--pink);
+}
+
+.footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:25px;
+}
+
+.footer-links a{
+  font-size:.57rem;
+  font-weight:600;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--cream2);
+}
+
+.copyright{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  padding-top:25px;
+
+  color:#8d7b68;
+  font-size:.59rem;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media(max-width:1050px){
+
+  .connect{
+    display:none;
+  }
+
+  .hero-grid{
+    grid-template-columns:1fr .85fr;
+  }
+
+  .verse-card{
+    right:4%;
+    width:280px;
+  }
+
+  .learn-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:850px){
+
+  .nav{
+    padding:18px 0;
+    flex-direction:column;
+    gap:15px;
+  }
+
+  nav{
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px 23px;
+  }
+
+  nav a{
+    padding:5px 0 10px;
+  }
+
+  nav a:after{
+    bottom:3px;
+  }
+
+  .hero{
+    min-height:auto;
+  }
+
+  .hero-grid{
+    min-height:auto;
+    grid-template-columns:1fr;
+    padding:80px 0 470px;
+  }
+
+  .hero-copy{
+    padding:0;
+  }
+
+  .hero-art{
+    width:760px;
+    max-width:none;
+    height:520px;
+
+    right:50%;
+    top:auto;
+    bottom:-20px;
+
+    transform:translateX(62%);
+  }
+
+  .verse-card{
+    top:auto;
+    bottom:350px;
+    right:7%;
+    width:300px;
+  }
+
+  .meet-grid,
+  .current-grid{
+    grid-template-columns:1fr;
+    gap:55px;
+  }
+
+  .project{
+    grid-template-columns:1fr;
+  }
+
+  .project-copy{
+    padding-right:0;
+  }
+
+  .project-window{
+    border-left:0;
+    border-top:1px solid rgba(213,161,75,.20);
+  }
+
+  .learn-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:600px){
+
+  .wrap{
+    width:88%;
+  }
+
+  .logo-copy span{
+    display:none;
+  }
+
+  nav{
+    gap:9px 15px;
+  }
+
+  nav a{
+    font-size:.55rem;
+  }
+
+  .hero-grid{
+    padding-top:65px;
+    padding-bottom:430px;
+  }
+
+  .hero h1{
+    font-size:clamp(4rem,18vw,5.5rem);
+  }
+
+  .intro{
+    font-size:1rem;
+  }
+
+  .actions{
+    flex-direction:column;
+  }
+
+  .btn{
+    width:100%;
+  }
+
+  .hero-art{
+    width:650px;
+    height:450px;
+    transform:translateX(63%);
+  }
+
+  .verse-card{
+    width:84%;
+    left:8%;
+    right:auto;
+    bottom:320px;
+  }
+
+  .section{
+    padding:85px 0;
+  }
+
+  .story-art{
+    min-height:340px;
+  }
+
+  .story-frame{
+    right:0;
+  }
+
+  .story-quote{
+    font-size:1.6rem;
+  }
+
+  .featured-top{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .project-window{
+    min-height:390px;
+  }
+
+  .article{
+    grid-template-columns:35px 1fr;
+    gap:15px;
+    padding:25px 0;
+  }
+
+  .article .read{
+    display:none;
+  }
+
+  .current-row{
+    grid-template-columns:1fr;
+    gap:7px;
+  }
+
+  .learn-grid{
+    grid-template-columns:1fr;
+  }
+
+  .footer-top,
+  .copyright{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+
+</style>
 </head>
-
 
 <body>
 
 
-  <!-- =======================================================
-       NAVIGATION
-       ======================================================= -->
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
 
-  <header class="site-header">
+<header>
 
-    <div class="nav-inner">
+  <div class="wrap nav">
 
-      <a href="index.html"
-         class="brand"
-         aria-label="Dee's Cyber Corner Home">
+    <a class="logo" href="index.html">
 
-        <span class="brand-mark"
-              aria-hidden="true"></span>
+      <svg class="logo-butterfly"
+           viewBox="0 0 80 60"
+           aria-hidden="true">
 
-        <span class="brand-name">
-          Dee's <span>Cyber Corner</span>
-        </span>
+        <path d="M38 29C29 3 4 3 5 20c1 14 18 24 33 17"
+              fill="#c83263"
+              stroke="#d5a14b"
+              stroke-width="2"/>
+
+        <path d="M42 29C51 3 76 3 75 20c-1 14-18 24-33 17"
+              fill="#e7652e"
+              stroke="#d5a14b"
+              stroke-width="2"/>
+
+        <path d="M40 20v28"
+              stroke="#d5a14b"
+              stroke-width="3"/>
+
+      </svg>
+
+      <span class="logo-copy">
+        <strong>Dee's</strong>
+        <span>CYBER CORNER</span>
+      </span>
+
+    </a>
+
+
+    <nav aria-label="Main navigation">
+
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="labs.html">Projects</a>
+      <a href="learn.html">Learn</a>
+      <a href="blog.html">Blog</a>
+
+    </nav>
+
+
+    <a class="connect" href="#footer">
+      Let's Connect
+    </a>
+
+  </div>
+
+</header>
+
+
+
+<main>
+
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
+<section class="hero">
+
+  <div class="wrap hero-grid">
+
+    <div class="hero-copy">
+
+      <p class="kicker">
+        Welcome to my corner of cybersecurity
+      </p>
+
+      <h1>
+        <span>Dee's</span>
+        <em>Cyber Corner</em>
+      </h1>
+
+      <p class="tagline">
+        Learning <b>•</b>
+        Building <b>•</b>
+        Sharing <b>•</b>
+        Growing
+      </p>
+
+      <p class="intro">
+        A place where cybersecurity, faith, and purpose meet.
+        I'm documenting my journey, sharing what I'm building,
+        and leaving something useful behind for the next person
+        coming behind me.
+      </p>
+
+      <div class="actions">
+
+        <a class="btn btn-primary"
+           href="labs.html">
+          Explore My Work
+        </a>
+
+        <a class="btn btn-outline"
+           href="#meet">
+          Get to Know Dee
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="verse-card">
+
+    <p>
+      “If you have faith as small as a mustard seed,
+      you can say to this mountain, ‘Move from here
+      to there,’ and it will move.”
+    </p>
+
+    <span>MATTHEW 17:20</span>
+
+  </div>
+
+
+  <!--
+       ORIGINAL INLINE ARTWORK
+       Decorative only — NOT technical/project evidence.
+  -->
+
+  <div class="hero-art" aria-hidden="true">
+
+    <svg viewBox="0 0 760 790"
+         preserveAspectRatio="xMidYMid slice">
+
+      <defs>
+
+        <radialGradient id="heroGlow">
+          <stop offset="0" stop-color="#ee2d75" stop-opacity=".38"/>
+          <stop offset=".45" stop-color="#a91d3b" stop-opacity=".13"/>
+          <stop offset="1" stop-color="#050302" stop-opacity="0"/>
+        </radialGradient>
+
+        <linearGradient id="leftWing"
+                        x1="0" y1="0"
+                        x2="1" y2="1">
+
+          <stop offset="0" stop-color="#190806"/>
+          <stop offset=".22" stop-color="#b51e45"/>
+          <stop offset=".57" stop-color="#f23878"/>
+          <stop offset=".82" stop-color="#ef6c2f"/>
+          <stop offset="1" stop-color="#5c160d"/>
+
+        </linearGradient>
+
+        <linearGradient id="rightWing"
+                        x1="1" y1="0"
+                        x2="0" y2="1">
+
+          <stop offset="0" stop-color="#190806"/>
+          <stop offset=".22" stop-color="#b51e45"/>
+          <stop offset=".57" stop-color="#f23878"/>
+          <stop offset=".82" stop-color="#ef6c2f"/>
+          <stop offset="1" stop-color="#5c160d"/>
+
+        </linearGradient>
+
+        <radialGradient id="flower">
+          <stop offset="0" stop-color="#ff6a96"/>
+          <stop offset=".28" stop-color="#d72866"/>
+          <stop offset=".72" stop-color="#941c3b"/>
+          <stop offset="1" stop-color="#3b0a13"/>
+        </radialGradient>
+
+        <linearGradient id="leaf"
+                        x1="0" y1="0"
+                        x2="1" y2="1">
+          <stop offset="0" stop-color="#435326"/>
+          <stop offset=".55" stop-color="#18200f"/>
+          <stop offset="1" stop-color="#070b05"/>
+        </linearGradient>
+
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="16"/>
+        </filter>
+
+      </defs>
+
+
+      <!-- warm light -->
+
+      <circle cx="430"
+              cy="390"
+              r="300"
+              fill="url(#heroGlow)"/>
+
+
+      <!-- fine orbit -->
+
+      <circle cx="430"
+              cy="380"
+              r="240"
+              fill="none"
+              stroke="#d5a14b"
+              stroke-opacity=".18"/>
+
+      <circle cx="430"
+              cy="380"
+              r="195"
+              fill="none"
+              stroke="#ee2d75"
+              stroke-opacity=".14"
+              stroke-dasharray="4 7"/>
+
+
+      <!-- leaves left -->
+
+      <g opacity=".82">
+
+        <path d="M125 410
+                 C30 350 25 260 130 292
+                 C191 311 196 370 125 410Z"
+              fill="url(#leaf)"
+              stroke="#8f7633"
+              stroke-opacity=".38"/>
+
+        <path d="M123 407L65 320"
+              fill="none"
+              stroke="#c59b47"
+              stroke-opacity=".26"/>
+
+        <path d="M140 520
+                 C46 492 34 412 121 424
+                 C187 433 199 487 140 520Z"
+              fill="url(#leaf)"
+              stroke="#8f7633"
+              stroke-opacity=".34"/>
+
+      </g>
+
+
+      <!-- leaves right -->
+
+      <g opacity=".92">
+
+        <path d="M580 545
+                 C696 468 741 525 674 590
+                 C628 635 584 605 580 545Z"
+              fill="url(#leaf)"
+              stroke="#9b7d38"
+              stroke-opacity=".40"/>
+
+        <path d="M615 621
+                 C720 577 755 646 674 694
+                 C623 724 592 687 615 621Z"
+              fill="url(#leaf)"
+              stroke="#9b7d38"
+              stroke-opacity=".35"/>
+
+        <path d="M584 552L689 530"
+              fill="none"
+              stroke="#d5a14b"
+              stroke-opacity=".25"/>
+
+      </g>
+
+
+      <!-- hibiscus left -->
+
+      <g transform="translate(116 585) rotate(-15)">
+
+        <ellipse rx="56"
+                 ry="32"
+                 transform="rotate(0)"
+                 fill="url(#flower)"/>
+
+        <ellipse rx="56"
+                 ry="32"
+                 transform="rotate(72)"
+                 fill="url(#flower)"/>
+
+        <ellipse rx="56"
+                 ry="32"
+                 transform="rotate(144)"
+                 fill="url(#flower)"/>
+
+        <ellipse rx="56"
+                 ry="32"
+                 transform="rotate(216)"
+                 fill="url(#flower)"/>
+
+        <ellipse rx="56"
+                 ry="32"
+                 transform="rotate(288)"
+                 fill="url(#flower)"/>
+
+        <circle r="15"
+                fill="#ef6c2f"/>
+
+        <path d="M0 0L76 -25"
+              stroke="#e9bb62"
+              stroke-width="3"/>
+
+        <circle cx="77"
+                cy="-25"
+                r="5"
+                fill="#f8d47f"/>
+
+      </g>
+
+
+      <!-- hibiscus lower right -->
+
+      <g transform="translate(650 655) rotate(14)">
+
+        <ellipse rx="66"
+                 ry="36"
+                 fill="url(#flower)"/>
+
+        <ellipse rx="66"
+                 ry="36"
+                 transform="rotate(72)"
+                 fill="url(#flower)"/>
+
+        <ellipse rx="66"
+                 ry="36"
+                 transform="rotate(144)"
+                 fill="url(#flower)"/>
+
+        <ellipse rx="66"
+                 ry="36"
+                 transform="rotate(216)"
+                 fill="url(#flower)"/>
+
+        <ellipse rx="66"
+                 ry="36"
+                 transform="rotate(288)"
+                 fill="url(#flower)"/>
+
+        <circle r="17"
+                fill="#ef6c2f"/>
+
+      </g>
+
+
+      <!-- glow behind butterfly -->
+
+      <ellipse cx="435"
+               cy="385"
+               rx="180"
+               ry="165"
+               fill="#ee2d75"
+               opacity=".14"
+               filter="url(#glow)"/>
+
+
+      <!-- MONARCH -->
+
+      <g transform="translate(430 370)">
+
+
+        <!-- LEFT UPPER WING -->
+
+        <path d="
+          M-12 -8
+          C-58 -132 -205 -181 -224 -78
+          C-241 16 -144 91 -35 63
+          C-16 43 -7 16 -12 -8Z"
+
+          fill="url(#leftWing)"
+          stroke="#d5a14b"
+          stroke-width="4"/>
+
+
+        <!-- RIGHT UPPER WING -->
+
+        <path d="
+          M12 -8
+          C58 -132 205 -181 224 -78
+          C241 16 144 91 35 63
+          C16 43 7 16 12 -8Z"
+
+          fill="url(#rightWing)"
+          stroke="#d5a14b"
+          stroke-width="4"/>
+
+
+        <!-- LEFT LOWER WING -->
+
+        <path d="
+          M-25 42
+          C-125 70 -181 156 -111 203
+          C-53 240 -6 146 -4 72
+          C-8 56 -15 47 -25 42Z"
+
+          fill="url(#leftWing)"
+          stroke="#d5a14b"
+          stroke-width="4"/>
+
+
+        <!-- RIGHT LOWER WING -->
+
+        <path d="
+          M25 42
+          C125 70 181 156 111 203
+          C53 240 6 146 4 72
+          C8 56 15 47 25 42Z"
+
+          fill="url(#rightWing)"
+          stroke="#d5a14b"
+          stroke-width="4"/>
+
+
+        <!-- monarch vein network -->
+
+        <g fill="none"
+           stroke="#32100e"
+           stroke-width="5"
+           opacity=".78">
+
+          <path d="M-12 -2L-185 -90"/>
+          <path d="M-20 10L-196 -25"/>
+          <path d="M-24 27L-150 48"/>
+          <path d="M-30 48L-92 176"/>
+
+          <path d="M12 -2L185 -90"/>
+          <path d="M20 10L196 -25"/>
+          <path d="M24 27L150 48"/>
+          <path d="M30 48L92 176"/>
+
+        </g>
+
+
+        <!-- circuit detailing -->
+
+        <g fill="none"
+           stroke="#f0c675"
+           stroke-width="2"
+           opacity=".48">
+
+          <path d="M-44 -30
+                   L-92 -54
+                   L-123 -35
+                   L-151 -51"/>
+
+          <path d="M44 -30
+                   L92 -54
+                   L123 -35
+                   L151 -51"/>
+
+          <path d="M-42 68
+                   L-83 91
+                   L-103 130"/>
+
+          <path d="M42 68
+                   L83 91
+                   L103 130"/>
+
+        </g>
+
+
+        <!-- circuit nodes -->
+
+        <g fill="#f4c969">
+
+          <circle cx="-92" cy="-54" r="4"/>
+          <circle cx="-151" cy="-51" r="4"/>
+          <circle cx="92" cy="-54" r="4"/>
+          <circle cx="151" cy="-51" r="4"/>
+
+          <circle cx="-83" cy="91" r="4"/>
+          <circle cx="83" cy="91" r="4"/>
+
+        </g>
+
+
+        <!-- wing spots -->
+
+        <g fill="#f8ead6" opacity=".78">
+
+          <circle cx="-175" cy="-75" r="7"/>
+          <circle cx="-196" cy="-48" r="5"/>
+          <circle cx="-183" cy="1" r="6"/>
+          <circle cx="-137" cy="68" r="5"/>
+
+          <circle cx="175" cy="-75" r="7"/>
+          <circle cx="196" cy="-48" r="5"/>
+          <circle cx="183" cy="1" r="6"/>
+          <circle cx="137" cy="68" r="5"/>
+
+        </g>
+
+
+        <!-- body -->
+
+        <ellipse cx="0"
+                 cy="25"
+                 rx="13"
+                 ry="72"
+                 fill="#1b0d09"
+                 stroke="#d5a14b"
+                 stroke-width="2"/>
+
+        <circle cx="0"
+                cy="-49"
+                r="12"
+                fill="#1b0d09"
+                stroke="#d5a14b"
+                stroke-width="2"/>
+
+
+        <!-- antenna -->
+
+        <path d="M-5 -57
+                 C-30 -105 -48 -105 -62 -120"
+
+              fill="none"
+              stroke="#d5a14b"
+              stroke-width="2"/>
+
+        <path d="M5 -57
+                 C30 -105 48 -105 62 -120"
+
+              fill="none"
+              stroke="#d5a14b"
+              stroke-width="2"/>
+
+      </g>
+
+
+      <!-- tiny circuit traces -->
+
+      <g stroke="#d5a14b"
+         stroke-width="1"
+         fill="none"
+         opacity=".22">
+
+        <path d="M490 130H620V185H688"/>
+        <path d="M530 190H670"/>
+        <path d="M205 655H285V720H370"/>
+
+      </g>
+
+    </svg>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     MEET DEE
+     ========================================================= -->
+
+<section class="section meet" id="meet">
+
+  <div class="wrap meet-grid">
+
+    <div class="story-art">
+
+      <div class="story-frame"></div>
+
+      <div class="story-quote">
+        Faith fuels
+        <span>progress.</span>
+      </div>
+
+    </div>
+
+
+    <div class="meet-copy">
+
+      <p class="section-label">
+        Meet Dee
+      </p>
+
+      <h2 class="section-title">
+        The heart behind
+        <em>this corner.</em>
+      </h2>
+
+      <p class="body-copy">
+        My path into cybersecurity wasn't perfectly linear,
+        and that's part of why this space exists. Dee's Cyber
+        Corner documents what I'm learning, what I'm building,
+        where I've been, and where I'm going.
+      </p>
+
+      <p class="body-copy" style="margin-top:16px;">
+        This is more than a place to list projects. It's a
+        growing record of curiosity, technical development,
+        persistence, faith, and giving back.
+      </p>
+
+      <a href="about.html" class="link">
+        Read My Story →
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FEATURED PROJECT
+     ========================================================= -->
+
+<section class="section featured">
+
+  <div class="wrap">
+
+    <div class="featured-top">
+
+      <div>
+
+        <p class="section-label">
+          Featured Project
+        </p>
+
+        <h2 class="section-title">
+          Built to <em>detect.</em>
+        </h2>
+
+      </div>
+
+      <a href="labs.html" class="link">
+        Explore Projects →
+      </a>
+
+    </div>
+
+
+    <article class="project">
+
+      <div class="project-copy">
+
+        <p class="project-category">
+          Security Operations • Cloud Security
+        </p>
+
+        <h3>
+          Cloud-Based SOC Monitoring
+          & Threat Detection
+        </h3>
+
+        <p>
+          Built and tested a cloud-based security monitoring
+          environment to detect unauthorized login attempts
+          and brute-force activity.
+        </p>
+
+        <div class="tags">
+          <span>Microsoft Azure</span>
+          <span>Sentinel</span>
+          <span>KQL</span>
+          <span>Log Analytics</span>
+          <span>SIEM</span>
+        </div>
+
+        <a href="projects/azure-sentinel-soc.html"
+           class="link">
+          View Case Study →
+        </a>
+
+      </div>
+
+
+      <div class="project-window"
+           aria-label="Stylized security monitoring preview">
+
+        <div class="monitor">
+
+          <div class="monitor-top">
+            <i></i><i></i><i></i>
+          </div>
+
+          <div class="monitor-grid">
+
+            <div class="monitor-side">
+              <div class="monitor-line"></div>
+              <div class="monitor-line"></div>
+              <div class="monitor-line"></div>
+              <div class="monitor-line"></div>
+              <div class="monitor-line"></div>
+            </div>
+
+            <div class="chart">
+
+              <svg viewBox="0 0 500 250"
+                   preserveAspectRatio="none"
+                   aria-hidden="true">
+
+                <polyline
+                  points="0,200 55,190 95,205 145,130 190,165 235,70 285,115 330,45 380,100 430,55 500,85"
+                  fill="none"
+                  stroke="#ee2d75"
+                  stroke-width="4"/>
+
+                <polyline
+                  points="0,220 70,205 130,210 185,185 240,190 300,155 355,170 415,130 500,145"
+                  fill="none"
+                  stroke="#d5a14b"
+                  stroke-width="2"
+                  opacity=".72"/>
+
+              </svg>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     BLOG
+     ========================================================= -->
+
+<section class="section blog">
+
+  <div class="wrap">
+
+    <div class="blog-head">
+
+      <p class="section-label">
+        From Dee's Corner
+      </p>
+
+      <h2 class="section-title">
+        The journey behind
+        <em>the work.</em>
+      </h2>
+
+      <p class="body-copy">
+        Thoughts from navigating cybersecurity, career growth,
+        learning, breaking into the industry, and everything
+        in between.
+      </p>
+
+    </div>
+
+
+    <div class="article-list">
+
+      <a href="blog.html" class="article">
+
+        <span class="num">01</span>
+
+        <div>
+          <small>My Journey</small>
+          <h3>How I Broke Into Cybersecurity</h3>
+        </div>
+
+        <span class="read">Read Soon</span>
 
       </a>
 
 
-      <nav class="site-nav"
-           aria-label="Main navigation">
+      <a href="blog.html" class="article">
 
-        <a href="index.html"
-           class="active">
-          Home
-        </a>
-
-        <a href="about.html">
-          About
-        </a>
-
-        <a href="labs.html">
-          Projects
-        </a>
-
-        <a href="learn.html">
-          Learn
-        </a>
-
-        <a href="blog.html">
-          Blog
-        </a>
-
-      </nav>
-
-    </div>
-
-  </header>
-
-
-  <main>
-
-
-    <!-- =====================================================
-         HERO
-         ===================================================== -->
-
-    <section class="hero">
-
-      <div class="hero-inner">
-
-
-        <div class="hero-copy-wrap">
-
-          <p class="eyebrow">
-            Welcome to my corner of cybersecurity
-          </p>
-
-
-          <h1>
-
-            <span class="dee">
-              Dee's
-            </span>
-
-            <span class="corner">
-              Cyber Corner
-            </span>
-
-          </h1>
-
-
-          <p class="hero-tagline">
-
-            Learning
-
-            <span>•</span>
-
-            Documenting
-
-            <span>•</span>
-
-            Growing
-
-          </p>
-
-
-          <p class="hero-copy">
-
-            A space where cybersecurity, curiosity,
-            career growth, faith, and real life meet.
-
-          </p>
-
-
-          <div class="hero-actions">
-
-            <a href="#featured-project"
-               class="button button-primary">
-
-              Explore My Work
-
-            </a>
-
-
-            <a href="#meet-dee"
-               class="button button-secondary">
-
-              Meet Dee
-
-            </a>
-
-          </div>
-
-        </div>
-
-
-        <!--
-          Decorative homepage artwork.
-          This is branding only — never project evidence.
-        -->
-
-        <div class="hero-art"
-             aria-hidden="true">
-
-          <div class="art-orbit">
-
-
-            <div class="butterfly">
-
-              <span class="wing wing-left"></span>
-
-              <span class="wing wing-right"></span>
-
-              <span class="butterfly-body"></span>
-
-            </div>
-
-
-            <span class="botanical botanical-one"></span>
-
-            <span class="botanical botanical-two"></span>
-
-          </div>
-
-        </div>
-
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         FAITH
-         ===================================================== -->
-
-    <section class="faith-strip">
-
-      <p>
-
-        “If you have faith as small as a mustard seed,
-        you can say to this mountain, ‘Move from here to there,’
-        and it will move.”
-
-        <strong>
-          Matthew 17:20
-        </strong>
-
-      </p>
-
-    </section>
-
-
-    <!-- =====================================================
-         MEET DEE
-         ===================================================== -->
-
-    <section class="section meet"
-             id="meet-dee">
-
-      <div class="shell meet-grid">
-
-
-        <div class="meet-art">
-
-          <span class="meet-art-label">
-            The person behind the corner
-          </span>
-
-          <!--
-            HEADSHOT LATER:
-
-            When you're ready, this area can become:
-
-            <img
-              src="assets/dee-headshot.jpg"
-              alt="Dee"
-              class="dee-headshot"
-            >
-
-            We are intentionally NOT adding it yet.
-          -->
-
-          <p class="headshot-later">
-            Personal photography will live here later.
-          </p>
-
-        </div>
-
-
-        <div class="meet-copy">
-
-          <p class="section-kicker">
-            Meet Dee
-          </p>
-
-
-          <h2 class="section-title">
-
-            My path wasn't
-            <em>perfectly linear.</em>
-
-          </h2>
-
-
-          <p class="section-copy">
-
-            Dee's Cyber Corner is where I document the
-            journey — what I'm learning, what I'm building,
-            the lessons I've picked up along the way, and
-            where I'm headed next.
-
-          </p>
-
-
-          <p class="section-copy">
-
-            This space isn't only about showing finished
-            work. It's about growth, curiosity, hands-on
-            learning, and sharing something useful with
-            the person coming behind me.
-
-          </p>
-
-
-          <a href="about.html"
-             class="text-link">
-
-            Read My Story →
-
-          </a>
-
-        </div>
-
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         FEATURED PROJECT
-         ===================================================== -->
-
-    <section class="section featured"
-             id="featured-project">
-
-      <div class="shell">
-
-
-        <div class="featured-heading">
-
-          <div>
-
-            <p class="section-kicker">
-              From the Lab
-            </p>
-
-            <h2 class="section-title">
-              Featured <em>Project.</em>
-            </h2>
-
-          </div>
-
-
-          <a href="labs.html"
-             class="text-link">
-
-            View All Projects →
-
-          </a>
-
-        </div>
-
-
-        <article class="project-feature">
-
-
-          <div class="project-content">
-
-            <span class="project-number">
-              01
-            </span>
-
-
-            <h3>
-
-              Cloud-Based SOC Monitoring
-              & Threat Detection
-
-            </h3>
-
-
-            <p>
-
-              Built and tested a cloud-based security
-              monitoring environment using Microsoft Azure
-              and Microsoft Sentinel to detect unauthorized
-              login attempts and brute-force activity.
-
-            </p>
-
-
-            <div class="project-tags">
-
-              <span>Microsoft Azure</span>
-
-              <span>Microsoft Sentinel</span>
-
-              <span>KQL</span>
-
-              <span>Log Analytics</span>
-
-              <span>SIEM</span>
-
-              <span>Detection Engineering</span>
-
-            </div>
-
-
-            <a href="projects/azure-sentinel-soc.html"
-               class="text-link">
-
-              View Case Study →
-
-            </a>
-
-          </div>
-
-
-          <div class="project-visual"
-               aria-label="Simplified Sentinel project architecture">
-
-            <div class="architecture">
-
-              <div class="arch-node">
-                Windows VM
-              </div>
-
-              <span class="arch-line"></span>
-
-              <div class="arch-node">
-                Security Logs
-              </div>
-
-              <span class="arch-line"></span>
-
-              <div class="arch-node">
-                Sentinel
-              </div>
-
-              <span class="arch-line"></span>
-
-              <div class="arch-node">
-                KQL
-              </div>
-
-              <span class="arch-line"></span>
-
-              <div class="arch-node">
-                Incident
-              </div>
-
-            </div>
-
-          </div>
-
-
-        </article>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         FROM DEE'S CORNER
-         ===================================================== -->
-
-    <section class="section journal">
-
-      <div class="shell">
-
-
-        <div class="journal-intro">
-
-          <p class="section-kicker">
-            From Dee's Corner
-          </p>
-
-
-          <h2 class="section-title">
-
-            More than a
-            <em>portfolio.</em>
-
-          </h2>
-
-
-          <p class="section-copy">
-
-            Thoughts on cybersecurity, breaking into tech,
-            navigating the job market, learning in public,
-            career growth, and the things I wish someone
-            had told me sooner.
-
-          </p>
-
-        </div>
-
-
-        <div class="journal-list">
-
-
-          <a href="blog.html"
-             class="journal-item">
-
-            <span class="journal-number">
-              01
-            </span>
-
-            <div class="journal-text">
-
-              <small>
-                My Journey
-              </small>
-
-              <h3>
-                How I Broke Into Cybersecurity
-              </h3>
-
-            </div>
-
-            <span class="journal-status">
-              Coming Soon
-            </span>
-
-          </a>
-
-
-          <a href="blog.html"
-             class="journal-item">
-
-            <span class="journal-number">
-              02
-            </span>
-
-            <div class="journal-text">
-
-              <small>
-                Career
-              </small>
-
-              <h3>
-                What the Cybersecurity Job Market Taught Me
-              </h3>
-
-            </div>
-
-            <span class="journal-status">
-              Coming Soon
-            </span>
-
-          </a>
-
-
-          <a href="blog.html"
-             class="journal-item">
-
-            <span class="journal-number">
-              03
-            </span>
-
-            <div class="journal-text">
-
-              <small>
-                Resources
-              </small>
-
-              <h3>
-                Resources That Actually Helped Me
-              </h3>
-
-            </div>
-
-            <span class="journal-status">
-              Coming Soon
-            </span>
-
-          </a>
-
-
-        </div>
-
-
-        <a href="blog.html"
-           class="text-link">
-
-          Visit the Blog →
-
-        </a>
-
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         LEARN WITH DEE
-         ===================================================== -->
-
-    <section class="section learn">
-
-      <div class="shell">
-
-
-        <div class="learn-header">
-
-          <p class="section-kicker">
-            Learn With Dee
-          </p>
-
-
-          <h2 class="section-title">
-
-            Cybersecurity doesn't have to
-            <em>sound complicated.</em>
-
-          </h2>
-
-
-          <p class="section-copy">
-
-            I'm building the kind of learning corner I
-            would've wanted while figuring things out:
-            concepts in plain language, interactive practice,
-            study notes, and resources I actually used.
-
-          </p>
-
-        </div>
-
-
-        <div class="learn-grid">
-
-
-          <a href="learn.html"
-             class="learn-item">
-
-            <small>
-              Interactive
-            </small>
-
-            <h3>
-              Cyber Terms
-            </h3>
-
-            <p>
-
-              Acronyms, terminology, and an interactive
-              practice experience designed to make the
-              language of cybersecurity easier to remember.
-
-            </p>
-
-          </a>
-
-
-          <a href="learn.html"
-             class="learn-item">
-
-            <small>
-              Study With Me
-            </small>
-
-            <h3>
-              Notes & Guides
-            </h3>
-
-            <p>
-
-              Concepts I'm learning translated into my own
-              words, with useful notes I can return to later.
-
-            </p>
-
-          </a>
-
-
-          <a href="learn.html"
-             class="learn-item">
-
-            <small>
-              Understand
-            </small>
-
-            <h3>
-              Security Basics
-            </h3>
-
-            <p>
-
-              Straightforward explanations of security
-              operations, IAM, cloud security, detection,
-              incident response, and more.
-
-            </p>
-
-          </a>
-
-
-          <a href="blog.html"
-             class="learn-item">
-
-            <small>
-              Give Back
-            </small>
-
-            <h3>
-              Career Resources
-            </h3>
-
-            <p>
-
-              Resources, lessons, and experiences that helped
-              me navigate learning, certifications, interviews,
-              and breaking into cybersecurity.
-
-            </p>
-
-          </a>
-
-
-        </div>
-
-
-        <a href="learn.html"
-           class="text-link">
-
-          Enter the Learning Corner →
-
-        </a>
-
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         CURRENTLY
-         ===================================================== -->
-
-    <section class="section currently">
-
-      <div class="shell currently-grid">
-
+        <span class="num">02</span>
 
         <div>
-
-          <p class="section-kicker">
-            Currently in My Cyber World
-          </p>
-
-
-          <h2 class="section-title">
-
-            Always
-            <em>growing.</em>
-
-          </h2>
-
+          <small>Career</small>
+          <h3>The Cybersecurity Job Market</h3>
         </div>
 
+        <span class="read">Read Soon</span>
 
-        <div class="current-list">
-
-
-          <div class="current-row">
-
-            <span>
-              Learning
-            </span>
-
-            <strong>
-              Graduate-level cybersecurity studies
-            </strong>
-
-          </div>
+      </a>
 
 
-          <div class="current-row">
+      <a href="blog.html" class="article">
 
-            <span>
-              Exploring
-            </span>
+        <span class="num">03</span>
 
-            <strong>
-              Security Engineering + AI Security
-            </strong>
-
-          </div>
-
-
-          <div class="current-row">
-
-            <span>
-              Building
-            </span>
-
-            <strong>
-              Dee's Cyber Corner
-            </strong>
-
-          </div>
-
-
-          <div class="current-row">
-
-            <span>
-              Documenting
-            </span>
-
-            <strong>
-              Labs, technical learning & career lessons
-            </strong>
-
-          </div>
-
-
+        <div>
+          <small>Resources</small>
+          <h3>Resources That Actually Helped Me</h3>
         </div>
 
+        <span class="read">Read Soon</span>
 
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         CLOSING
-         ===================================================== -->
-
-    <section class="section closing">
-
-      <div class="shell closing-inner">
-
-
-        <p class="section-kicker">
-          A Note From Dee
-        </p>
-
-
-        <h2 class="section-title">
-
-          Learn something.
-          <br>
-
-          <em>Build something.</em>
-          <br>
-
-          Share something.
-
-        </h2>
-
-
-        <p>
-
-          I created this corner to document my growth,
-          but also to leave something useful behind.
-          If something I've learned can make someone else's
-          path a little easier, then this space is doing
-          exactly what I created it to do.
-
-        </p>
-
-
-        <div class="closing-mantra">
-
-          Faith • Curiosity • Growth • Community
-
-        </div>
-
-
-      </div>
-
-    </section>
-
-
-  </main>
-
-
-  <!-- =======================================================
-       FOOTER
-       ======================================================= -->
-
-  <footer class="footer">
-
-    <div class="shell">
-
-
-      <div class="footer-top">
-
-        <a href="index.html"
-           class="footer-brand">
-
-          Dee's <span>Cyber Corner</span>
-
-        </a>
-
-
-        <div class="footer-links">
-
-          <a href="index.html">
-            Home
-          </a>
-
-          <a href="about.html">
-            About
-          </a>
-
-          <a href="labs.html">
-            Projects
-          </a>
-
-          <a href="learn.html">
-            Learn
-          </a>
-
-          <a href="blog.html">
-            Blog
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <div class="footer-bottom">
-
-        <span>
-          © 2026 Dee's Cyber Corner
-        </span>
-
-        <span class="footer-verse">
-          Faith as small as a mustard seed • Matthew 17:20
-        </span>
-
-      </div>
-
+      </a>
 
     </div>
 
-  </footer>
+
+    <a href="blog.html" class="link">
+      Visit the Blog →
+    </a>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CURRENTLY
+     ========================================================= -->
+
+<section class="section current">
+
+  <div class="wrap current-grid">
+
+    <div>
+
+      <p class="section-label">
+        Currently in My Cyber World
+      </p>
+
+      <h2 class="section-title">
+        Learning.
+        Building.
+        <em>Growing.</em>
+      </h2>
+
+    </div>
+
+
+    <div class="current-list">
+
+      <div class="current-row">
+        <span>Learning</span>
+        <strong>
+          Master's Studies • Security Engineering • AI + Security
+        </strong>
+      </div>
+
+      <div class="current-row">
+        <span>Building</span>
+        <strong>
+          Dee's Cyber Corner • New Cyber Labs • Technical Resources
+        </strong>
+      </div>
+
+      <div class="current-row">
+        <span>Exploring</span>
+        <strong>
+          AI Security • Security Engineering • Threat Intelligence
+        </strong>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     LEARN WITH DEE
+     ========================================================= -->
+
+<section class="section learn">
+
+  <div class="wrap">
+
+    <div class="learn-head">
+
+      <p class="section-label">
+        Learn With Dee
+      </p>
+
+      <h2 class="section-title">
+        Cybersecurity,
+        <em>simplified.</em>
+      </h2>
+
+      <p class="body-copy">
+        Cybersecurity doesn't have to sound complicated.
+        Things I've learned, simplified and shared for the
+        person coming behind me.
+      </p>
+
+    </div>
+
+
+    <div class="learn-grid">
+
+      <a href="learn.html" class="learn-card">
+
+        <small>Cyber Terms</small>
+
+        <h3>Acronym Game</h3>
+
+        <p>
+          Practice cybersecurity terminology in a way
+          that's easier to remember.
+        </p>
+
+      </a>
+
+
+      <a href="learn.html" class="learn-card">
+
+        <small>Study With Me</small>
+
+        <h3>Notes & Guides</h3>
+
+        <p>
+          Study notes, technical concepts and guides
+          translated into my own language.
+        </p>
+
+      </a>
+
+
+      <a href="learn.html" class="learn-card">
+
+        <small>Security Basics</small>
+
+        <h3>Simple Explainers</h3>
+
+        <p>
+          Security concepts without making everything
+          sound more complicated than it needs to be.
+        </p>
+
+      </a>
+
+
+      <a href="blog.html" class="learn-card">
+
+        <small>Career Resources</small>
+
+        <h3>What Helped Me</h3>
+
+        <p>
+          Resources and lessons I used while learning
+          and navigating cybersecurity.
+        </p>
+
+      </a>
+
+    </div>
+
+
+    <a href="learn.html" class="link">
+      Enter the Learning Corner →
+    </a>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     VERSE
+     ========================================================= -->
+
+<section class="verse-band">
+
+  <div class="wrap">
+
+    <blockquote>
+      “If you have faith as small as a mustard seed,
+      you can say to this mountain, ‘Move from here to there,’
+      and it will move.”
+    </blockquote>
+
+    <cite>
+      MATTHEW 17:20
+    </cite>
+
+  </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer id="footer">
+
+  <div class="wrap">
+
+    <div class="footer-top">
+
+      <a href="index.html" class="footer-logo">
+        Dee's <span>Cyber Corner</span>
+      </a>
+
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="labs.html">Projects</a>
+        <a href="learn.html">Learn</a>
+        <a href="blog.html">Blog</a>
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+      <span>
+        © 2026 Dee's Cyber Corner
+      </span>
+
+      <span>
+        Learning • Building • Sharing • Growing
+      </span>
+
+    </div>
+
+  </div>
+
+</footer>
 
 
 </body>
