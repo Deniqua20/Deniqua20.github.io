@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dee’s Blog Collection Examples</title>
+    <link
+      rel="stylesheet"
+      href="../assets/css/site.css?v=blog-collection-preview-1"
+    />
+    <style>
+      body {
+        background: #0a0806;
+        color: #f5ead7;
+        margin: 0;
+      }
+      .preview-controls {
+        text-align: center;
+        padding: 23px 5%;
+        border-bottom: 1px solid #d9ad5933;
+        background: #100b08;
+      }
+      .preview-controls p {
+        font-size: 14px;
+        color: #cbbba5;
+        margin: 0 0 15px;
+      }
+      .preview-controls nav {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .preview-controls button {
+        font: 500 14px var(--sans);
+        padding: 12px 18px;
+        border: 1px solid #d9ad5933;
+        border-radius: 6px;
+        background: transparent;
+        color: #f5ead7;
+        cursor: pointer;
+      }
+      .preview-controls button[aria-pressed="true"] {
+        background: #cf0f59;
+        border-color: #cf0f59;
+        color: white;
+      }
+      .collection {
+        max-width: 1150px;
+        margin: auto;
+        padding: 50px 6% 70px;
+      }
+      .collection-heading {
+        padding-bottom: 35px;
+      }
+      .collection-heading h1 {
+        font: 500 clamp(46px, 6vw, 74px)/1.1 var(--serif);
+        margin: 12px 0 18px;
+      }
+      .collection-heading h1 em {
+        color: #ff5c9a;
+      }
+      .collection-heading > p:last-child {
+        max-width: 610px;
+        line-height: 1.7;
+        color: #cbbba5;
+      }
+      .collection-post h2 {
+        font: 500 32px/1.2 var(--serif);
+        margin: 10px 0 14px;
+      }
+      .collection-post p {
+        color: #d8cbbb;
+        font-size: 16px;
+        line-height: 1.7;
+        margin: 0 0 18px;
+      }
+      .collection-post .post-meta {
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #e6bf7d;
+      }
+      .collection-post a {
+        display: inline-flex;
+        padding: 8px 0;
+        color: #ff80af;
+        font-size: 14px;
+      }
+      .placeholder h2 {
+        color: #c3b39c;
+      }
+      .placeholder .placeholder-note {
+        color: #a99a85;
+        font-size: 13px;
+      }
+      .posts {
+        display: grid;
+      }
+      .layout-list .posts {
+        gap: 0;
+      }
+      .layout-list .collection-post {
+        padding: 30px 0;
+        border-top: 1px solid #d9ad592e;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 55px;
+      }
+      .layout-list h2,
+      .layout-list .post-meta {
+        grid-column: 1;
+      }
+      .layout-list .post-meta {
+        grid-row: 1;
+      }
+      .layout-list h2 {
+        grid-row: 2/4;
+      }
+      .layout-list .collection-post > p:not(.post-meta) {
+        grid-column: 2;
+        grid-row: 1/3;
+      }
+      .layout-list a,
+      .layout-list .placeholder-note {
+        grid-column: 2;
+        grid-row: 3;
+      }
+      .layout-cards .posts {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+      .layout-cards .collection-post {
+        padding: 27px;
+        border: 1px solid #d9ad5920;
+        border-radius: 8px;
+        background: linear-gradient(145deg, #19110b66, #0d090622);
+        display: flex;
+        flex-direction: column;
+      }
+      .layout-cards .collection-post h2 {
+        font-size: 28px;
+      }
+      .layout-cards a,
+      .layout-cards .placeholder-note {
+        margin-top: auto;
+      }
+      .layout-featured .posts {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+      .layout-featured .collection-post:first-child {
+        grid-column: 1/-1;
+        background:
+          linear-gradient(90deg, #0a0806 20%, #0a080688),
+          url("../assets/images/article-journey.webp") center/cover;
+        padding: 45px 40px;
+        min-height: 330px;
+      }
+      .layout-featured .collection-post:first-child h2 {
+        font-size: 43px;
+        max-width: 610px;
+      }
+      .layout-featured .collection-post:first-child p {
+        max-width: 570px;
+      }
+      .layout-featured .placeholder {
+        border-top: 1px solid #d9ad5933;
+        padding-top: 25px;
+      }
+      .example-explainer {
+        margin-top: 40px;
+        padding-top: 25px;
+        border-top: 1px solid #d9ad592e;
+        color: #bca98d;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+      .collection-post a:hover {
+        text-decoration: underline;
+      }
+      button:focus-visible,
+      a:focus-visible {
+        outline: 2px solid #ffd58a;
+        outline-offset: 5px;
+      }
+      @media (max-width: 700px) {
+        .collection {
+          padding-top: 35px;
+        }
+        .layout-list .collection-post {
+          display: block;
+        }
+        .layout-cards .posts,
+        .layout-featured .posts {
+          grid-template-columns: 1fr;
+        }
+        .layout-featured .collection-post:first-child {
+          padding: 30px 24px;
+        }
+        .layout-featured .collection-post:first-child h2 {
+          font-size: 34px;
+        }
+        .collection-post h2 {
+          font-size: 29px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="preview-controls">
+      <p>Design examples only. Future post slots are placeholders.</p>
+      <nav aria-label="Choose collection layout">
+        <button type="button" data-layout="list" aria-pressed="true">
+          1. Simple story list</button
+        ><button type="button" data-layout="cards" aria-pressed="false">
+          2. Soft cards</button
+        ><button type="button" data-layout="featured" aria-pressed="false">
+          3. Featured story
+        </button>
+      </nav>
+    </header>
+    <main class="collection layout-list" id="collection">
+      <header class="collection-heading">
+        <p class="eyebrow">From Dee’s Corner</p>
+        <h1>Stories from <em>my corner.</em></h1>
+        <p>
+          My experiences in cybersecurity, what I’m learning, and the moments
+          along the way.
+        </p>
+      </header>
+      <div class="posts">
+        <article class="collection-post">
+          <p class="post-meta">Career journey · First post</p>
+          <h2>How I Broke Into Cybersecurity</h2>
+          <p>
+            It wasn’t a piece of cake for me. I had offers rescinded, but I kept
+            showing up because I knew where my passion was and the direction I
+            wanted to grow in.
+          </p>
+          <a href="../blog.html"
+            >Read my story <span aria-hidden="true">&nbsp; →</span></a
+          >
+        </article>
+        <article class="collection-post placeholder">
+          <p class="post-meta">Future post slot</p>
+          <h2>Your next story goes here</h2>
+          <p>
+            When you write another post, its title and a short introduction will
+            appear here. Readers can click through to the full story.
+          </p>
+          <span class="placeholder-note"
+            >Placeholder for this design preview</span
+          >
+        </article>
+        <article class="collection-post placeholder">
+          <p class="post-meta">Future post slot</p>
+          <h2>Another chapter from Dee</h2>
+          <p>
+            Each story gets its own page, so your earlier posts stay available
+            as your blog grows.
+          </p>
+          <span class="placeholder-note"
+            >Placeholder for this design preview</span
+          >
+        </article>
+      </div>
+      <p class="example-explainer">
+        In the finished blog, the newest story appears first. Each title opens a
+        separate article with the personal journal formatting you chose. Your
+        current story stays available.
+      </p>
+    </main>
+    <script>
+      const collection = document.querySelector("#collection");
+      document.querySelectorAll("[data-layout]").forEach((button) =>
+        button.addEventListener("click", () => {
+          collection.className = "collection layout-" + button.dataset.layout;
+          document
+            .querySelectorAll("[data-layout]")
+            .forEach((item) =>
+              item.setAttribute("aria-pressed", String(item === button)),
+            );
+        }),
+      );
+    </script>
+  </body>
+</html>
