@@ -2992,3 +2992,97 @@ svg.line-icon {
     gap: 5px 20px;
   }
 }
+
+/* Dee's journal: a calm reading space with personal details. */
+.journal-page {
+  background: #0a0806;
+}
+.journal-article {
+  max-width: 1050px;
+  margin: auto;
+  padding: 70px 6% 85px;
+}
+.journal-heading {
+  position: relative;
+  padding-bottom: 36px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(220, 174, 88, 0.3);
+}
+.journal-heading .eyebrow {
+  color: #e9bf77;
+  margin-bottom: 22px;
+  letter-spacing: 2.5px;
+}
+.journal-heading h1 {
+  font: 500 clamp(43px, 5.5vw, 76px)/1.06 var(--serif);
+  max-width: 850px;
+  margin: 0 0 28px;
+}
+.journal-heading h1 em {
+  display: block;
+  color: #ff5c9a;
+  font-weight: 500;
+}
+.journal-byline {
+  font-size: 14px;
+  color: #f5ead7;
+  margin: 0;
+}
+.journal-byline span {
+  display: block;
+  color: #bcae9b;
+  margin-top: 5px;
+  font-size: 13px;
+}
+.journal-butterfly {
+  position: absolute;
+  right: 0;
+  bottom: 22px;
+  object-fit: contain;
+  opacity: 0.8;
+}
+.journal-body {
+  max-width: 720px;
+}
+.journal-body > p:not(.journal-signature) {
+  color: #e5dfd5;
+  font-size: 18px;
+  line-height: 1.85;
+  margin-bottom: 27px;
+}
+.journal-body .journal-opening {
+  font-size: 20px;
+  color: #f5ead7;
+}
+
+.journal-signature {
+  font:
+    48px/1.2 "Great Vibes",
+    cursive;
+  color: #ff5c9a;
+}
+
+@media (max-width: 600px) {
+  .journal-article {
+    padding: 40px 6% 55px;
+  }
+  .journal-heading {
+    margin-bottom: 28px;
+  }
+  .journal-heading .eyebrow {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
+  .journal-body > p:not(.journal-signature) {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+  .journal-body .journal-opening {
+    font-size: 18px;
+  }
+
+  .journal-butterfly {
+    width: 52px;
+    height: 52px;
+  }
+}
