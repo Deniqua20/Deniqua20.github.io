@@ -3381,3 +3381,28 @@ svg.line-icon {
   line-height: 1.8;
   color: #443728;
 }
+
+/* Custom butterflies carry the decorative accents on links and disclosures. */
+.link-butterfly {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  margin-inline: 4px;
+}
+.showcase-notes summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.showcase-notes summary::-webkit-details-marker {
+  display: none;
+}
+.showcase-notes summary::before {
+  content: "";
+  display: block;
+  width: 25px;
+  height: 25px;
+  flex-shrink: 0;
+  background: url("../images/lab-butterfly.webp") center/contain no-repeat;
+}
