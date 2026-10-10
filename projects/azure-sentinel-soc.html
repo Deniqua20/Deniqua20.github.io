@@ -109,7 +109,12 @@
           I queried the SecurityEvent table for Event ID 4625 and sorted the
           results with the newest events first.
         </p>
-        <pre class="evidence-query"><code>SecurityEvent
+        <pre
+          class="evidence-query"
+          tabindex="0"
+          role="region"
+          aria-label="KQL query"
+        ><code>SecurityEvent
 | where EventID == 4625
 | sort by TimeGenerated desc</code></pre>
         <figure class="evidence-figure">
@@ -156,7 +161,12 @@
           failed logins by account in five minute windows and returns groups
           with more than five attempts.
         </p>
-        <pre class="evidence-query"><code>SecurityEvent
+        <pre
+          class="evidence-query"
+          tabindex="0"
+          role="region"
+          aria-label="KQL query"
+        ><code>SecurityEvent
 | where EventID == 4625
 | summarize FailedAttempts = count() by Account, bin(TimeGenerated, 5m)
 | where FailedAttempts &gt; 5</code></pre>
