@@ -3410,7 +3410,7 @@ svg.line-icon {
 /* Restrained accents connect the project pages without changing their layout. */
 .lab-gallery .link-butterfly,
 .honeypot-showcase .link-butterfly,
-.lab-gallery .floating-butterflies { display: none; }
+.lab-gallery .floating-butterflies { display: none !important; }
 .lab-gallery {
   background-image: radial-gradient(ellipse at 95% 25%, #b38a3914, transparent 46%), radial-gradient(ellipse at 3% 80%, #ed297911, transparent 45%);
 }
