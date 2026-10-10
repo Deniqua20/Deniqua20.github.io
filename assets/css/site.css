@@ -3430,3 +3430,26 @@ svg.line-icon {
 .lab-gallery .lab-card { border-bottom-color: #b18a4966; }
 .lab-gallery .lab-card:hover { box-shadow: 0 8px 32px #eb297910; }
 @media (max-width: 600px) { .showcase-evidence::before { inset: -7px 7px 7px -7px; } }
+
+/* A closer composition lets the work fill the page rather than extra padding. */
+.honeypot-showcase .showcase-main { max-width: 1440px; padding: 26px 4% 38px; }
+.honeypot-showcase .showcase-back { margin-bottom: 20px; }
+.honeypot-showcase .showcase-introduction { grid-template-columns: 1fr 1.12fr; gap: 32px; align-items: start; }
+.honeypot-showcase .showcase-story h1 { margin-bottom: 18px; }
+.honeypot-showcase .showcase-project-name { margin-bottom: 12px; }
+.honeypot-showcase .showcase-tools { margin-top: 14px; }
+.honeypot-showcase .showcase-discoveries { gap: 32px; margin-top: 30px; padding-top: 24px; }
+.honeypot-showcase .showcase-notes details { margin-bottom: 12px; padding-bottom: 12px; }
+.honeypot-showcase .showcase-next { margin-top: 22px; padding-top: 18px; }
+.honeypot-showcase .showcase-evidence figure a { min-height: 0; }
+.lab-gallery .lab-card-grid { gap: 16px; }
+.lab-gallery .lab-card { min-height: 250px; padding: 22px; }
+.lab-gallery .lab-card-content { gap: 10px; }
+.lab-gallery .lab-introduction { padding-top: 28px; padding-bottom: 24px; }
+@media (max-width: 850px) {
+  .honeypot-showcase .showcase-introduction, .honeypot-showcase .showcase-discoveries { grid-template-columns: 1fr; gap: 24px; }
+}
+@media (max-width: 600px) {
+  .honeypot-showcase .showcase-main { padding: 24px 6% 32px; }
+  .lab-gallery .lab-card { min-height: 0; padding: 22px; }
+}
