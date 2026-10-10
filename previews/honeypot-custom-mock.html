@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head><base href="../projects/">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Honeypot Design Mockup | Dee’s Cyber Corner</title>
+    <meta
+      name="description"
+      content="Follow Dee’s Sentinel honeypot lab with KQL queries, failed login results, and screenshots of generated incidents."
+    />
+    <meta name="theme-color" content="#0b0705" />
+    <link
+      rel="stylesheet"
+      href="../assets/css/site.css?v=honeypot-notebook-1"
+    />
+    <script src="../assets/js/site.js" defer></script>
+    <script src="../assets/js/honeypot-showcase.js" defer></script>
+  <style>
+.honeypot-showcase{background:radial-gradient(ellipse at 86% 15%,#e5d6ba88,transparent 50%),repeating-linear-gradient(2deg,#674e2410 0px,#674e2410 1px,transparent 1px,transparent 5px),#bfae91}
+.showcase-main{max-width:1400px;padding-top:26px}
+.showcase-introduction{grid-template-columns:1fr 1.12fr;gap:60px;align-items:center}
+.showcase-story{position:relative;padding-top:126px}
+.custom-project-art{position:absolute;top:0;left:0;width:100%;height:120px;pointer-events:none;color:#6e4b1b}
+.custom-project-art svg{width:100%;height:100%;opacity:.48}
+.custom-project-art img{position:absolute;width:165px;height:140px;object-fit:contain;left:44%;top:-17px;transform:rotate(-12deg);filter:drop-shadow(0 5px 12px #6c401f33)}
+.showcase-story h1{font-size:clamp(43px,4.5vw,67px)}
+.showcase-evidence{padding:25px 24px 20px;background:#efe5d04d;border:1px solid #674d2922;border-radius:3px;box-shadow:8px 11px 0 #76552b12}
+.showcase-evidence h2{font-size:27px}
+.showcase-evidence figure{padding:10px;background:#f1e8d8;box-shadow:0 6px 20px #432a1d1a}
+.showcase-evidence figure a{min-height:310px}
+.showcase-discoveries{position:relative;margin-top:55px;border-top:1px solid #684c2f55;padding-top:37px}
+.showcase-discoveries:before{content:'';position:absolute;left:0;top:-4px;width:84px;height:7px;background:#755321}
+.showcase-discoveries h2{font-size:43px}
+.showcase-notes details{border-color:#674c2a55}
+.showcase-next{background:linear-gradient(100deg,#e3d2b399,transparent);padding:25px 28px;border:0;border-left:2px solid #79582c;margin-top:40px}
+.mock-label{display:block;padding:11px 6%;background:#251b12;color:#f0d9ad;font:12px var(--sans);letter-spacing:1px;text-align:center}
+@media(max-width:850px){.showcase-introduction{grid-template-columns:1fr}.showcase-story{padding-top:105px}.custom-project-art{max-width:500px;height:100px}.custom-project-art img{height:120px;width:145px}.showcase-evidence figure a{min-height:0}.showcase-evidence{padding:20px}.showcase-discoveries h2{font-size:35px}}
+</style></head>
+  <body class="interior honeypot-showcase">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a
+        class="wordmark"
+        href="../index.html"
+        aria-label="Dee’s Cyber Corner home"
+        ><span
+          >Dee’s<small class="brand-butterfly" aria-hidden="true"></small></span
+        ><b>CYBER CORNER</b></a
+      ><button
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="navigation"
+      >
+        Menu <span aria-hidden="true">☰</span>
+      </button>
+      <nav id="navigation" aria-label="Main navigation">
+        <a href="../index.html">Home</a><a href="../about.html">About</a
+        ><a href="../labs.html" aria-current="page">Projects &amp; Labs</a
+        ><a href="../resources.html">Resources</a
+        ><a href="../books.html">Books</a><a href="../blog.html">Blog</a>
+      </nav>
+      <a class="button connect" href="../about.html#connect"
+        >Let’s connect <span aria-hidden="true">⟶</span></a
+      >
+    </header>
+    <div class="mock-label">Design mockup · Your live project page is unchanged</div>
+    <main id="main" class="showcase-main">
+      <a class="showcase-back" href="../labs.html">← Projects &amp; Labs</a>
+      <section class="showcase-introduction" aria-labelledby="project-title">
+        <div class="showcase-story"><div class="custom-project-art" aria-hidden="true"><svg viewBox="0 0 560 140" fill="none"><path d="M4 112H94L127 80H185L222 42H290M4 128H108L139 97H207L243 61H308M560 36H461L419 78H351M560 55H483L440 98H370" stroke="currentColor" stroke-width="1.5"/><circle cx="290" cy="42" r="4"/><circle cx="308" cy="61" r="4"/><circle cx="351" cy="78" r="4"/><circle cx="370" cy="98" r="4"/></svg><img src="../assets/images/home-main-butterfly.webp" alt=""/></div>
+          <p class="showcase-kicker">My Azure honeypot lab</p>
+          <h1 id="project-title">
+            What I built.<br /><em>What I discovered.</em>
+          </h1>
+          <h2 class="showcase-project-name">
+            Microsoft Sentinel SIEM Honeypot
+          </h2>
+          <p>
+            This project drew questions from hiring managers during my security
+            role interviews. It gave me a chance to walk through what I built,
+            how I investigated the activity, and how I used Microsoft Sentinel
+            in my Azure setup.
+          </p>
+          <a class="showcase-walkthrough" href="azure-honeypot-walkthrough.html"
+            >Want to recreate it? Follow my walkthrough
+            <span aria-hidden="true">→</span></a
+          >
+          <p class="showcase-tools">
+            Azure · Windows · Microsoft Sentinel · Log Analytics · KQL
+          </p>
+        </div>
+        <section class="showcase-evidence" aria-labelledby="evidence-title">
+          <h2 id="evidence-title">Explore my evidence</h2>
+          <div
+            class="evidence-switcher"
+            role="group"
+            aria-label="Choose a lab screenshot"
+          >
+            <button type="button" data-evidence="incidents" aria-pressed="true">
+              Incidents
+            </button>
+            <button type="button" data-evidence="query" aria-pressed="false">
+              KQL query
+            </button>
+            <button type="button" data-evidence="logins" aria-pressed="false">
+              Failed logins
+            </button>
+          </div>
+          <figure>
+            <a
+              id="showcase-image-link"
+              href="../assets/evidence/sentinel/sentinel-incidents.png"
+              aria-label="Open the current lab screenshot at full size"
+            >
+              <img
+                id="showcase-image"
+                src="../assets/evidence/sentinel/sentinel-incidents.png"
+                alt="Microsoft Sentinel showing two open medium severity brute force logon detection incidents"
+                width="1304"
+                height="868"
+              />
+            </a>
+            <figcaption id="showcase-caption" aria-live="polite">
+              Two medium severity incidents generated by the brute force logon
+              detection rule.
+            </figcaption>
+          </figure>
+          <p class="showcase-image-hint">
+            Select a view above. Click the image to inspect it at full size.
+          </p>
+          <noscript
+            ><p>
+              <a href="../assets/evidence/sentinel/sentinel-query.png"
+                >View KQL query</a
+              >
+              ·
+              <a href="../assets/evidence/sentinel/failed-logons.png"
+                >View failed login results</a
+              >
+            </p></noscript
+          >
+        </section>
+      </section>
+      <section class="showcase-discoveries" aria-labelledby="discoveries-title">
+        <div>
+          <p class="showcase-kicker">Behind the project</p>
+          <h2 id="discoveries-title">
+            From activity<br /><em>to investigation.</em>
+          </h2>
+          <p>
+            I followed the trail from Windows security events to a detection
+            query and Sentinel incidents. Explore each part of the project
+            below.
+          </p>
+        </div>
+        <div class="showcase-notes">
+          <details open>
+            <summary>What I built</summary>
+            <p>
+              An Azure honeypot environment connected to Log Analytics and
+              Microsoft Sentinel for collecting and investigating Windows
+              authentication events.
+            </p>
+          </details>
+          <details>
+            <summary>What I investigated</summary>
+            <p>
+              Failed authentication events using Event ID 4625. I reviewed the
+              event records with KQL and grouped repeated attempts by account in
+              five minute windows.
+            </p>
+          </details>
+          <details>
+            <summary>What my evidence shows</summary>
+            <p>
+              The screenshots show the query, failed login records, and two
+              medium severity incidents. The detection rule returns account
+              groups with more than five failed attempts in a five minute
+              window.
+            </p>
+            <p>
+              These screenshots document the lab results. They do not include an
+              attack map.
+            </p>
+          </details>
+          <a
+            class="showcase-source"
+            href="https://github.com/Deniqua20/azure-soc-lab-brute-force-detection"
+            >See the original lab on GitHub <span aria-hidden="true">→</span></a
+          >
+        </div>
+      </section>
+      <section class="showcase-next">
+        <p>Want to follow the process in your own learning environment?</p>
+        <a class="showcase-walkthrough" href="azure-honeypot-walkthrough.html"
+          >Open the step by step walkthrough
+          <span aria-hidden="true">→</span></a
+        >
+      </section>
+    </main>
+    <footer class="site-footer">
+      <a class="wordmark" href="../index.html"
+        ><span>Dee’s</span><b>CYBER CORNER</b></a
+      >
+      <nav aria-label="Footer navigation">
+        <a href="../index.html">Home</a><a href="../about.html">About</a
+        ><a href="../labs.html">Projects &amp; Labs</a
+        ><a href="../resources.html">Resources</a
+        ><a href="../books.html">Books</a><a href="../blog.html">Blog</a>
+      </nav>
+      <p>
+        © 2026 Dee’s Cyber Corner<br /><small
+          >Learning. Building. Sharing. Growing.</small
+        >
+      </p>
+    </footer>
+  </body>
+</html>
