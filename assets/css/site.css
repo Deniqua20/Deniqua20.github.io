@@ -3406,3 +3406,27 @@ svg.line-icon {
   flex-shrink: 0;
   background: url("../images/lab-butterfly.webp") center/contain no-repeat;
 }
+
+/* Restrained accents connect the project pages without changing their layout. */
+.lab-gallery .link-butterfly,
+.honeypot-showcase .link-butterfly,
+.lab-gallery .floating-butterflies { display: none; }
+.lab-gallery {
+  background-image: radial-gradient(ellipse at 95% 25%, #b38a3914, transparent 46%), radial-gradient(ellipse at 3% 80%, #ed297911, transparent 45%);
+}
+.honeypot-showcase {
+  background-image: radial-gradient(ellipse at 95% 20%, #a77b3120, transparent 48%), radial-gradient(ellipse at 0% 75%, #8e124014, transparent 45%);
+}
+.showcase-kicker { display: flex; align-items: center; gap: 16px; }
+.showcase-kicker::after { content: ''; height: 1px; width: 90px; background: linear-gradient(90deg, #8f682c, transparent); }
+.showcase-evidence { position: relative; }
+.showcase-evidence::before { content: ''; position: absolute; inset: -12px 12px 12px -12px; border-top: 1px solid #9a773f88; border-left: 1px solid #9a773f88; pointer-events: none; }
+.showcase-discoveries { border-image: linear-gradient(90deg, #8e124077, #987337aa, transparent) 1; }
+.showcase-next { border-image: linear-gradient(90deg, #987337aa, #8e124077, transparent) 1; }
+.showcase-notes summary::before { content: '+'; background: none; color: #8e1240; font: 400 24px/25px var(--serif); text-align: center; }
+.showcase-notes details[open] summary::before { content: '−'; }
+.showcase-notes summary { transition: color .2s ease; }
+.showcase-notes summary:hover { color: #8e1240; }
+.lab-gallery .lab-card { border-bottom-color: #b18a4966; }
+.lab-gallery .lab-card:hover { box-shadow: 0 8px 32px #eb297910; }
+@media (max-width: 600px) { .showcase-evidence::before { inset: -7px 7px 7px -7px; } }
