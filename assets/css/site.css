@@ -3478,3 +3478,19 @@ svg.line-icon {
 .lab-gallery .lab-filters button[aria-pressed="true"] { color: #8e1240; border-color: #8e1240; }
 .lab-gallery .lab-filters button:hover, .lab-gallery .lab-writeup { color: #8e1240; }
 .lab-gallery .lab-card-status, .lab-gallery .lab-noscript { color: #684519; }
+
+/* Warm reading surfaces balance the dark botanical identity. */
+.balanced-page { background: #d0c1aa; color: #281f17; }
+.balanced-page main { --cream: #281f17; --muted: #443728; --pink: #941342; --gold: #684519; --line: #7b5e3844; background: #d0c1aa; }
+.balanced-page .site-header, .balanced-page .site-footer { background: #0b0907; color: #f5ead7; max-width: none; }
+.balanced-page .site-header nav a, .balanced-page .site-footer nav a { color: #f5ead7; }
+.balanced-page .site-header nav a[aria-current] { color: #ff5c9a; }
+.balanced-page main .lead, .balanced-page main .prose p, .balanced-page main .resource-grid p { color: #443728; }
+.balanced-page main .eyebrow, .balanced-page main .status { color: #684519; }
+.balanced-page .quote-collection blockquote { border-color: #98733788; }
+.balanced-page .journal-byline, .balanced-page .journal-body > p:not(.journal-signature) { color: #443728; }
+.balanced-page .journal-byline span { color: #51422e; }
+.balanced-page .journal-heading h1 em, .balanced-page .journal-signature { color: #941342; }
+.balanced-page .journal-heading { border-color: #98733788; }
+.balanced-page .evidence-figure figcaption { color: #443728; }
+.balanced-page main a:focus-visible, .balanced-page main button:focus-visible { outline: 2px solid #941342; outline-offset: 4px; }
