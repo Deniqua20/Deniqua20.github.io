@@ -3460,3 +3460,21 @@ svg.line-icon {
 .quote-collection p { font: 500 clamp(32px, 4vw, 52px)/1.2 var(--serif); margin: 0; }
 .quote-collection em { color: var(--pink); }
 @media (max-width: 700px) { .quote-collection { grid-template-columns: 1fr; gap: 20px; } }
+
+/* Match the project index to the notebook project palette. */
+.lab-gallery { background: #d0c1aa; color: #281f17; }
+.lab-gallery .site-header, .lab-gallery .site-footer { background: #0b0907; color: #f5ead7; }
+.lab-gallery .site-header nav a, .lab-gallery .site-footer nav a { color: #f5ead7; }
+.lab-gallery .site-header nav a[aria-current] { color: #ff5c9a; }
+.lab-gallery .lab-kicker, .lab-gallery .lab-card .eyebrow { color: #684519; }
+.lab-gallery .lab-kicker::after { background: #9a773f; }
+.lab-gallery .lab-introduction h1 em, .lab-gallery .progress-flourish em { color: #941342; }
+.lab-gallery .lab-introduction > div > p:not(.eyebrow), .lab-gallery .lab-card-description { color: #443728; }
+.lab-gallery .progress-flourish { border-color: #94134266; }
+.lab-gallery .lab-card { background: #e8ddca66; border-color: #7b5e3833; }
+.lab-gallery .lab-card:hover { background: #e8ddca; border-color: #94134266; box-shadow: 0 8px 24px #33220b12; }
+.lab-gallery .lab-filters { border-color: #7b5e3855; }
+.lab-gallery .lab-filters button { color: #443728; }
+.lab-gallery .lab-filters button[aria-pressed="true"] { color: #8e1240; border-color: #8e1240; }
+.lab-gallery .lab-filters button:hover, .lab-gallery .lab-writeup { color: #8e1240; }
+.lab-gallery .lab-card-status, .lab-gallery .lab-noscript { color: #684519; }
