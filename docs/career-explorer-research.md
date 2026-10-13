@@ -40,16 +40,30 @@ Popularity was not verified. Neither example is described as the most popular. S
 
 The user requested no dashes in prose sentences. Code identifiers and necessary source URLs retain their spelling. Career labels describe work interests, not personality types. Experience, degrees, certifications, age, gender and current tool knowledge do not score interest.
 
-## Scoring
+## Revised eight question conversation
 
-Three original tasks per area, 36 tasks total. Scale 0 through 4, plus an excluded unsure answer. Equal weights within each area. Compute the mean of rated tasks; require at least two rated tasks and mean >= 2. Sort eligible means descending. Include the three highest positions plus every tie at the third position. Equal means are equally matched, regardless of display ordering. Show rated task count to make uncertainty visible. No positive qualified candidates produces a no clear match result, not an arbitrary career. Broadly equal interests can return many areas. No probabilities, population comparisons, statistical validation or salary predictions.
+The owner requested everyday interests rather than security tasks, eight questions instead of 36, no career titles before the result, and a typography led experience without decorative icons. The earlier task questionnaire has been replaced.
 
-Results quote the visitor's higher rated tasks and separate starting titles from progression roles. Even starting titles may require experience; the page explains variation and directs visitors to actual role descriptions. Architecture and red team are not presented as guaranteed direct entry jobs.
+Additional sources actually reviewed:
+
+- [O*NET Work Activities](https://www.onetonline.org/find/descriptor/browse/4.A): broad work behaviors across jobs, including getting information, analysis, communication, organizing, helping and creative work.
+- [O*NET Computer User Support Specialists](https://www.onetonline.org/link/summary/15-1232.00): customer communication, troubleshooting, explanation and support.
+- [O*NET Technical Writers](https://www.onetonline.org/link/summary/27-3042.00): documentation, research, interviewing, editing, information organization and explanation.
+
+The six interest dimensions are original editorial groupings, not renamed RIASEC scales: people, investigating, organizing, building, creating, explaining. They are not personality classifications. Each of eight prompts provides one primary option per dimension, with a second dimension for overlap. Wording addresses everyday work preferences without titles, security terminology, tool knowledge or qualification requirements. Visitors select one or two choices, or explicitly indicate uncertainty.
+
+Each choice contributes two points to its primary dimension and one to its secondary dimension. Two choices split the contribution, so selecting more does not create more total evidence. Every primary dimension has the same number of opportunities. Normalize each dimension by twice the number of answered prompts. Require four answered prompts; uncertain prompts do not score. If the range between the strongest and weakest dimensions is below 0.1, describe broad interests rather than force a career assignment.
+
+Role profiles use three dimensions, weights 3, 2 and 1. Require evidence for both leading interests in a role profile from at least two answered prompts each, so a single isolated choice cannot establish that connection. Compare the interest vector to eligible profiles using a weighted mean. Show the highest three positions, preserving ties at the cutoff with floating point tolerance. Identical profiles produce equal suggestions. For example, general preferences alone cannot reliably distinguish forensic investigation from data analysis; results should present both as possibilities rather than claim diagnostic precision. Explanations quote two relevant actual selections, not fabricated reasons. No percentages or aptitude grades are shown.
+
+These dimensions, weights, threshold, role profiles and questions are editorial choices. They have no empirical validation. O*NET and NICE inform the content rationale, not a statistical endorsement. The short format trades specificity for approachable discovery. Job descriptions, practical trials and a qualified career adviser can help narrow a direction further.
+
+Fifteen areas are available after the result, including technical writing, customer success and UX/design. Customer success and UX labels are broad editorial career areas, not direct O*NET taxonomy equivalents. Career suggestions may require additional education, technical skills or work experience. No job vacancies are represented as live results.
 
 ## Privacy and operation
 
-Static JavaScript only. Answers remain in an in-memory object; no storage, analytics, network requests, email collection or external APIs. Reloading clears answers. Without JavaScript, the complete career library remains available. Links are normal external navigation rather than live job listings. Back navigation, review and reset are available.
+Static JavaScript only. Answers remain in an in-memory object; no storage, analytics, network requests, email collection or external APIs. Reloading clears answers. Career titles and the complete library remain hidden until the result. Without JavaScript, the page provides a link to the established O*NET instrument rather than a nonfunctional quiz. Links are normal external navigation rather than live job listings. Back navigation, review and reset are available.
 
 ## Validation
 
-Pure scoring tests cover each of the twelve paths, no interest, unsure, low interest, partial ratings, normalization, invalid input and cutoff ties. Browser checks cover completion, required answers, back navigation, edits, restart, no JavaScript, mobile/tablet/desktop widths and accessibility of intro/questions/results. Research and scoring should be reviewed with a qualified career practitioner before describing the custom instrument as validated.
+Pure scoring checks cover eight prompts, equal primary opportunity, different everyday interests, uncertain answers, minimum evidence, two choices, invalid selections, broad interests, ties and explanations drawn from actual choices. Browser checks cover no visible career titles before completion, selection limit, complete results, back navigation, edits, reset, uncertainty, mobile/tablet/desktop layouts and accessibility.

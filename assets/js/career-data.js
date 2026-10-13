@@ -23,7 +23,12 @@ const CAREER_TRACKS = [
     "skills": "Windows and Linux logs, networking, SIEM queries, incident handling",
     "practiceLink": "projects/azure-sentinel-soc.html",
     "practiceLabel": "Explore Dee’s honeypot project",
-    "careerLink": "https://www.cyberseek.org/pathway.html"
+    "careerLink": "https://www.cyberseek.org/pathway.html",
+    "profile": {
+      "investigate": 3,
+      "build": 2,
+      "organize": 1
+    }
   },
   {
     "id": "red",
@@ -48,7 +53,12 @@ const CAREER_TRACKS = [
     "skills": "HTTP, operating systems, networking, scripting, clear reporting",
     "practiceLink": "https://portswigger.net/web-security",
     "practiceLabel": "Explore Web Security Academy",
-    "careerLink": "https://www.cyberseek.org/pathway.html"
+    "careerLink": "https://www.cyberseek.org/pathway.html",
+    "profile": {
+      "investigate": 3,
+      "create": 2,
+      "build": 1
+    }
   },
   {
     "id": "dfir",
@@ -73,7 +83,12 @@ const CAREER_TRACKS = [
     "skills": "File systems, evidence handling, operating system artifacts, timelines",
     "practiceLink": "https://www.autopsy.com/",
     "practiceLabel": "Explore Autopsy",
-    "careerLink": "https://www.cyberseek.org/pathway.html"
+    "careerLink": "https://www.cyberseek.org/pathway.html",
+    "profile": {
+      "investigate": 3,
+      "organize": 2,
+      "build": 1
+    }
   },
   {
     "id": "grc",
@@ -99,7 +114,12 @@ const CAREER_TRACKS = [
     "skills": "Risk assessment, control frameworks, evidence review, stakeholder communication",
     "practiceLink": "projects/security-risk-assessment.html",
     "practiceLabel": "Explore Dee’s GRC project",
-    "careerLink": "https://www.nist.gov/cyberframework"
+    "careerLink": "https://www.nist.gov/cyberframework",
+    "profile": {
+      "organize": 3,
+      "explain": 2,
+      "investigate": 1
+    }
   },
   {
     "id": "iam",
@@ -124,7 +144,12 @@ const CAREER_TRACKS = [
     "skills": "Authentication, authorization, least privilege, directories, automation",
     "practiceLink": "projects/identity-lifecycle.html",
     "practiceLabel": "Explore Dee’s IAM project",
-    "careerLink": "https://www.cyberseek.org/pathway.html"
+    "careerLink": "https://www.cyberseek.org/pathway.html",
+    "profile": {
+      "organize": 3,
+      "build": 2,
+      "people": 1
+    }
   },
   {
     "id": "cloud",
@@ -149,7 +174,12 @@ const CAREER_TRACKS = [
     "skills": "Cloud services, IAM, networking, logging, infrastructure automation",
     "practiceLink": "projects/cloud-security-monitoring.html",
     "practiceLabel": "Explore Dee’s cloud project",
-    "careerLink": "https://learn.microsoft.com/en-us/training/azure/"
+    "careerLink": "https://learn.microsoft.com/en-us/training/azure/",
+    "profile": {
+      "build": 3,
+      "organize": 2,
+      "investigate": 1
+    }
   },
   {
     "id": "architecture",
@@ -174,7 +204,12 @@ const CAREER_TRACKS = [
     "skills": "System design, threat modeling, network and identity controls, business requirements",
     "practiceLink": "https://owasp.org/www-community/Threat_Modeling",
     "practiceLabel": "Explore threat modeling",
-    "careerLink": "https://www.cyberseek.org/pathway.html"
+    "careerLink": "https://www.cyberseek.org/pathway.html",
+    "profile": {
+      "build": 3,
+      "organize": 2,
+      "create": 1
+    }
   },
   {
     "id": "appsec",
@@ -199,7 +234,12 @@ const CAREER_TRACKS = [
     "skills": "Programming, HTTP, secure design, authentication, code review",
     "practiceLink": "https://owasp.org/www-project-juice-shop/",
     "practiceLabel": "Explore OWASP Juice Shop",
-    "careerLink": "https://owasp.org/www-project-application-security-verification-standard/"
+    "careerLink": "https://owasp.org/www-project-application-security-verification-standard/",
+    "profile": {
+      "build": 3,
+      "investigate": 2,
+      "organize": 1
+    }
   },
   {
     "id": "software",
@@ -224,7 +264,12 @@ const CAREER_TRACKS = [
     "skills": "Programming, version control, testing, APIs, accessible interfaces",
     "practiceLink": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
     "practiceLabel": "Explore MDN learning",
-    "careerLink": "https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm"
+    "careerLink": "https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm",
+    "profile": {
+      "build": 3,
+      "create": 2,
+      "organize": 1
+    }
   },
   {
     "id": "data",
@@ -249,7 +294,12 @@ const CAREER_TRACKS = [
     "skills": "SQL, statistics, data quality, Python, evaluation, responsible data use",
     "practiceLink": "https://www.kaggle.com/learn",
     "practiceLabel": "Explore Kaggle Learn",
-    "careerLink": "https://www.bls.gov/ooh/math/data-scientists.htm"
+    "careerLink": "https://www.bls.gov/ooh/math/data-scientists.htm",
+    "profile": {
+      "investigate": 3,
+      "organize": 2,
+      "build": 1
+    }
   },
   {
     "id": "network",
@@ -275,7 +325,12 @@ const CAREER_TRACKS = [
     "skills": "TCP/IP, DNS, routing, switching, operating systems, monitoring",
     "practiceLink": "https://www.netacad.com/",
     "practiceLabel": "Explore Cisco Networking Academy",
-    "careerLink": "https://www.bls.gov/ooh/computer-and-information-technology/network-and-computer-systems-administrators.htm"
+    "careerLink": "https://www.bls.gov/ooh/computer-and-information-technology/network-and-computer-systems-administrators.htm",
+    "profile": {
+      "build": 3,
+      "investigate": 2,
+      "people": 1
+    }
   },
   {
     "id": "support",
@@ -301,7 +356,85 @@ const CAREER_TRACKS = [
     "skills": "Troubleshooting, operating systems, customer communication, ticketing, documentation",
     "practiceLink": "https://learn.microsoft.com/en-us/training/",
     "practiceLabel": "Explore Microsoft Learn",
-    "careerLink": "https://www.bls.gov/ooh/computer-and-information-technology/computer-support-specialists.htm"
+    "careerLink": "https://www.bls.gov/ooh/computer-and-information-technology/computer-support-specialists.htm",
+    "profile": {
+      "people": 3,
+      "explain": 2,
+      "build": 1
+    }
+  },
+  {
+    "id": "writing",
+    "title": "Technical writing and documentation",
+    "group": "Broader tech",
+    "description": "Turn complicated information into useful guides people can understand.",
+    "startingRoles": [
+      "Documentation specialist",
+      "Junior technical writer"
+    ],
+    "developingRoles": [
+      "Technical writer",
+      "Developer education specialist"
+    ],
+    "project": "Write a clear getting started guide for a tool, then ask someone unfamiliar with it to follow it.",
+    "skills": "Research, interviewing, writing, editing, information structure",
+    "practiceLink": "https://developers.google.com/tech-writing",
+    "practiceLabel": "Explore technical writing lessons",
+    "careerLink": "https://www.onetonline.org/link/summary/27-3042.00",
+    "profile": {
+      "explain": 3,
+      "organize": 2,
+      "investigate": 1
+    }
+  },
+  {
+    "id": "customer",
+    "title": "Customer success and technology adoption",
+    "group": "Broader tech",
+    "description": "Understand customer needs and help people get value from technology.",
+    "startingRoles": [
+      "Customer support specialist",
+      "Customer onboarding specialist"
+    ],
+    "developingRoles": [
+      "Customer success manager",
+      "Implementation consultant"
+    ],
+    "project": "Create a sample onboarding plan for a new software customer, including discovery questions and a clear success goal.",
+    "skills": "Customer communication, product knowledge, discovery, training, follow through",
+    "practiceLink": "https://www.bls.gov/ooh/office-and-administrative-support/customer-service-representatives.htm",
+    "practiceLabel": "Explore customer service work",
+    "careerLink": "https://www.onetonline.org/link/summary/15-1232.00",
+    "profile": {
+      "people": 3,
+      "explain": 2,
+      "organize": 1
+    }
+  },
+  {
+    "id": "design",
+    "title": "User experience and digital design",
+    "group": "Broader tech",
+    "description": "Understand how people use products and make those experiences clearer.",
+    "startingRoles": [
+      "Junior digital designer",
+      "UX design associate"
+    ],
+    "developingRoles": [
+      "UX designer",
+      "Product designer",
+      "UX researcher"
+    ],
+    "project": "Interview someone about a frustrating website, sketch an improved experience, and test whether it is easier to use.",
+    "skills": "User research, visual design, accessible interfaces, prototyping, usability testing",
+    "practiceLink": "https://www.w3.org/WAI/fundamentals/accessibility-intro/",
+    "practiceLabel": "Explore accessible design",
+    "careerLink": "https://www.bls.gov/ooh/computer-and-information-technology/web-developers.htm",
+    "profile": {
+      "create": 3,
+      "people": 2,
+      "investigate": 1
+    }
   }
 ];
 if (typeof module !== "undefined" && module.exports) module.exports = CAREER_TRACKS;
