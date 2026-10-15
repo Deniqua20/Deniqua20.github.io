@@ -55,12 +55,30 @@ Decorative studio monitors are artwork, not lab evidence. The About portrait is 
 
 ## Interaction and accessibility checks
 
-The Explore scene lasts about 900 milliseconds, can be continued immediately, and is skipped for reduced motion. Modified clicks retain native link behavior. Resource search combines its search text with the selected category and includes an empty state. Mobile menus expose expanded state and support Escape.
+The Explore sequence lasts about 1.65 seconds: dimming, a red scan, the existing butterfly asset, ACCESS GRANTED, NEW LEVEL UNLOCKED, and a completing progress indicator. It can be skipped immediately or cancelled with Escape. Focus stays within the temporary dialog and returns to the originating link on cancellation. Back/forward navigation clears transient state. Reduced motion skips the sequence. Modified clicks retain native link behavior. Homepage entrance cues and logo/light movement run once. Story reveals are progressive enhancements; content remains visible without JavaScript and for reduced motion. Resource search combines its search text with the selected category and includes an empty state. Mobile menus expose expanded state and support Escape.
 
 Browser checks use Playwright and axe-core from the development environment, not shipped website dependencies. With the server at port 8000 and Playwright available:
 
 ```sh
 node tests/world-interactions.cjs
+node tests/cinematic-navigation.cjs
 ```
 
 Validation covers desktop, tablet, and phone layouts, accessible navigation, internal files and anchors, WCAG A/AA automated checks, resource search, project filters, career panels, contact validation and email draft creation, no JavaScript fallbacks, the Explore animation, and reduced motion. Automated checks do not replace human accessibility testing.
+
+
+## Latest interaction update
+
+The approved hero artwork and character are unchanged. The homepage button reads “Explore My World.” Project and resource entries now use native stretched links so the full card area responds to clicks and keyboard focus. Okta has explicit tools, methodology, documented validation, and takeaways; missing EDR evidence remains clearly labeled. The About portrait retains its existing artwork with a provenance caption and can be replaced with an authentic source photo when available.
+
+The shared HTML renderer versions CSS and JavaScript by content hash. After changes, run `python3 scripts/build_shared.py`, commit the changed pages and assets, and push to `main`. The existing GitHub Pages workflow publishes the static files; no server build is required.
+
+If port 8000 is occupied, use another available port and set `DEE_TEST_BASE_URL`, for example:
+
+```sh
+python3 -m http.server 8032
+DEE_TEST_BASE_URL=http://localhost:8032 node tests/world-interactions.cjs
+DEE_TEST_BASE_URL=http://localhost:8032 node tests/cinematic-navigation.cjs
+```
+
+See [direct contact submission setup](docs/contact-setup.md) for the one service configuration still required. Tests have exercised the email draft and intercepted service responses; a real service submission cannot be verified until the owner supplies a verified endpoint.

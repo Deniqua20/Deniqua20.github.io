@@ -2,26 +2,71 @@
 // Shared interactions for the rooms of Dee's Cyber Corner.
 (() => {
   const reduceMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let entering = false;
+  const butterflyURL = new URL("../images/lab-butterfly.webp", document.currentScript.src).href;
+  let activeTransition = null;
+  const navigationType = performance.getEntriesByType("navigation")[0]?.type;
+  if (!reduceMotion() && navigationType !== "back_forward") {
+    document.body.classList.add("motion-ready");
+    document.documentElement.classList.add("world-smooth");
+  }
   document.querySelectorAll("a.portal-trigger").forEach(link => {
     link.addEventListener("click", event => {
-      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || reduceMotion()) return;
-      if (entering) { event.preventDefault(); return; }
-      event.preventDefault(); entering = true;
-      const overlay = document.createElement("div"); overlay.className = "level-transition";
-      const label = document.createElement("p"); label.className = "level-kicker";label.textContent = "ACCESS GRANTED";
-      const title = document.createElement("p");title.className = "level-title"; title.textContent = "NEW LEVEL UNLOCKED";
-      const indicator = document.createElement("progress");indicator.max = 100;indicator.value = 0;indicator.setAttribute("aria-label", "Opening the next page");
-      const status = document.createElement("div");status.setAttribute("role", "status");status.append(label, title, indicator);
-      const skip = document.createElement("button");skip.type = "button";skip.textContent = "Continue now";
-      overlay.append(status, skip);document.body.append(overlay);
-      let frame; const started = performance.now();
-      const go = () => { cancelAnimationFrame(frame); window.location.assign(link.href); };
-      skip.addEventListener("click",go);skip.focus({preventScroll:true});
-      function tick(now) { indicator.value = Math.min(100, (now - started) / 8.5);if(now-started >= 900) go();else frame=requestAnimationFrame(tick); }
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || reduceMotion() || link.hasAttribute("download") || (link.target && link.target !== "_self")) return;
+      const destination = new URL(link.href);
+      if (destination.origin !== location.origin || destination.href === location.href || (destination.pathname === location.pathname && destination.hash)) return;
+      event.preventDefault();
+      if (activeTransition) return;
+      const overlay = document.createElement("div");
+      overlay.className = "level-transition";
+      overlay.setAttribute("role", "dialog");
+      overlay.setAttribute("aria-modal", "true");
+      overlay.setAttribute("aria-labelledby", "level-title");
+      overlay.dataset.phase = "scanning";
+      const scan = document.createElement("div");scan.className = "level-scan";scan.setAttribute("aria-hidden", "true");
+      const butterfly = document.createElement("img");butterfly.className = "level-butterfly";butterfly.src = butterflyURL;butterfly.alt = "";butterfly.width = 70;butterfly.height = 70;
+      const label = document.createElement("p");label.className = "level-kicker";label.textContent = "ACCESS GRANTED";
+      const title = document.createElement("p");title.className = "level-title";title.id = "level-title";title.textContent = "NEW LEVEL UNLOCKED";
+      const indicator = document.createElement("progress");indicator.className = "level-progress";indicator.max = 100;indicator.value = 0;indicator.setAttribute("aria-label", "Opening the next page");
+      const scene = document.createElement("div");scene.className = "level-scene";scene.append(butterfly,label,title,indicator);
+      const skip = document.createElement("button");skip.type = "button";skip.className = "level-continue";skip.textContent = "Continue now";
+      overlay.append(scan,scene,skip);
+      const background = [...document.body.children].map(element => ({element, wasInert:element.inert}));
+      background.forEach(({element})=>{element.inert=true;});
+      document.body.classList.add("is-transitioning");document.body.append(overlay);
+      let frame, navigating = false;
+      const started = performance.now();
+      const restore = (focus = false) => {
+        cancelAnimationFrame(frame);background.forEach(({element,wasInert})=>{element.inert=wasInert;});
+        document.body.classList.remove("is-transitioning");overlay.remove();activeTransition=null;
+        if(focus)link.focus({preventScroll:true});
+      };
+      const go = () => { if(navigating)return;navigating=true;cancelAnimationFrame(frame);window.location.assign(destination.href); };
+      activeTransition={restore,go};
+      skip.addEventListener("click",go);
+      overlay.addEventListener("keydown",event=>{
+        if(event.key==="Escape"){event.preventDefault();restore(true);}
+        if(event.key==="Tab"){event.preventDefault();skip.focus();}
+      });
+      skip.focus({preventScroll:true});
+      function tick(now) {
+        const elapsed=now-started;
+        overlay.dataset.phase=elapsed<650?"scanning":elapsed<850?"access":elapsed<1550?"unlocked":"complete";
+        indicator.value=Math.max(0,Math.min(100,(elapsed-1050)/5));
+        if(elapsed>=1650)go();else frame=requestAnimationFrame(tick);
+      }
       frame=requestAnimationFrame(tick);
     });
   });
+  window.addEventListener("pagehide",()=>activeTransition?.restore());
+  window.addEventListener("pageshow",event=>{if(event.persisted){activeTransition?.restore();document.body.classList.remove("motion-ready");document.documentElement.classList.remove("world-smooth");}});
+  matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change",event=>{if(event.matches){document.body.classList.remove("motion-ready");document.documentElement.classList.remove("world-smooth");activeTransition?.go();}});
+  if (!reduceMotion() && "IntersectionObserver" in window) {
+    const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.remove("reveal-pending");observer.unobserve(entry.target);}});},{threshold:.08});
+    document.querySelectorAll(".story-chapters article,.world-project,.library-entry,.case-study-body > div > h2,.showcase-discoveries").forEach(element=>{
+      if(element.getBoundingClientRect().top>innerHeight){observer.observe(element);element.classList.add("reveal-pending");}
+    });
+    window.addEventListener("pageshow",event=>{if(event.persisted){observer.disconnect();document.querySelectorAll(".reveal-pending").forEach(element=>element.classList.remove("reveal-pending"));}});
+  }
   const search = document.querySelector("#resource-search");
   if (search) {
     let category = "all";

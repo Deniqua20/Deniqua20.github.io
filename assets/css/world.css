@@ -150,3 +150,39 @@
 @media(max-width:1000px){.room-projects .room-intro::after,.room-resources .room-intro::after{display:none;}}
 @media(max-width:850px){.contact-story::after{height:150px;}.contact-butterfly{width:55px;height:55px;margin-top:0;}}
 .contact-butterfly {animation-duration:4.5s;animation-iteration-count:1;}
+
+/* The approved artwork stays still; short entrance cues add depth in code. */
+html.world-smooth {scroll-behavior:smooth;}
+.motion-ready.cyber-home .studio-copy {animation:studio-enter .65s ease-out both;}
+.motion-ready.cyber-home .studio-destinations {animation:studio-enter .6s .15s ease-out both;}
+.motion-ready .world-header .brand-butterfly {animation:brand-greeting 3.2s ease-in-out 1;transform-origin:55% 60%;}
+.motion-ready.cyber-home .studio-hero::after {content:'';position:absolute;right:0;top:36%;width:24%;height:34%;background:linear-gradient(110deg,transparent,#f1435318,transparent);pointer-events:none;z-index:-1;opacity:0;animation:monitor-light 3.8s .5s ease-in-out 1;}
+@keyframes studio-enter {from{opacity:.5;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@keyframes brand-greeting {0%,100%{transform:rotate(0) scaleX(1)}40%{transform:rotate(-4deg) scaleX(.93)}70%{transform:rotate(3deg) scaleX(.98)}}
+@keyframes monitor-light {0%,100%{opacity:0;transform:translateX(-10px)}40%{opacity:.65}75%{opacity:.3;transform:translateX(5px)}}
+.cyber-world .world-project,.cyber-world .library-entry {transition:transform .25s ease,border-color .25s ease;}
+.cyber-world .world-project:hover,.cyber-world .library-entry:hover {transform:translateY(-2px);border-color:#c7778177;}
+.reveal-pending {opacity:0;transform:translateY(12px);}
+.story-chapters article,.world-project,.library-entry,.case-study-body > div > h2,.showcase-discoveries {transition:opacity .55s ease,transform .55s ease;}
+.reveal-pending:focus-within {opacity:1;transform:none;}
+/* A single 1.65 second navigation scene with real controls and progress. */
+.cyber-world.is-transitioning > :not(.level-transition) {filter:brightness(.65);}
+.level-transition {background:#09080bf2;animation:level-in .22s ease-out both;backdrop-filter:blur(3px);overflow:hidden;}
+.level-scene {position:relative;z-index:1;}
+.level-scan {position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,#ff6072aa 30%,#ffa0aa 50%,#ff6072aa 70%,transparent);box-shadow:0 0 12px #ed375a44;opacity:0;animation:level-scan .55s .15s ease-in-out both;pointer-events:none;}
+.level-butterfly {display:block;width:70px;height:70px;object-fit:contain;margin:0 auto 25px;opacity:0;filter:drop-shadow(0 0 9px #e94a5a44);animation:level-symbol .3s .4s ease-out forwards;}
+.level-transition .level-kicker {opacity:0;animation:level-words .25s .65s ease-out forwards;}
+.level-transition .level-title {opacity:0;animation:level-words .3s .85s ease-out forwards;}
+.level-transition .level-progress {opacity:0;animation:level-words .2s 1.05s ease-out forwards;}
+.level-transition .level-continue {position:absolute;bottom:28px;color:#e5d4d0;z-index:2;}
+.level-transition progress::-webkit-progress-bar {background:#4c2934;}
+.level-transition progress::-webkit-progress-value {background:#ff91a0;}
+@keyframes level-scan {0%{transform:translateY(-2svh);opacity:0}10%{opacity:.8}90%{opacity:.8}100%{transform:translateY(102svh);opacity:0}}
+@keyframes level-symbol {from{opacity:0;transform:scale(.94)}to{opacity:.9;transform:scale(1)}}
+@keyframes level-words {from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){html.world-smooth{scroll-behavior:auto}.motion-ready .studio-copy,.motion-ready .studio-destinations,.motion-ready .world-header .brand-butterfly,.motion-ready .studio-hero::after,.level-transition,.level-transition *{animation:none!important;}.reveal-pending{opacity:1;transform:none;}.cyber-world .world-project,.cyber-world .library-entry,.story-chapters article,.case-study-body > div > h2,.showcase-discoveries{transition:none;}.cyber-world .world-project:hover,.cyber-world .library-entry:hover{transform:none;}}
+.world-project,.library-entry {position:relative;}
+.world-project > a::after,.library-entry h2 a::after {content:'';position:absolute;inset:0;}
+.world-project:focus-within,.library-entry:focus-within {outline:2px solid #ffa0aa;outline-offset:5px;}
+.cyber-world .about-portrait {position:relative;}
+.portrait-caption {position:absolute;bottom:12px;left:18px;color:#f6eeea;background:#100d11d9;padding:5px 9px;font:11px/1.6 var(--sans);}
