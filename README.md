@@ -1,40 +1,66 @@
 # Dee’s Cyber Corner
 
-A static cybersecurity portfolio for GitHub Pages. The homepage follows the approved dark botanical mockup, with quieter interior pages and shared navigation.
+A responsive, dependency free static portfolio for GitHub Pages. The homepage uses the owner’s cyber studio design reference with live HTML branding, headings, links, and the Progress over Perfection message. The site uses locally hosted fonts and optimized WebP artwork.
 
-## View locally
-
-From this directory, run:
+## Develop
 
 ```sh
 python3 -m http.server 8000
 ```
 
-Open the server in your own browser. No dependency installation, compilation, environment variables, or API keys are required. GitHub Pages can serve these files directly from the configured branch and directory.
+No package installation, compilation, or credentials are required to serve the site.
 
-## Structure
+## Shared components
 
-- `index.html`: single botanical hero homepage; navigation leads to separate portfolio, story, blog, and resources pages
-- `labs.html`: preserved technical portfolio content with shared navigation
-- `about.html`: portrait-led introduction using the owner-supplied story and design reference
-- `resources.html`: resources from Dee’s journey, coming soon
-- `learn.html`: compatibility redirect to Resources
-- `blog.html`: clearly marked previews of forthcoming articles
-- `projects/azure-sentinel-soc.html`: project overview and architecture; detailed evidence is forthcoming
-- `assets/css/site.css`: shared visual system and responsive layouts
-- `assets/js/site.js`: accessible mobile menu and acronym game
-- `assets/images/`: optimized WebP decorative artwork
-- `assets/fonts/`: locally hosted fonts and their licenses
-- `style.css`: retained original stylesheet for reference; the redesigned pages use `assets/css/site.css`
+Header and footer markup live in `components/header.html` and `components/footer.html`. After editing those templates, run:
 
-## Content and artwork
+```sh
+python3 scripts/build_shared.py
+```
 
-Decorative botanical images were generated for this design and optimized to WebP. They are decorative artwork, not technical evidence. The portfolio does not present generated security screenshots, unpublished results, or invented contact details. Add verified project screenshots and the implemented KQL when available; replace article previews with the real articles before offering them as published posts. The About layout can accommodate a real headshot later.
+This writes the shared navigation as static HTML, adjusts relative paths, and marks the current section. It also attaches the shared world stylesheet and interaction script. The command is idempotent. Rendering does not rely on JavaScript.
 
-Fonts: Cormorant Garamond, DM Sans, and Great Vibes, distributed under the licenses included alongside the font files. Hosting them locally keeps typography independent of third-party font services.
+- `assets/css/site.css`: typography, existing layouts, and original component styles.
+- `assets/css/world.css`: the shared charcoal/crimson visual system and room layouts.
+- `assets/js/site.js`: mobile navigation and project filters.
+- `assets/js/world.js`: Explore transition, resource search/filtering, career explorer, and contact handling.
 
-## Validation
+## Pages
 
-The site was rendered with Chromium at 1440, 1024, 768, and 390 pixels wide. Local navigation paths and anchor targets were audited; the mobile menu and navigation were exercised. There is no build or package manifest to maintain.
+- `index.html`: single screen cyber studio homepage at typical screen sizes, with readable reflow in short windows.
+- `about.html`: the owner’s personal story, portrait, education, growth, and life beyond technology.
+- `labs.html`: project workspace with actual Sentinel evidence and filterable case studies.
+- `resources.html`: searchable starter library with source labels, the published walkthrough, career guidance, and the owner’s blog.
+- `careers.html`: Paths in Tech, with 15 selectable areas and role/project guidance. No quiz.
+- `contact.html`: public LinkedIn/GitHub links and an accessible email draft form.
+- `blog.html`: the owner’s published first story.
+- `projects/`: detailed Sentinel, Entra, Okta, cloud, and GRC case studies. EDR is explicitly in preparation.
 
-The About portrait artwork is an AI-assisted composite based on the owner’s supplied portrait and mockup; it is not an untouched photograph.
+## Contact delivery
+
+The public email and LinkedIn links were found in the owner’s GitHub profile README. By default, the form validates the visitor’s fields and opens their email app with a prepared message. It does not claim the message was sent; the visitor must review and send it there. Without JavaScript, a direct email link is available and the form button is disabled to avoid an unintended form submission.
+
+For direct website delivery, create and verify a form endpoint with a service such as Formspree, then put the HTTPS endpoint URL in `data-endpoint` on `#contact-form`. The shared script switches the button and explanatory copy, POSTs FormData, and reports acceptance or failure. No API secret should be placed in the page. Test with the chosen service before announcing direct delivery. A form service has **not** been connected yet.
+
+## Evidence and content
+
+Sentinel and Entra case studies retain real repository screenshots and evidence. Okta content is based on these public writeups:
+
+- https://github.com/Deniqua20/okta-iam-lifecycle-lab
+- https://github.com/Deniqua20/okta-sso-app-integration
+
+Those Okta repositories list screenshots as pending. No screenshots were invented. No EDR investigation evidence was found among the existing project links, so that case study is clearly marked in preparation without claimed findings.
+
+Decorative studio monitors are artwork, not lab evidence. The About portrait is an AI assisted composite based on the owner’s supplied portrait and reference. The homepage character is an illustrated cyborg likeness based on the supplied artwork, not an untouched photograph. Resource entries distinguish the owner’s own material from external learning references; external courses are not presented as completed by the owner.
+
+## Interaction and accessibility checks
+
+The Explore scene lasts about 900 milliseconds, can be continued immediately, and is skipped for reduced motion. Modified clicks retain native link behavior. Resource search combines its search text with the selected category and includes an empty state. Mobile menus expose expanded state and support Escape.
+
+Browser checks use Playwright and axe-core from the development environment, not shipped website dependencies. With the server at port 8000 and Playwright available:
+
+```sh
+node tests/world-interactions.cjs
+```
+
+Validation covers desktop, tablet, and phone layouts, accessible navigation, internal files and anchors, WCAG A/AA automated checks, resource search, project filters, career panels, contact validation and email draft creation, no JavaScript fallbacks, the Explore animation, and reduced motion. Automated checks do not replace human accessibility testing.
