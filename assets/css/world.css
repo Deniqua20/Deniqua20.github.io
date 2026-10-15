@@ -186,3 +186,8 @@ html.world-smooth {scroll-behavior:smooth;}
 .world-project:focus-within,.library-entry:focus-within {outline:2px solid #ffa0aa;outline-offset:5px;}
 .cyber-world .about-portrait {position:relative;}
 .portrait-caption {position:absolute;bottom:12px;left:18px;color:#f6eeea;background:#100d11d9;padding:5px 9px;font:11px/1.6 var(--sans);}
+
+/* The owner is preparing their own resource content. */
+.cyber-world.room-resources {display:flex;flex-direction:column;min-height:100svh;}
+.room-resources .resources-blank {flex:1;}
+.cyber-world.room-resources .world-footer {margin-top:0;}

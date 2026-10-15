@@ -2,20 +2,29 @@
 // Shared interactions for the rooms of Dee's Cyber Corner.
 (() => {
   const reduceMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const butterflyURL = new URL("../images/lab-butterfly.webp", document.currentScript.src).href;
+  const scriptURL = document.currentScript?.src || document.querySelector('script[src*="/world.js"]')?.src || new URL("assets/js/world.js", document.baseURI).href;
+  const butterflyURL = new URL("../images/lab-butterfly.webp", scriptURL).href;
   let activeTransition = null;
   const navigationType = performance.getEntriesByType("navigation")[0]?.type;
   if (!reduceMotion() && navigationType !== "back_forward") {
     document.body.classList.add("motion-ready");
     document.documentElement.classList.add("world-smooth");
   }
+  // Never cancel native navigation. Effects run only after the destination loads.
+  const arrivalKey = "dee-room-arrival";
   document.querySelectorAll("a.portal-trigger").forEach(link => {
     link.addEventListener("click", event => {
       if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || reduceMotion() || link.hasAttribute("download") || (link.target && link.target !== "_self")) return;
       const destination = new URL(link.href);
-      if (destination.origin !== location.origin || destination.href === location.href || (destination.pathname === location.pathname && destination.hash)) return;
-      event.preventDefault();
-      if (activeTransition) return;
+      if (destination.origin !== location.origin || destination.pathname === location.pathname) return;
+      try { sessionStorage.setItem(arrivalKey, JSON.stringify({path:destination.pathname + destination.search,time:Date.now()})); } catch {}
+    });
+  });
+  let arrival;
+  try { arrival=JSON.parse(sessionStorage.getItem(arrivalKey));sessionStorage.removeItem(arrivalKey); } catch {}
+  if (arrival && arrival.path === location.pathname + location.search && Date.now()-arrival.time < 8000 && navigationType !== "back_forward" && !reduceMotion()) {
+    const initialInert = [...document.body.children].map(element=>({element,wasInert:element.inert}));
+    try {
       const overlay = document.createElement("div");
       overlay.className = "level-transition";
       overlay.setAttribute("role", "dialog");
@@ -33,14 +42,14 @@
       const background = [...document.body.children].map(element => ({element, wasInert:element.inert}));
       background.forEach(({element})=>{element.inert=true;});
       document.body.classList.add("is-transitioning");document.body.append(overlay);
-      let frame, navigating = false;
+      let frame, navigationTimer;
       const started = performance.now();
       const restore = (focus = false) => {
-        cancelAnimationFrame(frame);background.forEach(({element,wasInert})=>{element.inert=wasInert;});
+        cancelAnimationFrame(frame);clearTimeout(navigationTimer);background.forEach(({element,wasInert})=>{element.inert=wasInert;});
         document.body.classList.remove("is-transitioning");overlay.remove();activeTransition=null;
-        if(focus)link.focus({preventScroll:true});
+        if(focus){const heading=document.querySelector("main h1");if(heading){heading.setAttribute("tabindex","-1");heading.focus({preventScroll:true});}}
       };
-      const go = () => { if(navigating)return;navigating=true;cancelAnimationFrame(frame);window.location.assign(destination.href); };
+      const go = () => restore(true);
       activeTransition={restore,go};
       skip.addEventListener("click",go);
       overlay.addEventListener("keydown",event=>{
@@ -54,12 +63,21 @@
         indicator.value=Math.max(0,Math.min(100,(elapsed-1050)/5));
         if(elapsed>=1650)go();else frame=requestAnimationFrame(tick);
       }
+      navigationTimer=setTimeout(go,1800);
       frame=requestAnimationFrame(tick);
-    });
-  });
+    } catch {
+      activeTransition?.restore();
+      initialInert.forEach(({element,wasInert})=>{element.inert=wasInert;});
+      document.body.classList.remove("is-transitioning");
+      document.querySelectorAll(".level-transition").forEach(element=>element.remove());
+    }
+  }
   window.addEventListener("pagehide",()=>activeTransition?.restore());
   window.addEventListener("pageshow",event=>{if(event.persisted){activeTransition?.restore();document.body.classList.remove("motion-ready");document.documentElement.classList.remove("world-smooth");}});
-  matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change",event=>{if(event.matches){document.body.classList.remove("motion-ready");document.documentElement.classList.remove("world-smooth");activeTransition?.go();}});
+  const motionPreference=matchMedia("(prefers-reduced-motion: reduce)");
+  const motionChanged=event=>{if(event.matches){document.body.classList.remove("motion-ready");document.documentElement.classList.remove("world-smooth");activeTransition?.go();}};
+  if(typeof motionPreference.addEventListener==="function")motionPreference.addEventListener("change",motionChanged);
+  else if(typeof motionPreference.addListener==="function")motionPreference.addListener(motionChanged);
   if (!reduceMotion() && "IntersectionObserver" in window) {
     const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.remove("reveal-pending");observer.unobserve(entry.target);}});},{threshold:.08});
     document.querySelectorAll(".story-chapters article,.world-project,.library-entry,.case-study-body > div > h2,.showcase-discoveries").forEach(element=>{
@@ -106,5 +124,5 @@ careerPanelButtons.forEach(button=>button.addEventListener('click',()=>{
   careerPanelButtons.forEach(item=>{const chosen=item===button;item.setAttribute('aria-pressed',String(chosen));document.getElementById(item.dataset.careerPanel).hidden=!chosen;});
   const panel=document.getElementById(button.dataset.careerPanel);panel.querySelector('h2').focus({preventScroll:true});
   if(matchMedia('(max-width: 850px)').matches)panel.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
-  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)panel.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:230,easing:'ease-out'});
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches && typeof panel.animate==='function')panel.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:230,easing:'ease-out'});
 }));
