@@ -1,7 +1,9 @@
 """Render shared static navigation. Run python3 scripts/build_shared.py after page edits."""
 from pathlib import Path
 import re
+import hashlib
 ROOT=Path(__file__).resolve().parents[1]
+VERSION=hashlib.sha256((ROOT/'assets/css/world.css').read_bytes()+(ROOT/'assets/js/world.js').read_bytes()).hexdigest()[:10]
 NAV=[('index.html','Home'),('about.html','About Me'),('labs.html','Projects'),('resources.html','Resources'),('contact.html','Contact')]
 for path in [*ROOT.glob('*.html'),*ROOT.joinpath('projects').glob('*.html')]:
     text=path.read_text()
@@ -17,4 +19,6 @@ for path in [*ROOT.glob('*.html'),*ROOT.joinpath('projects').glob('*.html')]:
     if 'cyber-world' not in text:text=re.sub(r'<body class="([^"]*)"',r'<body class="\1 cyber-world"',text,count=1)
     if 'assets/css/world.css' not in text:text=text.replace('</head>',f'<link rel="stylesheet" href="{prefix}assets/css/world.css?v=world-1" />\n</head>')
     if 'assets/js/world.js' not in text:text=text.replace('</head>',f'<script src="{prefix}assets/js/world.js?v=world-1" defer></script>\n</head>')
+    text=re.sub(r'world\.css\?v=[^"\s]+',f'world.css?v={VERSION}',text)
+    text=re.sub(r'world\.js\?v=[^"\s]+',f'world.js?v={VERSION}',text)
     path.write_text(text)

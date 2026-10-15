@@ -18,7 +18,7 @@ Header and footer markup live in `components/header.html` and `components/footer
 python3 scripts/build_shared.py
 ```
 
-This writes the shared navigation as static HTML, adjusts relative paths, and marks the current section. It also attaches the shared world stylesheet and interaction script. The command is idempotent. Rendering does not rely on JavaScript.
+This writes the shared navigation as static HTML, adjusts relative paths, and marks the current section. It also attaches the shared world stylesheet and interaction script. Asset versions are derived from the shared stylesheet and script so changes refresh correctly in browsers. The command is idempotent. Rendering does not rely on JavaScript.
 
 - `assets/css/site.css`: typography, existing layouts, and original component styles.
 - `assets/css/world.css`: the shared charcoal/crimson visual system and room layouts.
