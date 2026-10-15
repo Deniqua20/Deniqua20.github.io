@@ -60,5 +60,6 @@ const careerPanelButtons = [...document.querySelectorAll('[data-career-panel]')]
 careerPanelButtons.forEach(button=>button.addEventListener('click',()=>{
   careerPanelButtons.forEach(item=>{const chosen=item===button;item.setAttribute('aria-pressed',String(chosen));document.getElementById(item.dataset.careerPanel).hidden=!chosen;});
   const panel=document.getElementById(button.dataset.careerPanel);panel.querySelector('h2').focus({preventScroll:true});
+  if(matchMedia('(max-width: 850px)').matches)panel.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches)panel.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:230,easing:'ease-out'});
 }));
