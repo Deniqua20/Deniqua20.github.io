@@ -1,0 +1,42 @@
+/* Screens stay registered to the original image, including its responsive crop. */
+.hq-scene {position:absolute;inset:0;z-index:-3;transform-origin:60% 45%;}
+.cyber-home .hq-scene .studio-art {z-index:0;}
+.hq-screens {position:absolute;overflow:visible;pointer-events:none;z-index:1;}
+.hq-screens .hq-computer {pointer-events:auto;}
+.cyber-home .studio-shade {pointer-events:none;}
+.hq-monitor-label {fill:#bcd1df;font:7px monospace;letter-spacing:1px;}
+.hq-log-stream {fill:#a5bfca;font:7px monospace;animation:hq-log-drift 12s linear infinite;}
+.hq-log-stream .alert {fill:#f58793;}
+.hq-network-line {fill:none;stroke:#e16175;stroke-width:.9;stroke-dasharray:3 12;animation:hq-packet 8s linear infinite;opacity:.6;}
+.hq-network-node {fill:#ed8592;opacity:.55;animation:hq-node 5s ease-in-out infinite;}
+.hq-computer {display:flex;flex-direction:column;justify-content:center;width:100%;height:100%;box-sizing:border-box;background:linear-gradient(120deg,#090f1de8,#09111cd9);color:#dfebf0;text-decoration:none!important;padding:12px;font:11px/1.6 monospace;outline-offset:-3px;}
+.hq-computer strong {font-size:14px;font-weight:400;color:#f2afb7;}.hq-computer small {font-size:7px;color:#c1cdd2;}.hq-computer:focus-visible {outline:3px solid #ffb5c0;}.hq-computer:hover {background:#1d1726;}
+.hq-archive-stream {margin-top:15px;color:#8fabbc;font-size:8px;overflow:hidden;}
+.hq-archive-stream span {display:block;animation:hq-file 6s ease-in-out infinite;}
+.hq-sim {fill:#b7c2cc;font:6px monospace;}
+.hq-pause {position:absolute;right:14px;bottom:10px;z-index:5;border:1px solid #7b4b54;background:#100d11e6;color:#f1d8d9;border-radius:20px;padding:7px 11px;font:10px var(--sans);cursor:pointer;}
+.hq-paused .hq-screens * {animation-play-state:paused!important;}
+@keyframes hq-log-drift {0%,12%{transform:translateY(0)}85%,100%{transform:translateY(-40px)}}
+@keyframes hq-packet {to{stroke-dashoffset:-90}}
+@keyframes hq-node {50%{opacity:.95}}
+@keyframes hq-file {50%{opacity:.5;transform:translateX(2px)}}
+/* A screen anchored interface grows from the existing archive monitor. */
+.hq-console {position:fixed;z-index:1150;inset:0;background:radial-gradient(ellipse at 75% 35%,#1f0d1844,#06080be8);color:#f2edf0;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.hq-terminal {width:min(560px,85vw);padding:clamp(24px,5vw,48px);background:linear-gradient(125deg,#0f151ef5,#0d0a10f5);border:1px solid #a84a59;box-shadow:0 20px 90px #0009;}
+.hq-terminal h2 {font:500 clamp(23px,4vw,36px)/1.2 var(--serif);margin:0 0 25px;}
+.hq-terminal p {font:11px/1.8 monospace;letter-spacing:.07em;color:#d0bfc6;}
+.hq-terminal .hq-granted {color:#f79aa6;}.hq-terminal .hq-unlocked {font:500 clamp(24px,4vw,40px)/1.2 var(--serif);color:#fff0ed;}
+.hq-terminal .hq-butterfly {width:38px;height:38px;object-fit:contain;display:block;margin:16px 0;}
+.hq-meter {height:3px;background:#44202b;margin:25px 0;overflow:hidden;}.hq-meter span {display:block;height:100%;background:#f76a7c;transform:scaleX(0);transform-origin:left;}
+.hq-console .hq-enter {position:absolute;right:24px;bottom:24px;background:#100d11;border:1px solid #a95662;color:#fff0ec;border-radius:30px;padding:12px 20px;cursor:pointer;}
+body.hq-computer-playing {overflow:hidden;}
+.hq-blog-shell {position:fixed;inset:0;z-index:1160;overflow:auto;background:#100d11;color:#f6eeea;}
+.hq-blog-shell:focus {outline:none;}
+.hq-blog-shell .journal-article {max-width:1100px;margin:auto;padding:30px 6%;}
+.cyber-corner-intro {max-width:1100px;margin:auto;padding:42px 6% 24px;}
+.cyber-corner-intro h1 {font:500 clamp(38px,6vw,72px)/1.1 var(--serif);margin:22px 0;}
+.cyber-corner-intro > p:last-child {font:16px/1.8 var(--sans);color:#d8c8c9;max-width:680px;}
+.hq-return {display:inline-block;font:11px/1.6 var(--sans);letter-spacing:.13em;border-bottom:1px solid #b85869;color:#ffc2c8!important;padding:8px 0;margin-bottom:25px;}
+.journal-heading .corner-post-title {font:500 clamp(36px,5vw,68px)/1.1 var(--serif);margin:16px 0;}.corner-post-title em{color:#ffa0aa;}
+@media(max-width:700px){.hq-pause{padding:6px 9px;bottom:6px;font-size:9px;}.hq-terminal p{font-size:10px;}}
+@media(prefers-reduced-motion:reduce){.hq-screens *{animation:none!important;}.hq-pause{display:none;}}

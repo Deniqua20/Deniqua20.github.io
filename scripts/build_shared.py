@@ -4,7 +4,7 @@ import re
 import hashlib
 ROOT=Path(__file__).resolve().parents[1]
 VERSION=hashlib.sha256((ROOT/'assets/css/world.css').read_bytes()+(ROOT/'assets/js/world.js').read_bytes()).hexdigest()[:10]
-NAV=[('index.html','Home'),('about.html','About Me'),('labs.html','Projects'),('resources.html','Resources'),('contact.html','Contact')]
+NAV=[('index.html','Home'),('about.html','About Me'),('labs.html','Projects'),('resources.html','Resources'),('blog.html','BLOG'),('contact.html','Contact')]
 for path in [*ROOT.glob('*.html'),*ROOT.joinpath('projects').glob('*.html')]:
     text=path.read_text()
     if '<header class="site-header' not in text:continue

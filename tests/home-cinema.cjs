@@ -3,7 +3,7 @@ const {chromium}=require('playwright');const assert=require('node:assert/strict'
 for(const viewport of [{width:1440,height:900},{width:390,height:844}]){
  const page=await browser.newPage({viewport});const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('http://localhost:8034/');await page.waitForTimeout(1900);
  assert.equal(await page.locator('.studio-explore').getAttribute('href'),'about.html');
- await page.locator('.studio-explore').click();await page.waitForFunction(()=>document.querySelector('.cinema-door')?.dataset.phase==='camera');assert(await page.locator('.studio-art').evaluate(e=>getComputedStyle(e).transform!=='none'));
+ await page.locator('.studio-explore').click();await page.waitForFunction(()=>document.querySelector('.cinema-door')?.dataset.phase==='camera');assert(await page.locator('.hq-scene').evaluate(e=>getComputedStyle(e).transform!=='none'));
  await page.waitForFunction(()=>document.querySelector('.cinema-door')?.dataset.phase==='doorway');assert(await page.locator('.cinema-panel-left').evaluate(e=>getComputedStyle(e).transform!=='none'));
  await page.waitForFunction(()=>document.querySelector('.cinema-door')?.dataset.phase==='access');assert.equal(await page.locator('.cinema-title').innerText(),'NEW LEVEL UNLOCKED');await page.screenshot({path:`/tmp/dee-cinema-${viewport.width}.png`});
  await page.waitForFunction(()=>document.querySelector('.cinema-door')?.dataset.phase==='level');await page.waitForURL('**/about.html');assert.match(await page.locator('main').innerText(),/Deniqua/);

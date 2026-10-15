@@ -4,7 +4,7 @@
   const hero=document.querySelector('.studio-hero');
   if(!button || !hero || !window.gsap)return;
   const motion=matchMedia('(prefers-reduced-motion: reduce)');
-  const art=hero.querySelector('.studio-art'),copy=hero.querySelector('.studio-copy');
+  const art=hero.querySelector('.hq-scene') || hero.querySelector('.studio-art'),copy=hero.querySelector('.studio-copy');
   const dark=document.createElement('div'),light=document.createElement('div');
   dark.className='cinema-dark';light.className='cinema-light';
   dark.setAttribute('aria-hidden','true');light.setAttribute('aria-hidden','true');
@@ -25,16 +25,16 @@
       .fromTo('.studio-destinations',{opacity:0},{opacity:1,duration:.6},1.2);
   }else dark.style.opacity='0';
   hero.addEventListener('pointermove',event=>{
-    if(playing || motion.matches || event.pointerType!=='mouse')return;
+    if(playing || document.body.classList.contains('hq-computer-playing') || motion.matches || event.pointerType!=='mouse')return;
     const rect=hero.getBoundingClientRect();
     const x=(event.clientX-rect.left)/rect.width-.5,y=(event.clientY-rect.top)/rect.height-.5;
     gsap.to(art,{x:x*9,y:y*6,rotationY:x*.5,duration:1.2,ease:'power2.out',overwrite:'auto'});
     gsap.to(light,{x:x*-8,y:y*-5,duration:1.3,overwrite:'auto'});
   });
-  hero.addEventListener('pointerleave',()=>{if(!playing)gsap.to([art,light],{x:0,y:0,rotationY:0,duration:1,overwrite:'auto'});});
+  hero.addEventListener('pointerleave',()=>{if(!playing && !document.body.classList.contains('hq-computer-playing'))gsap.to([art,light],{x:0,y:0,rotationY:0,duration:1,overwrite:'auto'});});
   button.addEventListener('click',event=>{
     if(event.defaultPrevented || event.button!==0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || motion.matches)return;
-    event.preventDefault();if(playing)return;playing=true;entrance?.kill();
+    event.preventDefault();if(playing || document.body.classList.contains('hq-computer-playing'))return;playing=true;entrance?.kill();
     // A native destination remains available if any visual enhancement fails.
     watchdog=setTimeout(navigate,4500);
     try{
@@ -68,6 +68,7 @@
         .to(find('.cinema-message'),{opacity:0,duration:.2},2.8);
     }catch{navigate();}
   });
+  window.addEventListener('hq-computer-activate',()=>{entrance?.kill();gsap.set(copy,{opacity:1,y:0});gsap.set(dark,{opacity:0});});
   window.addEventListener('pagehide',reset);
   window.addEventListener('pageshow',event=>{if(event.persisted)reset();});
   const changed=()=>{if(motion.matches){if(playing)navigate();else reset();}};
