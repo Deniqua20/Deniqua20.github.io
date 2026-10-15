@@ -3632,3 +3632,20 @@ svg.line-icon {
 }
 @media (max-width: 430px) { .studio-destinations { grid-template-columns: 1fr; } .studio-destination { min-height: 260px; } }
 @media (prefers-reduced-motion: reduce) { .studio-explore, .studio-destination::before { transition: none; } }
+
+/* A warmer second direction with the message at the heart of the hero. */
+.studio-copy .studio-progress-title { margin: 25px 0 30px; }
+.studio-copy .studio-progress-title strong { font: 500 clamp(49px, 5vw, 80px)/.94 var(--serif); letter-spacing: -1px; margin: 0; }
+.studio-copy .studio-progress-title em { display: block; font: 400 clamp(72px, 7.8vw, 125px)/1.05 "Great Vibes", cursive; color: #ff8790; margin: -24px 0 0 95px; text-shadow: 0 0 15px #e4213544; }
+.cyber-home .studio-motto { top: 8%; right: 2.5%; width: 22%; font-size: clamp(30px, 3.2vw, 51px); line-height: 1.08; }
+.cyber-home .studio-destination h2 { font: 400 clamp(38px, 3.5vw, 57px)/1.1 "Great Vibes", cursive; color: #ff9ba4; margin-bottom: 12px; }
+.cyber-home .studio-destination p { font: 500 16px/1.5 var(--serif); letter-spacing: .3px; }
+@media (max-width: 1100px) { .studio-copy .studio-progress-title em { margin-left: 60px; margin-top: -12px; font-size: 78px; } }
+@media (max-width: 700px) {
+ .studio-copy .studio-progress-title { margin-top: 24px; margin-bottom: 16px; }
+ .studio-copy .studio-progress-title strong { font-size: 53px; }
+ .studio-copy .studio-progress-title em { margin-left: 90px; margin-top: -15px; font-size: 75px; }
+ .cyber-home .studio-motto { top: auto; bottom: 25px; right: 5%; width: 42%; font-size: 33px; }
+ .cyber-home .studio-destination h2 { font-size: 45px; }
+}
+@media (max-width: 360px) { .studio-copy .studio-progress-title strong { font-size: 47px; } .studio-copy .studio-progress-title em { margin-left: 66px; font-size: 70px; } }
