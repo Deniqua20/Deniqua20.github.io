@@ -1,0 +1,21 @@
+/* Isolated homepage enhancement. The approved image and typography stay intact. */
+.cinema-ready .studio-hero {perspective:1100px;}
+.cinema-ready .studio-art {transform-origin:60% 45%;will-change:transform;}
+.cinema-ready .studio-copy,.cinema-ready .studio-destinations {animation:none!important;}
+.cinema-dark,.cinema-light {position:absolute;inset:0;pointer-events:none;}
+.cinema-dark {z-index:3;background:#050405;}
+.cinema-light {z-index:1;opacity:0;background:radial-gradient(ellipse at 77% 35%,#e51e2638,transparent 65%);mix-blend-mode:screen;}
+.cinema-door {position:fixed;inset:0;z-index:1100;perspective:1000px;overflow:hidden;background:transparent;color:#fff4f0;}
+.cinema-preview {position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none;opacity:0;background:#100d11;}
+.cinema-panel {position:absolute;top:0;bottom:0;width:50.1%;opacity:0;background:linear-gradient(90deg,#08090b,#19191d 48%,#09090c);box-shadow:inset 0 0 80px #000,0 0 70px #000;}
+.cinema-panel::after {content:'';position:absolute;top:7%;bottom:7%;width:2px;background:#ff4052;box-shadow:0 0 12px #d91c35,0 0 30px #d91c3566;}
+.cinema-panel-left {left:0;border-right:1px solid #ef3244;}.cinema-panel-left::after{right:6px;}
+.cinema-panel-right {right:0;border-left:1px solid #ef3244;}.cinema-panel-right::after{left:6px;}
+.cinema-message {position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;pointer-events:none;background:radial-gradient(ellipse,#08070bf5 15%,#08070bd9 40%,#08070b44 75%,transparent);opacity:0;}
+.cinema-message p {margin:9px 0;}.cinema-access {font:12px/1.5 var(--sans);letter-spacing:.3em;color:#ff8c98;}
+.cinema-title {font:500 clamp(28px,5vw,66px)/1.12 var(--serif);text-shadow:0 2px 22px #000;}
+.cinema-level {font:13px/1.5 var(--sans);letter-spacing:.2em;opacity:0;}
+.cinema-progress {width:min(240px,55vw);height:2px;background:#5f2530;margin:24px auto;overflow:hidden;}.cinema-progress span{display:block;width:100%;height:100%;background:#ff6276;transform:scaleX(0);transform-origin:left;}
+.cinema-skip {position:absolute;right:24px;bottom:24px;background:#100d11d9;border:1px solid #a95662;color:#fff0ec;border-radius:30px;padding:12px 20px;cursor:pointer;}
+body.cinema-playing{overflow:hidden;}
+@media(prefers-reduced-motion:reduce){.cinema-dark,.cinema-light,.cinema-door{display:none;}.cinema-ready .studio-art{will-change:auto;}}
