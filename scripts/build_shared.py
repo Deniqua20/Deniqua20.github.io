@@ -6,6 +6,7 @@ ROOT=Path(__file__).resolve().parents[1]
 VERSION=hashlib.sha256((ROOT/'assets/css/world.css').read_bytes()+(ROOT/'assets/js/world.js').read_bytes()).hexdigest()[:10]
 ROOMS=hashlib.sha256((ROOT/'assets/css/rooms.css').read_bytes()+(ROOT/'assets/js/rooms.js').read_bytes()).hexdigest()[:10]
 GAME=hashlib.sha256((ROOT/'assets/css/game.css').read_bytes()+(ROOT/'assets/js/game.js').read_bytes()).hexdigest()[:10]
+EYES=hashlib.sha256((ROOT/'assets/css/hq-eyes.css').read_bytes()+(ROOT/'assets/js/hq-eyes.js').read_bytes()).hexdigest()[:10]
 NAV=[('index.html','Home'),('about.html','About Me'),('labs.html','Projects'),('resources.html','Resources'),('blog.html','BLOG'),('contact.html','Contact')]
 for path in [*ROOT.glob('*.html'),*ROOT.joinpath('projects').glob('*.html'),*ROOT.joinpath('stories').glob('*.html')]:
     text=path.read_text()
@@ -26,6 +27,7 @@ for path in [*ROOT.glob('*.html'),*ROOT.joinpath('projects').glob('*.html'),*ROO
     text=re.sub(r'game\.css\?v=[^"\s]+',f'game.css?v={GAME}',text)
     text=re.sub(r'game\.js\?v=[^"\s]+',f'game.js?v={GAME}',text)
     text=re.sub(r'rooms\.css\?v=[^"\s]+',f'rooms.css?v={ROOMS}',text)
+    text=re.sub(r'hq-eyes\.(css|js)\?v=[^"\s]+',lambda m:f'hq-eyes.{m.group(1)}?v={EYES}',text)
     if 'cyber-home' not in text:
         if 'room-page' not in text:text=re.sub(r'<body class="([^"]*)"',r'<body class="\1 room-page"',text,count=1)
         if 'assets/css/rooms.css' not in text:text=text.replace('</head>',f'<link rel="stylesheet" href="{prefix}assets/css/rooms.css?v=rooms-1" />\n</head>')
