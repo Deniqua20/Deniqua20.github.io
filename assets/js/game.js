@@ -20,10 +20,12 @@
   const KEY = "dee-cyber-progress";
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const inProjects = location.pathname.includes("/projects/");
-  const prefix = inProjects ? "../" : "";
+  const inStories = location.pathname.includes("/stories/");
+  const prefix = inProjects || inStories ? "../" : "";
   const file = location.pathname.split("/").pop() || "index.html";
-  const level = inProjects ? LEVELS[1] : LEVELS.find(l => l.file === file || (file === "learn.html" && l.n === 3));
+  const level = inProjects ? LEVELS[1] : inStories ? LEVELS[4] : LEVELS.find(l => l.file === file || (file === "learn.html" && l.n === 3));
 
+  let sawArrival = false;
   let state = { levels: [], achievements: [] };
   try { state = Object.assign(state, JSON.parse(localStorage.getItem(KEY)) || {}); } catch {}
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {} };
@@ -51,8 +53,8 @@
   const live = document.createElement("div");
   live.className = "visually-hidden"; live.setAttribute("role", "status");
   document.body.append(live);
-  function toast(kind, title, detail, reward) {
-    queue.push({ kind, title, detail, reward });
+  function toast(kind, kicker, title, reward) {
+    queue.push({ kind, kicker, title, reward });
     if (!showing) next();
   }
   function next() {
@@ -61,25 +63,32 @@
     if (document.querySelector(".level-transition, .cinema-door")) { queue.unshift(item); setTimeout(next, 400); return; }
     showing = true;
     const el = document.createElement("div");
-    el.className = `game-toast game-toast-${item.kind}`;
     el.setAttribute("aria-hidden", "true");
-    el.innerHTML = `<p class="game-toast-kicker">${item.kind === "level" ? "NEW LEVEL UNLOCKED" : "ACHIEVEMENT UNLOCKED"}</p><p class="game-toast-title" data-text="${item.title}">${item.title}</p><p class="game-toast-detail">${item.detail}</p><p class="game-toast-reward">+${item.reward} XP</p><span class="game-toast-bar"><span></span></span>`;
+    if (item.kind === "level") {
+      // Chapter title card: thin lines draw out from the centre, the room name resolves between them.
+      el.className = "game-card";
+      el.innerHTML = `<img class="gc-butterfly" src="${prefix}assets/images/lab-butterfly.webp" alt="" width="44" height="44"><span class="gc-line"></span><p class="gc-kicker">${item.kicker}</p><p class="gc-title">${item.title}</p><p class="gc-reward">+${item.reward} XP</p><span class="gc-line"></span>`;
+    } else {
+      el.className = "game-badge";
+      el.innerHTML = `<img src="${prefix}assets/images/lab-butterfly.webp" alt="" width="34" height="34"><span class="gb-copy"><span class="gb-kicker">${item.kicker}</span><span class="gb-title">${item.title}</span></span><span class="gb-xp">+${item.reward} XP</span>`;
+    }
     document.body.append(el);
-    live.textContent = `${item.kind === "level" ? "New level unlocked" : "Achievement unlocked"}: ${item.title}. ${item.reward} experience points.`;
-    requestAnimationFrame(() => el.classList.add("is-in"));
-    setTimeout(() => { el.classList.remove("is-in"); el.classList.add("is-out"); }, reduce ? 3200 : 3600);
-    setTimeout(() => { el.remove(); next(); }, reduce ? 3400 : 4100);
+    live.textContent = `${item.kicker}: ${item.title}. ${item.reward} experience points.`;
+    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add("is-in")));
+    const hold = item.kind === "level" ? 3400 : 3200;
+    setTimeout(() => { el.classList.remove("is-in"); el.classList.add("is-out"); }, hold);
+    setTimeout(() => { el.remove(); next(); }, hold + 700);
   }
 
   function award(id) {
     if (!ACHIEVEMENTS[id] || state.achievements.includes(id)) return;
     state.achievements.push(id); save(); renderHud();
-    toast("achievement", ACHIEVEMENTS[id][0], ACHIEVEMENTS[id][1], 50);
+    toast("achievement", "Achievement unlocked", ACHIEVEMENTS[id][0], 50);
   }
   function unlock(lv) {
     if (state.levels.includes(lv.n)) return;
     state.levels.push(lv.n); save(); renderHud();
-    toast("level", `Level ${pad(lv.n)}`, lv.name, 100);
+    toast(sawArrival ? "achievement" : "level", `Level ${pad(lv.n)} unlocked`, lv.name, 100);
     if (state.levels.length === LEVELS.length) award("explorer");
   }
 
@@ -87,6 +96,7 @@
   if (level) {
     const name = () => {
       const scene = document.querySelector(".level-transition .level-scene");
+      if (scene) sawArrival = true;
       if (scene && !scene.querySelector(".level-name")) {
         const p = document.createElement("p"); p.className = "level-name";
         p.textContent = `LEVEL ${pad(level.n)} — ${level.name.toUpperCase()}`;

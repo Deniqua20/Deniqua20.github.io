@@ -7,11 +7,11 @@ VERSION=hashlib.sha256((ROOT/'assets/css/world.css').read_bytes()+(ROOT/'assets/
 ROOMS=hashlib.sha256((ROOT/'assets/css/rooms.css').read_bytes()+(ROOT/'assets/js/rooms.js').read_bytes()).hexdigest()[:10]
 GAME=hashlib.sha256((ROOT/'assets/css/game.css').read_bytes()+(ROOT/'assets/js/game.js').read_bytes()).hexdigest()[:10]
 NAV=[('index.html','Home'),('about.html','About Me'),('labs.html','Projects'),('resources.html','Resources'),('blog.html','BLOG'),('contact.html','Contact')]
-for path in [*ROOT.glob('*.html'),*ROOT.joinpath('projects').glob('*.html')]:
+for path in [*ROOT.glob('*.html'),*ROOT.joinpath('projects').glob('*.html'),*ROOT.joinpath('stories').glob('*.html')]:
     text=path.read_text()
     if '<header class="site-header' not in text:continue
-    prefix='../' if path.parent.name=='projects' else ''
-    active='labs.html' if prefix else ('resources.html' if path.name in ['careers.html','learn.html'] else path.name)
+    prefix='../' if path.parent.name in ('projects','stories') else ''
+    active=('blog.html' if path.parent.name=='stories' else 'labs.html') if prefix else ('resources.html' if path.name in ['careers.html','learn.html'] else path.name)
     def links(current=False):
         return ''.join(f'<a href="{prefix}{url}"'+(' aria-current="page"' if current and active==url else '')+f'>{label}</a>' for url,label in NAV)
     header=(ROOT/'components/header.html').read_text().strip().format(prefix=prefix,links=links(True))
@@ -25,6 +25,7 @@ for path in [*ROOT.glob('*.html'),*ROOT.joinpath('projects').glob('*.html')]:
     if 'assets/js/game.js' not in text:text=text.replace('</head>',f'<script src="{prefix}assets/js/game.js?v=game-1" defer></script>\n</head>')
     text=re.sub(r'game\.css\?v=[^"\s]+',f'game.css?v={GAME}',text)
     text=re.sub(r'game\.js\?v=[^"\s]+',f'game.js?v={GAME}',text)
+    text=re.sub(r'rooms\.css\?v=[^"\s]+',f'rooms.css?v={ROOMS}',text)
     if 'cyber-home' not in text:
         if 'room-page' not in text:text=re.sub(r'<body class="([^"]*)"',r'<body class="\1 room-page"',text,count=1)
         if 'assets/css/rooms.css' not in text:text=text.replace('</head>',f'<link rel="stylesheet" href="{prefix}assets/css/rooms.css?v=rooms-1" />\n</head>')

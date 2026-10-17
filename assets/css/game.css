@@ -9,25 +9,34 @@
 .world-header .menu-toggle {order:4;}
 .cyber-world main h1[tabindex="-1"]:focus {outline:none;}
 
-.game-toast {position:fixed;top:96px;left:50%;z-index:1200;width:min(380px,calc(100% - 32px));padding:18px 22px 16px;text-align:center;color:#fff1f2;background:linear-gradient(160deg,#21101ae8,#0b080df2);border:1px solid #ff6b7c;border-radius:14px;box-shadow:0 0 0 1px #ff2b4533,0 20px 50px -10px #000,0 0 40px -8px #ff2b45aa;transform:translate(-50%,-30px) scale(.92);opacity:0;transition:transform .45s cubic-bezier(.2,1.4,.4,1),opacity .3s;pointer-events:none;overflow:hidden;}
-.game-toast.is-in {transform:translate(-50%,0) scale(1);opacity:1;}
-.game-toast.is-out {transform:translate(-50%,-20px) scale(.96);opacity:0;transition:transform .4s,opacity .4s;}
-.game-toast::before {content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,#ffffff06 0 1px,transparent 1px 3px);pointer-events:none;}
-.game-toast p {margin:0;}
 .game-toast-kicker {font:600 10px/1.4 ui-monospace,Menlo,monospace;letter-spacing:.32em;color:#ff8e98;}
-.game-toast-title {position:relative;margin-top:6px!important;font:500 30px/1.1 var(--serif,"Cormorant Garamond",serif);letter-spacing:1px;}
-.game-toast-level .game-toast-title {font:400 40px/1.1 "Great Vibes",cursive;color:#ff9ba4;text-shadow:0 0 18px #ff2b4588;}
-.game-toast.is-in .game-toast-title::before,.game-toast.is-in .game-toast-title::after {content:attr(data-text);position:absolute;inset:0;opacity:.7;animation:game-glitch .5s steps(2) 2;}
-.game-toast-title::before {color:#00e5ff;clip-path:inset(0 0 55% 0);}
-.game-toast-title::after {color:#ff2b45;clip-path:inset(50% 0 0 0);}
-.game-toast:not(.is-in) .game-toast-title::before,.game-toast:not(.is-in) .game-toast-title::after {display:none;}
-@keyframes game-glitch {0%{transform:translate(-3px,0);}50%{transform:translate(3px,-1px);}100%{transform:none;opacity:0;}}
-.game-toast-detail {margin-top:4px!important;font:500 13px/1.5 var(--sans);color:#f1dcdc;}
-.game-toast-reward {margin-top:8px!important;font:700 12px/1 ui-monospace,Menlo,monospace;color:#ffd166;letter-spacing:2px;text-shadow:0 0 10px #ffb30066;}
-.game-toast-bar {display:block;height:2px;margin-top:12px;background:#4a1b25;overflow:hidden;border-radius:2px;}
-.game-toast-bar span {display:block;height:100%;background:#ff6b7c;transform-origin:left;transform:scaleX(0);}
-.game-toast.is-in .game-toast-bar span {animation:game-fill 3.2s linear forwards;}
-@keyframes game-fill {to{transform:scaleX(1);}}
+
+/* Level unlock: a cinematic chapter card, not a pop-up box. */
+.game-card {position:fixed;left:0;right:0;top:38%;z-index:1200;display:flex;flex-direction:column;align-items:center;gap:10px;padding:34px 16px;text-align:center;pointer-events:none;
+  background:linear-gradient(90deg,transparent,#060406e0 15%,#060406f7 50%,#060406e0 85%,transparent);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transition:opacity .6s ease;}
+.game-card.is-in {opacity:1;}
+.game-card.is-out {opacity:0;transition:opacity .7s ease;}
+.game-card p {margin:0;}
+.gc-butterfly {width:40px;height:40px;opacity:0;transform:translateY(6px);transition:opacity .8s .2s,transform .8s .2s;}
+.gc-line {display:block;width:min(520px,80vw);height:1px;background:linear-gradient(90deg,transparent,#e8b9a0,#ff8e98,#e8b9a0,transparent);transform:scaleX(0);transition:transform 1.1s cubic-bezier(.2,.7,.2,1);}
+.gc-kicker {font:500 11px/1 var(--sans);letter-spacing:.55em;text-transform:uppercase;color:#e8b9a0;opacity:0;transition:opacity .8s .35s,letter-spacing 1.4s .35s cubic-bezier(.2,.7,.2,1);}
+.gc-title {font:400 clamp(40px,6vw,76px)/1.05 "Great Vibes",cursive;color:#fff4ef;text-shadow:0 0 30px #ff2b4555;opacity:0;filter:blur(8px);transform:scale(1.04);transition:opacity 1s .5s,filter 1s .5s,transform 1.4s .5s cubic-bezier(.2,.7,.2,1);}
+.gc-reward {font:500 11px/1 var(--sans);letter-spacing:.35em;color:#e8c27a;opacity:0;transition:opacity .8s 1.1s;}
+.game-card.is-in .gc-butterfly {opacity:1;transform:none;}
+.game-card.is-in .gc-line {transform:scaleX(1);}
+.game-card.is-in .gc-kicker {opacity:1;letter-spacing:.32em;}
+.game-card.is-in .gc-title {opacity:1;filter:none;transform:none;}
+.game-card.is-in .gc-reward {opacity:1;}
+
+/* Achievements: a quiet glass pill that slides in at the top right. */
+.game-badge {position:fixed;top:100px;right:24px;z-index:1200;display:flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;max-width:calc(100% - 32px);border:1px solid #e8b9a066;border-radius:40px;background:#0d090ce6;backdrop-filter:blur(8px);box-shadow:0 16px 40px -16px #000;pointer-events:none;opacity:0;transform:translateX(24px);transition:opacity .45s,transform .6s cubic-bezier(.2,.8,.2,1);}
+.game-badge.is-in {opacity:1;transform:none;}
+.game-badge.is-out {opacity:0;transform:translateX(24px);}
+.game-badge img {width:34px;height:34px;border-radius:50%;background:#1f1218;padding:4px;box-shadow:0 0 0 1px #e8b9a055;}
+.gb-copy {display:flex;flex-direction:column;gap:3px;}
+.gb-kicker {font:500 9px/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:#e8b9a0;}
+.gb-title {font:500 17px/1.15 var(--serif,"Cormorant Garamond",serif);color:#fff4ef;}
+.gb-xp {margin-left:6px;font:500 10px/1 var(--sans);letter-spacing:.2em;color:#e8c27a;white-space:nowrap;}
 
 .level-transition .level-name {font:600 12px/1.5 ui-monospace,Menlo,monospace;letter-spacing:.25em;color:#ffd2d7;margin-top:10px;}
 
@@ -64,24 +73,15 @@
 .game-map-actions button {padding:9px 18px;border-radius:30px;border:1px solid #ff6b7c88;background:#1a0d12;color:#ffe3e6;font:500 12px var(--sans);cursor:pointer;}
 .game-map-actions .game-close {background:#5c2632;border-color:#ff6b7c;}
 
-/* Achievements slide in from the right, away from the homepage portrait. */
-.game-toast-achievement {left:auto;right:24px;width:min(320px,calc(100% - 32px));transform:translate(30px,0) scale(.96);}
-.game-toast-achievement.is-in {transform:none;}
-.game-toast-achievement.is-out {transform:translate(30px,0);}
-.game-toast-achievement .game-toast-title {font-size:24px;}
 .world-header nav {margin-left:auto;}
 
 @media (max-width:850px) {
+  .game-badge {top:80px;right:16px;}
   .game-hud {margin-left:auto;margin-right:10px;padding:6px 10px;}
   .game-hud-bar,.game-hud-xp {display:none;}
-  .game-toast {top:76px;}
-  .game-toast-achievement {right:16px;}
   .cyber-home .game-tile-badge {display:none;}
   .game-achievements {grid-template-columns:1fr;}
 }
 @media (prefers-reduced-motion:reduce) {
-  .game-toast,.game-toast.is-in,.game-toast.is-out {transition:opacity .2s;transform:translate(-50%,0);}
-  .game-toast-achievement,.game-toast-achievement.is-in,.game-toast-achievement.is-out {transform:none;}
-  .game-toast-title::before,.game-toast-title::after {display:none;}
-  .game-toast.is-in .game-toast-bar span {animation:none;transform:scaleX(1);}
+  .game-card *,.game-badge {transition:opacity .2s!important;transform:none!important;filter:none!important;}
 }

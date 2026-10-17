@@ -90,3 +90,7 @@ See [direct contact submission setup](docs/contact-setup.md) for the one service
 - `assets/css/hq-eyes.css`, `assets/js/hq-eyes.js`: on the homepage, both irises shift inside their eye openings (following the mouse or glancing on their own) and a periodic facial-scan overlay locks on. The artwork file is unchanged; moving layers are masked copies of it.
 
 `scripts/build_shared.py` attaches the rooms files to interior pages and the game files to every page. All motion is disabled for reduced motion.
+
+### Adding a blog story
+
+Each story lives in `stories/`. To publish a new one, copy `stories/how-i-broke-into-cybersecurity.html`, change the title, meta description, eyebrow, and body, then add a matching `.story-card` to the `.story-grid` in `blog.html` (newest first) and replace or remove the "being written" card. Run `python3 scripts/build_shared.py` afterwards.

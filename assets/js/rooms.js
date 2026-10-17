@@ -4,7 +4,7 @@
   if (!body.classList.contains("room-page")) return;
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = matchMedia("(hover: hover) and (pointer: fine)").matches;
-  const prefix = location.pathname.includes("/projects/") ? "../" : "";
+  const prefix = /\/(projects|stories)\//.test(location.pathname) ? "../" : "";
   const hero = document.querySelector(".room-intro, .cyber-corner-intro, .interior-hero");
 
   // Scroll / reading progress.

@@ -28,11 +28,12 @@
       <path class="hq-bracket" d="M672 196h22M672 196v22M866 196h-22M866 196v22M672 352h22M672 352v-22M866 352h-22M866 352v-22"/>
       <line class="hq-facescan" x1="672" x2="866" y1="196" y2="196"/>
       ${eyes.map(e => `<g class="hq-reticle" transform="translate(${e.cx} ${e.cy})"><circle r="15"/><path d="M-21 0h8M13 0h8M0 -21v8M0 13v8"/></g>`).join("")}
-      <g class="hq-readout" transform="translate(872 206)">
-        <text y="0">FACIAL SCAN // ACTIVE</text>
-        <text y="13" class="hq-match">MATCH 00.0%</text>
-        <text y="26">SUBJECT: DEE</text>
-        <text y="39" class="hq-clear">CLEARANCE: LEVEL 05</text>
+      <g class="hq-readout" transform="translate(874 198)">
+        <rect class="hq-panel" x="-7" y="-12" width="134" height="72" rx="3"/>
+        <text y="0">FACIAL RECOGNITION</text>
+        <text y="14" class="hq-match">SCANNING 00.0%</text>
+        <text y="33" class="hq-found">FACE RECOGNIZED</text>
+        <text y="51" class="hq-dee">IT’S DEE ✓</text>
       </g>
     </g>`;
   screens.after(svg);
@@ -82,12 +83,12 @@
     const start = performance.now();
     const count = now => {
       const t = Math.min(1, (now - start) / 1800);
-      match.textContent = `MATCH ${(t * 99.2).toFixed(1).padStart(4, "0")}%`;
+      match.textContent = t < 1 ? `SCANNING ${(t * 99.2).toFixed(1).padStart(4, "0")}%` : "MATCH 99.2%";
       if (t < 1) requestAnimationFrame(count);
       else { svg.classList.add("is-matched"); scanning = false; target = { x: 0, y: 0 }; }
     };
     requestAnimationFrame(count);
-    setTimeout(() => svg.classList.remove("is-scanning", "is-matched"), 4200);
+    setTimeout(() => svg.classList.remove("is-scanning", "is-matched"), 5600);
   }
   function start() {
     cancelAnimationFrame(frame);
