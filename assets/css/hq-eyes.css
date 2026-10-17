@@ -1,0 +1,20 @@
+/* Homepage portrait: living eyes and investigation scan overlay. */
+.hq-eyes {position:absolute;overflow:visible;pointer-events:none;z-index:1;}
+.hq-cyber-glow {fill:#ff2035;mix-blend-mode:screen;opacity:.35;animation:hq-cyber-pulse 3.2s ease-in-out infinite;}
+@keyframes hq-cyber-pulse {0%,100%{opacity:.25;}50%{opacity:.7;}}
+.hq-investigate {opacity:0;transition:opacity .35s;fill:none;stroke:#ff4d62;stroke-width:1.4;}
+.is-scanning .hq-investigate {opacity:1;}
+.hq-bracket {filter:drop-shadow(0 0 3px #ff2035);}
+.hq-facescan {stroke:#ff6b7c;stroke-width:1;opacity:0;}
+.is-scanning .hq-facescan {animation:hq-facescan 1.8s ease-in-out forwards;}
+@keyframes hq-facescan {0%{opacity:1;transform:translateY(0);}90%{opacity:1;transform:translateY(156px);}100%{opacity:0;transform:translateY(156px);}}
+.hq-reticle circle {stroke-dasharray:6 4;transform-box:fill-box;transform-origin:center;}
+.is-scanning .hq-reticle circle {animation:hq-reticle 1.8s linear;}
+@keyframes hq-reticle {from{transform:rotate(0) scale(1.8);opacity:.2;}to{transform:rotate(180deg) scale(1);opacity:1;}}
+.hq-readout text {fill:#ffd2d7;stroke:none;font:600 9px/1 ui-monospace,Menlo,monospace;letter-spacing:.8px;paint-order:stroke;}
+.hq-readout .hq-clear {fill:#ff6b7c;opacity:0;}
+.is-matched .hq-readout .hq-clear {opacity:1;animation:hq-blink .25s steps(1) 3;}
+.is-matched .hq-bracket,.is-matched .hq-reticle {stroke:#ffb3bb;}
+@keyframes hq-blink {50%{opacity:0;}}
+.hq-paused .hq-eyes *, .hq-eyes.paused * {animation-play-state:paused!important;}
+@media (prefers-reduced-motion:reduce) {.hq-cyber-glow,.hq-investigate {display:none;}}

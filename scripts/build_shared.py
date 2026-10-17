@@ -5,6 +5,7 @@ import hashlib
 ROOT=Path(__file__).resolve().parents[1]
 VERSION=hashlib.sha256((ROOT/'assets/css/world.css').read_bytes()+(ROOT/'assets/js/world.js').read_bytes()).hexdigest()[:10]
 ROOMS=hashlib.sha256((ROOT/'assets/css/rooms.css').read_bytes()+(ROOT/'assets/js/rooms.js').read_bytes()).hexdigest()[:10]
+GAME=hashlib.sha256((ROOT/'assets/css/game.css').read_bytes()+(ROOT/'assets/js/game.js').read_bytes()).hexdigest()[:10]
 NAV=[('index.html','Home'),('about.html','About Me'),('labs.html','Projects'),('resources.html','Resources'),('blog.html','BLOG'),('contact.html','Contact')]
 for path in [*ROOT.glob('*.html'),*ROOT.joinpath('projects').glob('*.html')]:
     text=path.read_text()
@@ -20,6 +21,10 @@ for path in [*ROOT.glob('*.html'),*ROOT.joinpath('projects').glob('*.html')]:
     if 'cyber-world' not in text:text=re.sub(r'<body class="([^"]*)"',r'<body class="\1 cyber-world"',text,count=1)
     if 'assets/css/world.css' not in text:text=text.replace('</head>',f'<link rel="stylesheet" href="{prefix}assets/css/world.css?v=world-1" />\n</head>')
     if 'assets/js/world.js' not in text:text=text.replace('</head>',f'<script src="{prefix}assets/js/world.js?v=world-1" defer></script>\n</head>')
+    if 'assets/css/game.css' not in text:text=text.replace('</head>',f'<link rel="stylesheet" href="{prefix}assets/css/game.css?v=game-1" />\n</head>')
+    if 'assets/js/game.js' not in text:text=text.replace('</head>',f'<script src="{prefix}assets/js/game.js?v=game-1" defer></script>\n</head>')
+    text=re.sub(r'game\.css\?v=[^"\s]+',f'game.css?v={GAME}',text)
+    text=re.sub(r'game\.js\?v=[^"\s]+',f'game.js?v={GAME}',text)
     if 'cyber-home' not in text:
         if 'room-page' not in text:text=re.sub(r'<body class="([^"]*)"',r'<body class="\1 room-page"',text,count=1)
         if 'assets/css/rooms.css' not in text:text=text.replace('</head>',f'<link rel="stylesheet" href="{prefix}assets/css/rooms.css?v=rooms-1" />\n</head>')

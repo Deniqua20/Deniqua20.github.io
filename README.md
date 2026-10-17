@@ -82,3 +82,11 @@ DEE_TEST_BASE_URL=http://localhost:8032 node tests/cinematic-navigation.cjs
 ```
 
 See [direct contact submission setup](docs/contact-setup.md) for the one service configuration still required. Tests have exercised the email draft and intercepted service responses; a real service submission cannot be verified until the owner supplies a verified endpoint.
+
+## Rooms, game layer, and living portrait
+
+- `assets/css/rooms.css`, `assets/js/rooms.js`: interior pages share the homepage look: studio-art hero band, circuit network canvas, scan sweep, decrypting eyebrow, card tilt, pointer spotlight, scroll progress, and a Keep exploring row of homepage tiles.
+- `assets/css/game.css`, `assets/js/game.js`: each room is a level (About 01, Projects 02, Paths in Tech 03, Resources 04, Blog 05, Contact 06). Visiting unlocks a level, real actions earn achievements, and the header HUD opens a mission map. Progress is stored only in the visitor's browser and can be reset there.
+- `assets/css/hq-eyes.css`, `assets/js/hq-eyes.js`: on the homepage, both irises shift inside their eye openings (following the mouse or glancing on their own) and a periodic facial-scan overlay locks on. The artwork file is unchanged; moving layers are masked copies of it.
+
+`scripts/build_shared.py` attaches the rooms files to interior pages and the game files to every page. All motion is disabled for reduced motion.

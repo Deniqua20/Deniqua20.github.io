@@ -1,0 +1,87 @@
+/* Game layer: HUD, unlock toasts, level chips, mission map. */
+.game-hud {display:inline-flex;align-items:center;gap:9px;margin-left:22px;padding:7px 14px;border:1px solid #ff6b7c88;border-radius:30px;background:#1a0d12cc;color:#ffe3e6;font:600 10px/1 ui-monospace,Menlo,monospace;letter-spacing:1px;cursor:pointer;box-shadow:0 0 14px -4px #ff2b45;transition:box-shadow .3s,transform .3s;white-space:nowrap;}
+.game-hud:hover {box-shadow:0 0 22px -2px #ff2b45;transform:translateY(-1px);}
+.game-hud-lvl {color:#ff8e98;}
+.game-hud-bar {width:54px;height:4px;border-radius:4px;background:#4a1b25;overflow:hidden;}
+.game-hud-bar span {display:block;height:100%;background:linear-gradient(90deg,#c0122f,#ff8e98);box-shadow:0 0 8px #ff2b45;transition:width .8s ease;}
+.cyber-home .game-hud {align-self:center;}
+.world-header nav + .game-hud {order:3;}
+.world-header .menu-toggle {order:4;}
+.cyber-world main h1[tabindex="-1"]:focus {outline:none;}
+
+.game-toast {position:fixed;top:96px;left:50%;z-index:1200;width:min(380px,calc(100% - 32px));padding:18px 22px 16px;text-align:center;color:#fff1f2;background:linear-gradient(160deg,#21101ae8,#0b080df2);border:1px solid #ff6b7c;border-radius:14px;box-shadow:0 0 0 1px #ff2b4533,0 20px 50px -10px #000,0 0 40px -8px #ff2b45aa;transform:translate(-50%,-30px) scale(.92);opacity:0;transition:transform .45s cubic-bezier(.2,1.4,.4,1),opacity .3s;pointer-events:none;overflow:hidden;}
+.game-toast.is-in {transform:translate(-50%,0) scale(1);opacity:1;}
+.game-toast.is-out {transform:translate(-50%,-20px) scale(.96);opacity:0;transition:transform .4s,opacity .4s;}
+.game-toast::before {content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,#ffffff06 0 1px,transparent 1px 3px);pointer-events:none;}
+.game-toast p {margin:0;}
+.game-toast-kicker {font:600 10px/1.4 ui-monospace,Menlo,monospace;letter-spacing:.32em;color:#ff8e98;}
+.game-toast-title {position:relative;margin-top:6px!important;font:500 30px/1.1 var(--serif,"Cormorant Garamond",serif);letter-spacing:1px;}
+.game-toast-level .game-toast-title {font:400 40px/1.1 "Great Vibes",cursive;color:#ff9ba4;text-shadow:0 0 18px #ff2b4588;}
+.game-toast.is-in .game-toast-title::before,.game-toast.is-in .game-toast-title::after {content:attr(data-text);position:absolute;inset:0;opacity:.7;animation:game-glitch .5s steps(2) 2;}
+.game-toast-title::before {color:#00e5ff;clip-path:inset(0 0 55% 0);}
+.game-toast-title::after {color:#ff2b45;clip-path:inset(50% 0 0 0);}
+.game-toast:not(.is-in) .game-toast-title::before,.game-toast:not(.is-in) .game-toast-title::after {display:none;}
+@keyframes game-glitch {0%{transform:translate(-3px,0);}50%{transform:translate(3px,-1px);}100%{transform:none;opacity:0;}}
+.game-toast-detail {margin-top:4px!important;font:500 13px/1.5 var(--sans);color:#f1dcdc;}
+.game-toast-reward {margin-top:8px!important;font:700 12px/1 ui-monospace,Menlo,monospace;color:#ffd166;letter-spacing:2px;text-shadow:0 0 10px #ffb30066;}
+.game-toast-bar {display:block;height:2px;margin-top:12px;background:#4a1b25;overflow:hidden;border-radius:2px;}
+.game-toast-bar span {display:block;height:100%;background:#ff6b7c;transform-origin:left;transform:scaleX(0);}
+.game-toast.is-in .game-toast-bar span {animation:game-fill 3.2s linear forwards;}
+@keyframes game-fill {to{transform:scaleX(1);}}
+
+.level-transition .level-name {font:600 12px/1.5 ui-monospace,Menlo,monospace;letter-spacing:.25em;color:#ffd2d7;margin-top:10px;}
+
+.game-chip {display:inline-flex;align-items:center;gap:10px;margin:0 0 14px;font:600 10px/1 ui-monospace,Menlo,monospace;letter-spacing:2px;text-transform:uppercase;color:#f3d8da;}
+.game-chip span {padding:5px 9px;border:1px solid #ff6b7c;border-radius:4px;color:#ff8e98;background:#2a0f17aa;box-shadow:0 0 12px -3px #ff2b45;}
+.game-chip {align-self:flex-start;}
+
+.game-tile-badge {display:inline-block;margin-bottom:8px;padding:4px 8px;font:600 9px/1 ui-monospace,Menlo,monospace;letter-spacing:1.5px;color:#ffd2d7;background:#140a0ecc;border:1px solid #ff6b7c88;border-radius:4px;}
+.game-tile-badge.is-open {color:#ffd166;border-color:#ffd16688;}
+.studio-destination:hover .game-tile-badge:not(.is-open) {background:#ff2b45;color:#fff;border-color:#ff2b45;}
+
+.game-mission {display:block;margin-bottom:10px;font:600 10px/1 ui-monospace,Menlo,monospace;letter-spacing:2px;color:#ff6b7c;}
+
+.game-map {width:min(560px,calc(100% - 32px));max-height:calc(100svh - 48px);overflow:auto;padding:26px;color:#f6eeea;background:linear-gradient(170deg,#1d0f16,#0c090e);border:1px solid #ff6b7c88;border-radius:16px;box-shadow:0 0 60px -10px #ff2b4588;}
+.game-map::backdrop {background:#050305cc;backdrop-filter:blur(3px);}
+.game-map h2 {margin:6px 0 4px;font:400 42px/1.1 "Great Vibes",cursive;color:#ff9ba4;}
+.game-map h3 {margin:22px 0 10px;font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.3em;color:#ff8e98;text-transform:uppercase;}
+.game-map-stats {font:600 11px/1.4 ui-monospace,Menlo,monospace;color:#ffd166;letter-spacing:1px;margin:0;}
+.game-levels,.game-achievements {list-style:none;margin:16px 0 0;padding:0;display:grid;gap:6px;}
+.game-levels a {display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;padding:10px 14px;border:1px solid #ab586244;border-radius:10px;color:#e9dedd;text-decoration:none;background:#120c10;transition:border-color .25s,background .25s;}
+.game-levels a:hover {border-color:#ff6b7c;background:#261019;text-decoration:none;}
+.game-levels strong {display:block;font:500 17px/1.2 var(--serif,"Cormorant Garamond",serif);}
+.game-levels small,.game-achievements small {display:block;font-size:11px;color:#bca9ab;}
+.game-level-n {font:700 14px/1 ui-monospace,Menlo,monospace;color:#6f4a50;}
+.game-level-state {font:600 9px/1 ui-monospace,Menlo,monospace;letter-spacing:1px;color:#8d767a;text-transform:uppercase;}
+.game-levels .is-open .game-level-n {color:#ff8e98;}
+.game-levels .is-open .game-level-state {color:#ffd166;}
+.game-achievements {grid-template-columns:1fr 1fr;}
+.game-achievements li {padding:10px 12px;border:1px dashed #ab586244;border-radius:10px;opacity:.55;}
+.game-achievements li.is-open {opacity:1;border-style:solid;border-color:#ffd16677;background:#1f1610;}
+.game-achievements strong {font:600 12px/1.4 var(--sans);color:#ffe3e6;}
+.game-map-note {margin:16px 0 0;font-size:11px;color:#a8969a;}
+.game-map-actions {display:flex;justify-content:flex-end;gap:10px;margin-top:14px;}
+.game-map-actions button {padding:9px 18px;border-radius:30px;border:1px solid #ff6b7c88;background:#1a0d12;color:#ffe3e6;font:500 12px var(--sans);cursor:pointer;}
+.game-map-actions .game-close {background:#5c2632;border-color:#ff6b7c;}
+
+/* Achievements slide in from the right, away from the homepage portrait. */
+.game-toast-achievement {left:auto;right:24px;width:min(320px,calc(100% - 32px));transform:translate(30px,0) scale(.96);}
+.game-toast-achievement.is-in {transform:none;}
+.game-toast-achievement.is-out {transform:translate(30px,0);}
+.game-toast-achievement .game-toast-title {font-size:24px;}
+.world-header nav {margin-left:auto;}
+
+@media (max-width:850px) {
+  .game-hud {margin-left:auto;margin-right:10px;padding:6px 10px;}
+  .game-hud-bar,.game-hud-xp {display:none;}
+  .game-toast {top:76px;}
+  .game-toast-achievement {right:16px;}
+  .cyber-home .game-tile-badge {display:none;}
+  .game-achievements {grid-template-columns:1fr;}
+}
+@media (prefers-reduced-motion:reduce) {
+  .game-toast,.game-toast.is-in,.game-toast.is-out {transition:opacity .2s;transform:translate(-50%,0);}
+  .game-toast-achievement,.game-toast-achievement.is-in,.game-toast-achievement.is-out {transform:none;}
+  .game-toast-title::before,.game-toast-title::after {display:none;}
+  .game-toast.is-in .game-toast-bar span {animation:none;transform:scaleX(1);}
+}
