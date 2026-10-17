@@ -7,7 +7,7 @@ const intro='Cyber Corner, where authenticity meets faith. Here, I share my expe
  for(const viewport of [{width:1440,height:900},{width:768,height:1024},{width:390,height:844}]){
   const p=await browser.newPage({viewport});const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto(BASE+'/');await p.waitForTimeout(1900);
   assert.equal(await p.locator('#navigation a').count(),6);assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
-  assert.equal(await p.locator('.studio-art').getAttribute('src'),'assets/images/cyber-studio-titled-books.webp');
+  assert.equal(await p.locator('.studio-art').getAttribute('src'),'assets/images/cyber-studio-studio-books.webp');
   const stream=p.locator('.hq-log-stream');const before=await stream.evaluate(e=>getComputedStyle(e).transform);await p.waitForTimeout(1500);assert.notEqual(await stream.evaluate(e=>getComputedStyle(e).transform),before);
   await p.getByRole('button',{name:'Pause monitor activity',exact:true}).click();assert.equal(await stream.evaluate(e=>getComputedStyle(e).animationPlayState),'paused');await p.getByRole('button',{name:'Resume monitor activity',exact:true}).click();
   // Verify the overlay maps image pixels using the real responsive crop.
