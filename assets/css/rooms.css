@@ -160,3 +160,6 @@
 .story-more h2 { font:500 clamp(26px,3vw,34px)/1.1 var(--serif); margin:0 0 20px; color:#fff4ef; }
 .story-more .story-grid { margin-bottom:24px; }
 @media (max-width:700px) { .story-page .journal-article { margin-top:-40px; } }
+
+/* Full-bleed hero art must never widen the page. */
+.room-page main { overflow-x:clip; }
