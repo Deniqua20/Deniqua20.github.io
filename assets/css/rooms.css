@@ -1,0 +1,105 @@
+/* Interior rooms: carries the homepage's cinematic studio look onto every inner page. */
+.room-page { --room-pos:left top; --room-glow:#ff2b45; }
+.room-careers { --room-pos:left bottom; }
+.room-resources { --room-pos:right top; }
+.journal-page,.room-contact { --room-pos:right bottom; }
+
+/* Cinematic hero band: studio artwork bleeds in from the right, as on the homepage. */
+.room-page .room-intro,.room-page .cyber-corner-intro,.room-page .interior-hero,.room-page .contact-story { position:relative; isolation:isolate; }
+.room-page .room-intro,.room-page .cyber-corner-intro,.room-page .interior-hero { padding-top:clamp(56px,8vw,110px); padding-bottom:clamp(48px,6vw,90px); min-height:min(62vh,560px); display:flex; flex-direction:column; justify-content:center; }
+.room-page .room-intro::before,.room-page .cyber-corner-intro::before,.room-page .interior-hero::before {
+  content:''; position:absolute; z-index:-2; top:0; bottom:0; right:calc(50% - 50vw); aspect-ratio:3/2; max-width:72vw;
+  background:url('../images/cyber-studio-features.webp') var(--room-pos)/200% 200% no-repeat;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 45%); mask-image:linear-gradient(90deg,transparent 0%,#000 45%);
+  opacity:.85; transform:scale(1.04) translate3d(calc(var(--px,0) * -14px),calc(var(--py,0) * -10px),0); transition:transform .5s ease-out;
+}
+.room-page .room-intro::after,.room-page .cyber-corner-intro::after,.room-page .interior-hero::after {
+  content:''; position:absolute; z-index:-1; inset:0 calc(50% - 50vw);
+  background:linear-gradient(90deg,#100d11 0%,#100d11f0 28%,#100d1199 55%,#100d1133 100%),linear-gradient(0deg,#100d11 0%,transparent 30%);
+  border-bottom:1px solid #9c434d44; top:0; right:auto; width:auto; height:auto; opacity:1; -webkit-mask-image:none; mask-image:none; background-size:auto;
+}
+.room-page .room-intro > :not(.room-net):not(.room-scan),.room-page .cyber-corner-intro > :not(.room-net):not(.room-scan),.room-page .interior-hero > :not(.room-net):not(.room-scan) { max-width:min(680px,100%); position:relative; }
+.room-page .room-intro > a,.room-page .interior-hero > a,.room-page .cyber-corner-intro > a { align-self:flex-start; }
+/* Clip the full-bleed art vertically so it never spills below the band. */
+.room-page .room-intro,.room-page .cyber-corner-intro,.room-page .interior-hero { clip-path:inset(0 -100vw); }
+.room-page .room-intro h1,.room-page .interior-hero h1 { text-shadow:0 2px 30px #000; }
+.room-page .room-intro h1 em,.room-page .interior-hero h1 em,.room-page .contact-story h1 em,.room-page .about-story h1 em {
+  font-family:"Great Vibes",cursive; font-style:normal; font-weight:400; font-size:1.18em; letter-spacing:0; color:#ff8e98;
+  text-shadow:0 0 18px #ff2b4566; display:inline-block; padding-right:.1em;
+}
+.room-page .cyber-corner-intro h1 { letter-spacing:2px; }
+
+/* Living circuit canvas and scan sweep inside each hero. */
+.room-net { position:absolute; inset:0 calc(50% - 50vw); width:100vw!important; max-width:none!important; height:100%; z-index:-1; pointer-events:none; opacity:.9; }
+.room-scan { position:absolute; inset:0 calc(50% - 50vw); max-width:none!important; z-index:-1; pointer-events:none; overflow:hidden; }
+.room-scan::before { content:''; position:absolute; left:0; right:0; height:120px; top:-120px; background:linear-gradient(180deg,transparent,#ff2b4512 70%,#ff4d6266 100%); border-bottom:1px solid #ff4d6288; animation:room-scan 7s cubic-bezier(.5,0,.5,1) 0.4s infinite; }
+@keyframes room-scan { 0% { top:-120px; } 45%,100% { top:105%; } }
+
+/* Decrypting eyebrow with terminal caret. */
+.room-page .room-eyebrow.is-typing::after,.room-page .eyebrow.is-typing::after { content:'_'; margin-left:2px; animation:room-blink .8s steps(1) infinite; color:#ff8e98; }
+@keyframes room-blink { 50% { opacity:0; } }
+
+/* Pointer spotlight that follows the visitor through the room. */
+.room-page .room-spot { position:fixed; inset:0; pointer-events:none; z-index:0; background:radial-gradient(420px circle at var(--mx,50%) var(--my,30%),#ff2b4514,transparent 60%); transition:opacity .4s; }
+.room-page main,.room-page .world-footer { position:relative; z-index:1; }
+
+/* Reading / scroll progress line under the header. */
+.room-progress { position:fixed; top:0; left:0; height:2px; width:100%; transform-origin:0 50%; transform:scaleX(var(--progress,0)); background:linear-gradient(90deg,#b3132b,#ff6b7c,#ffc2c8); box-shadow:0 0 12px #ff2b45; z-index:60; pointer-events:none; }
+
+/* Glass cards with tilt, glow border and a light sheen that tracks the pointer. */
+.room-page .world-project,.room-page .story-chapters > *,.room-page .about-columns > *,.room-page .case-study-body aside,.room-page .world-contact-form,.room-page .featured-case .case-evidence-preview {
+  position:relative; border-radius:14px; transform-style:preserve-3d;
+  transform:perspective(900px) rotateX(var(--ry,0deg)) rotateY(var(--rx,0deg)) translateY(var(--lift,0));
+  transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;
+}
+.room-page .world-project { background:linear-gradient(160deg,#1d1218e6,#0d0a0ee6); border:1px solid #ab586244; padding:26px 24px 24px; overflow:hidden; counter-increment:room-card; }
+.room-page .world-project-grid { counter-reset:room-card; }
+.room-page .world-project::before { content:counter(room-card,decimal-leading-zero); position:absolute; top:14px; right:18px; font:400 34px/1 "Great Vibes",cursive; color:#ff8e9855; }
+.room-page .world-project::after,.room-page .world-contact-form::after {
+  content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none; opacity:0; transition:opacity .35s;
+  background:radial-gradient(260px circle at var(--cx,50%) var(--cy,50%),#ff6b7c26,transparent 65%);
+}
+.room-page .world-project:hover,.room-page .world-project:focus-within { --lift:-6px; border-color:#ff6b7c99; box-shadow:0 18px 40px -18px #ff2b4588,0 0 0 1px #ff6b7c33; }
+.room-page .world-project:hover::after,.room-page .world-project:focus-within::after,.room-page .world-contact-form:hover::after { opacity:1; }
+.room-page .world-project h3 { transition:color .3s; }
+.room-page .world-project:hover h3 { color:#ffb3bb; }
+.room-page .featured-case .case-evidence-preview:hover { --lift:-4px; box-shadow:0 24px 60px -24px #ff2b45aa; }
+.room-page .world-contact-form { border:1px solid #ab586255; overflow:hidden; }
+.room-page .world-contact-form input:focus,.room-page .world-contact-form textarea:focus { border-color:#ff6b7c; box-shadow:0 0 0 3px #ff2b4533,0 0 22px -6px #ff2b45; outline:none; }
+
+/* Filter chips and career list feel like controls on the studio console. */
+.room-page .world-filters button { position:relative; transition:color .25s; }
+.room-page .world-filters button::after { content:''; position:absolute; left:0; right:0; bottom:-4px; height:1px; background:#ff6b7c; transform:scaleX(0); transition:transform .3s; }
+.room-page .world-filters button:hover::after { transform:scaleX(1); }
+.room-page .field-guide nav button,.room-page .field-guide nav a { transition:background .25s,padding-left .25s,color .25s; }
+.room-page .field-guide nav button:hover,.room-page .field-guide nav a:hover { padding-left:30px; background:#2a1219; color:#ffb3bb; }
+
+/* Buttons pick up the glowing pill from the homepage "Explore my world". */
+.room-page .world-button,.room-page .button { border-color:#ff6b7c; box-shadow:0 0 0 0 #ff2b4500; letter-spacing:1.5px; text-transform:uppercase; font-size:12px; padding:14px 30px; transition:background .3s,box-shadow .3s,transform .3s; }
+.room-page .world-button:hover,.room-page .button:hover { box-shadow:0 0 24px -2px #ff2b4599; transform:translateY(-2px); }
+
+/* Keep exploring: the homepage destination tiles, reused at the end of each room. */
+.room-next { width:min(1400px,97%); margin:70px auto 0; }
+.room-next > p { font:500 11px var(--sans); letter-spacing:3px; text-transform:uppercase; color:#ff8e98; margin:0 0 14px 1.5%; }
+.room-next .studio-destinations { grid-template-columns:repeat(3,minmax(0,1fr)); padding:0; gap:6px; background:none; }
+.room-next .studio-destination { min-height:220px; border-radius:12px; text-decoration:none; }
+.room-next .studio-destination h2 { font:400 clamp(34px,3vw,46px)/1.1 "Great Vibes",cursive; color:#ff9ba4; margin-bottom:6px; }
+.room-next .studio-destination p { font:500 15px/1.5 var(--serif); margin-bottom:10px; }
+.room-next .studio-destination:hover .studio-destination-action { text-decoration:underline; text-underline-offset:5px; }
+
+/* Resources: a styled holding room rather than an empty page. */
+.room-resources main.resources-blank { flex:1; }
+.room-resources .world-header,.room-resources .world-footer { width:100%; align-self:stretch; }
+
+@media (max-width:850px) {
+  .room-page .room-intro::before,.room-page .cyber-corner-intro::before,.room-page .interior-hero::before { max-width:none; left:calc(50% - 50vw); right:calc(50% - 50vw); aspect-ratio:auto; opacity:.45; -webkit-mask-image:none; mask-image:none; }
+  .room-page .room-intro,.room-page .cyber-corner-intro,.room-page .interior-hero { min-height:0; }
+  .room-next .studio-destinations { grid-template-columns:1fr; }
+  .room-page .room-spot { display:none; }
+}
+@media (hover:none) { .room-page .room-spot { display:none; } }
+@media (prefers-reduced-motion:reduce) {
+  .room-scan,.room-net { display:none; }
+  .room-page .room-intro::before,.room-page .cyber-corner-intro::before,.room-page .interior-hero::before { transform:none; transition:none; }
+  .room-page .world-project,.room-page .world-contact-form,.room-page .featured-case .case-evidence-preview { transform:none!important; transition:none; }
+}

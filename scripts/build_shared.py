@@ -4,6 +4,7 @@ import re
 import hashlib
 ROOT=Path(__file__).resolve().parents[1]
 VERSION=hashlib.sha256((ROOT/'assets/css/world.css').read_bytes()+(ROOT/'assets/js/world.js').read_bytes()).hexdigest()[:10]
+ROOMS=hashlib.sha256((ROOT/'assets/css/rooms.css').read_bytes()+(ROOT/'assets/js/rooms.js').read_bytes()).hexdigest()[:10]
 NAV=[('index.html','Home'),('about.html','About Me'),('labs.html','Projects'),('resources.html','Resources'),('blog.html','BLOG'),('contact.html','Contact')]
 for path in [*ROOT.glob('*.html'),*ROOT.joinpath('projects').glob('*.html')]:
     text=path.read_text()
@@ -19,6 +20,12 @@ for path in [*ROOT.glob('*.html'),*ROOT.joinpath('projects').glob('*.html')]:
     if 'cyber-world' not in text:text=re.sub(r'<body class="([^"]*)"',r'<body class="\1 cyber-world"',text,count=1)
     if 'assets/css/world.css' not in text:text=text.replace('</head>',f'<link rel="stylesheet" href="{prefix}assets/css/world.css?v=world-1" />\n</head>')
     if 'assets/js/world.js' not in text:text=text.replace('</head>',f'<script src="{prefix}assets/js/world.js?v=world-1" defer></script>\n</head>')
+    if 'cyber-home' not in text:
+        if 'room-page' not in text:text=re.sub(r'<body class="([^"]*)"',r'<body class="\1 room-page"',text,count=1)
+        if 'assets/css/rooms.css' not in text:text=text.replace('</head>',f'<link rel="stylesheet" href="{prefix}assets/css/rooms.css?v=rooms-1" />\n</head>')
+        if 'assets/js/rooms.js' not in text:text=text.replace('</head>',f'<script src="{prefix}assets/js/rooms.js?v=rooms-1" defer></script>\n</head>')
+        text=re.sub(r'rooms\.css\?v=[^"\s]+',f'rooms.css?v={ROOMS}',text)
+        text=re.sub(r'rooms\.js\?v=[^"\s]+',f'rooms.js?v={ROOMS}',text)
     text=re.sub(r'world\.css\?v=[^"\s]+',f'world.css?v={VERSION}',text)
     text=re.sub(r'world\.js\?v=[^"\s]+',f'world.js?v={VERSION}',text)
     path.write_text(text)
