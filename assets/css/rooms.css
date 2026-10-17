@@ -163,3 +163,8 @@
 
 /* Full-bleed hero art must never widen the page. */
 .room-page main { overflow-x:clip; }
+
+/* Cover crops: keep the character's face in frame; the upcoming-story card keeps its colour. */
+.story-cover img { object-position:center 28%; }
+.story-card-art[src*="cyber-studio-warm-hero"] { object-position:center 22%; }
+.story-card-soon .story-card-art { filter:brightness(.8); }
