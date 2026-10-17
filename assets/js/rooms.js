@@ -163,4 +163,12 @@
       .join("")}</div>`;
     main.append(section);
   }
+  // Story share: copy the page link.
+  document.querySelectorAll("[data-copy-link]").forEach(button => {
+    button.addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText(location.href); button.textContent = "Link copied ✓"; }
+      catch { button.textContent = location.href; }
+      setTimeout(() => { button.textContent = "Copy link"; }, 2400);
+    });
+  });
 })();

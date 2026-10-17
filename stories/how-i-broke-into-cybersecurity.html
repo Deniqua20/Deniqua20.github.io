@@ -14,8 +14,8 @@
   <link rel="stylesheet" href="../assets/css/world.css?v=b23a1bab39" />
 <script src="../assets/js/world.js?v=b23a1bab39" defer></script>
 <link rel="icon" href="../assets/images/lab-butterfly.webp" type="image/webp" />
-<link rel="stylesheet" href="../assets/css/rooms.css?v=a48222a321" />
-<script src="../assets/js/rooms.js?v=a48222a321" defer></script>
+<link rel="stylesheet" href="../assets/css/rooms.css?v=5775dbf476" />
+<script src="../assets/js/rooms.js?v=5775dbf476" defer></script>
 <link rel="stylesheet" href="../assets/css/game.css?v=796e253539" />
 <script src="../assets/js/game.js?v=796e253539" defer></script>
 </head>
@@ -33,13 +33,15 @@
 
     <main id="main" class="story-main">
       <nav class="story-crumbs" aria-label="Breadcrumb"><a href="../blog.html">Dee’s Corner</a><span aria-hidden="true">/</span><span>Story 01</span></nav>
+      <figure class="story-cover"><img src="../assets/images/article-journey.webp" width="640" height="640" alt="" fetchpriority="high" /></figure>
       <article class="journal-article">
         <header class="journal-heading">
-          <p class="eyebrow">Story 01 · Career · <span class="story-readtime">3 min read</span></p>
+          <p class="eyebrow">Story 01 · <span class="story-readtime">3 min read</span></p>
           <h1 class="corner-post-title" id="story-title">How I Broke Into <em>Cybersecurity</em></h1>
           <p class="journal-byline">
             By Deniqua Collins <span>Known around here as Dee</span>
           </p>
+          <ul class="story-tags" aria-label="Topics"><li>Career</li><li>Job search</li><li>Interviews</li></ul>
           <img
             class="journal-butterfly"
             src="../assets/images/lab-butterfly.webp"
@@ -78,6 +80,7 @@
             to know my work front to back. If interviewing isn’t your strong
             suit, mock interviews can help you practice.
           </p>
+          <blockquote class="story-quote"><p>I had offers rescinded, but I kept showing up because I knew where my passion was.</p></blockquote>
           <p>
             And the last thing? I was myself. I was personable, and I thanked
             them after the interview. I feel like that was the icing on the
@@ -96,7 +99,20 @@
           <p class="journal-signature" aria-label="Signed Dee">Dee</p>
         </div>
       </article>
-      <nav class="story-next" aria-label="More stories"><a class="world-button" href="../blog.html">Back to all stories</a></nav>
+      <section class="story-after" aria-label="About this story">
+        <div class="story-share"><span>Share this story</span><a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fdeniqua20.github.io%2Fstories%2Fhow-i-broke-into-cybersecurity.html" target="_blank" rel="noopener">LinkedIn</a><button type="button" data-copy-link>Copy link</button></div>
+        <aside class="story-author"><img src="../assets/images/lab-butterfly.webp" width="56" height="56" alt="" /><div><p class="story-author-kicker">Written by</p><p class="story-author-name">Dee</p><p>Cybersecurity professional, mother of twins, and lifelong learner sharing the journey so the road is a little easier for someone coming behind me.</p><a href="../about.html">More about Dee</a></div></aside>
+      </section>
+      <section class="story-more" aria-labelledby="more-title">
+        <h2 id="more-title">More from Dee’s Corner</h2>
+        <div class="story-grid">
+          <article class="story-card story-card-soon" aria-label="Next story in progress">
+            <img class="story-card-art" src="../assets/images/article-market.webp" width="640" height="640" alt="" loading="lazy" />
+            <div class="story-card-copy"><p class="story-card-meta">Story 02 · In progress</p><h3>The next story is <em>being written</em></h3><p>New chapters from my journey are on the way. Check back soon.</p></div>
+          </article>
+        </div>
+        <a class="world-button" href="../blog.html">See all stories</a>
+      </section>
     </main>
     <footer class="site-footer world-footer">
   <nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="../about.html">About Me</a><a href="../labs.html">Projects</a><a href="../resources.html">Resources</a><a href="../blog.html">BLOG</a><a href="../contact.html">Contact</a></nav>

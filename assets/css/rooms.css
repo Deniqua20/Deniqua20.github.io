@@ -135,3 +135,28 @@
 .story-next { width:min(1100px,88%); margin:10px auto 0; padding:0 6%; }
 .story-page .journal-heading .corner-post-title em { font-family:"Great Vibes",cursive; font-style:normal; font-size:1.15em; }
 @media (prefers-reduced-motion:reduce) { .story-card,.story-card-art { transition:none; } }
+
+/* Story page: blog-style cover, tags, drop cap, pull quote, share and author box. */
+.story-cover { width:min(1100px,92%); margin:18px auto 0; height:clamp(200px,32vw,380px); border-radius:18px; overflow:hidden; position:relative; }
+.story-cover img { width:100%; height:100%; object-fit:cover; object-position:center 60%; display:block; }
+.story-cover::after { content:''; position:absolute; inset:0; background:linear-gradient(0deg,#100d11 0%,transparent 55%); }
+.story-page .journal-article { position:relative; margin-top:-70px; }
+.story-tags { list-style:none; display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 0; padding:0; }
+.story-tags li { padding:5px 12px; border:1px solid #ff8e9866; border-radius:20px; font:500 11px/1 var(--sans); letter-spacing:1px; color:#ffc6cc; background:#2a111a88; }
+.story-page .journal-opening::first-letter { float:left; font:400 4.4em/.8 "Great Vibes",cursive; color:#ff8e98; padding:8px 12px 0 0; }
+.story-quote { margin:38px 0; padding:8px 0 8px 26px; border-left:3px solid #ff6b7c; }
+.story-quote p { margin:0; font:italic 500 clamp(24px,2.6vw,32px)/1.35 var(--serif); color:#fff4ef!important; }
+.story-after { width:min(1100px,88%); margin:30px auto 0; padding:0 6%; display:grid; gap:22px; }
+.story-share { display:flex; align-items:center; flex-wrap:wrap; gap:10px; padding:16px 0; border-top:1px solid #ab586244; border-bottom:1px solid #ab586244; }
+.story-share span { font:600 10px/1 ui-monospace,Menlo,monospace; letter-spacing:2px; text-transform:uppercase; color:#c8bab8; margin-right:6px; }
+.cyber-world main .story-share a,.story-share button { padding:8px 16px; border:1px solid #ff8e9888; border-radius:20px; background:#1a0d12; color:#ffe3e6; font:500 12px var(--sans); text-decoration:none; cursor:pointer; transition:background .25s; }
+.story-share a:hover,.story-share button:hover { background:#5c2632; text-decoration:none; }
+.story-author { display:flex; gap:18px; align-items:flex-start; padding:22px; border:1px solid #ab586244; border-radius:16px; background:linear-gradient(160deg,#1b1016,#0d0a0e); }
+.story-author img { width:56px; height:56px; flex:none; padding:8px; border-radius:50%; background:#2a111a; box-shadow:0 0 0 1px #ff8e9866; }
+.story-author p { margin:0 0 8px; color:#d9cbc9; font-size:14px; line-height:1.6; }
+.story-author .story-author-kicker { font:600 10px/1 ui-monospace,Menlo,monospace; letter-spacing:2px; text-transform:uppercase; color:#ff8e98; margin-bottom:4px; }
+.story-author .story-author-name { font:400 34px/1 "Great Vibes",cursive; color:#ff9ba4; }
+.story-more { width:min(1100px,88%); margin:50px auto 0; padding:0 6%; }
+.story-more h2 { font:500 clamp(26px,3vw,34px)/1.1 var(--serif); margin:0 0 20px; color:#fff4ef; }
+.story-more .story-grid { margin-bottom:24px; }
+@media (max-width:700px) { .story-page .journal-article { margin-top:-40px; } }
