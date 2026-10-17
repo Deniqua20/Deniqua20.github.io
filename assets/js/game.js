@@ -113,7 +113,10 @@
   if (level && hero) {
     const chip = document.createElement("p");
     chip.className = "game-chip";
-    chip.innerHTML = `<span>LEVEL ${pad(level.n)}</span>${inProjects ? "Mission file" : level.short}`;
+    const label = inProjects ? "Mission file" : level.short;
+    const eyebrowText = (hero.querySelector(".room-eyebrow, .eyebrow, .about-label, .showcase-kicker")?.textContent || "").toLowerCase();
+    // Skip the label when the page's own eyebrow already says it (e.g. "About me").
+    chip.innerHTML = `<span>LEVEL ${pad(level.n)}</span>${eyebrowText.includes(label.toLowerCase()) ? "" : label}`;
     const back = hero.querySelector(":scope > .room-back, :scope > .hq-return, :scope > .text-link");
     (back || hero.firstElementChild)?.[back ? "after" : "before"](chip);
   }

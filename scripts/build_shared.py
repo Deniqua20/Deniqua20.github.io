@@ -28,6 +28,17 @@ for path in [*ROOT.glob('*.html'),*ROOT.joinpath('projects').glob('*.html'),*ROO
     text=re.sub(r'game\.js\?v=[^"\s]+',f'game.js?v={GAME}',text)
     text=re.sub(r'rooms\.css\?v=[^"\s]+',f'rooms.css?v={ROOMS}',text)
     text=re.sub(r'hq-eyes\.(css|js)\?v=[^"\s]+',lambda m:f'hq-eyes.{m.group(1)}?v={EYES}',text)
+    # Link previews (LinkedIn, texts, etc.) built from each page's own title and description.
+    if 'property="og:title"' not in text:
+        t=re.search(r'<title>(.*?)</title>',text,re.S); d=re.search(r'name="description"\s+content="([^"]*)"',text,re.S)
+        rel=path.relative_to(ROOT).as_posix(); url='https://deniqua20.github.io/'+('' if rel=='index.html' else rel)
+        og=(f'<meta property="og:title" content="{t.group(1).strip() if t else "Dee’s Cyber Corner"}" />\n'
+            f'<meta property="og:description" content="{d.group(1).strip() if d else ""}" />\n'
+            '<meta property="og:type" content="website" />\n'
+            f'<meta property="og:url" content="{url}" />\n'
+            '<meta property="og:image" content="https://deniqua20.github.io/assets/images/share-card.jpg" />\n'
+            '<meta name="twitter:card" content="summary_large_image" />\n')
+        text=text.replace('</head>',og+'</head>',1)
     if 'cyber-home' not in text:
         if 'room-page' not in text:text=re.sub(r'<body class="([^"]*)"',r'<body class="\1 room-page"',text,count=1)
         if 'assets/css/rooms.css' not in text:text=text.replace('</head>',f'<link rel="stylesheet" href="{prefix}assets/css/rooms.css?v=rooms-1" />\n</head>')

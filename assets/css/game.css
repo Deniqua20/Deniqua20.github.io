@@ -85,3 +85,5 @@
 @media (prefers-reduced-motion:reduce) {
   .game-card *,.game-badge {transition:opacity .2s!important;transform:none!important;filter:none!important;}
 }
+/* Some page styles target every paragraph in a hero; keep the chip's own type. */
+.room-page p.game-chip { font:600 10px/1 ui-monospace,Menlo,monospace!important; letter-spacing:2px!important; color:#f3d8da!important; }

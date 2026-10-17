@@ -168,3 +168,8 @@
 .story-cover img { object-position:center 28%; }
 .story-card-art[src*="cyber-studio-warm-hero"] { object-position:center 22%; }
 .story-card-soon .story-card-art { filter:brightness(.8); }
+
+/* Case-study showcase pages: readable intro copy and the same script accent as other rooms. */
+.cyber-world .showcase-story > p:not(.showcase-kicker):not(.showcase-tools):not(.game-chip) { color:#e6d9d7; }
+.room-page .showcase-story h1 em { font-family:"Great Vibes",cursive; font-style:normal; font-weight:400; font-size:1.18em; color:#ff8e98; text-shadow:0 0 18px #ff2b4566; }
+.room-page .room-intro + .case-study-body { margin-top:48px; }
