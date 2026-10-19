@@ -131,7 +131,7 @@ def grail():
 <div class="grail-box-head"><p class="grail-kicker">What actually worked for me</p><h2 id="grail-title">Dee’s <em>Holy Grail</em></h2>
 </div>
 <h3 class="grail-sub">My three favorite resources</h3><ol class="grail-favs">{favs}</ol>
-<details class="grail-part"><summary><span class="grail-part-n">01</span><span>How I learned to learn <small>My ADHD study methods</small></span></summary>
+<details class="grail-part"><summary><span class="grail-part-n">01</span><span>As someone with ADHD, this is what helped me <small>The study methods that worked for me</small></span></summary>
 <div class="grail-part-body"><p class="grail-intro">I have ADHD, and throughout college I had to discover study techniques that helped me stay focused, understand concepts, and retain information. These are the methods that personally helped me.</p>
 <div class="grail-learn"><ul class="grail-methods">{methods}</ul>
 <aside class="focus" aria-labelledby="focus-title"><p class="grail-kicker">Try it now</p><h4 id="focus-title">Focus session</h4><p class="focus-sub">A simple Pomodoro timer: focus, then take a short break.</p>
