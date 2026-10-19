@@ -69,7 +69,7 @@ Validation covers desktop, tablet, and phone layouts, accessible navigation, int
 
 ## Latest interaction update
 
-The approved hero artwork and character are unchanged. The homepage button reads “Explore My World.” Project entries use native stretched links so the full card area responds to clicks and keyboard focus. Okta has explicit tools, methodology, documented validation, and takeaways; missing EDR evidence remains clearly labeled. The About portrait retains its existing artwork with a provenance caption and can be replaced with an authentic source photo when available.
+The approved hero artwork and character are unchanged. The homepage button reads “Explore My World.” Project entries use native stretched links so the full card area responds to clicks and keyboard focus. Okta has explicit tools, methodology, documented validation, and takeaways; missing EDR evidence remains clearly labeled.
 
 The shared HTML renderer versions CSS and JavaScript by content hash. After changes, run `python3 scripts/build_shared.py`, commit the changed pages and assets, and push to `main`. The existing GitHub Pages workflow publishes the static files; no server build is required.
 
