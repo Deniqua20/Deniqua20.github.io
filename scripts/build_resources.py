@@ -95,12 +95,12 @@ def host(url):
 
 
 def card(name, url, note, used, fav):
+    """One resource as a row inside its category box."""
     badge = '<span class="lib-badge is-used">✓ I used this</span>' if used else '<span class="lib-badge">+ Recommended</span>'
-    star = '<span class="lib-fav" title="One of Dee’s three favorites">★ Favorite</span>' if fav else ""
+    star = ' <span class="lib-fav" title="One of Dee’s three favorites">★</span>' if fav else ""
     return (f'<li class="lib-card{" is-fav" if fav else ""}" data-used="{str(used).lower()}">'
-            f'<div class="lib-card-top">{badge}{star}</div>'
-            f'<h4><a href="{e(url)}" target="_blank" rel="noopener">{e(name)}<span class="visually-hidden"> (opens in a new tab)</span></a></h4>'
-            f'<p>{e(note)}</p><span class="lib-host" aria-hidden="true">{e(host(url))} ↗</span></li>')
+            f'<div class="lib-row-main"><h4><a href="{e(url)}" target="_blank" rel="noopener">{e(name)}<span class="visually-hidden"> (opens in a new tab)</span></a>{star}</h4>'
+            f'<p>{e(note)}</p></div>{badge}<span class="lib-go" aria-hidden="true">↗</span></li>')
 
 
 def library():
@@ -174,7 +174,7 @@ def write(name, main, title, desc, body_class):
     head = re.sub(r'<meta property="og:[^>]*>\n|<meta name="twitter:[^>]*>\n', "", head)
     head = re.sub(r'<body class="[^"]*"', f'<body class="{body_class}"', head, count=1)
     head = re.sub(r'\n?<link rel="stylesheet" href="assets/css/resources\.css[^>]*>|\n?<script src="assets/js/resources\.js[^>]*></script>', "", head)
-    head = head.replace("</head>", '<link rel="stylesheet" href="assets/css/resources.css?v=2" />\n<script src="assets/js/resources.js?v=2" defer></script>\n</head>', 1)
+    head = head.replace("</head>", '<link rel="stylesheet" href="assets/css/resources.css?v=5" />\n<script src="assets/js/resources.js?v=5" defer></script>\n</head>', 1)
     (ROOT / name).write_text(head + main + tail)
 
 

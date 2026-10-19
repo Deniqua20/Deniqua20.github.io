@@ -167,3 +167,30 @@
 }
 .adhd { font-weight:700; color:#fff4ef; letter-spacing:.5px; }
 .grail-part summary small .adhd { color:var(--gold); }
+
+/* One box per category, resources as rows inside it. */
+.lib-group { padding:22px 26px 10px; border:1px solid #ab586244; border-radius:18px; background:linear-gradient(165deg,#1a1015,#0e0a0d); }
+.lib-group-head { margin-bottom:6px; padding-bottom:14px; border-bottom:1px solid #ab586233; }
+.lib-grid { display:block; }
+.lib-card { flex-direction:row; align-items:center; gap:16px; padding:14px 6px; border:0; border-radius:10px; background:none; box-shadow:none; }
+.lib-card + .lib-card { border-top:1px solid #ab586222; border-radius:0; }
+.lib-card:hover,.lib-card:focus-within { transform:none; background:#ff8e980d; box-shadow:none; border-color:#ab586222; }
+.lib-card.is-fav { background:none; }
+.lib-card.is-fav h4 a { color:#ffe2b0!important; }
+.lib-row-main { flex:1; min-width:0; }
+.lib-card h4 { margin:0; font-size:21px; }
+.lib-card p { margin:2px 0 0; }
+.lib-fav { padding:0; font-size:14px; letter-spacing:0; }
+.lib-go { color:#ff9ba4; font-size:15px; width:16px; text-align:center; transition:transform .25s; }
+.lib-card:hover .lib-go { transform:translate(3px,-3px); }
+.lib-host { display:none; }
+.lib-card:focus-within { outline:2px solid #ffa0aa; outline-offset:0; }
+@media (max-width:600px) {
+ .lib-group { padding:16px 16px 6px; }
+ .lib-grid { display:block!important; }
+ .lib-card { flex-wrap:wrap; gap:6px 10px; padding:12px 2px; }
+ .lib-row-main { flex-basis:100%; }
+ .lib-go { display:none; }
+ .lib-card h4 { font-size:19px; }
+ .lib-card p { font-size:13px; }
+}
