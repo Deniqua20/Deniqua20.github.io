@@ -165,3 +165,5 @@
  .grail-favs { gap:10px; }
  .grail-fav { padding:20px 18px 18px; }
 }
+.adhd { font-weight:700; color:#fff4ef; letter-spacing:.5px; }
+.grail-part summary small .adhd { color:var(--gold); }

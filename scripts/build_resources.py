@@ -139,7 +139,7 @@ def grail():
     methods = "".join(f'<li class="grail-method"><h4>{e(t)}</h4><p>{e(d)}</p></li>' for t, d in METHODS)
     prep = "".join(f"<li>{e(x)}</li>" for x in CERT_PREP)
     tips = "".join(f"<li>{e(x)}</li>" for x in COLLEGE)
-    return f'''<section class="world-shell grail-box" id="holy-grail" aria-labelledby="grail-title">
+    return _bold_adhd(f'''<section class="world-shell grail-box" id="holy-grail" aria-labelledby="grail-title">
 <div class="grail-box-head"><p class="grail-kicker">What actually worked for me</p><h2 id="grail-title">Dee’s <em>Holy Grail</em></h2>
 <p class="grail-intro">The resources and study techniques that personally helped me through college, certification prep, and my cybersecurity journey. This is what helped me, not a promise that one method will work for everyone.</p></div>
 <h3 class="grail-sub">My three favorite resources</h3><ol class="grail-favs">{favs}</ol>
@@ -158,7 +158,11 @@ def grail():
 <details class="grail-part"><summary><span class="grail-part-n">03</span><span>College survival tips <small>Lessons from finishing college with ADHD</small></span></summary>
 <div class="grail-part-body"><p class="grail-intro">Lessons from completing college while managing ADHD and other responsibilities.</p><ul class="grail-tips">{tips}</ul></div></details>
 <p class="grail-sign">Progress over perfection.</p>
-</section>'''
+</section>''')
+
+
+def _bold_adhd(html):
+    return html.replace("ADHD", '<strong class="adhd">ADHD</strong>')
 
 
 def write(name, main, title, desc, body_class):
