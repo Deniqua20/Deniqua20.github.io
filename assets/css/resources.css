@@ -216,3 +216,14 @@
 .room-resources .lib-card:hover,.room-resources .lib-card:focus-within { border-color:#ff3b4f99; }
 .room-resources .room-next > p,.room-resources .room-next .studio-destination-action { color:#ff4a5c; }
 .room-resources .room-next .studio-destination h2 { color:#ff3348; }
+
+/* Certification steps (numbered) and encouragement callout */
+.grail-steps { counter-reset:step; }
+.grail-steps li { counter-increment:step; padding:16px 18px 16px 58px; display:flex; flex-direction:column; gap:4px; }
+.grail-steps li::before { content:counter(step); background:#2a0f17; border-color:#ff3b4f88; color:#ff8e98; border-radius:50%; width:28px; height:28px; top:14px; font:600 13px ui-monospace,Menlo,monospace; }
+.grail-steps li strong { color:#fff4ef; font:500 19px/1.25 var(--serif); }
+.grail-steps li span { color:#d9cbc9; }
+.grail-yougotthis { font:400 34px/1.15 "Great Vibes",cursive!important; color:#ff3348!important; margin-top:14px!important; }
+.grail-small { font-size:12.5px!important; color:#bba98f!important; }
+.lib-card-top:empty { display:none; }
+.lib-stats .lib-fav { color:var(--gold); }

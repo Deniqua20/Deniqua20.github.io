@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 LIBRARY = [
     ("funding", "Funding Opportunities", "Scholarships and programs that can help pay for training, certifications, and school.", [
-        ("Last Mile Education Fund", "https://www.lastmile-ed.org/", "Financial support for students finishing tech degrees. I used this one.", True, False),
+        ("Last Mile Education Fund", "https://www.lastmile-ed.org/", "Financial support for students finishing tech degrees.", True, False),
         ("Center for Cyber Safety and Education", "https://www.iamcybersafe.org/", "Additional scholarship opportunities.", False, False),
         ("SANS Cyber Academies", "https://www.sans.org/cyber-academy", "Additional cybersecurity training and funding opportunities.", False, False),
     ]),
@@ -63,14 +63,12 @@ METHODS = [
 ]
 
 CERT_PREP = [
-    "Watching instructional videos from educators such as Professor Messer and Jason Dion.",
-    "Using Udemy, YouTube, and other learning resources.",
-    "Taking practice quizzes and creating my own questions.",
-    "Practicing active recall.",
-    "Teaching technical concepts back to myself.",
-    "Using hands-on platforms such as TryHackMe and LetsDefend.",
-    "Participating in or learning from Reddit and Discord discussions.",
-    "Studying in shorter, focused sessions.",
+    ("Search Reddit and Discord", "I search Reddit and Discord for tips and to gather the study notes and resources people used when they passed. I’m currently in college, so these communities have been a big help."),
+    ("Download the official exam objectives", "The objectives tell you exactly what can be on the exam. Everything on them is up for grabs."),
+    ("Turn the objectives into a study plan", "I put the objectives into ChatGPT to create a study plan and clear up any gray areas. While I study, I have it break information down so simply that a toddler could understand it. You’re taking in a lot, so make it digestible for you."),
+    ("Pair my notes with videos", "Once I have my study plan and notes, I pair them with YouTube videos. For Security+, I used Professor Messer’s videos, and he has study materials too."),
+    ("Prefer not to use AI? Use reputable study material", "If you’d rather not use ChatGPT, Claude, or other AI tools, look at who offers trusted study material. I’ve used Jason Dion and Professor Messer, and there are plenty of others. Do your research."),
+    ("Don’t overcomplicate it", "See what’s being covered, study, take practice tests, and give it a shot."),
 ]
 
 COLLEGE = [
@@ -95,10 +93,8 @@ def host(url):
 
 
 def card(name, url, note, used, fav):
-    badge = '<span class="lib-badge is-used">✓ I used this</span>' if used else '<span class="lib-badge">+ Recommended</span>'
-    star = '<span class="lib-fav" title="One of Dee’s three favorites">★ Favorite</span>' if fav else ""
-    return (f'<li class="lib-card{" is-fav" if fav else ""}" data-used="{str(used).lower()}">'
-            f'<div class="lib-card-top">{badge}{star}</div>'
+    star = '<div class="lib-card-top"><span class="lib-fav" title="One of Dee’s three favorites">★ Favorite</span></div>' if fav else ""
+    return (f'<li class="lib-card{" is-fav" if fav else ""}">{star}'
             f'<h4><a href="{e(url)}" target="_blank" rel="noopener">{e(name)}<span class="visually-hidden"> (opens in a new tab)</span></a></h4>'
             f'<p>{e(note)}</p><span class="lib-host" aria-hidden="true">{e(host(url))} ↗</span></li>')
 
@@ -109,14 +105,14 @@ def library():
     folders = "".join(
         f'<details class="lib-group" data-lib-group="{k}"{" open" if k == "practice" else ""}>'
         f'<summary class="lib-group-head"><h3 id="lib-{k}">{e(t)}</h3>'
-        f'<span class="lib-count-pill">{len(items)} resources · {sum(1 for i in items if i[3])} I used</span></summary>'
+        f'<span class="lib-count-pill">{len(items)} resources</span></summary>'
         f'<p class="lib-group-desc">{e(d)}</p><ul class="lib-grid">{"".join(card(*i) for i in items)}</ul></details>'
         for k, t, d, items in LIBRARY)
     return f'''<main id="main" class="resources-main">
-<section class="world-shell room-intro"><p class="room-eyebrow">The resource library</p><h1>Resources.<br><em>What helped me grow.</em></h1><p class="room-lead">Cybersecurity resources I’ve personally used throughout my journey, plus a few more that others may find helpful. Anything marked “I used this” is from my own experience.</p></section>
+<section class="world-shell room-intro"><p class="room-eyebrow">The resource library</p><h1>Resources.<br><em>What helped me grow.</em></h1><p class="room-lead">Cybersecurity resources from my own journey, plus a few more that others may find helpful.</p></section>
 {grail()}
 <section class="world-shell lib" id="library" aria-labelledby="lib-title">
-<div class="lib-head"><h2 id="lib-title">Resource Library</h2><p class="lib-stats"><strong>{total}</strong> resources · <strong>{used}</strong> I’ve used myself</p></div>
+<div class="lib-head"><h2 id="lib-title">Resource Library</h2><p class="lib-stats"><strong>{total}</strong> resources · <span class="lib-fav">★</span> = one of my favorites</p></div>
 {folders}
 <p class="lib-note">These links go to other websites. Programs, prices, and offerings change, so check each site for current details. Nothing here is sponsored.</p>
 </section>
@@ -129,7 +125,7 @@ def grail():
         f'<a class="grail-visit" href="{e(url)}" target="_blank" rel="noopener">Visit {e(name)} ↗<span class="visually-hidden"> (opens in a new tab)</span></a></li>'
         for n, (name, url, tag, text) in enumerate(FAVORITES, 1))
     methods = "".join(f'<li class="grail-method"><h4>{e(t)}</h4><p>{e(d)}</p></li>' for t, d in METHODS)
-    prep = "".join(f"<li>{e(x)}</li>" for x in CERT_PREP)
+    prep = "".join(f'<li><strong>{e(t)}</strong><span>{e(d)}</span></li>' for t, d in CERT_PREP)
     tips = "".join(f"<li>{e(x)}</li>" for x in COLLEGE)
     return _bold_adhd(f'''<section class="world-shell grail-box" id="holy-grail" aria-labelledby="grail-title">
 <div class="grail-box-head"><p class="grail-kicker">What actually worked for me</p><h2 id="grail-title">Dee’s <em>Holy Grail</em></h2>
@@ -143,10 +139,10 @@ def grail():
 <div class="focus-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="focus-track" cx="60" cy="60" r="52"/><circle class="focus-bar" cx="60" cy="60" r="52"/></svg><p class="focus-time" id="focus-time" role="timer" aria-live="off">25:00</p></div>
 <div class="focus-actions"><button type="button" class="world-button" id="focus-start">Start</button><button type="button" class="focus-reset" id="focus-reset">Reset</button></div>
 <p class="focus-done" id="focus-done" role="status"></p></aside></div></div></details>
-<details class="grail-part"><summary><span class="grail-part-n">02</span><span>How I prepared for certifications <small>The approach behind my certs</small></span></summary>
-<div class="grail-part-body"><p class="grail-intro">I hold multiple industry certifications. This is the approach that helped me prepare.</p>
-<div class="grail-certs"><ul class="grail-checklist">{prep}</ul>
-<aside class="grail-callout"><p class="grail-kicker">Important</p><p>Certification exams and objectives change over time. I’m sharing what worked for me rather than exam-specific guides that may become outdated. Always verify the current exam version and official objectives before you study.</p></aside></div></div></details>
+<details class="grail-part"><summary><span class="grail-part-n">02</span><span>How I prepared for certifications <small>My step-by-step process</small></span></summary>
+<div class="grail-part-body"><p class="grail-intro">I hold multiple industry certifications. When it came to certification, this is what I did.</p>
+<div class="grail-certs"><ol class="grail-checklist grail-steps">{prep}</ol>
+<aside class="grail-callout"><p class="grail-kicker">If you don’t pass</p><p>It isn’t the end-all be-all. I’ll let you know now: I have failed certifications multiple times, and guess what? I’m still in the industry. Go back to the drawing board, make some adjustments, and execute.</p><p class="grail-yougotthis">You got this. If it was easy, everyone would be doing it.</p><p class="grail-small">Exams and objectives change over time, so always check the current exam version and official objectives.</p></aside></div></div></details>
 <details class="grail-part"><summary><span class="grail-part-n">03</span><span>College survival tips <small>Lessons from finishing college with ADHD</small></span></summary>
 <div class="grail-part-body"><p class="grail-intro">Lessons from completing college while managing ADHD and other responsibilities.</p><ul class="grail-tips">{tips}</ul></div></details>
 </section>''')
@@ -165,7 +161,7 @@ def write(name, main, title, desc, body_class):
     head = re.sub(r'<meta property="og:[^>]*>\n|<meta name="twitter:[^>]*>\n', "", head)
     head = re.sub(r'<body class="[^"]*"', f'<body class="{body_class}"', head, count=1)
     head = re.sub(r'\n?<link rel="stylesheet" href="assets/css/resources\.css[^>]*>|\n?<script src="assets/js/resources\.js[^>]*></script>', "", head)
-    head = head.replace("</head>", '<link rel="stylesheet" href="assets/css/resources.css?v=8" />\n<script src="assets/js/resources.js?v=6" defer></script>\n</head>', 1)
+    head = head.replace("</head>", '<link rel="stylesheet" href="assets/css/resources.css?v=9" />\n<script src="assets/js/resources.js?v=6" defer></script>\n</head>', 1)
     (ROOT / name).write_text(head + main + tail)
 
 
