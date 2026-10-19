@@ -165,7 +165,7 @@ def write(name, main, title, desc, body_class):
     head = re.sub(r'<meta property="og:[^>]*>\n|<meta name="twitter:[^>]*>\n', "", head)
     head = re.sub(r'<body class="[^"]*"', f'<body class="{body_class}"', head, count=1)
     head = re.sub(r'\n?<link rel="stylesheet" href="assets/css/resources\.css[^>]*>|\n?<script src="assets/js/resources\.js[^>]*></script>', "", head)
-    head = head.replace("</head>", '<link rel="stylesheet" href="assets/css/resources.css?v=6" />\n<script src="assets/js/resources.js?v=6" defer></script>\n</head>', 1)
+    head = head.replace("</head>", '<link rel="stylesheet" href="assets/css/resources.css?v=8" />\n<script src="assets/js/resources.js?v=6" defer></script>\n</head>', 1)
     (ROOT / name).write_text(head + main + tail)
 
 

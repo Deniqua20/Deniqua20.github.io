@@ -195,3 +195,24 @@
  .lib-group-desc { margin:-2px 16px 12px; }
  .lib-group .lib-grid { padding:0 10px 12px; grid-template-columns:1fr; }
 }
+
+/* Resources page uses red instead of pink for its accent text. */
+.room-resources { --rose:#ff3b4f; --red-deep:#e8283d; }
+.room-resources .room-intro h1 em { color:#ff3348; text-shadow:0 0 22px #ff1f3a66; }
+.room-resources .room-eyebrow,.room-resources .grail-sub,.room-resources .grail-tag { color:#ff4a5c; }
+.room-resources .lib-group-head h3 { color:#ff3348; }
+.room-resources .lib-group > summary:hover h3 { color:#ff6170; }
+.room-resources .lib-group > summary::after,.room-resources .grail-part summary::after { color:#ff3b4f; }
+.cyber-world.room-resources main a:not(.studio-destination):not(.world-button):not(.button),
+.cyber-world.room-resources main .lib-card h4 a { color:#ff4a5c; }
+.cyber-world.room-resources main .lib-card.is-fav h4 a { color:#ffd27a!important; }
+.cyber-world.room-resources main .grail-visit { color:var(--gold); }
+.room-resources .lib-stats strong { color:#ff4a5c; }
+.room-resources .grail-method::before { border-color:#ff3b4f; color:#ff4a5c; box-shadow:0 0 14px -4px #ff1f3a; }
+.room-resources .focus h4,.room-resources .focus .grail-kicker { color:#ff3b4f; }
+.room-resources .focus { border-color:#ff3b4f66; }
+.room-resources .focus-bar { stroke:#ff2b45; }
+.room-resources .focus-modes button[aria-pressed="true"] { background:#ff3b4f; color:#fff; }
+.room-resources .lib-card:hover,.room-resources .lib-card:focus-within { border-color:#ff3b4f99; }
+.room-resources .room-next > p,.room-resources .room-next .studio-destination-action { color:#ff4a5c; }
+.room-resources .room-next .studio-destination h2 { color:#ff3348; }
