@@ -1,0 +1,188 @@
+"""Render resources.html (Resource Library) and holy-grail.html (Dee's Holy Grail).
+
+Edit the lists below, then run:
+    python3 scripts/build_resources.py && python3 scripts/build_shared.py
+
+used=True marks a resource Dee personally used; fav=True marks one of her three favorites.
+"""
+import re
+from html import escape
+from pathlib import Path
+from urllib.parse import urlparse
+
+ROOT = Path(__file__).resolve().parents[1]
+
+LIBRARY = [
+    ("funding", "Funding Opportunities", "Scholarships and programs that can help pay for training, certifications, and school.", [
+        ("Last Mile Education Fund", "https://www.lastmile-ed.org/", "Financial support for students finishing tech degrees. I used this one.", True, False),
+        ("Center for Cyber Safety and Education", "https://www.iamcybersafe.org/", "Additional scholarship opportunities.", False, False),
+        ("SANS Cyber Academies", "https://www.sans.org/cyber-academy", "Additional cybersecurity training and funding opportunities.", False, False),
+    ]),
+    ("study", "My Study Toolkit", "Courses, videos, and learning paths for building knowledge and preparing for certifications.", [
+        ("Professor Messer", "https://www.professormesser.com/", "Free certification training videos. One of my favorites.", True, True),
+        ("Jason Dion / Dion Training", "https://www.diontraining.com/", "Certification courses and practice exams.", True, False),
+        ("Udemy", "https://www.udemy.com/", "Online courses on almost any tech topic.", True, False),
+        ("YouTube", "https://www.youtube.com/", "Free lessons, walkthroughs, and explanations.", True, False),
+        ("Certify Breakfast", "https://www.youtube.com/@CertifyBreakfast", "A YouTube channel I used while studying.", True, False),
+        ("Microsoft Learn", "https://learn.microsoft.com/en-us/training/", "Free Microsoft training paths.", False, False),
+        ("Cisco Networking Academy", "https://www.netacad.com/", "Networking and cybersecurity courses.", False, False),
+        ("SANS Free Resources", "https://www.sans.org/security-resources", "Free security resources from SANS.", False, False),
+    ]),
+    ("practice", "Hands-On Practice", "Labs and challenges where you apply what you learn.", [
+        ("TryHackMe", "https://tryhackme.com/", "Guided hands-on labs. One of my favorites.", True, True),
+        ("LetsDefend", "https://letsdefend.io/", "Blue-team and SOC investigation practice. One of my favorites.", True, True),
+        ("Hack The Box", "https://www.hackthebox.com/", "Hands-on labs and challenges.", True, False),
+        ("CyberDefenders", "https://cyberdefenders.org/", "Blue-team investigation challenges.", False, False),
+        ("PortSwigger Web Security Academy", "https://portswigger.net/web-security", "Free web security training and labs.", False, False),
+        ("picoCTF", "https://picoctf.org/", "Free, beginner-friendly capture-the-flag challenges.", False, False),
+    ]),
+    ("community", "Cyber Communities", "Groups and spaces where you can learn from people further along.", [
+        ("ISC2", "https://www.isc2.org/", "Professional cybersecurity association.", True, False),
+        ("ISACA", "https://www.isaca.org/", "Professional association for audit, risk, and governance.", True, False),
+        ("WiCyS", "https://www.wicys.org/", "Women in CyberSecurity community.", True, False),
+        ("r/CompTIA", "https://www.reddit.com/r/CompTIA/", "Certification discussions, study experiences, and community advice.", False, False),
+        ("r/cybersecurity", "https://www.reddit.com/r/cybersecurity/", "Industry discussions.", False, False),
+        ("Discord", "https://discord.com/", "Study groups, discussions, and community support.", False, False),
+        ("Blacks In Cybersecurity", "https://www.blacksincyberconf.com/", "Additional community.", False, False),
+        ("OWASP Chapters", "https://owasp.org/chapters/", "Local application security meetups.", False, False),
+    ]),
+]
+
+FAVORITES = [
+    ("TryHackMe", "https://tryhackme.com/", "Hands-on practice", "One of my favorite platforms for hands-on cybersecurity practice. It helped me apply what I was learning."),
+    ("LetsDefend", "https://letsdefend.io/", "Blue team · SOC", "One of my favorite resources for practicing blue-team concepts, SOC investigations, and security analysis."),
+    ("Professor Messer", "https://www.professormesser.com/", "Certification study", "Professor Messer has been with me throughout my studies and certification journey. His lessons have been one of my go-to resources for understanding technical concepts."),
+]
+
+METHODS = [
+    ("Pomodoro Method", "I used focused study sessions with breaks in between instead of trying to study continuously for hours."),
+    ("Active Recall", "I would study a topic, put my notes away, and try to remember what I had learned without looking at the answers. This helped me identify which concepts I understood and which ones needed more attention."),
+    ("Teaching Myself the Lesson Back", "After learning something, I would explain it back to myself in my own words, almost as though I were teaching someone else. This helped me understand concepts rather than simply memorize them."),
+    ("Creating My Own Quizzes", "I would create practice quizzes based on what I was studying. Quizzing myself helped me test my understanding, remember information, and identify weak areas."),
+    ("Short Study Sessions", "I found that studying in shorter sessions worked better for me than forcing myself to sit for long periods. I focused on manageable amounts of information at a time."),
+]
+
+CERT_PREP = [
+    "Watching instructional videos from educators such as Professor Messer and Jason Dion.",
+    "Using Udemy, YouTube, and other learning resources.",
+    "Taking practice quizzes and creating my own questions.",
+    "Practicing active recall.",
+    "Teaching technical concepts back to myself.",
+    "Using hands-on platforms such as TryHackMe and LetsDefend.",
+    "Participating in or learning from Reddit and Discord discussions.",
+    "Studying in shorter, focused sessions.",
+]
+
+COLLEGE = [
+    "Finding study methods that fit how you learn.",
+    "Breaking assignments and difficult topics into smaller pieces.",
+    "Using short study sessions to avoid feeling overwhelmed.",
+    "Taking breaks when needed.",
+    "Testing your knowledge instead of only rereading material.",
+    "Explaining concepts out loud to improve understanding.",
+    "Finding supportive learning communities.",
+    "Staying consistent without expecting perfection.",
+    "Remembering that everyone’s learning journey is different.",
+]
+
+e = escape
+
+
+def host(url):
+    h = urlparse(url).netloc.removeprefix("www.")
+    path = urlparse(url).path.rstrip("/")
+    return h + (path if h in ("reddit.com", "youtube.com") else "")
+
+
+def card(name, url, note, used, fav):
+    badge = '<span class="lib-badge is-used">✓ I used this</span>' if used else '<span class="lib-badge">+ Recommended</span>'
+    star = '<span class="lib-fav" title="One of Dee’s three favorites">★ Favorite</span>' if fav else ""
+    return (f'<li class="lib-card{" is-fav" if fav else ""}" data-used="{str(used).lower()}">'
+            f'<div class="lib-card-top">{badge}{star}</div>'
+            f'<h4><a href="{e(url)}" target="_blank" rel="noopener">{e(name)}<span class="visually-hidden"> (opens in a new tab)</span></a></h4>'
+            f'<p>{e(note)}</p><span class="lib-host" aria-hidden="true">{e(host(url))} ↗</span></li>')
+
+
+def library():
+    total = sum(len(items) for *_, items in LIBRARY)
+    used = sum(1 for *_, items in LIBRARY for i in items if i[3])
+    chips = '<button type="button" data-lib-cat="all" aria-pressed="true">All</button>' + "".join(
+        f'<button type="button" data-lib-cat="{k}" aria-pressed="false">{e(t)}</button>' for k, t, _, _ in LIBRARY)
+    groups = "".join(
+        f'<section class="lib-group" data-lib-group="{k}" aria-labelledby="lib-{k}"><div class="lib-group-head"><h3 id="lib-{k}">{e(t)}</h3><p>{e(d)}</p></div>'
+        f'<ul class="lib-grid">{"".join(card(*i) for i in items)}</ul></section>'
+        for k, t, d, items in LIBRARY)
+    return f'''<main id="main" class="resources-main">
+<section class="world-shell room-intro"><p class="room-eyebrow">The resource library</p><h1>Resources.<br><em>What helped me grow.</em></h1><p class="room-lead">Cybersecurity resources I’ve personally used throughout my journey, plus a few more that others may find helpful. Anything marked “I used this” is from my own experience.</p></section>
+<section class="world-shell grail-teaser" aria-labelledby="grail-teaser-title"><div><p class="grail-kicker">My personal favorites</p><h2 id="grail-teaser-title">Dee’s <em>Holy Grail</em></h2><p>My three favorite resources, the ADHD study methods that got me through college, how I prepared for certifications, and my college survival tips.</p></div><a class="world-button grail-button" href="holy-grail.html">Open the Holy Grail</a></section>
+<section class="world-shell lib" aria-labelledby="lib-title">
+<div class="lib-head"><h2 id="lib-title">Resource Library</h2><p class="lib-stats"><strong>{total}</strong> resources · <strong>{used}</strong> I’ve used myself</p></div>
+<div class="lib-controls">
+<div class="lib-chips" role="group" aria-label="Filter by category">{chips}</div>
+<div class="lib-tools"><label class="lib-search"><span class="visually-hidden">Search resources</span><input id="lib-search" type="search" placeholder="Search resources" autocomplete="off" /></label>
+<button type="button" class="lib-toggle" id="lib-used" aria-pressed="false"><span class="lib-switch" aria-hidden="true"></span>Only what I’ve used</button></div>
+</div>
+<p class="lib-legend"><span class="lib-badge is-used">✓ I used this</span> from my own experience <span class="lib-badge">+ Recommended</span> additional resources others may find helpful</p>
+<p id="lib-count" class="lib-count" role="status"></p>
+{groups}
+<p id="lib-empty" class="lib-empty" hidden>No resources match that search. Try another word or choose All.</p>
+<p class="lib-note">These links go to other websites. Programs, prices, and offerings change, so check each site for current details. Nothing here is sponsored.</p>
+</section>
+</main>'''
+
+
+def grail():
+    favs = "".join(
+        f'<li class="grail-fav"><span class="grail-rank">0{n}</span><p class="grail-tag">{e(tag)}</p><h3>{e(name)}</h3><p>{e(text)}</p>'
+        f'<a class="grail-visit" href="{e(url)}" target="_blank" rel="noopener">Visit {e(name)} ↗<span class="visually-hidden"> (opens in a new tab)</span></a></li>'
+        for n, (name, url, tag, text) in enumerate(FAVORITES, 1))
+    methods = "".join(f'<li class="grail-method"><h3>{e(t)}</h3><p>{e(d)}</p></li>' for t, d in METHODS)
+    prep = "".join(f"<li>{e(x)}</li>" for x in CERT_PREP)
+    tips = "".join(f"<li>{e(x)}</li>" for x in COLLEGE)
+    return f'''<main id="main" class="grail-main">
+<section class="world-shell room-intro"><a class="room-back" href="resources.html">Back to Resources</a><p class="room-eyebrow">Dee’s Holy Grail</p><h1>What actually<br><em>worked for me.</em></h1><p class="room-lead">The resources and study techniques that personally helped me through college, certification prep, and my cybersecurity journey. This is what helped me, not a promise that one method or resource will work for everyone.</p>
+<nav class="grail-jump" aria-label="On this page"><a href="#favorites">My favorites</a><a href="#learn">How I learned to learn</a><a href="#certs">Certification prep</a><a href="#college">College survival</a></nav></section>
+
+<section class="world-shell grail-section" id="favorites" aria-labelledby="favorites-title"><p class="grail-kicker">01 · The top three</p><h2 id="favorites-title">My three <em>favorite resources</em></h2><ol class="grail-favs">{favs}</ol></section>
+
+<section class="world-shell grail-section" id="learn" aria-labelledby="learn-title"><p class="grail-kicker">02 · My ADHD study methods</p><h2 id="learn-title">How I learned <em>to learn</em></h2>
+<p class="grail-intro">I have ADHD, and throughout college I had to discover study techniques that helped me stay focused, understand concepts, and retain information. These are the methods that personally helped me.</p>
+<div class="grail-learn"><ul class="grail-methods">{methods}</ul>
+<aside class="focus" aria-labelledby="focus-title"><p class="grail-kicker">Try it now</p><h3 id="focus-title">Focus session</h3><p class="focus-sub">A simple Pomodoro timer: focus, then take a short break.</p>
+<div class="focus-modes" role="group" aria-label="Session type"><button type="button" data-focus="1500" aria-pressed="true">Focus 25</button><button type="button" data-focus="300" aria-pressed="false">Break 5</button></div>
+<div class="focus-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="focus-track" cx="60" cy="60" r="52"/><circle class="focus-bar" cx="60" cy="60" r="52"/></svg><p class="focus-time" id="focus-time" role="timer" aria-live="off">25:00</p></div>
+<div class="focus-actions"><button type="button" class="world-button" id="focus-start">Start</button><button type="button" class="focus-reset" id="focus-reset">Reset</button></div>
+<p class="focus-done" id="focus-done" role="status"></p></aside></div></section>
+
+<section class="world-shell grail-section" id="certs" aria-labelledby="certs-title"><p class="grail-kicker">03 · Certification prep</p><h2 id="certs-title">How I prepared <em>for certifications</em></h2>
+<p class="grail-intro">I hold multiple industry certifications. This is the approach that helped me prepare.</p>
+<div class="grail-certs"><ul class="grail-checklist">{prep}</ul>
+<aside class="grail-callout"><p class="grail-kicker">Important</p><p>Certification exams and objectives change over time. I’m sharing what worked for me rather than exam-specific guides that may become outdated. Always verify the current exam version and official objectives before you study.</p></aside></div></section>
+
+<section class="world-shell grail-section" id="college" aria-labelledby="college-title"><p class="grail-kicker">04 · College survival</p><h2 id="college-title">College <em>survival tips</em></h2>
+<p class="grail-intro">Lessons from completing college while managing ADHD and other responsibilities.</p><ul class="grail-tips">{tips}</ul></section>
+
+<section class="world-shell grail-close"><p>Everyone’s learning journey is different. Take what helps and leave the rest.</p><p class="grail-sign">Progress over perfection.</p><a class="world-button" href="resources.html">Browse the full Resource Library</a></section>
+</main>'''
+
+
+def write(name, main, title, desc, body_class):
+    src = (ROOT / "resources.html").read_text()
+    head, rest = src.split('<main id="main"', 1)
+    tail = rest.split("</main>", 1)[1]
+    head = head.replace(head[head.index("<title>"):head.index("</title>") + 8], f"<title>{title}</title>", 1)
+    head = re.sub(r'(<meta\s+name="description"\s+content=")[^"]*"', lambda m: m.group(1) + desc + '"', head, count=1)
+    head = re.sub(r'<meta property="og:[^>]*>\n|<meta name="twitter:[^>]*>\n', "", head)
+    head = re.sub(r'<body class="[^"]*"', f'<body class="{body_class}"', head, count=1)
+    head = re.sub(r'\n?<link rel="stylesheet" href="assets/css/resources\.css[^>]*>|\n?<script src="assets/js/resources\.js[^>]*></script>', "", head)
+    head = head.replace("</head>", '<link rel="stylesheet" href="assets/css/resources.css?v=2" />\n<script src="assets/js/resources.js?v=2" defer></script>\n</head>', 1)
+    (ROOT / name).write_text(head + main + tail)
+
+
+write("resources.html", library(), "Resources | Dee’s Cyber Corner",
+      "Cybersecurity resources Dee has used and recommends: funding, study tools, hands-on practice, and communities.",
+      "interior room-resources cyber-world room-page")
+write("holy-grail.html", grail(), "Dee’s Holy Grail | Dee’s Cyber Corner",
+      "Dee’s favorite resources, ADHD study methods, certification prep approach, and college survival tips.",
+      "interior room-resources room-grail cyber-world room-page")
+print("wrote resources.html and holy-grail.html")
