@@ -1,46 +1,38 @@
 "use strict";
 /* Resource Library filters and the Holy Grail focus timer. Content stays readable without JavaScript. */
 (() => {
-  // Library: category chips, search, and "only what I've used".
-  const search = document.getElementById("lib-search");
-  if (search) {
-    const chips = [...document.querySelectorAll("[data-lib-cat]")];
-    const usedToggle = document.getElementById("lib-used");
-    const groups = [...document.querySelectorAll("[data-lib-group]")];
-    const count = document.getElementById("lib-count");
-    const empty = document.getElementById("lib-empty");
-    let category = "all", onlyUsed = false;
-    const apply = () => {
-      const terms = search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
-      let shown = 0;
-      groups.forEach(group => {
-        const inCategory = category === "all" || group.dataset.libGroup === category;
-        let groupShown = 0;
-        group.querySelectorAll(".lib-card").forEach(card => {
-          const text = card.textContent.toLowerCase();
-          const visible = inCategory && (!onlyUsed || card.dataset.used === "true") && terms.every(t => text.includes(t));
-          card.hidden = !visible;
-          if (visible) groupShown++;
-        });
-        group.hidden = groupShown === 0;
-        shown += groupShown;
-      });
-      empty.hidden = shown !== 0;
-      const filtered = category !== "all" || onlyUsed || terms.length;
-      count.textContent = filtered ? `Showing ${shown} ${shown === 1 ? "resource" : "resources"}.` : "";
+  // Library bookshelf: tap a spine to pull the book out; "only what I've used" dims the rest.
+  const lib = document.getElementById("library");
+  if (lib) {
+    document.documentElement.classList.add("shelf-js");
+    const show = (spine) => {
+      const shelf = spine.closest(".shelf"), pull = shelf.querySelector(".shelf-pull");
+      const open = spine.getAttribute("aria-expanded") === "true";
+      shelf.querySelectorAll(".spine").forEach(s => s.setAttribute("aria-expanded", "false"));
+      if (open) { pull.hidden = true; return; }
+      spine.setAttribute("aria-expanded", "true");
+      const d = spine.dataset, used = d.used === "true", fav = d.fav === "true";
+      const tag = fav ? "★ Favorite · ✓ I used this" : used ? "✓ I used this" : "+ Recommended";
+      pull.className = "shelf-pull" + (fav ? " is-fav" : "");
+      pull.innerHTML = "";
+      const cover = document.createElement("span"); cover.className = "pull-cover " + [...spine.classList].find(c => c.startsWith("spine-")); cover.setAttribute("aria-hidden", "true");
+      const copy = document.createElement("div"); copy.className = "pull-copy";
+      const k = document.createElement("p"); k.className = "lib-badge" + (used ? " is-used" : ""); k.textContent = tag; k.style.display = "inline-block";
+      const h = document.createElement("h4"); h.textContent = d.name;
+      const p = document.createElement("p"); p.textContent = d.note;
+      copy.append(k, h, p);
+      const a = document.createElement("a"); a.className = "pull-visit"; a.href = d.url; a.target = "_blank"; a.rel = "noopener";
+      a.textContent = "Visit ↗"; a.setAttribute("aria-label", `Visit ${d.name} (opens in a new tab)`);
+      pull.append(cover, copy, a);
+      pull.hidden = false;
     };
-    chips.forEach(chip => chip.addEventListener("click", () => {
-      category = chip.dataset.libCat;
-      chips.forEach(c => c.setAttribute("aria-pressed", String(c === chip)));
-      apply();
-    }));
-    usedToggle.addEventListener("click", () => {
-      onlyUsed = !onlyUsed;
-      usedToggle.setAttribute("aria-pressed", String(onlyUsed));
-      apply();
+    lib.querySelectorAll(".spine").forEach(spine => spine.addEventListener("click", () => show(spine)));
+    const toggle = document.getElementById("lib-used");
+    toggle.addEventListener("click", () => {
+      const on = toggle.getAttribute("aria-pressed") !== "true";
+      toggle.setAttribute("aria-pressed", String(on));
+      lib.classList.toggle("only-used", on);
     });
-    search.addEventListener("input", apply);
-    apply();
   }
 
   // Holy Grail: a simple Pomodoro timer.

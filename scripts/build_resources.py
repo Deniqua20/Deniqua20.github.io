@@ -94,38 +94,44 @@ def host(url):
     return h + (path if h in ("reddit.com", "youtube.com") else "")
 
 
-def card(name, url, note, used, fav):
-    badge = '<span class="lib-badge is-used">✓ I used this</span>' if used else '<span class="lib-badge">+ Recommended</span>'
-    star = '<span class="lib-fav" title="One of Dee’s three favorites">★ Favorite</span>' if fav else ""
-    return (f'<li class="lib-card{" is-fav" if fav else ""}" data-used="{str(used).lower()}">'
-            f'<div class="lib-card-top">{badge}{star}</div>'
-            f'<h4><a href="{e(url)}" target="_blank" rel="noopener">{e(name)}<span class="visually-hidden"> (opens in a new tab)</span></a></h4>'
-            f'<p>{e(note)}</p><span class="lib-host" aria-hidden="true">{e(host(url))} ↗</span></li>')
+SPINE_COLORS = ["wine", "ink", "plum", "rust"]
+
+
+def spine(i, cat, name, url, note, used, fav):
+    """One book spine button plus the data its pulled-out panel shows."""
+    color = "gold" if fav else SPINE_COLORS[(i + len(name)) % len(SPINE_COLORS)]
+    height = min(290, max(165, len(name) * 8 + 70)) + (i * 23) % 24
+    mark = "★" if fav else ("✓" if used else "")
+    return (f'<button type="button" class="spine spine-{color}" style="--h:{height}px" aria-expanded="false" aria-controls="pull-{cat}" '
+            f'data-name="{e(name)}" data-url="{e(url)}" data-note="{e(note)}" data-used="{str(used).lower()}" data-fav="{str(fav).lower()}">'
+            f'<span class="spine-title">{e(name)}</span>{f"<span class=spine-mark>{mark}</span>" if mark else ""}</button>')
+
+
+def list_item(name, url, note, used, fav):
+    tag = "✓ I used this" if used else "+ Recommended"
+    return (f'<li data-used="{str(used).lower()}"><a href="{e(url)}" target="_blank" rel="noopener">{e(name)}</a>{" ★" if fav else ""} '
+            f'<span class="shelf-tag{" is-used" if used else ""}">{tag}</span> <span class="shelf-note">{e(note)}</span></li>')
 
 
 def library():
     total = sum(len(items) for *_, items in LIBRARY)
     used = sum(1 for *_, items in LIBRARY for i in items if i[3])
-    chips = '<button type="button" data-lib-cat="all" aria-pressed="true">All</button>' + "".join(
-        f'<button type="button" data-lib-cat="{k}" aria-pressed="false">{e(t)}</button>' for k, t, _, _ in LIBRARY)
-    groups = "".join(
-        f'<section class="lib-group" data-lib-group="{k}" aria-labelledby="lib-{k}"><div class="lib-group-head"><h3 id="lib-{k}">{e(t)}</h3><p>{e(d)}</p></div>'
-        f'<ul class="lib-grid">{"".join(card(*i) for i in items)}</ul></section>'
+    shelves = "".join(
+        f'<section class="shelf" data-lib-group="{k}" aria-labelledby="lib-{k}"><div class="shelf-head"><h3 id="lib-{k}">{e(t)}</h3><p>{e(d)}</p></div>'
+        f'<div class="shelf-row" role="group" aria-label="{e(t)} books">{"".join(spine(n, k, *i) for n, i in enumerate(items))}</div>'
+        f'<div class="shelf-board" aria-hidden="true"></div>'
+        f'<div class="shelf-pull" id="pull-{k}" aria-live="polite" hidden></div>'
+        f'<ul class="shelf-list">{"".join(list_item(*i) for i in items)}</ul></section>'
         for k, t, d, items in LIBRARY)
     return f'''<main id="main" class="resources-main">
 <section class="world-shell room-intro"><p class="room-eyebrow">The resource library</p><h1>Resources.<br><em>What helped me grow.</em></h1><p class="room-lead">Cybersecurity resources I’ve personally used throughout my journey, plus a few more that others may find helpful. Anything marked “I used this” is from my own experience.</p><nav class="grail-jump" aria-label="On this page"><a href="#holy-grail">★ Dee’s Holy Grail</a><a href="#library">Resource Library</a></nav></section>
 {grail()}
 <section class="world-shell lib" id="library" aria-labelledby="lib-title">
-<div class="lib-head"><h2 id="lib-title">Resource Library</h2><p class="lib-stats"><strong>{total}</strong> resources · <strong>{used}</strong> I’ve used myself</p></div>
-<div class="lib-controls">
-<div class="lib-chips" role="group" aria-label="Filter by category">{chips}</div>
-<div class="lib-tools"><label class="lib-search"><span class="visually-hidden">Search resources</span><input id="lib-search" type="search" placeholder="Search resources" autocomplete="off" /></label>
-<button type="button" class="lib-toggle" id="lib-used" aria-pressed="false"><span class="lib-switch" aria-hidden="true"></span>Only what I’ve used</button></div>
-</div>
-<p class="lib-legend"><span class="lib-badge is-used">✓ I used this</span> from my own experience <span class="lib-badge">+ Recommended</span> additional resources others may find helpful</p>
-<p id="lib-count" class="lib-count" role="status"></p>
-{groups}
-<p id="lib-empty" class="lib-empty" hidden>No resources match that search. Try another word or choose All.</p>
+<div class="lib-head"><div><h2 id="lib-title">The Resource <em>Library</em></h2><p class="lib-sub">Tap a book to pull it off the shelf.</p></div>
+<div class="lib-head-side"><p class="lib-stats"><strong>{total}</strong> books · <strong>{used}</strong> I’ve used myself</p>
+<button type="button" class="lib-toggle" id="lib-used" aria-pressed="false"><span class="lib-switch" aria-hidden="true"></span>Only what I’ve used</button></div></div>
+<p class="lib-key"><span><b class="k-used">✓</b> I used this</span><span><b class="k-fav">★</b> One of my favorites (gold books)</span><span><b class="k-rec">·</b> Recommended</span></p>
+{shelves}
 <p class="lib-note">These links go to other websites. Programs, prices, and offerings change, so check each site for current details. Nothing here is sponsored.</p>
 </section>
 </main>'''
@@ -174,7 +180,7 @@ def write(name, main, title, desc, body_class):
     head = re.sub(r'<meta property="og:[^>]*>\n|<meta name="twitter:[^>]*>\n', "", head)
     head = re.sub(r'<body class="[^"]*"', f'<body class="{body_class}"', head, count=1)
     head = re.sub(r'\n?<link rel="stylesheet" href="assets/css/resources\.css[^>]*>|\n?<script src="assets/js/resources\.js[^>]*></script>', "", head)
-    head = head.replace("</head>", '<link rel="stylesheet" href="assets/css/resources.css?v=2" />\n<script src="assets/js/resources.js?v=2" defer></script>\n</head>', 1)
+    head = head.replace("</head>", '<link rel="stylesheet" href="assets/css/resources.css?v=4" />\n<script src="assets/js/resources.js?v=4" defer></script>\n</head>', 1)
     (ROOT / name).write_text(head + main + tail)
 
 
