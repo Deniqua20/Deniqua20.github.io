@@ -176,3 +176,30 @@
 
 /* Logo butterfly: use the transparent artwork so no dark square shows behind it. */
 .brand-butterfly { background-image:url("../images/lab-butterfly.webp")!important; }
+
+/* Contact: reasons to reach out, suggestion box, and nudges to it from other pages. */
+.contact-reasons { margin-top:22px; }
+.contact-reasons-title { margin:0 0 10px; font:600 11px/1.4 ui-monospace,Menlo,monospace; letter-spacing:2.5px; text-transform:uppercase; color:#ff8e98; }
+.contact-chips { display:flex; flex-wrap:wrap; gap:8px; }
+.contact-chips button { padding:9px 15px; border:1px solid #ab586277; border-radius:30px; background:#140c10; color:#f1e4e2; font:500 13px var(--sans); cursor:pointer; transition:background .25s,border-color .25s,transform .25s; }
+.contact-chips button:hover { border-color:#ff8e98; transform:translateY(-2px); }
+.contact-chips button[aria-pressed="true"] { background:#ff8e98; border-color:#ff8e98; color:#25090f; }
+.contact-chips button:focus-visible { outline:2px solid #ffa0aa; outline-offset:3px; }
+.suggest-room { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:40px; align-items:start; margin-top:70px; padding-top:50px; border-top:1px solid #ab586244; scroll-margin-top:100px; }
+.suggest-intro h2 { margin:6px 0 12px; font:500 clamp(32px,3.6vw,46px)/1.1 var(--serif); color:#fff4ef; }
+.suggest-intro h2 em { font:400 1.2em "Great Vibes",cursive; color:#ff8e98; }
+.suggest-intro p:not(.room-eyebrow) { color:#d9cbc9; line-height:1.7; max-width:46ch; }
+.suggest-form fieldset { border:0; margin:0 0 6px; padding:0; }
+.suggest-form legend { margin-bottom:10px; color:#f6eeea; font-size:14px; }
+.suggest-types { display:flex; flex-wrap:wrap; gap:8px; }
+.suggest-types label { cursor:pointer; margin:0; }
+.suggest-types input { position:absolute; opacity:0; pointer-events:none; }
+.suggest-types span { display:inline-block; padding:9px 15px; border:1px solid #ab586277; border-radius:30px; background:#140c10; color:#f1e4e2; font:500 13px var(--sans); transition:background .25s,border-color .25s; }
+.suggest-types input:checked + span { background:#ff8e98; border-color:#ff8e98; color:#25090f; }
+.suggest-types input:focus-visible + span { outline:2px solid #ffa0aa; outline-offset:3px; }
+.suggest-optional { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.suggest-optional label small { color:#a8969a; font-size:11px; }
+.suggest-nudge { margin:30px 0 0; padding:16px 20px; border:1px dashed #ab586266; border-radius:14px; color:#d9cbc9; font-size:14.5px; }
+.cyber-world main .suggest-nudge a { color:#ff9ba4; font-weight:500; }
+@media (max-width:850px) { .suggest-room { grid-template-columns:1fr; gap:20px; } }
+@media (max-width:520px) { .suggest-optional { grid-template-columns:1fr; } }

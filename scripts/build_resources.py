@@ -114,6 +114,7 @@ def library():
 <section class="world-shell lib" id="library" aria-labelledby="lib-title">
 <div class="lib-head"><h2 id="lib-title">Resource Library</h2><p class="lib-stats"><strong>{total}</strong> resources · <span class="lib-fav">★</span> = one of my favorites</p></div>
 {folders}
+<p class="suggest-nudge">Know a resource that should be here? <a href="contact.html#suggest">Drop it in the suggestion box →</a></p>
 <p class="lib-note">These links go to other websites. Programs, prices, and offerings change, so check each site for current details. Nothing here is sponsored.</p>
 </section>
 </main>'''
