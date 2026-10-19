@@ -142,7 +142,7 @@ def grail():
 <details class="grail-part"><summary><span class="grail-part-n">02</span><span>How I prepared for certifications <small>My step-by-step process</small></span></summary>
 <div class="grail-part-body"><p class="grail-intro">I hold multiple industry certifications. When it came to certification, this is what I did.</p>
 <div class="grail-certs"><ol class="grail-checklist grail-steps">{prep}</ol>
-<aside class="grail-callout"><p class="grail-kicker">If you don’t pass</p><p>It isn’t the end-all be-all. I’ll let you know now: I have failed certifications multiple times, and guess what? I’m still in the industry. Go back to the drawing board, make some adjustments, and execute.</p><p class="grail-yougotthis">You got this. If it was easy, everyone would be doing it.</p><p class="grail-small">Exams and objectives change over time, so always check the current exam version and official objectives.</p></aside></div></div></details>
+<aside class="grail-callout"><p class="grail-kicker">If you don’t pass</p><p>It isn’t the end-all be-all. I’ll let you know now: I have failed certifications multiple times, and guess what? I’m still in the industry. Go back to the drawing board, make some adjustments, and execute.</p><p class="grail-yougotthis">You got this. If it was easy, everyone would be doing it.</p></aside></div></div></details>
 <details class="grail-part"><summary><span class="grail-part-n">03</span><span>College survival tips <small>Lessons from finishing college with ADHD</small></span></summary>
 <div class="grail-part-body"><p class="grail-intro">Lessons from completing college while managing ADHD and other responsibilities.</p><ul class="grail-tips">{tips}</ul></div></details>
 </section>''')
