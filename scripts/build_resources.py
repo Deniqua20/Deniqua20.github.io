@@ -95,37 +95,29 @@ def host(url):
 
 
 def card(name, url, note, used, fav):
-    """One resource as a row inside its category box."""
     badge = '<span class="lib-badge is-used">✓ I used this</span>' if used else '<span class="lib-badge">+ Recommended</span>'
-    star = ' <span class="lib-fav" title="One of Dee’s three favorites">★</span>' if fav else ""
+    star = '<span class="lib-fav" title="One of Dee’s three favorites">★ Favorite</span>' if fav else ""
     return (f'<li class="lib-card{" is-fav" if fav else ""}" data-used="{str(used).lower()}">'
-            f'<div class="lib-row-main"><h4><a href="{e(url)}" target="_blank" rel="noopener">{e(name)}<span class="visually-hidden"> (opens in a new tab)</span></a>{star}</h4>'
-            f'<p>{e(note)}</p></div>{badge}<span class="lib-go" aria-hidden="true">↗</span></li>')
+            f'<div class="lib-card-top">{badge}{star}</div>'
+            f'<h4><a href="{e(url)}" target="_blank" rel="noopener">{e(name)}<span class="visually-hidden"> (opens in a new tab)</span></a></h4>'
+            f'<p>{e(note)}</p><span class="lib-host" aria-hidden="true">{e(host(url))} ↗</span></li>')
 
 
 def library():
     total = sum(len(items) for *_, items in LIBRARY)
     used = sum(1 for *_, items in LIBRARY for i in items if i[3])
-    chips = '<button type="button" data-lib-cat="all" aria-pressed="true">All</button>' + "".join(
-        f'<button type="button" data-lib-cat="{k}" aria-pressed="false">{e(t)}</button>' for k, t, _, _ in LIBRARY)
-    groups = "".join(
-        f'<section class="lib-group" data-lib-group="{k}" aria-labelledby="lib-{k}"><div class="lib-group-head"><h3 id="lib-{k}">{e(t)}</h3><p>{e(d)}</p></div>'
-        f'<ul class="lib-grid">{"".join(card(*i) for i in items)}</ul></section>'
+    folders = "".join(
+        f'<details class="lib-group" data-lib-group="{k}"{" open" if k == "practice" else ""}>'
+        f'<summary class="lib-group-head"><h3 id="lib-{k}">{e(t)}</h3>'
+        f'<span class="lib-count-pill">{len(items)} resources · {sum(1 for i in items if i[3])} I used</span></summary>'
+        f'<p class="lib-group-desc">{e(d)}</p><ul class="lib-grid">{"".join(card(*i) for i in items)}</ul></details>'
         for k, t, d, items in LIBRARY)
     return f'''<main id="main" class="resources-main">
-<section class="world-shell room-intro"><p class="room-eyebrow">The resource library</p><h1>Resources.<br><em>What helped me grow.</em></h1><p class="room-lead">Cybersecurity resources I’ve personally used throughout my journey, plus a few more that others may find helpful. Anything marked “I used this” is from my own experience.</p><nav class="grail-jump" aria-label="On this page"><a href="#holy-grail">★ Dee’s Holy Grail</a><a href="#library">Resource Library</a></nav></section>
+<section class="world-shell room-intro"><p class="room-eyebrow">The resource library</p><h1>Resources.<br><em>What helped me grow.</em></h1><p class="room-lead">Cybersecurity resources I’ve personally used throughout my journey, plus a few more that others may find helpful. Anything marked “I used this” is from my own experience.</p></section>
 {grail()}
 <section class="world-shell lib" id="library" aria-labelledby="lib-title">
 <div class="lib-head"><h2 id="lib-title">Resource Library</h2><p class="lib-stats"><strong>{total}</strong> resources · <strong>{used}</strong> I’ve used myself</p></div>
-<div class="lib-controls">
-<div class="lib-chips" role="group" aria-label="Filter by category">{chips}</div>
-<div class="lib-tools"><label class="lib-search"><span class="visually-hidden">Search resources</span><input id="lib-search" type="search" placeholder="Search resources" autocomplete="off" /></label>
-<button type="button" class="lib-toggle" id="lib-used" aria-pressed="false"><span class="lib-switch" aria-hidden="true"></span>Only what I’ve used</button></div>
-</div>
-<p class="lib-legend"><span class="lib-badge is-used">✓ I used this</span> from my own experience <span class="lib-badge">+ Recommended</span> additional resources others may find helpful</p>
-<p id="lib-count" class="lib-count" role="status"></p>
-{groups}
-<p id="lib-empty" class="lib-empty" hidden>No resources match that search. Try another word or choose All.</p>
+{folders}
 <p class="lib-note">These links go to other websites. Programs, prices, and offerings change, so check each site for current details. Nothing here is sponsored.</p>
 </section>
 </main>'''
@@ -141,7 +133,7 @@ def grail():
     tips = "".join(f"<li>{e(x)}</li>" for x in COLLEGE)
     return _bold_adhd(f'''<section class="world-shell grail-box" id="holy-grail" aria-labelledby="grail-title">
 <div class="grail-box-head"><p class="grail-kicker">What actually worked for me</p><h2 id="grail-title">Dee’s <em>Holy Grail</em></h2>
-<p class="grail-intro">The resources and study techniques that personally helped me through college, certification prep, and my cybersecurity journey. This is what helped me, not a promise that one method will work for everyone.</p></div>
+</div>
 <h3 class="grail-sub">My three favorite resources</h3><ol class="grail-favs">{favs}</ol>
 <details class="grail-part"><summary><span class="grail-part-n">01</span><span>How I learned to learn <small>My ADHD study methods</small></span></summary>
 <div class="grail-part-body"><p class="grail-intro">I have ADHD, and throughout college I had to discover study techniques that helped me stay focused, understand concepts, and retain information. These are the methods that personally helped me.</p>
@@ -157,7 +149,6 @@ def grail():
 <aside class="grail-callout"><p class="grail-kicker">Important</p><p>Certification exams and objectives change over time. I’m sharing what worked for me rather than exam-specific guides that may become outdated. Always verify the current exam version and official objectives before you study.</p></aside></div></div></details>
 <details class="grail-part"><summary><span class="grail-part-n">03</span><span>College survival tips <small>Lessons from finishing college with ADHD</small></span></summary>
 <div class="grail-part-body"><p class="grail-intro">Lessons from completing college while managing ADHD and other responsibilities.</p><ul class="grail-tips">{tips}</ul></div></details>
-<p class="grail-sign">Progress over perfection.</p>
 </section>''')
 
 
@@ -174,7 +165,7 @@ def write(name, main, title, desc, body_class):
     head = re.sub(r'<meta property="og:[^>]*>\n|<meta name="twitter:[^>]*>\n', "", head)
     head = re.sub(r'<body class="[^"]*"', f'<body class="{body_class}"', head, count=1)
     head = re.sub(r'\n?<link rel="stylesheet" href="assets/css/resources\.css[^>]*>|\n?<script src="assets/js/resources\.js[^>]*></script>', "", head)
-    head = head.replace("</head>", '<link rel="stylesheet" href="assets/css/resources.css?v=5" />\n<script src="assets/js/resources.js?v=5" defer></script>\n</head>', 1)
+    head = head.replace("</head>", '<link rel="stylesheet" href="assets/css/resources.css?v=6" />\n<script src="assets/js/resources.js?v=6" defer></script>\n</head>', 1)
     (ROOT / name).write_text(head + main + tail)
 
 

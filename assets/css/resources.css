@@ -168,29 +168,30 @@
 .adhd { font-weight:700; color:#fff4ef; letter-spacing:.5px; }
 .grail-part summary small .adhd { color:var(--gold); }
 
-/* One box per category, resources as rows inside it. */
-.lib-group { padding:22px 26px 10px; border:1px solid #ab586244; border-radius:18px; background:linear-gradient(165deg,#1a1015,#0e0a0d); }
-.lib-group-head { margin-bottom:6px; padding-bottom:14px; border-bottom:1px solid #ab586233; }
-.lib-grid { display:block; }
-.lib-card { flex-direction:row; align-items:center; gap:16px; padding:14px 6px; border:0; border-radius:10px; background:none; box-shadow:none; }
-.lib-card + .lib-card { border-top:1px solid #ab586222; border-radius:0; }
-.lib-card:hover,.lib-card:focus-within { transform:none; background:#ff8e980d; box-shadow:none; border-color:#ab586222; }
-.lib-card.is-fav { background:none; }
-.lib-card.is-fav h4 a { color:#ffe2b0!important; }
-.lib-row-main { flex:1; min-width:0; }
-.lib-card h4 { margin:0; font-size:21px; }
-.lib-card p { margin:2px 0 0; }
-.lib-fav { padding:0; font-size:14px; letter-spacing:0; }
-.lib-go { color:#ff9ba4; font-size:15px; width:16px; text-align:center; transition:transform .25s; }
-.lib-card:hover .lib-go { transform:translate(3px,-3px); }
-.lib-host { display:none; }
-.lib-card:focus-within { outline:2px solid #ffa0aa; outline-offset:0; }
+/* Folders layout: each category is a collapsible folder; the Holy Grail box is compact. */
+.lib-host,.lib-legend { display:none; }
+.lib-group { margin-top:10px; border:1px solid #ab586244; border-radius:14px; background:#120c0f; }
+.lib-group:first-of-type { margin-top:24px; }
+.lib-group[open] { border-color:#ab586277; }
+.lib-group > summary.lib-group-head { display:flex; align-items:center; gap:14px; margin:0; padding:16px 22px; cursor:pointer; list-style:none; }
+.lib-group > summary::-webkit-details-marker { display:none; }
+.lib-group > summary::after { content:'+'; margin-left:auto; color:#ff8e98; font:400 28px/1 var(--sans); transition:transform .3s; }
+.lib-group[open] > summary::after { transform:rotate(45deg); }
+.lib-group > summary:hover h3 { color:#ffb3bb; }
+.lib-group > summary:focus-visible { outline:2px solid #ffa0aa; outline-offset:-3px; border-radius:14px; }
+.lib-group-head h3 { font-size:clamp(28px,2.6vw,34px)!important; }
+.lib-count-pill { font:600 11px/1 ui-monospace,Menlo,monospace; letter-spacing:1px; color:#c8f5da; border:1px solid #7ed3a166; border-radius:20px; padding:5px 10px; white-space:nowrap; }
+.lib-group-desc { margin:-4px 22px 14px; color:#c8bab8; font-size:14px; }
+.lib-group .lib-grid { padding:0 16px 18px; }
+.grail-fav { padding:20px 20px 18px; gap:8px; }
+.grail-fav h4 { font-size:24px; }
+.grail-fav p:not(.grail-tag) { font-size:13.5px; line-height:1.55; }
+.grail-rank { font-size:34px; top:12px; }
+.grail-box .grail-sub { margin-top:16px; }
 @media (max-width:600px) {
- .lib-group { padding:16px 16px 6px; }
- .lib-grid { display:block!important; }
- .lib-card { flex-wrap:wrap; gap:6px 10px; padding:12px 2px; }
- .lib-row-main { flex-basis:100%; }
- .lib-go { display:none; }
- .lib-card h4 { font-size:19px; }
- .lib-card p { font-size:13px; }
+ .lib-group > summary.lib-group-head { flex-wrap:wrap; gap:6px 10px; padding:14px 16px; }
+ .lib-group > summary::after { position:absolute; right:16px; }
+ .lib-group { position:relative; }
+ .lib-group-desc { margin:-2px 16px 12px; }
+ .lib-group .lib-grid { padding:0 10px 12px; grid-template-columns:1fr; }
 }
