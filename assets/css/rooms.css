@@ -173,3 +173,6 @@
 .cyber-world .showcase-story > p:not(.showcase-kicker):not(.showcase-tools):not(.game-chip) { color:#e6d9d7; }
 .room-page .showcase-story h1 em { font-family:"Great Vibes",cursive; font-style:normal; font-weight:400; font-size:1.18em; color:#ff8e98; text-shadow:0 0 18px #ff2b4566; }
 .room-page .room-intro + .case-study-body { margin-top:48px; }
+
+/* Logo butterfly: use the transparent artwork so no dark square shows behind it. */
+.brand-butterfly { background-image:url("../images/lab-butterfly.webp")!important; }

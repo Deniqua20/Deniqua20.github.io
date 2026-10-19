@@ -24,3 +24,19 @@
 @keyframes hq-blink {50%{opacity:0;}}
 .hq-paused .hq-eyes *, .hq-eyes.paused * {animation-play-state:paused!important;}
 @media (prefers-reduced-motion:reduce) {.hq-cyber-glow,.hq-investigate {display:none;}}
+
+/* Homepage layout fixes: upright tablets use the stacked phone layout (copy above, portrait below),
+   and phones drop the portrait slightly so the Explore button never covers the face. */
+@media (min-width:701px) and (max-width:1100px) and (orientation:portrait) {
+ .cyber-home .studio-art { width:100%; max-width:100%; height:60%; inset:auto 0 0; object-fit:cover; object-position:58% 14%; }
+ .cyber-home .studio-shade { background:linear-gradient(180deg,#080607 0%,#080607 34%,#080607aa 44%,transparent 58%,#08060733 100%); }
+ .cyber-home .studio-copy { width:100%; padding:34px 7% 0; }
+ .cyber-home .studio-description { max-width:520px; font-size:16px; }
+ .cyber-home #main { grid-template-rows:minmax(0,1fr) auto; }
+ .cyber-home .studio-destinations { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .cyber-home .studio-destination { min-height:150px; }
+}
+@media (max-width:700px) {
+ .cyber-home .studio-art { height:56%; object-position:center 10%; }
+ .cyber-home .studio-shade { background:linear-gradient(180deg,#080607 0%,#080607 38%,#080607aa 48%,transparent 62%,#08060733 100%); }
+}
