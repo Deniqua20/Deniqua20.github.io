@@ -113,9 +113,9 @@ def library():
         f'<ul class="lib-grid">{"".join(card(*i) for i in items)}</ul></section>'
         for k, t, d, items in LIBRARY)
     return f'''<main id="main" class="resources-main">
-<section class="world-shell room-intro"><p class="room-eyebrow">The resource library</p><h1>Resources.<br><em>What helped me grow.</em></h1><p class="room-lead">Cybersecurity resources I’ve personally used throughout my journey, plus a few more that others may find helpful. Anything marked “I used this” is from my own experience.</p></section>
-<section class="world-shell grail-teaser" aria-labelledby="grail-teaser-title"><div><p class="grail-kicker">My personal favorites</p><h2 id="grail-teaser-title">Dee’s <em>Holy Grail</em></h2><p>My three favorite resources, the ADHD study methods that got me through college, how I prepared for certifications, and my college survival tips.</p></div><a class="world-button grail-button" href="holy-grail.html">Open the Holy Grail</a></section>
-<section class="world-shell lib" aria-labelledby="lib-title">
+<section class="world-shell room-intro"><p class="room-eyebrow">The resource library</p><h1>Resources.<br><em>What helped me grow.</em></h1><p class="room-lead">Cybersecurity resources I’ve personally used throughout my journey, plus a few more that others may find helpful. Anything marked “I used this” is from my own experience.</p><nav class="grail-jump" aria-label="On this page"><a href="#holy-grail">★ Dee’s Holy Grail</a><a href="#library">Resource Library</a></nav></section>
+{grail()}
+<section class="world-shell lib" id="library" aria-labelledby="lib-title">
 <div class="lib-head"><h2 id="lib-title">Resource Library</h2><p class="lib-stats"><strong>{total}</strong> resources · <strong>{used}</strong> I’ve used myself</p></div>
 <div class="lib-controls">
 <div class="lib-chips" role="group" aria-label="Filter by category">{chips}</div>
@@ -133,37 +133,32 @@ def library():
 
 def grail():
     favs = "".join(
-        f'<li class="grail-fav"><span class="grail-rank">0{n}</span><p class="grail-tag">{e(tag)}</p><h3>{e(name)}</h3><p>{e(text)}</p>'
+        f'<li class="grail-fav"><span class="grail-rank">0{n}</span><p class="grail-tag">{e(tag)}</p><h4>{e(name)}</h4><p>{e(text)}</p>'
         f'<a class="grail-visit" href="{e(url)}" target="_blank" rel="noopener">Visit {e(name)} ↗<span class="visually-hidden"> (opens in a new tab)</span></a></li>'
         for n, (name, url, tag, text) in enumerate(FAVORITES, 1))
-    methods = "".join(f'<li class="grail-method"><h3>{e(t)}</h3><p>{e(d)}</p></li>' for t, d in METHODS)
+    methods = "".join(f'<li class="grail-method"><h4>{e(t)}</h4><p>{e(d)}</p></li>' for t, d in METHODS)
     prep = "".join(f"<li>{e(x)}</li>" for x in CERT_PREP)
     tips = "".join(f"<li>{e(x)}</li>" for x in COLLEGE)
-    return f'''<main id="main" class="grail-main">
-<section class="world-shell room-intro"><a class="room-back" href="resources.html">Back to Resources</a><p class="room-eyebrow">Dee’s Holy Grail</p><h1>What actually<br><em>worked for me.</em></h1><p class="room-lead">The resources and study techniques that personally helped me through college, certification prep, and my cybersecurity journey. This is what helped me, not a promise that one method or resource will work for everyone.</p>
-<nav class="grail-jump" aria-label="On this page"><a href="#favorites">My favorites</a><a href="#learn">How I learned to learn</a><a href="#certs">Certification prep</a><a href="#college">College survival</a></nav></section>
-
-<section class="world-shell grail-section" id="favorites" aria-labelledby="favorites-title"><p class="grail-kicker">01 · The top three</p><h2 id="favorites-title">My three <em>favorite resources</em></h2><ol class="grail-favs">{favs}</ol></section>
-
-<section class="world-shell grail-section" id="learn" aria-labelledby="learn-title"><p class="grail-kicker">02 · My ADHD study methods</p><h2 id="learn-title">How I learned <em>to learn</em></h2>
-<p class="grail-intro">I have ADHD, and throughout college I had to discover study techniques that helped me stay focused, understand concepts, and retain information. These are the methods that personally helped me.</p>
+    return f'''<section class="world-shell grail-box" id="holy-grail" aria-labelledby="grail-title">
+<div class="grail-box-head"><p class="grail-kicker">What actually worked for me</p><h2 id="grail-title">Dee’s <em>Holy Grail</em></h2>
+<p class="grail-intro">The resources and study techniques that personally helped me through college, certification prep, and my cybersecurity journey. This is what helped me, not a promise that one method will work for everyone.</p></div>
+<h3 class="grail-sub">My three favorite resources</h3><ol class="grail-favs">{favs}</ol>
+<details class="grail-part"><summary><span class="grail-part-n">01</span><span>How I learned to learn <small>My ADHD study methods</small></span></summary>
+<div class="grail-part-body"><p class="grail-intro">I have ADHD, and throughout college I had to discover study techniques that helped me stay focused, understand concepts, and retain information. These are the methods that personally helped me.</p>
 <div class="grail-learn"><ul class="grail-methods">{methods}</ul>
-<aside class="focus" aria-labelledby="focus-title"><p class="grail-kicker">Try it now</p><h3 id="focus-title">Focus session</h3><p class="focus-sub">A simple Pomodoro timer: focus, then take a short break.</p>
+<aside class="focus" aria-labelledby="focus-title"><p class="grail-kicker">Try it now</p><h4 id="focus-title">Focus session</h4><p class="focus-sub">A simple Pomodoro timer: focus, then take a short break.</p>
 <div class="focus-modes" role="group" aria-label="Session type"><button type="button" data-focus="1500" aria-pressed="true">Focus 25</button><button type="button" data-focus="300" aria-pressed="false">Break 5</button></div>
 <div class="focus-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="focus-track" cx="60" cy="60" r="52"/><circle class="focus-bar" cx="60" cy="60" r="52"/></svg><p class="focus-time" id="focus-time" role="timer" aria-live="off">25:00</p></div>
 <div class="focus-actions"><button type="button" class="world-button" id="focus-start">Start</button><button type="button" class="focus-reset" id="focus-reset">Reset</button></div>
-<p class="focus-done" id="focus-done" role="status"></p></aside></div></section>
-
-<section class="world-shell grail-section" id="certs" aria-labelledby="certs-title"><p class="grail-kicker">03 · Certification prep</p><h2 id="certs-title">How I prepared <em>for certifications</em></h2>
-<p class="grail-intro">I hold multiple industry certifications. This is the approach that helped me prepare.</p>
+<p class="focus-done" id="focus-done" role="status"></p></aside></div></div></details>
+<details class="grail-part"><summary><span class="grail-part-n">02</span><span>How I prepared for certifications <small>The approach behind my certs</small></span></summary>
+<div class="grail-part-body"><p class="grail-intro">I hold multiple industry certifications. This is the approach that helped me prepare.</p>
 <div class="grail-certs"><ul class="grail-checklist">{prep}</ul>
-<aside class="grail-callout"><p class="grail-kicker">Important</p><p>Certification exams and objectives change over time. I’m sharing what worked for me rather than exam-specific guides that may become outdated. Always verify the current exam version and official objectives before you study.</p></aside></div></section>
-
-<section class="world-shell grail-section" id="college" aria-labelledby="college-title"><p class="grail-kicker">04 · College survival</p><h2 id="college-title">College <em>survival tips</em></h2>
-<p class="grail-intro">Lessons from completing college while managing ADHD and other responsibilities.</p><ul class="grail-tips">{tips}</ul></section>
-
-<section class="world-shell grail-close"><p>Everyone’s learning journey is different. Take what helps and leave the rest.</p><p class="grail-sign">Progress over perfection.</p><a class="world-button" href="resources.html">Browse the full Resource Library</a></section>
-</main>'''
+<aside class="grail-callout"><p class="grail-kicker">Important</p><p>Certification exams and objectives change over time. I’m sharing what worked for me rather than exam-specific guides that may become outdated. Always verify the current exam version and official objectives before you study.</p></aside></div></div></details>
+<details class="grail-part"><summary><span class="grail-part-n">03</span><span>College survival tips <small>Lessons from finishing college with ADHD</small></span></summary>
+<div class="grail-part-body"><p class="grail-intro">Lessons from completing college while managing ADHD and other responsibilities.</p><ul class="grail-tips">{tips}</ul></div></details>
+<p class="grail-sign">Progress over perfection.</p>
+</section>'''
 
 
 def write(name, main, title, desc, body_class):
@@ -182,7 +177,4 @@ def write(name, main, title, desc, body_class):
 write("resources.html", library(), "Resources | Dee’s Cyber Corner",
       "Cybersecurity resources Dee has used and recommends: funding, study tools, hands-on practice, and communities.",
       "interior room-resources cyber-world room-page")
-write("holy-grail.html", grail(), "Dee’s Holy Grail | Dee’s Cyber Corner",
-      "Dee’s favorite resources, ADHD study methods, certification prep approach, and college survival tips.",
-      "interior room-resources room-grail cyber-world room-page")
-print("wrote resources.html and holy-grail.html")
+print("wrote resources.html")
