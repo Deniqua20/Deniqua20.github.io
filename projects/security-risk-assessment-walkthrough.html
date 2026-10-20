@@ -3,30 +3,29 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>
-      Security Risk Assessment &amp; Remediation | Dee’s Cyber Corner
-    </title>
+    <title>Security Risk Assessment Walkthrough | Dee’s Cyber Corner</title>
     <meta
       name="description"
-      content="Dee’s security control assessment, remediation planning, and governance project."
+      content="Step-by-step walkthrough to run a security gap and risk assessment against NIST SP 800-53 Rev. 5 and build a POA&amp;M, based on Dee’s GRC lab."
     />
     <meta name="theme-color" content="#0b0705" />
     <link rel="stylesheet" href="../assets/css/site.css?v=balanced-pages-1" />
     <script src="../assets/js/site.js" defer></script>
   <link rel="stylesheet" href="../assets/css/world.css?v=b23a1bab39" />
 <script src="../assets/js/world.js?v=b23a1bab39" defer></script>
-<link rel="stylesheet" href="../assets/css/rooms.css?v=28b287d41c" />
-<script src="../assets/js/rooms.js?v=28b287d41c" defer></script>
+<link rel="stylesheet" href="../assets/css/rooms.css?v=b24912f4b0" />
+<script src="../assets/js/rooms.js?v=b24912f4b0" defer></script>
 <link rel="stylesheet" href="../assets/css/game.css?v=eeaf0ba5c4" />
 <script src="../assets/js/game.js?v=eeaf0ba5c4" defer></script>
-<meta property="og:title" content="Security Risk Assessment &amp; Remediation | Dee’s Cyber Corner" />
-<meta property="og:description" content="Dee’s security control assessment, remediation planning, and governance project." />
+<script src="../assets/js/walkthrough.js?v=1" defer></script>
+<meta property="og:title" content="Security Risk Assessment Walkthrough | Dee’s Cyber Corner" />
+<meta property="og:description" content="Step-by-step walkthrough to run a security gap and risk assessment against NIST SP 800-53 Rev. 5 and build a POA&amp;M, based on Dee’s GRC lab." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://deniqua20.github.io/projects/security-risk-assessment-walkthrough.html" />
 <meta property="og:image" content="https://deniqua20.github.io/assets/images/share-card.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 </head>
-  <body class="interior balanced-page cyber-world room-page">
+  <body class="interior balanced-page lab-page cyber-world room-page">
     <a class="skip" href="#main">Skip to content</a>
     <header class="site-header world-header">
   <a class="wordmark" href="../index.html" aria-label="Dee’s Cyber Corner home"><span>Dee’s<small class="brand-butterfly" aria-hidden="true"></small></span><b>CYBER CORNER</b></a>
@@ -38,92 +37,30 @@
 
 
 
-    <main id="main">
+    <main id="main" class="lab-walkthrough">
       <section class="interior-hero shell">
-        <a class="text-link" href="security-risk-assessment.html"
-          ><img
-            class="link-butterfly"
-            src="../assets/images/lab-butterfly.webp"
-            alt=""
-            aria-hidden="true"
-            width="22"
-            height="22"
-            style="
-              display: inline-block;
-              object-fit: contain;
-              vertical-align: middle;
-            "
-          />
-          Project showcase</a
-        >
-        <p class="eyebrow">Project steps</p>
-        <h1>Security Risk Assessment &amp; Remediation</h1>
-        <p class="lead">
-          I assessed security gaps against NIST SP 800-53 Rev. 5, considered
-          their impact on confidentiality, integrity, and availability, and
-          developed remediation recommendations and a POA&amp;M process.
-        </p>
+        <a class="text-link" href="security-risk-assessment.html">Back to the project overview</a>
+        <p class="eyebrow">Governance, risk, and compliance / Lab walkthrough</p>
+        <h1>Run my security<br /><em>risk assessment lab.</em></h1>
+        <p class="lead">Practice the full GRC cycle: find control gaps, map them to NIST SP 800-53, rate the risk, and turn findings into a tracked remediation plan.</p>
+        <div class="tags"><span>NIST SP 800-53 Rev. 5</span><span>FIPS 199</span><span>PCI DSS</span><span>RBAC</span><span>POA&amp;M</span></div>
       </section>
       <section class="shell prose">
-        <h2>1. Identify gaps and impact</h2>
-        <p>
-          Assess control deficiencies and consider confidentiality, integrity,
-          and availability using the project’s NIST and FIPS context.
-        </p>
-        <h2>2. Analyze the selected controls</h2>
-        <p>
-          Review AC-6, CA-5, CA-7, RA-3, and RA-7 and connect each control to
-          the gaps being assessed.
-        </p>
-        <h2>3. Develop access recommendations</h2>
-        <p>
-          Recommend role based access, least privilege, and periodic reviews to
-          reduce excessive access.
-        </p>
-        <h2>4. Track remediation through POA&amp;M</h2>
-        <p>
-          Define severity, ownership, deadlines, status, and evidence of
-          completion for remediation work.
-        </p>
-        <h2>5. Document the policy context</h2>
-        <p>
-          Connect the point of sale security policy to PCI DSS requirements and
-          assign technical ownership.
-        </p>
-        <p>
-          <a
-            class="text-link"
-            href="https://github.com/Deniqua20/Security-Risk-Assessment-Compliance-Lab"
-            >Read the source write up on GitHub
-            <img
-              class="link-butterfly"
-              src="../assets/images/lab-butterfly.webp"
-              alt=""
-              aria-hidden="true"
-              width="22"
-              height="22"
-              style="
-                display: inline-block;
-                object-fit: contain;
-                vertical-align: middle;
-              "
-          /></a>
-        </p>
-        <a class="button" href="security-risk-assessment.html"
-          >Back to my project
-          <img
-            class="link-butterfly"
-            src="../assets/images/lab-butterfly.webp"
-            alt=""
-            aria-hidden="true"
-            width="22"
-            height="22"
-            style="
-              display: inline-block;
-              object-fit: contain;
-              vertical-align: middle;
-            "
-        /></a>
+        <div class="lab-start">
+          <div><h2>Before you start</h2><ul><li>A copy of NIST SP 800-53 Rev. 5 (free from csrc.nist.gov).</li><li>A spreadsheet for your risk register and POA&M, and a document for your policy.</li><li>A practice scenario. Mine included a point-of-sale (POS) environment.</li></ul></div>
+          <div><h2>What you’ll learn</h2><ul><li>Security control assessment and gap analysis</li><li>Rating impact on confidentiality, integrity, and availability</li><li>Risk-based remediation planning</li><li>POA&amp;M tracking</li><li>RBAC and least-privilege design</li><li>Writing a policy aligned to PCI DSS</li></ul></div>
+        </div>
+        <h2>How it fits together</h2>
+        <ol class="architecture-flow"><li><strong>Scope the system</strong><span>Pick an organization and what you’re assessing.</span></li><li><strong>Categorize with FIPS 199</strong><span>Rate impact on C, I, and A.</span></li><li><strong>Find control gaps</strong><span>Map deficiencies to NIST 800-53.</span></li><li><strong>Plan remediation</strong><span>Risk-based fixes, RBAC, access reviews.</span></li><li><strong>Track with a POA&amp;M</strong><span>Owners, deadlines, status, evidence.</span></li></ol>
+        <h2>Step by step</h2>
+        <ol class="lab-steps"><li class="lab-step"><h3>Scope your system</h3><p>Describe a practice organization and the system you’re assessing: what it does, the data it handles, and who uses it.</p></li><li class="lab-step"><h3>Categorize it with FIPS 199</h3><p>Rate the potential impact of a loss of <strong>confidentiality</strong>, <strong>integrity</strong>, and <strong>availability</strong> as low, moderate, or high. The highest of the three sets the overall category.</p></li><li class="lab-step"><h3>Identify control gaps</h3><p>List the deficiencies you find and map each one to NIST SP 800-53 Rev. 5. My lab focused on these controls:</p><ul><li><strong>AC-6 Least Privilege:</strong> users have more access than their job needs.</li><li><strong>CA-5 Plan of Action and Milestones:</strong> findings are not tracked to completion.</li><li><strong>CA-7 Continuous Monitoring:</strong> security status is not watched over time.</li><li><strong>RA-3 Risk Assessment:</strong> risks are not formally identified and rated.</li><li><strong>RA-7 Risk Response:</strong> there is no defined way to respond to findings.</li></ul></li><li class="lab-step"><h3>Rate the risk</h3><p>For each gap, note its impact on confidentiality, integrity, and availability, and how likely it is to be exploited. Use that to rank what to fix first.</p></li><li class="lab-step"><h3>Write remediation strategies</h3><p>For each control, write a risk-based remediation strategy that explains what changes, why it reduces risk, and who owns it.</p></li><li class="lab-step"><h3>Recommend RBAC and access reviews</h3><p>Design role-based access so people only get what their role needs, and add periodic access reviews to catch excessive access to sensitive information.</p></li><li class="lab-step"><h3>Build a POA&amp;M tracker</h3><p>Create a Plan of Action and Milestones to track remediation to completion. My tracker covered risk severity, ownership, deadlines, status, and evidence. Suggested columns:</p><div class="lab-code"><div class="lab-code-bar"><span>text</span><button type="button" class="lab-copy">Copy</button></div><pre><code>ID | Weakness | NIST control | Risk severity | Owner | Milestones | Due date | Status | Evidence of completion</code></pre></div></li><li class="lab-step"><h3>Write a PCI DSS-aligned policy</h3><p>Write a security policy for a point-of-sale environment that covers network security controls, secure configurations, changing default credentials, and malware protection. Name a technical owner for each requirement.</p></li></ol>
+        <h2>Check your work</h2>
+        <ul class="lab-checks"><li>Every gap is mapped to a specific NIST SP 800-53 control.</li><li>Each finding has a CIA impact rating and a priority.</li><li>Every POA&amp;M item has an owner, a due date, a status, and evidence.</li><li>Your policy names an owner for each requirement.</li></ul>
+        
+        <div class="lab-interview"><p class="lab-interview-kicker">Interview ready</p><h2>Be ready to explain</h2><ul><li>How you used FIPS 199 to decide how critical the system is.</li><li>Why you chose AC-6, CA-5, CA-7, RA-3, and RA-7, and how they connect.</li><li>How a POA&amp;M turns findings into accountable, trackable work.</li><li>How RBAC and access reviews reduce excessive access.</li><li>How continuous monitoring (CA-7) ties to detection work like my Sentinel lab.</li></ul>
+        <p>This lab sparked real conversations in my interviews. Know your work front to back and you’ll be ready for “walk me through it.”</p></div>
+        <p class="lab-source">This walkthrough follows my lab. Portals and menus change over time, so names may look slightly different when you try it. <a href="https://github.com/Deniqua20/Security-Risk-Assessment-Compliance-Lab">See my original write-up on GitHub</a></p>
+        <a class="button" href="security-risk-assessment.html">Back to the project overview</a>
       </section>
     </main>
     <footer class="site-footer world-footer">
