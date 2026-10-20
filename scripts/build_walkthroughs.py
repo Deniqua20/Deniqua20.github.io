@@ -12,6 +12,57 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 e = escape
 
+# Original practice scenario for the risk assessment lab. The company and every detail are fictional.
+SCENARIO_BAYOU = '''
+<section class="lab-scenario" aria-labelledby="scenario-title">
+  <p class="lab-why-kicker">Practice scenario · fictional company</p>
+  <h2 id="scenario-title">Bayou Bites Café</h2>
+  <p>Bayou Bites Café is a family-owned restaurant with <strong>3 locations</strong> and <strong>22 employees</strong>. The owner hired you to assess their security before they renew their card processing contract.</p>
+  <div class="scenario-grid">
+    <div><h3>Their systems</h3><ul>
+      <li>A cloud <strong>point-of-sale (POS)</strong> system with card terminals at every location. It processes credit card payments.</li>
+      <li>One <strong>back-office Windows PC</strong> per location for scheduling, payroll, and inventory.</li>
+      <li>An <strong>online ordering website</strong> run by a vendor, with an admin login for the café.</li>
+      <li>One <strong>Wi-Fi network</strong> per location, shared by guests, staff, and the POS terminals.</li>
+      <li>The owner’s <strong>laptop</strong>, used for email and banking.</li>
+    </ul></div>
+    <div><h3>Your assessment notes</h3><ol class="scenario-notes">
+      <li>Everyone logs in to the POS with one shared manager account, <code>manager1</code>. Former employees still know the password.</li>
+      <li>The POS terminals and the Wi-Fi routers still use the vendor’s default passwords.</li>
+      <li>Last year an IT consultant found 8 issues. The list lives in an old email. Only 2 were fixed, and nobody owns the rest.</li>
+      <li>Nobody reviews POS, router, or antivirus logs. Alerts go to an inbox no one checks.</li>
+      <li>The café has never done a formal risk assessment. The owner says, “We’re too small to be a target.”</li>
+      <li>When a phishing email compromised a cashier’s email account, the only response was changing that one password. There is no plan for what to do when something goes wrong.</li>
+      <li>Guest Wi-Fi and the POS terminals are on the same network.</li>
+      <li>Antivirus on two back-office PCs expired six months ago.</li>
+      <li>A shift lead who left three months ago still has active accounts in the scheduling system and the online ordering admin.</li>
+    </ol></div>
+  </div>
+  <div class="scenario-downloads">
+    <a class="lab-download" href="../assets/labs/bayou-bites-risk-register.csv" download>⬇ Risk register worksheet (.csv)</a>
+    <a class="lab-download" href="../assets/labs/bayou-bites-poam.csv" download>⬇ POA&amp;M worksheet (.csv)</a>
+    <p>Opens in Excel or Google Sheets (File → Import). The first row of each is filled in as an example.</p>
+  </div>
+  <details class="scenario-key">
+    <summary>Answer key: try it yourself first, then tap to compare</summary>
+    <div class="scenario-key-body">
+      <p><strong>FIPS 199:</strong> SC Bayou Bites POS = {(confidentiality, MODERATE), (integrity, MODERATE), (availability, MODERATE)}, so the overall category is <strong>Moderate</strong>. Card data leaking would hurt customers and the business, altered orders or prices cause real loss, and a POS outage stops sales. Rating confidentiality High is reasonable too, if you can explain why.</p>
+      <table><thead><tr><th>Note</th><th>Main control</th><th>Why</th></tr></thead><tbody>
+        <tr><td>1</td><td>AC-6 Least Privilege</td><td>A shared admin login gives everyone more access than they need and no accountability.</td></tr>
+        <tr><td>2</td><td>PCI DSS: secure configurations</td><td>Vendor default passwords are public knowledge and must be changed.</td></tr>
+        <tr><td>3</td><td>CA-5 Plan of Action and Milestones</td><td>Known findings have no owners, dates, or tracking.</td></tr>
+        <tr><td>4</td><td>CA-7 Continuous Monitoring</td><td>No one watches logs or alerts, so problems go unnoticed.</td></tr>
+        <tr><td>5</td><td>RA-3 Risk Assessment</td><td>Risks have never been identified or rated.</td></tr>
+        <tr><td>6</td><td>RA-7 Risk Response</td><td>There is no defined way to respond to findings or incidents.</td></tr>
+        <tr><td>7</td><td>PCI DSS: network security controls</td><td>The POS should be separated from guest Wi-Fi.</td></tr>
+        <tr><td>8</td><td>PCI DSS: malware protection</td><td>Expired antivirus leaves the PCs unprotected.</td></tr>
+        <tr><td>9</td><td>AC-6, plus access reviews</td><td>A former employee still has access. Periodic access reviews would have caught it.</td></tr>
+      </tbody></table>
+      <p><strong>Highest risks to fix first:</strong> notes 1, 2, 7, and 9. They directly expose card data or give access to people who shouldn’t have it.</p>
+    </div>
+  </details>
+</section>'''
+
 # Each step is (heading, [blocks]); a block is a paragraph string, ("ul", [...]), ("code", lang, text) or ("tip", text).
 LABS = [
     {
@@ -189,25 +240,38 @@ Invoke-RestMethod -Method Post -Uri "<your-logic-app-http-post-url>" `
         "need": [
             "A copy of NIST SP 800-53 Rev. 5 (free from csrc.nist.gov).",
             "A spreadsheet for your risk register and POA&M, and a document for your policy.",
-            "A practice scenario. Mine included a point-of-sale (POS) environment.",
+            "The <strong>Bayou Bites Café</strong> practice scenario and worksheets below.",
         ],
+        "scenario": SCENARIO_BAYOU,
         "learn": ["Security control assessment and gap analysis", "Rating impact on confidentiality, integrity, and availability", "Risk-based remediation planning", "POA&M tracking", "RBAC and least-privilege design", "Writing a policy aligned to PCI DSS"],
         "flow": [("Scope the system", "Pick an organization and what you’re assessing."), ("Categorize with FIPS 199", "Rate impact on C, I, and A."), ("Find control gaps", "Map deficiencies to NIST 800-53."), ("Plan remediation", "Risk-based fixes, RBAC, access reviews."), ("Track with a POA&M", "Owners, deadlines, status, evidence.")],
         "steps": [
-            ("Scope your system", ["Describe a practice organization and the system you’re assessing: what it does, the data it handles, and who uses it."]),
-            ("Categorize it with FIPS 199", ["Rate the potential impact of a loss of <strong>confidentiality</strong>, <strong>integrity</strong>, and <strong>availability</strong> as low, moderate, or high. The highest of the three sets the overall category."]),
+            ("Scope your system", ["Read the Bayou Bites Café scenario above. In a few sentences, describe what you’re assessing: the business, its systems, the data it handles (especially card payments), and who uses each system."]),
+            ("Categorize it with FIPS 199", [
+                "Rate the potential impact of a loss of <strong>confidentiality</strong>, <strong>integrity</strong>, and <strong>availability</strong> as low, moderate, or high. The highest of the three sets the overall category. Write it in the FIPS 199 format:",
+                ("code", "text", "SC Bayou Bites POS = {(confidentiality, ?), (integrity, ?), (availability, ?)}"),
+                "Ask yourself: what happens if card data leaks (C)? If prices or orders are changed (I)? If the registers go down on a Friday night (A)?",
+            ]),
             ("Identify control gaps", [
-                "List the deficiencies you find and map each one to NIST SP 800-53 Rev. 5. My lab focused on these controls:",
+                "Go through the nine assessment notes in the scenario. For each one, write the finding in your risk register and map it to a NIST SP 800-53 Rev. 5 control (or a PCI DSS requirement). My lab focused on these controls:",
                 ("ul", ["<strong>AC-6 Least Privilege:</strong> users have more access than their job needs.", "<strong>CA-5 Plan of Action and Milestones:</strong> findings are not tracked to completion.", "<strong>CA-7 Continuous Monitoring:</strong> security status is not watched over time.", "<strong>RA-3 Risk Assessment:</strong> risks are not formally identified and rated.", "<strong>RA-7 Risk Response:</strong> there is no defined way to respond to findings."]),
             ]),
-            ("Rate the risk", ["For each gap, note its impact on confidentiality, integrity, and availability, and how likely it is to be exploited. Use that to rank what to fix first."]),
+            ("Rate the risk", [
+                "For each gap, rate its impact and how likely it is to happen, then combine them with this simple matrix. Fix the Highs first.",
+                ("code", "text", "                 Impact: Low    Moderate   High\nLikelihood High:         Moderate  High       High\nLikelihood Moderate:     Low       Moderate   High\nLikelihood Low:          Low       Low        Moderate"),
+                "The first row of the risk register worksheet is filled in as an example.",
+            ]),
             ("Write remediation strategies", ["For each control, write a risk-based remediation strategy that explains what changes, why it reduces risk, and who owns it."]),
             ("Recommend RBAC and access reviews", ["Design role-based access so people only get what their role needs, and add periodic access reviews to catch excessive access to sensitive information."]),
             ("Build a POA&M tracker", [
-                "Create a Plan of Action and Milestones to track remediation to completion. My tracker covered risk severity, ownership, deadlines, status, and evidence. Suggested columns:",
+                "Create a Plan of Action and Milestones to track remediation to completion. My tracker covered risk severity, ownership, deadlines, status, and evidence. Use the POA&M worksheet above. Its first row shows a finished example:",
                 ("code", "text", "ID | Weakness | NIST control | Risk severity | Owner | Milestones | Due date | Status | Evidence of completion"),
             ]),
-            ("Write a PCI DSS-aligned policy", ["Write a security policy for a point-of-sale environment that covers network security controls, secure configurations, changing default credentials, and malware protection. Name a technical owner for each requirement."]),
+            ("Write a PCI DSS-aligned policy", [
+                "Write a short security policy for Bayou Bites’ point-of-sale environment. Name a technical owner for each requirement. A simple outline:",
+                ("ol", ["<strong>Purpose and scope:</strong> which systems and locations it covers.", "<strong>Network security controls:</strong> keep the POS on its own network, separate from guest Wi-Fi.", "<strong>Secure configuration:</strong> change every vendor default password before a device goes live.", "<strong>Malware protection:</strong> keep antivirus current on every back-office computer.", "<strong>Roles and ownership:</strong> who is responsible for each requirement.", "<strong>Review:</strong> how often the policy is reviewed and updated."]),
+            ]),
+            ("Compare with the answer key", ["When you’re done, open the answer key at the top of the page and compare. It’s fine if your mappings differ, as long as you can explain why."]),
         ],
         "check": ["Every gap is mapped to a specific NIST SP 800-53 control.", "Each finding has a CIA impact rating and a priority.", "Every POA&M item has an owner, a due date, a status, and evidence.", "Your policy names an owner for each requirement."],
         "cleanup": "",
@@ -269,6 +333,8 @@ def block(b):
     kind = b[0]
     if kind == "ul":
         return "<ul>" + "".join(f"<li>{x}</li>" for x in b[1]) + "</ul>"
+    if kind == "ol":
+        return "<ol>" + "".join(f"<li>{x}</li>" for x in b[1]) + "</ol>"
     if kind == "code":
         return (f'<div class="lab-code"><div class="lab-code-bar"><span>{e(b[1])}</span><button type="button" class="lab-copy">Copy</button></div>'
                 f'<pre><code>{e(b[2])}</code></pre></div>')
@@ -299,6 +365,7 @@ def page(lab):
           <div><h2>Before you start</h2><ul>{"".join(f"<li>{x}</li>" for x in lab["need"])}</ul></div>
           <div><h2>What you’ll learn</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in lab["learn"])}</ul></div>
         </div>
+        {lab.get("scenario", "")}
         <h2>How it fits together</h2>
         <ol class="architecture-flow">{flow}</ol>
         <h2>Step by step</h2>

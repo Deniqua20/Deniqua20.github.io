@@ -1,0 +1,10 @@
+POA&M ID,Weakness,NIST control,Risk severity,Owner,Milestones,Scheduled completion,Status,Evidence of completion
+P-01,Shared POS manager login,AC-6,High,Operations Manager,"1) List all staff and their roles (week 1) 2) Create individual logins by role (week 2) 3) Disable manager1 (week 2) 4) First access review (end of quarter)",30 days from start,Open,Screenshot of POS user list with individual accounts; manager1 disabled; signed access review
+P-02,,,,,,,,
+P-03,,,,,,,,
+P-04,,,,,,,,
+P-05,,,,,,,,
+P-06,,,,,,,,
+P-07,,,,,,,,
+P-08,,,,,,,,
+P-09,,,,,,,,

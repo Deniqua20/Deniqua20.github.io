@@ -13,8 +13,8 @@
     <script src="../assets/js/site.js" defer></script>
   <link rel="stylesheet" href="../assets/css/world.css?v=b23a1bab39" />
 <script src="../assets/js/world.js?v=b23a1bab39" defer></script>
-<link rel="stylesheet" href="../assets/css/rooms.css?v=286f3f77ff" />
-<script src="../assets/js/rooms.js?v=286f3f77ff" defer></script>
+<link rel="stylesheet" href="../assets/css/rooms.css?v=56253ae7dd" />
+<script src="../assets/js/rooms.js?v=56253ae7dd" defer></script>
 <link rel="stylesheet" href="../assets/css/game.css?v=eeaf0ba5c4" />
 <script src="../assets/js/game.js?v=eeaf0ba5c4" defer></script>
 <script src="../assets/js/walkthrough.js?v=1" defer></script>
@@ -52,6 +52,7 @@
           <div><h2>Before you start</h2><ul><li>An Azure subscription and a Microsoft Entra ID tenant you can test in. My lab used Entra ID P2.</li><li>Permission to create users, groups, an Automation account, and a Logic App.</li><li>Test accounts only. Never point this pipeline at real users.</li></ul></div>
           <div><h2>What you’ll learn</h2><ul><li>Joiner/Mover/Leaver (JML) lifecycle management</li><li>Managed identity authentication with no stored credentials</li><li>Calling Microsoft Graph from a PowerShell runbook</li><li>Event-driven automation with Logic Apps</li><li>Verifying changes in Entra ID audit logs</li></ul></div>
         </div>
+        
         <h2>How it fits together</h2>
         <ol class="architecture-flow"><li><strong>HTTP POST</strong><span>A simulated HR termination event.</span></li><li><strong>Azure Logic App</strong><span>Receives the event and starts the runbook.</span></li><li><strong>Automation runbook</strong><span>Runs PowerShell with a managed identity.</span></li><li><strong>Microsoft Graph</strong><span>Disables, revokes, removes groups and licenses.</span></li><li><strong>Audit logs + email</strong><span>Proof of every action and a completion notice.</span></li></ol>
         <h2>Step by step</h2>

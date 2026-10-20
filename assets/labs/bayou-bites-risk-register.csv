@@ -1,0 +1,10 @@
+ID,Finding,NIST SP 800-53 control,Confidentiality impact,Integrity impact,Availability impact,Likelihood,Overall risk,Remediation strategy,Owner
+R-01,All staff share one POS manager login (manager1) and former employees still know it,AC-6 Least Privilege,Moderate,Moderate,Low,High,High,"Give every employee their own POS login; create Cashier, Shift Lead, and Manager roles; delete the shared account; review access every quarter",Operations Manager
+R-02,,,,,,,,,
+R-03,,,,,,,,,
+R-04,,,,,,,,,
+R-05,,,,,,,,,
+R-06,,,,,,,,,
+R-07,,,,,,,,,
+R-08,,,,,,,,,
+R-09,,,,,,,,,
