@@ -13,8 +13,8 @@
     <script src="../assets/js/site.js" defer></script>
   <link rel="stylesheet" href="../assets/css/world.css?v=b23a1bab39" />
 <script src="../assets/js/world.js?v=b23a1bab39" defer></script>
-<link rel="stylesheet" href="../assets/css/rooms.css?v=b24912f4b0" />
-<script src="../assets/js/rooms.js?v=b24912f4b0" defer></script>
+<link rel="stylesheet" href="../assets/css/rooms.css?v=286f3f77ff" />
+<script src="../assets/js/rooms.js?v=286f3f77ff" defer></script>
 <link rel="stylesheet" href="../assets/css/game.css?v=eeaf0ba5c4" />
 <script src="../assets/js/game.js?v=eeaf0ba5c4" defer></script>
 <script src="../assets/js/walkthrough.js?v=1" defer></script>
@@ -46,6 +46,8 @@
         <div class="tags"><span>Microsoft Entra ID</span><span>Logic Apps</span><span>Azure Automation</span><span>Microsoft Graph</span><span>PowerShell</span></div>
       </section>
       <section class="shell prose">
+        <div class="lab-why"><p class="lab-why-kicker">Why I built this lab</p><p>Orphaned accounts, where people keep access after they leave, are one of the most common identity risks. I wanted to go beyond creating users and show offboarding that is automatic, auditable, and has no manual steps, the way enterprise IAM teams handle terminations at scale.</p></div>
+        <p class="lab-adjust"><strong>Make it your own.</strong> This is how I did it, not the only way. Feel free to adjust the lab to your liking: change the names, tools, or scope, or take it further. What matters is that you understand what you built and why.</p>
         <div class="lab-start">
           <div><h2>Before you start</h2><ul><li>An Azure subscription and a Microsoft Entra ID tenant you can test in. My lab used Entra ID P2.</li><li>Permission to create users, groups, an Automation account, and a Logic App.</li><li>Test accounts only. Never point this pipeline at real users.</li></ul></div>
           <div><h2>What you’ll learn</h2><ul><li>Joiner/Mover/Leaver (JML) lifecycle management</li><li>Managed identity authentication with no stored credentials</li><li>Calling Microsoft Graph from a PowerShell runbook</li><li>Event-driven automation with Logic Apps</li><li>Verifying changes in Entra ID audit logs</li></ul></div>
@@ -123,7 +125,7 @@ Invoke-RestMethod -Method Post -Uri &quot;&lt;your-logic-app-http-post-url&gt;&q
         <ul class="lab-checks"><li>The Logic App run history shows green checkmarks.</li><li>The runbook output lists each step as completed.</li><li>The test user is disabled in Entra ID.</li><li>Their group memberships and licenses are gone.</li><li>Entra ID audit logs captured every action.</li><li>You received the completion email.</li></ul>
         <h2>Clean up</h2><p class="lab-cleanup">Delete the test users, then delete the resource group that holds the Automation account and Logic App. Remove the managed identity’s Graph permissions if you keep the account.</p>
         <div class="lab-interview"><p class="lab-interview-kicker">Interview ready</p><h2>Be ready to explain</h2><ul><li>Why orphaned accounts are a risk, and how automated offboarding removes that gap.</li><li>Why a managed identity is safer than storing credentials in a script.</li><li>What each Graph call does: disable, revoke sessions, remove groups, remove licenses.</li><li>How the HTTP trigger could be swapped for an HR system webhook in production.</li><li>How you proved it worked: run history, runbook output, and audit logs.</li></ul>
-        <p>This lab sparked real conversations in my interviews. Know your work front to back and you’ll be ready for “walk me through it.”</p></div>
+        <p>Know your work front to back and you’ll be ready when someone says “walk me through it.”</p></div>
         <p class="lab-source">This walkthrough follows my lab. Portals and menus change over time, so names may look slightly different when you try it. <a href="https://github.com/Deniqua20/Automated-JML-Identity-Lifecycle-Microsoft-Entra-ID">See my original write-up on GitHub</a></p>
         <a class="button" href="identity-lifecycle.html">Back to the project overview</a>
       </section>

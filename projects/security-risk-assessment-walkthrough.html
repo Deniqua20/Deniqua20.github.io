@@ -13,8 +13,8 @@
     <script src="../assets/js/site.js" defer></script>
   <link rel="stylesheet" href="../assets/css/world.css?v=b23a1bab39" />
 <script src="../assets/js/world.js?v=b23a1bab39" defer></script>
-<link rel="stylesheet" href="../assets/css/rooms.css?v=b24912f4b0" />
-<script src="../assets/js/rooms.js?v=b24912f4b0" defer></script>
+<link rel="stylesheet" href="../assets/css/rooms.css?v=286f3f77ff" />
+<script src="../assets/js/rooms.js?v=286f3f77ff" defer></script>
 <link rel="stylesheet" href="../assets/css/game.css?v=eeaf0ba5c4" />
 <script src="../assets/js/game.js?v=eeaf0ba5c4" defer></script>
 <script src="../assets/js/walkthrough.js?v=1" defer></script>
@@ -46,6 +46,8 @@
         <div class="tags"><span>NIST SP 800-53 Rev. 5</span><span>FIPS 199</span><span>PCI DSS</span><span>RBAC</span><span>POA&amp;M</span></div>
       </section>
       <section class="shell prose">
+        <div class="lab-why"><p class="lab-why-kicker">Why I built this lab</p><p>Security isn’t only tools. I wanted to practice the governance side: finding control gaps, mapping them to a real framework, and turning findings into a tracked plan, the same workflow GRC and risk teams use.</p></div>
+        <p class="lab-adjust"><strong>Make it your own.</strong> This is how I did it, not the only way. Feel free to adjust the lab to your liking: change the names, tools, or scope, or take it further. What matters is that you understand what you built and why.</p>
         <div class="lab-start">
           <div><h2>Before you start</h2><ul><li>A copy of NIST SP 800-53 Rev. 5 (free from csrc.nist.gov).</li><li>A spreadsheet for your risk register and POA&M, and a document for your policy.</li><li>A practice scenario. Mine included a point-of-sale (POS) environment.</li></ul></div>
           <div><h2>What you’ll learn</h2><ul><li>Security control assessment and gap analysis</li><li>Rating impact on confidentiality, integrity, and availability</li><li>Risk-based remediation planning</li><li>POA&amp;M tracking</li><li>RBAC and least-privilege design</li><li>Writing a policy aligned to PCI DSS</li></ul></div>
@@ -58,7 +60,7 @@
         <ul class="lab-checks"><li>Every gap is mapped to a specific NIST SP 800-53 control.</li><li>Each finding has a CIA impact rating and a priority.</li><li>Every POA&amp;M item has an owner, a due date, a status, and evidence.</li><li>Your policy names an owner for each requirement.</li></ul>
         
         <div class="lab-interview"><p class="lab-interview-kicker">Interview ready</p><h2>Be ready to explain</h2><ul><li>How you used FIPS 199 to decide how critical the system is.</li><li>Why you chose AC-6, CA-5, CA-7, RA-3, and RA-7, and how they connect.</li><li>How a POA&amp;M turns findings into accountable, trackable work.</li><li>How RBAC and access reviews reduce excessive access.</li><li>How continuous monitoring (CA-7) ties to detection work like my Sentinel lab.</li></ul>
-        <p>This lab sparked real conversations in my interviews. Know your work front to back and you’ll be ready for “walk me through it.”</p></div>
+        <p>Know your work front to back and you’ll be ready when someone says “walk me through it.”</p></div>
         <p class="lab-source">This walkthrough follows my lab. Portals and menus change over time, so names may look slightly different when you try it. <a href="https://github.com/Deniqua20/Security-Risk-Assessment-Compliance-Lab">See my original write-up on GitHub</a></p>
         <a class="button" href="security-risk-assessment.html">Back to the project overview</a>
       </section>

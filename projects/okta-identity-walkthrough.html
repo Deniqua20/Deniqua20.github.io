@@ -13,8 +13,8 @@
     <script src="../assets/js/site.js" defer></script>
   <link rel="stylesheet" href="../assets/css/world.css?v=b23a1bab39" />
 <script src="../assets/js/world.js?v=b23a1bab39" defer></script>
-<link rel="stylesheet" href="../assets/css/rooms.css?v=b24912f4b0" />
-<script src="../assets/js/rooms.js?v=b24912f4b0" defer></script>
+<link rel="stylesheet" href="../assets/css/rooms.css?v=286f3f77ff" />
+<script src="../assets/js/rooms.js?v=286f3f77ff" defer></script>
 <link rel="stylesheet" href="../assets/css/game.css?v=eeaf0ba5c4" />
 <script src="../assets/js/game.js?v=eeaf0ba5c4" defer></script>
 <script src="../assets/js/walkthrough.js?v=1" defer></script>
@@ -46,6 +46,8 @@
         <div class="tags"><span>Okta</span><span>SAML 2.0</span><span>SCIM 2.0</span><span>Google Workspace</span><span>Okta System Log</span></div>
       </section>
       <section class="shell prose">
+        <div class="lab-why"><p class="lab-why-kicker">Why I built this lab</p><p>Single sign-on and lifecycle management are core IAM skills. I wanted hands-on proof that I understand how companies centralize sign-in and make sure access is granted, changed, and removed through groups instead of one person at a time.</p></div>
+        <p class="lab-adjust"><strong>Make it your own.</strong> This is how I did it, not the only way. Feel free to adjust the lab to your liking: change the names, tools, or scope, or take it further. What matters is that you understand what you built and why.</p>
         <div class="lab-start">
           <div><h2>Before you start</h2><ul><li>A free Okta developer account.</li><li>A test application that supports SAML 2.0 and, for provisioning, SCIM 2.0.</li><li>Optional: a Google Workspace test environment to practice SSO into a real service.</li></ul></div>
           <div><h2>What you’ll learn</h2><ul><li>Identity Provider (IdP) vs. Service Provider (SP) roles</li><li>SAML 2.0 federation and SSO configuration</li><li>Group-based access and least privilege</li><li>SCIM provisioning and Joiner/Mover/Leaver workflows</li><li>Monitoring identity events in the Okta System Log</li></ul></div>
@@ -58,7 +60,7 @@
         <ul class="lab-checks"><li>Signing in through Okta gets you into the app.</li><li>Unassigned users are denied access.</li><li>Joiner, mover, and leaver changes show up in the app automatically.</li><li>The System Log shows the sign-in and provisioning events.</li></ul>
         <h2>Clean up</h2><p class="lab-cleanup">Deactivate and delete your test users and remove test app integrations when you’re done.</p>
         <div class="lab-interview"><p class="lab-interview-kicker">Interview ready</p><h2>Be ready to explain</h2><ul><li>The difference between the IdP and the SP, and what’s inside a SAML assertion.</li><li>Why group-based assignment scales least privilege.</li><li>How SCIM prevents orphaned accounts when someone leaves.</li><li>How you tested each Joiner, Mover, and Leaver scenario.</li><li>Why the Okta System Log matters for identity threat detection.</li></ul>
-        <p>This lab sparked real conversations in my interviews. Know your work front to back and you’ll be ready for “walk me through it.”</p></div>
+        <p>Know your work front to back and you’ll be ready when someone says “walk me through it.”</p></div>
         <p class="lab-source">This walkthrough follows my lab. Portals and menus change over time, so names may look slightly different when you try it. <a href="https://github.com/Deniqua20/okta-iam-lifecycle-lab">See my original write-up on GitHub</a> · <a href="https://github.com/Deniqua20/okta-sso-app-integration">SSO app integration write-up</a></p>
         <a class="button" href="okta-identity.html">Back to the project overview</a>
       </section>

@@ -16,6 +16,7 @@ e = escape
 LABS = [
     {
         "slug": "identity-lifecycle-walkthrough",
+        "why": "Orphaned accounts, where people keep access after they leave, are one of the most common identity risks. I wanted to go beyond creating users and show offboarding that is automatic, auditable, and has no manual steps, the way enterprise IAM teams handle terminations at scale.",
         "overview": "identity-lifecycle.html",
         "title": "Automated Identity Lifecycle Walkthrough",
         "desc": "Step-by-step walkthrough to build Dee’s automated Joiner/Mover/Leaver offboarding pipeline with Microsoft Entra ID, Logic Apps, Azure Automation, and Microsoft Graph.",
@@ -141,6 +142,7 @@ Invoke-RestMethod -Method Post -Uri "<your-logic-app-http-post-url>" `
     },
     {
         "slug": "cloud-security-monitoring-walkthrough",
+        "why": "You can’t protect what you can’t see. I built this to understand the foundation every cloud security program starts with: getting logs into one place so activity can be monitored, investigated, and audited.",
         "overview": "cloud-security-monitoring.html",
         "title": "Azure Cloud Security Monitoring Walkthrough",
         "desc": "Step-by-step walkthrough to deploy Microsoft Sentinel with a Log Analytics workspace, based on Dee’s Azure cloud security monitoring lab.",
@@ -175,6 +177,7 @@ Invoke-RestMethod -Method Post -Uri "<your-logic-app-http-post-url>" `
     },
     {
         "slug": "security-risk-assessment-walkthrough",
+        "why": "Security isn’t only tools. I wanted to practice the governance side: finding control gaps, mapping them to a real framework, and turning findings into a tracked plan, the same workflow GRC and risk teams use.",
         "overview": "security-risk-assessment.html",
         "title": "Security Risk Assessment Walkthrough",
         "desc": "Step-by-step walkthrough to run a security gap and risk assessment against NIST SP 800-53 Rev. 5 and build a POA&M, based on Dee’s GRC lab.",
@@ -212,6 +215,7 @@ Invoke-RestMethod -Method Post -Uri "<your-logic-app-http-post-url>" `
     },
     {
         "slug": "okta-identity-walkthrough",
+        "why": "Single sign-on and lifecycle management are core IAM skills. I wanted hands-on proof that I understand how companies centralize sign-in and make sure access is granted, changed, and removed through groups instead of one person at a time.",
         "overview": "okta-identity.html",
         "title": "Okta SSO and Lifecycle Walkthrough",
         "desc": "Step-by-step walkthrough to configure Okta SAML single sign-on, group-based access, SCIM provisioning, and Joiner/Mover/Leaver workflows, based on Dee’s Okta labs.",
@@ -289,6 +293,8 @@ def page(lab):
         <div class="tags">{"".join(f"<span>{e(t)}</span>" for t in lab["tags"])}</div>
       </section>
       <section class="shell prose">
+        <div class="lab-why"><p class="lab-why-kicker">Why I built this lab</p><p>{e(lab["why"])}</p></div>
+        <p class="lab-adjust"><strong>Make it your own.</strong> This is how I did it, not the only way. Feel free to adjust the lab to your liking: change the names, tools, or scope, or take it further. What matters is that you understand what you built and why.</p>
         <div class="lab-start">
           <div><h2>Before you start</h2><ul>{"".join(f"<li>{x}</li>" for x in lab["need"])}</ul></div>
           <div><h2>What you’ll learn</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in lab["learn"])}</ul></div>
@@ -301,7 +307,7 @@ def page(lab):
         <ul class="lab-checks">{"".join(f"<li>{e(x)}</li>" for x in lab["check"])}</ul>
         {cleanup}
         <div class="lab-interview"><p class="lab-interview-kicker">Interview ready</p><h2>Be ready to explain</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in lab["interview"])}</ul>
-        <p>This lab sparked real conversations in my interviews. Know your work front to back and you’ll be ready for “walk me through it.”</p></div>
+        <p>Know your work front to back and you’ll be ready when someone says “walk me through it.”</p></div>
         <p class="lab-source">This walkthrough follows my lab. Portals and menus change over time, so names may look slightly different when you try it. {repos}</p>
         <a class="button" href="{lab["overview"]}">Back to the project overview</a>
       </section>
