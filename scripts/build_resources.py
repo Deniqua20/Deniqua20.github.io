@@ -65,7 +65,7 @@ METHODS = [
 CERT_PREP = [
     ("Search Reddit and Discord", "I search Reddit and Discord for tips and to gather the study notes and resources people used when they passed. I’m currently in college, so these communities have been a big help."),
     ("Download the official exam objectives", "The objectives tell you exactly what can be on the exam. Everything on them is up for grabs."),
-    ("Turn the objectives into a study plan", "I put the objectives into ChatGPT to create a study plan and clear up any gray areas. While I study, I have it break information down so simply that a toddler could understand it. You’re taking in a lot, so make it digestible for you."),
+    ("Turn the objectives into a study plan", "I put the objectives into an AI tool like ChatGPT or Claude to create a study plan and clear up any gray areas. While I study, I have it break information down so simply that a toddler could understand it. You’re taking in a lot, so make it digestible for you."),
     ("Pair my notes with videos", "Once I have my study plan and notes, I pair them with YouTube videos. For Security+, I used Professor Messer’s videos, and he has study materials too."),
     ("Prefer not to use AI? Use reputable study material", "If you’d rather not use ChatGPT, Claude, or other AI tools, look at who offers trusted study material. I’ve used Jason Dion and Professor Messer, and there are plenty of others. Do your research."),
     ("Don’t overcomplicate it", "See what’s being covered, study, take practice tests, and give it a shot."),
@@ -141,7 +141,7 @@ def grail():
 <div class="focus-actions"><button type="button" class="world-button" id="focus-start">Start</button><button type="button" class="focus-reset" id="focus-reset">Reset</button></div>
 <p class="focus-done" id="focus-done" role="status"></p></aside></div></div></details>
 <details class="grail-part"><summary><span class="grail-part-n">02</span><span>How I prepared for certifications <small>My step-by-step process</small></span></summary>
-<div class="grail-part-body"><p class="grail-intro">I hold multiple industry certifications. When it came to certification, this is what I did.</p>
+<div class="grail-part-body"><p class="grail-intro">I hold over 12 industry certifications, so I feel like I’ve got cert prep down (until they change the exams, lol). When it came to certification, this is what I did.</p>
 <div class="grail-certs"><ol class="grail-checklist grail-steps">{prep}</ol>
 <aside class="grail-callout"><p class="grail-kicker">If you don’t pass</p><p>It isn’t the end-all be-all. I’ll let you know now: I have failed certifications multiple times, and guess what? I’m still in the industry. Go back to the drawing board, make some adjustments, and execute.</p><p class="grail-yougotthis">You got this. If it was easy, everyone would be doing it.</p></aside></div></div></details>
 <details class="grail-part"><summary><span class="grail-part-n">03</span><span>College survival tips <small>Lessons from finishing college with ADHD</small></span></summary>
