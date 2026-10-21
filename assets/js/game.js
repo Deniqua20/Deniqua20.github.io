@@ -15,6 +15,7 @@
     "analyst": ["Analyst", "Filtered the project workspace."],
     "pathfinder": ["Pathfinder", "Explored three career paths."],
     "reader": ["Story Reader", "Read a story to the end."],
+    "teamplayer": ["Team Player", "Found your team in the Paths in Tech quiz."],
     "explorer": ["Explorer", "Unlocked every level of Dee’s Cyber Corner."]
   };
   const KEY = "dee-cyber-progress";
@@ -144,6 +145,7 @@
 
   // Achievements wired to real actions.
   if (inProjects) setTimeout(() => award("investigator"), 1500);
+  document.addEventListener("dee:achievement", event => award(event.detail));
   document.addEventListener("click", event => {
     if (event.target.closest("[data-lab-filter]:not([data-lab-filter='all'])")) award("analyst");
   });

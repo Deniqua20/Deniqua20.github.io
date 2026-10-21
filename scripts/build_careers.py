@@ -44,9 +44,77 @@ ICON = {
     "writing": '<path d="M4 20l1-4L16 5l3 3L8 19z"/><path d="M14 7l3 3"/>',
 }
 
+# "Meet the teams" explainer: (key, color name, nickname, think-of-them-as, typical day, jump target row).
+EXPLAIN = [
+    ("blue", "Blue team", "The defenders", "the security guards and detectives of a company.",
+     ["Watch alerts for anything suspicious", "Investigate odd logins and strange activity", "Stop an attack and clean up after it"], "blue"),
+    ("red", "Red team", "The friendly hackers", "burglars you hire, with permission, to test your locks before a real one shows up.",
+     ["Try to break in the way an attacker would", "Find weak spots before the bad guys do", "Write up what they found and how to fix it"], "red"),
+    ("purple", "Purple team", "The coaches", "the coach who gets red and blue in the same room so both get better.",
+     ["Run attacks and watch if defenders catch them", "Turn every miss into a new detection", "Share lessons across both teams"], "red"),
+    ("white", "White team", "The referees", "the referees and rule makers who keep everyone playing fair and safe.",
+     ["Write security policies and rules", "Measure risk and check controls work", "Design how all the pieces fit together"], "white"),
+    ("yellow", "Yellow team", "The builders", "the architects and construction crew who build what everyone else protects.",
+     ["Write code and build apps", "Set up networks, data, and systems", "Design what people click on and use"], "yellow"),
+    ("people", "The team behind the teams", "The connectors", "the friendly faces who help people actually use and understand technology.",
+     ["Fix tech problems for coworkers", "Help customers get value from a product", "Explain tricky things in plain words"], "people"),
+]
+
+
+# Quiz: each answer points at a team row.
+QUIZ = [
+    ("A mystery lands on your desk. You…", [
+        ("Dig through the clues to find out what happened", "blue"),
+        ("Try to recreate how they got in", "red"),
+        ("Write the plan so it never happens again", "white"),
+        ("Build a tool that fixes it for good", "yellow"),
+        ("Check that everyone affected is okay and in the loop", "people")]),
+    ("Your perfect Saturday project…", [
+        ("A puzzle or true-crime deep dive", "blue"),
+        ("Taking something apart to see how it works", "red"),
+        ("Organizing and planning everything out", "white"),
+        ("Making something from scratch", "yellow"),
+        ("Teaching a friend something new", "people")]),
+    ("Your friends call you the one who…", [
+        ("Notices when something is off", "blue"),
+        ("Finds the loophole in every rule", "red"),
+        ("Always has a plan B", "white"),
+        ("Can build or fix anything", "yellow"),
+        ("Explains things so they finally make sense", "people")]),
+]
+RESULT = {
+    "blue": ("Blue team", "You’re a defender. You notice details and love solving the case."),
+    "red": ("Red & purple team", "You’re a tester. You see how things break so they can be made stronger."),
+    "white": ("White team", "You’re a planner. You bring order, rules, and the big picture."),
+    "yellow": ("Yellow team", "You’re a builder. You love making things that work."),
+    "people": ("The team behind the teams", "You’re a connector. You make tech work for real people."),
+}
+
+
+def explainer():
+    cards = []
+    for key, name, nick, think, day, row in EXPLAIN:
+        cards.append(f'<article class="team-card team-{key}"><p class="team-chip"><span class="team-dot" aria-hidden="true"></span>{e(name)}</p>'
+                     f'<h3 class="team-nick">{e(nick)}</h3><p class="team-think"><span>Think of them as</span> {e(think)}</p>'
+                     f'<ul class="team-day">{"".join(f"<li>{e(d)}</li>" for d in day)}</ul>'
+                     f'<a class="team-jump" href="#team-{row}">See their paths <span aria-hidden="true">↓</span></a></article>')
+    qs = "".join(f'<fieldset class="quiz-q" data-step="{i}"{"" if i == 0 else " hidden"}><legend><span class="quiz-n">{i + 1}/{len(QUIZ)}</span> {e(q)}</legend>'
+                 + "".join(f'<button type="button" class="quiz-a" data-team="{t}">{e(a)}</button>' for a, t in opts) + '</fieldset>'
+                 for i, (q, opts) in enumerate(QUIZ))
+    results = "".join(f'<div class="quiz-result team-{k}" data-result="{k}" hidden><p class="team-chip"><span class="team-dot" aria-hidden="true"></span>You’d fit on the {e(n)}</p>'
+                      f'<p>{e(t)} Every team needs you.</p><div class="quiz-actions"><a class="team-jump" href="#team-{k}">See your paths <span aria-hidden="true">↓</span></a>'
+                      f'<button type="button" class="quiz-retry">Take it again</button></div></div>' for k, (n, t) in RESULT.items())
+    return (f'<section class="world-shell team-explainer" aria-labelledby="teams-heading"><!-- built by build_careers.py -->'
+            f'<div class="team-explainer-head"><p class="room-eyebrow">Team colors 101</p><h2 id="teams-heading">Meet the teams</h2>'
+            f'<p>In cybersecurity, people talk about teams by color. It’s an easy way to see who does what. '
+            f'You don’t need to pick one forever. Lots of people move between teams over their career.</p></div>'
+            f'<div class="team-cards">{"".join(cards)}</div>'
+            f'<div class="team-quiz" data-team-quiz><h3>Which team are you?</h3><p class="quiz-sub">Three quick questions. Just for fun.</p>{qs}{results}</div></section>')
+
+
 p = ROOT / "careers.html"
 s = p.read_text()
-titles = dict(re.findall(r'data-career-panel="career-([a-z]+)"[^>]*>([^<]+)</button>', s))
+titles = dict(re.findall(r'<article class="career-panel" id="career-([a-z]+)".*?<h2[^>]*>([^<]+)</h2>', s))
 assert len(titles) == 15, titles
 
 
@@ -64,13 +132,15 @@ for key, name, sub, blurb, ids in TEAMS:
     for cid in ids:
         tiles.append(tile(cid, first))
         first = False
-    rows.append(f'<div class="team-row team-{key}"><div class="team-head"><p class="team-chip"><span class="team-dot" aria-hidden="true"></span>{e(name)}</p>'
+    rows.append(f'<div class="team-row team-{key}" id="team-{key}"><div class="team-head"><p class="team-chip"><span class="team-dot" aria-hidden="true"></span>{e(name)}</p>'
                 f'<h2 class="team-title">{e(sub)}</h2><p class="team-blurb">{e(blurb)}</p></div>'
                 f'<div class="team-tiles" role="group" aria-label="{e(name)} paths">{"".join(tiles)}</div></div>')
 assert sum(len(t[4]) for t in TEAMS) == 15
 
 index = f'<nav class="field-guide-index team-rows" aria-label="Career areas by team">{"".join(rows)}</nav>'
 s = re.sub(r'<nav class="field-guide-index[^"]*"[^>]*>.*?</nav>', lambda m: index, s, count=1, flags=re.S)
+s = re.sub(r'<section class="world-shell team-explainer".*?</section>', "", s, flags=re.S)
+s = s.replace('<section class="world-shell field-guide"', explainer() + '<section class="world-shell field-guide"', 1)
 if "assets/js/careers.js" not in s:
     s = s.replace("</head>", '<script src="assets/js/careers.js?v=1" defer></script>\n</head>', 1)
 p.write_text(s)

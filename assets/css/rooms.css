@@ -335,3 +335,44 @@
 .role-chips { list-style:none; display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 0; padding:0; }
 .role-chips li { padding:7px 14px; border:1px solid #ab586277; border-radius:30px; background:#1a0d12; color:#f1e4e2; font-size:13.5px; }
 .role-source { margin:8px 0 0; font-size:12px; color:#a8969a; }
+
+/* Paths in Tech: Meet the teams explainer + quiz. */
+.team-purple { --team:#b67cff; --team-soft:#b67cff22; }
+.team-explainer { margin-bottom:56px; }
+.team-explainer-head { max-width:720px; margin-bottom:22px; }
+.team-explainer-head h2 { margin:4px 0 8px; font:400 clamp(40px,4.4vw,58px)/1 "Great Vibes",cursive; color:#ff9ba4; }
+.team-explainer-head p:last-child { color:#c8bab8; margin:0; }
+.team-cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.team-card { position:relative; display:flex; flex-direction:column; gap:10px; padding:20px; border:1px solid #ab586233; border-left:3px solid var(--team); border-radius:14px; background:radial-gradient(ellipse at 0% 0%,var(--team-soft),transparent 55%),linear-gradient(170deg,#1b1016,#0e0a0d); transition:transform .3s,box-shadow .3s; }
+.team-card:hover { transform:translateY(-3px); box-shadow:0 0 0 1px var(--team-soft),0 18px 34px -18px var(--team); }
+.team-card .team-chip { align-self:flex-start; }
+.team-nick { margin:0; font:500 24px/1.1 var(--serif); color:#fff4ef; }
+.team-think { margin:0; color:#e6d8d4; font-size:14.5px; line-height:1.5; }
+.team-think span { display:block; font:600 9.5px/1.4 ui-monospace,Menlo,monospace; letter-spacing:1.3px; text-transform:uppercase; color:var(--team); }
+.team-day { margin:0; padding:0; list-style:none; display:grid; gap:5px; color:#c8bab8; font-size:13.5px; }
+.team-day li { position:relative; padding-left:16px; }
+.team-day li::before { content:""; position:absolute; left:0; top:.6em; width:7px; height:7px; border-radius:50%; background:var(--team); box-shadow:0 0 8px var(--team); }
+.team-explainer .team-jump { margin-top:auto; padding-top:4px; color:var(--team,#ff8e98); font:600 12px ui-monospace,Menlo,monospace; letter-spacing:1px; text-transform:uppercase; text-decoration:none; }
+.team-jump:hover { text-decoration:underline; }
+.team-row { scroll-margin-top:90px; transition:box-shadow .4s; border-radius:16px; }
+.team-row.is-match { box-shadow:0 0 0 1px var(--team),0 0 40px -12px var(--team); padding:14px; }
+
+.team-quiz { margin-top:18px; padding:22px; border:1px solid #ff8e9844; border-radius:16px; background:linear-gradient(160deg,#22111a,#0e0a0d); }
+.team-quiz h3 { margin:0; font:500 24px/1.2 var(--serif); color:#fff4ef; }
+.quiz-sub { margin:4px 0 14px; color:#c8bab8; font-size:14px; }
+.quiz-q { border:0; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px; }
+.quiz-q legend { width:100%; margin-bottom:10px; color:#f6eeea; font:500 17px/1.4 var(--serif); }
+.quiz-n { margin-right:8px; color:#ff8e98; font:600 11px ui-monospace,Menlo,monospace; letter-spacing:1px; }
+.quiz-a, .quiz-retry { padding:9px 14px; border:1px solid #ff8e9855; border-radius:30px; background:#140c11; color:#f6eeea; font:inherit; font-size:14px; cursor:pointer; text-align:left; transition:background .2s,border-color .2s; }
+.quiz-a:hover, .quiz-a:focus-visible, .quiz-retry:hover { border-color:#ff8e98; background:#2a1420; }
+.quiz-result { padding:4px 0 0; animation:quiz-pop .45s ease-out; }
+.quiz-result p:not(.team-chip) { margin:10px 0 12px; color:#e6d8d4; }
+.quiz-actions { display:flex; flex-wrap:wrap; align-items:center; gap:16px; }
+@keyframes quiz-pop { from { opacity:0; transform:scale(.97); } to { opacity:1; transform:none; } }
+@media (max-width:900px) { .team-cards { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:600px) {
+ .team-cards { grid-auto-flow:column; grid-template-columns:none; grid-auto-columns:82%; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:6px; }
+ .team-card { scroll-snap-align:start; }
+ .team-quiz { padding:18px 16px; }
+}
+@media (prefers-reduced-motion:reduce) { .team-card,.quiz-result { transition:none; animation:none; } }
