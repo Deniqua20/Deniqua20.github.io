@@ -16,8 +16,8 @@
     <script src="../assets/js/site.js" defer></script>
   <link rel="stylesheet" href="../assets/css/world.css?v=b23a1bab39" />
 <script src="../assets/js/world.js?v=b23a1bab39" defer></script>
-<link rel="stylesheet" href="../assets/css/rooms.css?v=a88d2dbe9a" />
-<script src="../assets/js/rooms.js?v=a88d2dbe9a" defer></script>
+<link rel="stylesheet" href="../assets/css/rooms.css?v=f1276a07c8" />
+<script src="../assets/js/rooms.js?v=f1276a07c8" defer></script>
 <link rel="stylesheet" href="../assets/css/game.css?v=eeaf0ba5c4" />
 <script src="../assets/js/game.js?v=eeaf0ba5c4" defer></script>
 <meta property="og:title" content="Azure Honeypot Walkthrough | Dee’s Cyber Corner" />
@@ -69,6 +69,9 @@
         </div>
       </section>
       <section class="shell prose">
+        <div class="lab-star"><p class="lab-why-kicker">★ The lab that got me the most interview questions</p><p>Hiring managers kept asking me to walk them through this one. Being able to explain every step, from the VM to the KQL to the incident, made a real difference in my interviews.</p></div>
+        <div class="lab-why"><p class="lab-why-kicker">Why I built this lab</p><p>I wanted to see real attack activity, not just read about it. A honeypot let me watch failed sign-ins arrive, investigate them with KQL, and turn what I found into a detection that creates incidents, the core of what a SOC analyst does every day.</p></div>
+        <p class="lab-adjust"><strong>Make it your own.</strong> This is how I did it, not the only way. Feel free to adjust the lab to your liking: change the names, tools, or scope, or take it further. What matters is that you understand what you built and why.</p>
         <h2>The environment</h2>
         <p>
           I built and tested a cloud environment using a Windows virtual machine
@@ -101,15 +104,7 @@
             ><span>Turn detection logic into security visibility.</span>
           </li>
         </ol>
-        <div class="lab-star"><p class="lab-why-kicker">★ The lab that got me the most interview questions</p><p>Hiring managers kept asking me to walk them through this one. Being able to explain every step, from the VM to the KQL to the incident, made a real difference in my interviews.</p></div>
-        <div class="lab-why"><p class="lab-why-kicker">Why I built this lab</p><p>I wanted to see real attack activity, not just read about it. A honeypot let me watch failed sign-ins arrive, investigate them with KQL, and turn what I found into a detection that creates incidents, the core of what a SOC analyst does every day.</p></div>
-        <p class="lab-adjust"><strong>Make it your own.</strong> This is how I did it, not the only way. Feel free to adjust the lab to your liking: change the names, tools, or scope, or take it further. What matters is that you understand what you built and why.</p>
         <h2>Follow the walkthrough</h2>
-        <p>
-          This lab sparked questions from hiring managers during my security
-          role interviews. This is my process, which you can adapt for your own
-          learning environment.
-        </p>
         <p>
           This walkthrough follows my Azure honeypot setup, event collection,
           investigation, and detection process.
