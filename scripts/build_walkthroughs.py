@@ -277,53 +277,6 @@ Invoke-RestMethod -Method Post -Uri "<your-logic-app-http-post-url>" `
         "cleanup": "",
         "interview": ["How you used FIPS 199 to decide how critical the system is.", "Why you chose AC-6, CA-5, CA-7, RA-3, and RA-7, and how they connect.", "How a POA&M turns findings into accountable, trackable work.", "How RBAC and access reviews reduce excessive access.", "How continuous monitoring (CA-7) ties to detection work like my Sentinel lab."],
     },
-    {
-        "slug": "okta-identity-walkthrough",
-        "why": "Single sign-on and lifecycle management are core IAM skills. I wanted hands-on proof that I understand how companies centralize sign-in and make sure access is granted, changed, and removed through groups instead of one person at a time.",
-        "overview": "okta-identity.html",
-        "title": "Okta SSO and Lifecycle Walkthrough",
-        "desc": "Step-by-step walkthrough to configure Okta SAML single sign-on, group-based access, SCIM provisioning, and Joiner/Mover/Leaver workflows, based on Dee’s Okta labs.",
-        "eyebrow": "Identity and access / Lab walkthrough",
-        "h1": ("Set up my Okta", "SSO and lifecycle lab."),
-        "lead": "Use a free Okta developer account to centralize sign-in with SAML 2.0, control access with groups, and automate joiner, mover, and leaver changes.",
-        "tags": ["Okta", "SAML 2.0", "SCIM 2.0", "Google Workspace", "Okta System Log"],
-        "repo": "https://github.com/Deniqua20/okta-iam-lifecycle-lab",
-        "repo2": "https://github.com/Deniqua20/okta-sso-app-integration",
-        "need": [
-            "A free Okta developer account.",
-            "A test application that supports SAML 2.0 and, for provisioning, SCIM 2.0.",
-            "Optional: a Google Workspace test environment to practice SSO into a real service.",
-        ],
-        "learn": ["Identity Provider (IdP) vs. Service Provider (SP) roles", "SAML 2.0 federation and SSO configuration", "Group-based access and least privilege", "SCIM provisioning and Joiner/Mover/Leaver workflows", "Monitoring identity events in the Okta System Log"],
-        "flow": [("Okta tenant", "Users and groups by job function."), ("SAML app integration", "Okta signs users in to the app."), ("Group-based access", "Apps assigned to groups, not people."), ("SCIM provisioning", "Accounts created, updated, removed automatically."), ("System Log", "Audit sign-ins and lifecycle events.")],
-        "steps": [
-            ("Set up your Okta tenant", ["Create a free Okta developer tenant and configure the organization settings, branding, and domain."]),
-            ("Create users and groups", ["Add test users and create groups mapped to job functions. You’ll assign apps to these groups instead of to individual people."]),
-            ("Create a SAML 2.0 app integration", [
-                ("ul", ["Go to <strong>Applications → Create App Integration → SAML 2.0</strong>.",
-                        "Enter the service provider settings: <strong>Single sign-on URL</strong> (ACS URL), <strong>Audience URI</strong> (Entity ID), and <strong>Name ID format</strong>.",
-                        "Add attribute statements to map the user attributes the app needs.",
-                        "Finish, then use Okta’s IdP metadata (or SSO URL and certificate) to configure the app’s side.",
-                        "Sign in through Okta and confirm it works. A browser SAML tracer extension lets you see the assertion and verify the claims."]),
-            ]),
-            ("Optional: SSO into Google Workspace", ["Configure Google Workspace as a service provider with Okta as the IdP: set the sign-in URL and Entity ID, and upload the Okta certificate. Enable SSO for test users and confirm sign-in redirects through Okta. Then disable a user in Okta and confirm they can no longer get into Google Workspace."]),
-            ("Assign access by group", ["Assign each application to the groups that need it. Sign in as an unassigned user and confirm access is denied. That’s least privilege at the group level."]),
-            ("Turn on SCIM provisioning", ["On an app that supports SCIM 2.0, enable provisioning and map attributes between Okta and the app so accounts are created, updated, and deactivated automatically."]),
-            ("Test Joiner, Mover, and Leaver", [
-                ("ul", ["<strong>Joiner:</strong> create a user and add them to a group. Confirm they’re provisioned to the group’s apps.",
-                        "<strong>Mover:</strong> move the user to another group. Confirm their app access changes.",
-                        "<strong>Leaver:</strong> deactivate the user in Okta. Confirm app access is revoked and the account is deprovisioned."]),
-            ]),
-            ("Review the Okta System Log", [
-                "Open <strong>Reports → System Log</strong> to review provisioning events and sign-ins. Filters help you find what matters, for example failed attempts:",
-                ("code", "text", 'outcome.result eq "FAILURE"'),
-                "Export the logs to practice getting identity events into a SIEM.",
-            ]),
-        ],
-        "check": ["Signing in through Okta gets you into the app.", "Unassigned users are denied access.", "Joiner, mover, and leaver changes show up in the app automatically.", "The System Log shows the sign-in and provisioning events."],
-        "cleanup": "Deactivate and delete your test users and remove test app integrations when you’re done.",
-        "interview": ["The difference between the IdP and the SP, and what’s inside a SAML assertion.", "Why group-based assignment scales least privilege.", "How SCIM prevents orphaned accounts when someone leaves.", "How you tested each Joiner, Mover, and Leaver scenario.", "Why the Okta System Log matters for identity threat detection."],
-    },
 ]
 
 
