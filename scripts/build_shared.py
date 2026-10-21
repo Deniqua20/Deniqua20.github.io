@@ -12,7 +12,7 @@ for path in [*ROOT.glob('*.html'),*ROOT.joinpath('projects').glob('*.html'),*ROO
     text=path.read_text()
     if '<header class="site-header' not in text:continue
     prefix='../' if path.parent.name in ('projects','stories') else ''
-    active=('blog.html' if path.parent.name=='stories' else 'labs.html') if prefix else ('resources.html' if path.name in ['careers.html','learn.html'] else path.name)
+    active=('blog.html' if path.parent.name=='stories' else 'labs.html') if prefix else (None if path.name in ['careers.html','learn.html'] else path.name)
     def links(current=False):
         return ''.join(f'<a href="{prefix}{url}"'+(' aria-current="page"' if current and active==url else '')+f'>{label}</a>' for url,label in NAV)
     header=(ROOT/'components/header.html').read_text().strip().format(prefix=prefix,links=links(True))
