@@ -10,8 +10,8 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 
 TEAMS = [
-    ("blue", "Blue team", "Cyber Defense", "The defenders. They watch for threats, investigate incidents, and protect accounts, systems, and the cloud. SANS covers this under Cyber Defense, Digital Forensics & Incident Response, and Cloud Security.", ["blue", "dfir", "iam", "cloud"]),
-    ("red", "Red & purple team", "Offensive Operations", "Red teams test defenses the way an attacker would, with permission. Purple teams bring red and blue together so offense makes defense better. SANS covers both under Offensive Operations.", ["red", "appsec"]),
+    ("blue", "Blue team", "Cyber Defense", "The defenders. They watch for threats, investigate incidents, and protect accounts, systems, and the cloud.", ["blue", "dfir", "iam", "cloud"]),
+    ("red", "Red & purple team", "Offensive Operations", "Red teams test defenses the way an attacker would, with permission. Purple teams bring red and blue together so offense makes defense better.", ["red", "appsec"]),
     ("lead", "Leadership", "Cybersecurity Leadership", "The planners. They manage risk, keep the company compliant, design the big picture, and connect security to the business.", ["grc", "architecture"]),
     ("tech", "Broader tech", "Build, support, and connect", "Not security roles, but security teams work with them every day. Lots of people start here and move into security later.", ["software", "data", "network", "design", "support", "customer", "writing"]),
 ]
@@ -102,7 +102,7 @@ def explainer():
                       f'<button type="button" class="quiz-retry">Take it again</button></div></div>' for k, (n, t) in RESULT.items())
     return (f'<section class="world-shell team-explainer" aria-labelledby="teams-heading"><!-- built by build_careers.py -->'
             f'<div class="team-explainer-head"><p class="room-eyebrow">Teams 101</p><h2 id="teams-heading">Meet the teams</h2>'
-            f'<p>In cybersecurity you’ll hear about the red, blue, and purple teams. SANS, a leading cybersecurity training organization, uses these too, and groups the rest of the work into focus areas like Cybersecurity Leadership. '
+            f'<p>In cybersecurity you’ll hear about the red, blue, and purple teams. Here’s who does what, plus the leadership side and the broader tech roles security works with every day. '
             f'You don’t need to pick one forever. Lots of people move between teams over their career.</p></div>'
             f'<div class="team-cards">{"".join(cards)}</div>'
             f'<div class="team-quiz" data-team-quiz><h3>Which team are you?</h3><p class="quiz-sub">Three quick questions. Just for fun.</p>{qs}{results}</div></section>')
