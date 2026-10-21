@@ -10,11 +10,10 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 
 TEAMS = [
-    ("blue", "Blue team", "Defend and investigate", "The defenders. They watch for threats, respond to incidents, and protect accounts and systems.", ["blue", "dfir", "iam", "cloud"]),
-    ("red", "Red & purple team", "Test and strengthen", "Red teams test defenses the way an attacker would, with permission. Purple teams connect what attackers find to how defenders and builders fix it.", ["red", "appsec"]),
-    ("white", "White team", "Rules, risk, and design", "The planners. They set the rules, measure risk, and design how security fits together.", ["grc", "architecture"]),
-    ("yellow", "Yellow team", "Build and create", "The builders. They create the software, data systems, networks, and experiences everyone else protects.", ["software", "data", "network", "design"]),
-    ("people", "The team behind the teams", "Help and connect", "Every team needs people who support users, explain technology, and help it get adopted.", ["support", "customer", "writing"]),
+    ("blue", "Blue team", "Cyber Defense", "The defenders. They watch for threats, investigate incidents, and protect accounts, systems, and the cloud. SANS covers this under Cyber Defense, Digital Forensics & Incident Response, and Cloud Security.", ["blue", "dfir", "iam", "cloud"]),
+    ("red", "Red & purple team", "Offensive Operations", "Red teams test defenses the way an attacker would, with permission. Purple teams bring red and blue together so offense makes defense better. SANS covers both under Offensive Operations.", ["red", "appsec"]),
+    ("lead", "Leadership", "Cybersecurity Leadership", "The planners. They manage risk, keep the company compliant, design the big picture, and connect security to the business.", ["grc", "architecture"]),
+    ("tech", "Broader tech", "Build, support, and connect", "Not security roles, but security teams work with them every day. Lots of people start here and move into security later.", ["software", "data", "network", "design", "support", "customer", "writing"]),
 ]
 
 FIT = {
@@ -52,12 +51,10 @@ EXPLAIN = [
      ["Try to break in the way an attacker would", "Find weak spots before the bad guys do", "Write up what they found and how to fix it"], "red"),
     ("purple", "Purple team", "The coaches", "the coach who gets red and blue in the same room so both get better.",
      ["Run attacks and watch if defenders catch them", "Turn every miss into a new detection", "Share lessons across both teams"], "red"),
-    ("white", "White team", "The referees", "the referees and rule makers who keep everyone playing fair and safe.",
-     ["Write security policies and rules", "Measure risk and check controls work", "Design how all the pieces fit together"], "white"),
-    ("yellow", "Yellow team", "The builders", "the architects and construction crew who build what everyone else protects.",
-     ["Write code and build apps", "Set up networks, data, and systems", "Design what people click on and use"], "yellow"),
-    ("people", "The team behind the teams", "The connectors", "the friendly faces who help people actually use and understand technology.",
-     ["Fix tech problems for coworkers", "Help customers get value from a product", "Explain tricky things in plain words"], "people"),
+    ("lead", "Leadership", "The captains", "the captains who set the game plan and keep the company playing by the rules.",
+     ["Measure risk and decide what to fix first", "Check that security controls actually work", "Explain security to business leaders"], "lead"),
+    ("tech", "Broader tech", "The builders and helpers", "the people who build and run the tech everyone else protects.",
+     ["Write code, build networks, and work with data", "Help coworkers and customers with tech problems", "Explain tricky things in plain words"], "tech"),
 ]
 
 
@@ -66,28 +63,27 @@ QUIZ = [
     ("A mystery lands on your desk. You…", [
         ("Dig through the clues to find out what happened", "blue"),
         ("Try to recreate how they got in", "red"),
-        ("Write the plan so it never happens again", "white"),
-        ("Build a tool that fixes it for good", "yellow"),
-        ("Check that everyone affected is okay and in the loop", "people")]),
+        ("Write the plan so it never happens again", "lead"),
+        ("Build a tool that fixes it for good", "tech"),
+        ("Check that everyone affected is okay and in the loop", "tech")]),
     ("Your perfect Saturday project…", [
         ("A puzzle or true-crime deep dive", "blue"),
         ("Taking something apart to see how it works", "red"),
-        ("Organizing and planning everything out", "white"),
-        ("Making something from scratch", "yellow"),
-        ("Teaching a friend something new", "people")]),
+        ("Organizing and planning everything out", "lead"),
+        ("Making something from scratch", "tech"),
+        ("Teaching a friend something new", "tech")]),
     ("Your friends call you the one who…", [
         ("Notices when something is off", "blue"),
         ("Finds the loophole in every rule", "red"),
-        ("Always has a plan B", "white"),
-        ("Can build or fix anything", "yellow"),
-        ("Explains things so they finally make sense", "people")]),
+        ("Always has a plan B", "lead"),
+        ("Can build or fix anything", "tech"),
+        ("Explains things so they finally make sense", "tech")]),
 ]
 RESULT = {
     "blue": ("Blue team", "You’re a defender. You notice details and love solving the case."),
     "red": ("Red & purple team", "You’re a tester. You see how things break so they can be made stronger."),
-    "white": ("White team", "You’re a planner. You bring order, rules, and the big picture."),
-    "yellow": ("Yellow team", "You’re a builder. You love making things that work."),
-    "people": ("The team behind the teams", "You’re a connector. You make tech work for real people."),
+    "lead": ("Leadership", "You’re a planner. You bring order, rules, and the big picture."),
+    "tech": ("Broader tech", "You’re a builder and helper. You make tech work for real people."),
 }
 
 
@@ -101,12 +97,12 @@ def explainer():
     qs = "".join(f'<fieldset class="quiz-q" data-step="{i}"{"" if i == 0 else " hidden"}><legend><span class="quiz-n">{i + 1}/{len(QUIZ)}</span> {e(q)}</legend>'
                  + "".join(f'<button type="button" class="quiz-a" data-team="{t}">{e(a)}</button>' for a, t in opts) + '</fieldset>'
                  for i, (q, opts) in enumerate(QUIZ))
-    results = "".join(f'<div class="quiz-result team-{k}" data-result="{k}" hidden><p class="team-chip"><span class="team-dot" aria-hidden="true"></span>You’d fit on the {e(n)}</p>'
+    results = "".join(f'<div class="quiz-result team-{k}" data-result="{k}" hidden><p class="team-chip"><span class="team-dot" aria-hidden="true"></span>Your match: {e(n)}</p>'
                       f'<p>{e(t)} Every team needs you.</p><div class="quiz-actions"><a class="team-jump" href="#team-{k}">See your paths <span aria-hidden="true">↓</span></a>'
                       f'<button type="button" class="quiz-retry">Take it again</button></div></div>' for k, (n, t) in RESULT.items())
     return (f'<section class="world-shell team-explainer" aria-labelledby="teams-heading"><!-- built by build_careers.py -->'
-            f'<div class="team-explainer-head"><p class="room-eyebrow">Team colors 101</p><h2 id="teams-heading">Meet the teams</h2>'
-            f'<p>In cybersecurity, people talk about teams by color. It’s an easy way to see who does what. '
+            f'<div class="team-explainer-head"><p class="room-eyebrow">Teams 101</p><h2 id="teams-heading">Meet the teams</h2>'
+            f'<p>In cybersecurity you’ll hear about the red, blue, and purple teams. SANS, a leading cybersecurity training organization, uses these too, and groups the rest of the work into focus areas like Cybersecurity Leadership. '
             f'You don’t need to pick one forever. Lots of people move between teams over their career.</p></div>'
             f'<div class="team-cards">{"".join(cards)}</div>'
             f'<div class="team-quiz" data-team-quiz><h3>Which team are you?</h3><p class="quiz-sub">Three quick questions. Just for fun.</p>{qs}{results}</div></section>')

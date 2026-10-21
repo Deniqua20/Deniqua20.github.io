@@ -298,9 +298,8 @@
 .team-row { --team:#ff8e98; --team-soft:#ff8e9822; }
 .team-blue { --team:#5fa8ff; --team-soft:#5fa8ff22; }
 .team-red { --team:#ff4d62; --team-soft:#ff4d6222; }
-.team-white { --team:#e9e2e4; --team-soft:#e9e2e41a; }
-.team-yellow { --team:#f2c14e; --team-soft:#f2c14e22; }
-.team-people { --team:#ff8e98; --team-soft:#ff8e9822; }
+.team-lead { --team:#e9e2e4; --team-soft:#e9e2e41a; }
+.team-tech { --team:#ff8e98; --team-soft:#ff8e9822; }
 .team-head { display:grid; grid-template-columns:auto 1fr; align-items:baseline; gap:4px 16px; margin-bottom:12px; }
 .team-chip { grid-row:span 2; display:inline-flex; align-items:center; gap:8px; margin:0; padding:6px 12px; border:1px solid var(--team); border-radius:30px; background:var(--team-soft); color:var(--team); font:600 11px/1 ui-monospace,Menlo,monospace; letter-spacing:1.5px; text-transform:uppercase; white-space:nowrap; align-self:center; }
 .team-dot { width:8px; height:8px; border-radius:50%; background:var(--team); box-shadow:0 0 10px var(--team); }
