@@ -93,3 +93,8 @@
     draw();
   }
 })();
+/* Open a Holy Grail section when linked to it directly (e.g. resources.html#portfolio). */
+(() => {
+  const open = () => { const t = location.hash && document.querySelector(`details${location.hash}`); if (t) { t.open = true; t.scrollIntoView({ block: "start" }); } };
+  open(); addEventListener("hashchange", open);
+})();

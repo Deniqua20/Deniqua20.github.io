@@ -279,3 +279,4 @@
 .scenario-key th,.scenario-key td { padding:8px 10px; border-bottom:1px solid #e8c27a22; text-align:left; vertical-align:top; color:#efe2d6; }
 .scenario-key th { color:#e8c27a; font:600 11px ui-monospace,Menlo,monospace; letter-spacing:1px; text-transform:uppercase; }
 @media (max-width:760px) { .scenario-grid { grid-template-columns:1fr; } .lab-scenario { padding:20px 18px; } }
+.portfolio-nudge { margin:0 0 34px; }
