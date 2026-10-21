@@ -1,15 +1,25 @@
 "use strict";
-/* Paths in Tech: after a tile is chosen, bring the matching panel into view if it is off screen. */
-document.querySelectorAll(".path-tile").forEach(tile => tile.addEventListener("click", () => {
-  const panel = document.getElementById(tile.getAttribute("aria-controls"));
+/* Paths in Tech: after a path is chosen, bring the matching panel into view if it is off screen. */
+const smooth = () => matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+document.querySelectorAll(".path-card").forEach(card => card.addEventListener("click", () => {
+  const panel = document.getElementById(card.getAttribute("aria-controls"));
   if (!panel) return;
   const box = panel.getBoundingClientRect();
-  if (box.top < 80 || box.top > innerHeight * 0.6) {
-    panel.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
-  }
+  if (box.top < 80 || box.top > innerHeight * 0.6) panel.scrollIntoView({ behavior: smooth(), block: "start" });
 }));
 
-/* Which team are you? Tally answers, show the top team, highlight its row. */
+/* "See the paths" links open the folder they point to. */
+document.addEventListener("click", event => {
+  const link = event.target.closest('.team-jump[href^="#team-"]');
+  const folder = link && document.querySelector(link.getAttribute("href"));
+  if (!folder) return;
+  event.preventDefault();
+  folder.open = true;
+  folder.scrollIntoView({ behavior: smooth(), block: "start" });
+  folder.querySelector("summary")?.focus({ preventScroll: true });
+});
+
+/* Which team are you? Tally answers, show the top team, open its folder. */
 document.querySelectorAll("[data-team-quiz]").forEach(quiz => {
   const steps = [...quiz.querySelectorAll(".quiz-q")];
   let picks = [];
@@ -27,7 +37,7 @@ document.querySelectorAll("[data-team-quiz]").forEach(quiz => {
       const result = quiz.querySelector(`[data-result="${team}"]`);
       result.hidden = false;
       result.querySelector("a")?.focus();
-      document.querySelectorAll(".team-row").forEach(row => row.classList.toggle("is-match", row.id === `team-${team}`));
+      document.querySelectorAll(".path-folder").forEach(f => f.classList.toggle("is-match", f.id === `team-${team}`));
       document.dispatchEvent(new CustomEvent("dee:achievement", { detail: "teamplayer" }));
     }
     if (event.target.closest(".quiz-retry")) {

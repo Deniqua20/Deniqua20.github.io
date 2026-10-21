@@ -1,20 +1,14 @@
-"""Rebuild the Paths in Tech navigation as team rows with line icons.
+"""Rebuild the Paths in Tech teams section and path folders.
 
-Keeps every .career-panel article (content and ids) exactly as it is and replaces only the
-area index with rows grouped by security team color. Run, then python3 scripts/build_shared.py.
+Keeps every .career-panel article (content and ids) exactly as it is. Writes "Meet the Teams"
+(red, blue, purple photo cards plus a short quiz) and replaces the area index with folders of
+path cards. Run, then python3 scripts/build_shared.py.
 """
 from html import escape as e
 from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-
-TEAMS = [
-    ("blue", "Blue team", "Cyber Defense", "Blue teams defend the company. They watch for threats, investigate incidents, and protect accounts, systems, and the cloud.", ["blue", "dfir", "iam", "cloud"]),
-    ("red", "Red & purple team", "Offensive Security", "Red teams test defenses the way an attacker would, with permission. Purple teams bring red and blue together so offense makes defense better.", ["red", "appsec"]),
-    ("lead", "GRC & security architecture", "Governance, risk, compliance & architecture", "GRC teams manage risk, make sure the company follows laws and standards, and security architects design how it all fits together. You don’t need to be a manager to work here.", ["grc", "architecture"]),
-    ("tech", "Other paths", "Other paths that aren’t cyber", "Tech jobs outside of cybersecurity. Security teams work with them every day, and lots of people start here and move into cyber later.", ["software", "data", "network", "design", "support", "customer", "writing"]),
-]
 
 FIT = {
     "blue": "Love solving puzzles", "dfir": "Love a good mystery", "iam": "Like order and clear rules",
@@ -43,22 +37,25 @@ ICON = {
     "writing": '<path d="M4 20l1-4L16 5l3 3L8 19z"/><path d="M14 7l3 3"/>',
 }
 
-# "Meet the teams" explainer: (key, color name, nickname, think-of-them-as, typical day, jump target row).
-EXPLAIN = [
-    ("blue", "Blue team", "Cyber Defense", "the security guards and detectives of a company.",
-     ["Watch alerts for anything suspicious", "Investigate odd logins and strange activity", "Stop an attack and clean up after it"], "blue"),
-    ("red", "Red team", "Offensive Security", "burglars you hire, with permission, to test your locks before a real one shows up.",
-     ["Try to break in the way an attacker would", "Find weak spots before the bad guys do", "Write up what they found and how to fix it"], "red"),
-    ("purple", "Purple team", "Purple teaming", "the coach who gets red and blue in the same room so both get better.",
-     ["Run attacks and watch if defenders catch them", "Turn every miss into a new detection", "Share lessons across both teams"], "red"),
-    ("lead", "GRC & security architecture", "Governance, risk, compliance & architecture", "the planners and referees who make sure everything follows the rules and fits together.",
-     ["Measure risk and decide what to fix first", "Check that security controls actually work", "Turn tech risks into plain-language plans"], "lead"),
-    ("tech", "Other paths", "Other paths that aren’t cyber", "the people who build and run the tech everyone else protects.",
-     ["Write code, build networks, and work with data", "Help coworkers and customers with tech problems", "Explain tricky things in plain words"], "tech"),
+# Path folders: (key, folder title, accent, description, path ids).
+GROUPS = [
+    ("blue", "Blue Team Paths", "#6fb0ff", "Defend, investigate, and protect accounts, systems, and the cloud.", ["blue", "dfir", "iam", "cloud"]),
+    ("red", "Red & Purple Team Paths", "#ff4d62", "Test defenses the way an attacker would, with permission, and help the defense get better.", ["red", "appsec"]),
+    ("lead", "More Cybersecurity Paths", "#ff8e98", "Cyber jobs outside the color teams: managing risk, following the rules, and designing how security fits together.", ["grc", "architecture"]),
+    ("tech", "Other Paths That Aren’t Cyber", "#e8c27a", "Tech jobs outside of cybersecurity. Security teams work with them every day, and lots of people start here and move into cyber later.", ["software", "data", "network", "design", "support", "customer", "writing"]),
 ]
 
+# Meet the Teams cards: (key, name, accent, photo, photo position, explanation, typical day, folder).
+TEAM_CARDS = [
+    ("red", "Red Team", "#ff4d62", "cyber-studio-hero.webp", "60% 30%", "Friendly hackers you hire, with permission, to test your locks before a real attacker shows up.",
+     ["Try to break in the way an attacker would", "Find weak spots first", "Write up how to fix them"], "red"),
+    ("blue", "Blue Team", "#6fb0ff", "hero-butterfly-laptop.webp", "50% 40%", "The security guards and detectives. They watch, investigate, and stop attacks.",
+     ["Watch alerts for anything suspicious", "Investigate odd activity", "Stop an attack and clean up"], "blue"),
+    ("purple", "Purple Team", "#c28cff", "cyber-studio-features.webp", "50% 50%", "Red and blue working together, so what attackers find makes the defense better.",
+     ["Run attacks and see if they’re caught", "Turn every miss into a new alert", "Share lessons across both teams"], "red"),
+]
 
-# Quiz: each answer points at a team row.
+# Quiz: each answer points at a folder.
 QUIZ = [
     ("A mystery lands on your desk. You…", [
         ("Dig through the clues to find out what happened", "blue"),
@@ -80,64 +77,68 @@ QUIZ = [
         ("Explains things so they finally make sense", "tech")]),
 ]
 RESULT = {
-    "blue": ("Blue team", "You’re a defender. You notice details and love solving the case."),
-    "red": ("Red & purple team", "You’re a tester. You see how things break so they can be made stronger."),
-    "lead": ("GRC & security architecture", "You’re a planner. You bring order, rules, and the big picture."),
-    "tech": ("Other paths that aren’t cyber", "You’re a builder and helper. You make tech work for real people."),
+    "blue": ("Blue Team", "You’re a defender. You notice details and love solving the case."),
+    "red": ("Red & Purple Team", "You’re a tester. You see how things break so they can be made stronger."),
+    "lead": ("More Cybersecurity Paths", "You’re a planner. You bring order, rules, and the big picture."),
+    "tech": ("Paths That Aren’t Cyber", "You’re a builder and helper. You make tech work for real people."),
 }
 
 
 def explainer():
-    cards = []
-    for key, name, nick, think, day, row in EXPLAIN:
-        cards.append(f'<article class="team-card team-{key}"><p class="team-chip"><span class="team-dot" aria-hidden="true"></span>{e(name)}</p>'
-                     f'<h3 class="team-nick">{e(nick)}</h3><p class="team-think"><span>Think of them as</span> {e(think)}</p>'
-                     f'<ul class="team-day">{"".join(f"<li>{e(d)}</li>" for d in day)}</ul>'
-                     f'<a class="team-jump" href="#team-{row}">See their paths <span aria-hidden="true">↓</span></a></article>')
+    cards = "".join(
+        f'<article class="team-poster" style="--c:{c}"><img src="assets/images/{img}" alt="" loading="lazy" style="object-position:{pos}">'
+        f'<p class="team-poster-n">{i + 1:02d}</p><h3>{e(name)}</h3><p>{e(text)}</p>'
+        f'<ul>{"".join(f"<li>{e(d)}</li>" for d in day)}</ul><a class="team-jump" href="#team-{folder}">See the paths <span aria-hidden="true">↓</span></a></article>'
+        for i, (key, name, c, img, pos, text, day, folder) in enumerate(TEAM_CARDS))
     qs = "".join(f'<fieldset class="quiz-q" data-step="{i}"{"" if i == 0 else " hidden"}><legend><span class="quiz-n">{i + 1}/{len(QUIZ)}</span> {e(q)}</legend>'
                  + "".join(f'<button type="button" class="quiz-a" data-team="{t}">{e(a)}</button>' for a, t in opts) + '</fieldset>'
                  for i, (q, opts) in enumerate(QUIZ))
-    results = "".join(f'<div class="quiz-result team-{k}" data-result="{k}" hidden><p class="team-chip"><span class="team-dot" aria-hidden="true"></span>Your match: {e(n)}</p>'
+    results = "".join(f'<div class="quiz-result" data-result="{k}" hidden><p class="quiz-match">Your match: <strong>{e(n)}</strong></p>'
                       f'<p>{e(t)} Every team needs you.</p><div class="quiz-actions"><a class="team-jump" href="#team-{k}">See your paths <span aria-hidden="true">↓</span></a>'
                       f'<button type="button" class="quiz-retry">Take it again</button></div></div>' for k, (n, t) in RESULT.items())
     return (f'<section class="world-shell team-explainer" aria-labelledby="teams-heading"><!-- built by build_careers.py -->'
-            f'<div class="team-explainer-head"><p class="room-eyebrow">Teams 101</p><h2 id="teams-heading">Meet the teams</h2>'
-            f'<p>In cybersecurity you’ll hear about the red, blue, and purple teams. Here’s who does what, plus other cyber paths and tech paths that aren’t cyber. '
-            f'You don’t need to pick one forever. Lots of people move between teams over their career.</p></div>'
-            f'<div class="team-cards">{"".join(cards)}</div>'
-            f'<div class="team-quiz" data-team-quiz><h3>Which team are you?</h3><p class="quiz-sub">Three quick questions. Just for fun.</p>{qs}{results}</div></section>')
+            f'<div class="team-explainer-head"><p class="room-eyebrow">Teams 101</p><h2 id="teams-heading">Meet the Teams</h2>'
+            f'<p>In cybersecurity you’ll hear about the red, blue, and purple teams. Here’s who does what, then explore every path below.</p></div>'
+            f'<div class="team-posters">{cards}</div>'
+            f'<details class="team-quiz" data-team-quiz><summary><span><strong>Which team are you?</strong><small>Three quick questions. Just for fun.</small></span>'
+            f'<span class="quiz-start">Take the quiz <span aria-hidden="true">▶</span></span></summary>{qs}{results}</details></section>')
 
 
 p = ROOT / "careers.html"
 s = p.read_text()
 titles = dict(re.findall(r'<article class="career-panel" id="career-([a-z]+)".*?<h2[^>]*>([^<]+)</h2>', s))
-assert len(titles) == 15, titles
+descs = dict(re.findall(r'<article class="career-panel" id="career-([a-z]+)".*?class="field-guide-description">([^<]+)</p>', s))
+assert len(titles) == len(descs) == 15, titles
 
 
-def tile(cid, first):
-    return (f'<button type="button" class="path-tile" data-career-panel="career-{cid}" aria-controls="career-{cid}" '
+def card(cid, first):
+    return (f'<button type="button" class="path-card" data-career-panel="career-{cid}" aria-controls="career-{cid}" '
             f'aria-pressed="{str(first).lower()}" aria-label="{e(titles[cid])}">'
             f'<svg class="path-icon" viewBox="0 0 24 24" aria-hidden="true">{ICON[cid]}</svg>'
             f'<span class="path-fit" aria-hidden="true">{e(FIT[cid])}</span>'
-            f'<span class="path-name" aria-hidden="true">{e(titles[cid])}</span></button>')
+            f'<span class="path-name" aria-hidden="true">{e(titles[cid])}</span>'
+            f'<span class="path-desc" aria-hidden="true">{descs[cid]}</span>'
+            f'<span class="path-go" aria-hidden="true">Explore →</span></button>')
 
 
-rows, first = [], True
-for key, name, sub, blurb, ids in TEAMS:
-    tiles = []
+folders, first = [], True
+for i, (key, name, c, desc, ids) in enumerate(GROUPS):
+    cards = []
     for cid in ids:
-        tiles.append(tile(cid, first))
+        cards.append(card(cid, first))
         first = False
-    rows.append(f'<div class="team-row team-{key}" id="team-{key}"><div class="team-head"><p class="team-chip"><span class="team-dot" aria-hidden="true"></span>{e(name)}</p>'
-                f'<h2 class="team-title">{e(sub)}</h2><p class="team-blurb">{e(blurb)}</p></div>'
-                f'<div class="team-tiles" role="group" aria-label="{e(name)} paths">{"".join(tiles)}</div></div>')
-assert sum(len(t[4]) for t in TEAMS) == 15
+    folders.append(f'<details class="path-folder" id="team-{key}" style="--c:{c}"{" open" if i == 0 else ""}>'
+                   f'<summary><span class="path-folder-dot" aria-hidden="true"></span><h3>{e(name)}</h3>'
+                   f'<span class="path-folder-count">{len(ids)} paths</span><span class="path-folder-x" aria-hidden="true"></span></summary>'
+                   f'<p class="path-folder-desc">{e(desc)}</p><div class="path-cards" role="group" aria-label="{e(name)}">{"".join(cards)}</div></details>')
+assert sum(len(g[4]) for g in GROUPS) == 15
 
-index = f'<nav class="field-guide-index team-rows" aria-label="Career areas by team">{"".join(rows)}</nav>'
+index = (f'<nav class="field-guide-index path-folders" aria-labelledby="paths-heading">'
+         f'<h2 class="paths-heading" id="paths-heading">Explore the Paths</h2>{"".join(folders)}</nav>')
 s = re.sub(r'<nav class="field-guide-index[^"]*"[^>]*>.*?</nav>', lambda m: index, s, count=1, flags=re.S)
 s = re.sub(r'<section class="world-shell team-explainer".*?</section>', "", s, flags=re.S)
 s = s.replace('<section class="world-shell field-guide"', explainer() + '<section class="world-shell field-guide"', 1)
 if "assets/js/careers.js" not in s:
     s = s.replace("</head>", '<script src="assets/js/careers.js?v=1" defer></script>\n</head>', 1)
 p.write_text(s)
-print("rebuilt careers.html team rows")
+print("rebuilt careers.html teams and path folders")
