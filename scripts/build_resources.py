@@ -73,11 +73,11 @@ CERT_PREP = [
 
 PORTFOLIO = [
     ("Quality over quantity", "You don’t need a thousand labs. Two to four labs you can explain front to back will do more for you than a long list you can’t talk about."),
+    ("Align it with what you’re applying to", "Make sure your labs match the roles you want. Read the job description, then build or highlight the labs that fit: a SOC role, show detection and investigation. An IAM role, show identity lifecycle and SSO. Cloud security, show cloud monitoring. GRC, show a risk assessment. If your labs don’t line up with the jobs you’re applying to, that’s your next lab."),
     ("Know it front to back", "Be ready to explain what you built, why you built it, the choices you made, what went wrong, and what you’d do differently. The first time an interviewer asked me to walk through my lab, I wasn’t ready. After that, I made sure I knew every step."),
     ("Practice “walk me through it” out loud", "Have a two-minute version of each lab: the problem, what you built, what you found, and what you learned. Say it out loud until it feels natural."),
     ("Document as you go", "Take screenshots and notes while you work. It’s much harder to recreate them later, and they become your evidence."),
     ("Write it up so others can follow", "For each lab, write the problem, the tools, the steps, the results, and your takeaways. Put it on GitHub or your own site so you can share one link."),
-    ("Connect it to the job", "Read the job description and pick the lab that matches it. A SOC role? Talk about detection. An IAM role? Talk about identity."),
     ("Keep it current", "Add new labs as you grow and update the old ones. Your portfolio grows with you."),
 ]
 
