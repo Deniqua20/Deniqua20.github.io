@@ -1,13 +1,6 @@
 "use strict";
-/* Contact page: reason chips fill the subject; the suggestion box sends via a form service or an email draft. */
+/* Contact page: the suggestion box sends via a form service or an email draft. */
 (() => {
-  const subject = document.getElementById("contact-subject");
-  document.querySelectorAll("[data-subject]").forEach(chip => chip.addEventListener("click", () => {
-    document.querySelectorAll("[data-subject]").forEach(c => c.setAttribute("aria-pressed", String(c === chip)));
-    subject.value = chip.dataset.subject;
-    document.getElementById("contact-form").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
-    document.getElementById("contact-message").focus({ preventScroll: true });
-  }));
 
   const form = document.getElementById("suggest-form");
   if (!form) return;
