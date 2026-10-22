@@ -8,7 +8,7 @@ ROOMS=hashlib.sha256((ROOT/'assets/css/rooms.css').read_bytes()+(ROOT/'assets/js
 GAME=hashlib.sha256((ROOT/'assets/css/game.css').read_bytes()+(ROOT/'assets/js/game.js').read_bytes()).hexdigest()[:10]
 EYES=hashlib.sha256((ROOT/'assets/css/hq-eyes.css').read_bytes()+(ROOT/'assets/js/hq-eyes.js').read_bytes()).hexdigest()[:10]
 # GoatCounter site code (the part before .goatcounter.com). Empty means no visitor counter.
-GOATCOUNTER=''
+GOATCOUNTER='deescybercorner'
 NAV=[('index.html','Home'),('about.html','About Me'),('labs.html','Projects'),('resources.html','Resources'),('blog.html','BLOG'),('contact.html','Contact')]
 for path in [*ROOT.glob('*.html'),*ROOT.joinpath('projects').glob('*.html'),*ROOT.joinpath('stories').glob('*.html')]:
     text=path.read_text()
