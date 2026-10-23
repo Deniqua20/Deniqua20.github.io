@@ -110,11 +110,11 @@
     const endpoint=form.dataset.endpoint;
     if(endpoint){
       submit.disabled=true;status.textContent="Sending your message…";
-      try{const response=await fetch(endpoint,{method:"POST",body:data,headers:{Accept:"application/json"}});if(!response.ok)throw Error("delivery");status.textContent="Your message has been submitted. Thank you for reaching out.";form.reset();}catch{status.textContent="Your message could not be sent. Please try again or use Email Dee.";}finally{submit.disabled=false;}return;
+      try{const response=await fetch(endpoint,{method:"POST",body:data,headers:{Accept:"application/json"}});if(!response.ok)throw Error("delivery");status.textContent="Your message has been submitted. Thank you for reaching out.";form.reset();}catch{status.textContent="Your message could not be sent. Please try again or email deescybercorner@gmail.com.";}finally{submit.disabled=false;}return;
     }
     const subject=String(data.get("subject")).replace(/[\r\n]/g," ");
     const body=`Name: ${data.get("name")}\nReply email: ${data.get("email")}\n\n${data.get("message")}`;
-    status.textContent="Your email app should open with your draft. Review the message and press Send there. If it does not open, use Email Dee or copy your message.";
+    status.textContent="Your email app should open with your draft. Review the message and press Send there. If it does not open, email deescybercorner@gmail.com.";
     const draft=document.createElement("a");draft.href=`mailto:deescybercorner@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;draft.hidden=true;document.body.append(draft);draft.click();draft.remove();
   });
 })();
