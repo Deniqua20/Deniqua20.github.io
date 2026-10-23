@@ -115,7 +115,7 @@
     const subject=String(data.get("subject")).replace(/[\r\n]/g," ");
     const body=`Name: ${data.get("name")}\nReply email: ${data.get("email")}\n\n${data.get("message")}`;
     status.textContent="Your email app should open with your draft. Review the message and press Send there. If it does not open, use Email Dee or copy your message.";
-    const draft=document.createElement("a");draft.href=`mailto:deniquamarie@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;draft.hidden=true;document.body.append(draft);draft.click();draft.remove();
+    const draft=document.createElement("a");draft.href=`mailto:deescybercorner@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;draft.hidden=true;document.body.append(draft);draft.click();draft.remove();
   });
 })();
 

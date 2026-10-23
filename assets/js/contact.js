@@ -27,7 +27,7 @@
     const body = `Suggestion type: ${data.get("type")}\nFrom: ${who}\n\n${data.get("suggestion")}`;
     status.textContent = "Your email app should open with your suggestion. Review it and press Send there.";
     const draft = document.createElement("a");
-    draft.href = `mailto:deniquamarie@gmail.com?subject=${encodeURIComponent("Suggestion box: " + data.get("type"))}&body=${encodeURIComponent(body)}`;
+    draft.href = `mailto:deescybercorner@gmail.com?subject=${encodeURIComponent("Suggestion box: " + data.get("type"))}&body=${encodeURIComponent(body)}`;
     draft.hidden = true; document.body.append(draft); draft.click(); draft.remove();
   });
 })();
