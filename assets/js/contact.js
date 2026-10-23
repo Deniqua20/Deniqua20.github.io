@@ -15,8 +15,12 @@
     if (form.dataset.endpoint) {
       submit.disabled = true; status.textContent = "Sending your suggestion…";
       try {
-        const response = await fetch(form.dataset.endpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
-        if (!response.ok) throw Error("delivery");
+        const fields = Object.fromEntries(data);
+        fields._subject = "Suggestion box: " + data.get("type");
+        fields._template = "table";
+        const response = await fetch(form.dataset.endpoint, { method: "POST", body: JSON.stringify(fields), headers: { "Content-Type": "application/json", Accept: "application/json" } });
+        const reply = await response.json().catch(() => ({}));
+        if (!response.ok || String(reply.success) === "false") throw Error("delivery");
         status.textContent = "Thank you! Your suggestion was sent.";
         form.reset();
       } catch { status.textContent = "Your suggestion could not be sent. Please try again in a moment."; }

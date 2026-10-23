@@ -110,7 +110,7 @@
     const endpoint=form.dataset.endpoint;
     if(endpoint){
       submit.disabled=true;status.textContent="Sending your message…";
-      try{const response=await fetch(endpoint,{method:"POST",body:data,headers:{Accept:"application/json"}});if(!response.ok)throw Error("delivery");status.textContent="Your message has been submitted. Thank you for reaching out.";form.reset();}catch{status.textContent="Your message could not be sent. Please try again or email deescybercorner@gmail.com.";}finally{submit.disabled=false;}return;
+      try{const fields=Object.fromEntries(data);fields._subject="Website message: "+String(fields.subject||"").replace(/[\r\n]/g," ");fields._template="table";const response=await fetch(endpoint,{method:"POST",body:JSON.stringify(fields),headers:{"Content-Type":"application/json",Accept:"application/json"}});const reply=await response.json().catch(()=>({}));if(!response.ok||String(reply.success)==="false")throw Error("delivery");status.textContent="Your message has been submitted. Thank you for reaching out.";form.reset();}catch{status.textContent="Your message could not be sent. Please try again or email deescybercorner@gmail.com.";}finally{submit.disabled=false;}return;
     }
     const subject=String(data.get("subject")).replace(/[\r\n]/g," ");
     const body=`Name: ${data.get("name")}\nReply email: ${data.get("email")}\n\n${data.get("message")}`;
