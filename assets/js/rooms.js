@@ -145,7 +145,7 @@
   // Keep exploring: homepage destination tiles for the other rooms.
   const rooms = [
     ["labs.html", "studio-projects", "Projects", "What I’m building, testing, and discovering.", "Explore my projects"],
-    ["resources.html", "studio-resources", "Resources", "Useful tools and resources for the journey.", "Explore resources"],
+    ["resources.html", "studio-resources", "Resources", "My Holy Grail, study tips, and resources.", "See my Holy Grail"],
     ["careers.html", "studio-careers", "Paths in Tech", "Discover the work. Explore your possibilities.", "Find your direction"],
     ["blog.html", "studio-stories", "Dee’s Corner", "Real experiences, personal growth, and life in tech.", "Read my stories"]
   ];

@@ -9,6 +9,7 @@ GAME=hashlib.sha256((ROOT/'assets/css/game.css').read_bytes()+(ROOT/'assets/js/g
 EYES=hashlib.sha256((ROOT/'assets/css/hq-eyes.css').read_bytes()+(ROOT/'assets/js/hq-eyes.js').read_bytes()).hexdigest()[:10]
 # GoatCounter site code (the part before .goatcounter.com). Empty means no visitor counter.
 GOATCOUNTER='deescybercorner'
+TRACK=hashlib.sha256((ROOT/'assets/js/track.js').read_bytes()).hexdigest()[:10]
 NAV=[('index.html','Home'),('about.html','About Me'),('labs.html','Projects'),('resources.html','Resources'),('blog.html','BLOG'),('contact.html','Contact')]
 for path in [*ROOT.glob('*.html'),*ROOT.joinpath('projects').glob('*.html'),*ROOT.joinpath('stories').glob('*.html')]:
     text=path.read_text()
@@ -26,6 +27,8 @@ for path in [*ROOT.glob('*.html'),*ROOT.joinpath('projects').glob('*.html'),*ROO
     if 'assets/js/world.js' not in text:text=text.replace('</head>',f'<script src="{prefix}assets/js/world.js?v=world-1" defer></script>\n</head>')
     if 'assets/css/game.css' not in text:text=text.replace('</head>',f'<link rel="stylesheet" href="{prefix}assets/css/game.css?v=game-1" />\n</head>')
     text=re.sub(r'<script data-goatcounter=[^>]*></script>\n?','',text)
+    text=re.sub(r'<script src="[./]*assets/js/track\.js[^"]*" defer></script>\n?','',text)
+    if GOATCOUNTER:text=text.replace('</head>',f'<script src="{prefix}assets/js/track.js?v={TRACK}" defer></script>\n</head>',1)
     if GOATCOUNTER:text=text.replace('</head>',f'<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>\n</head>',1)
     if 'assets/js/game.js' not in text:text=text.replace('</head>',f'<script src="{prefix}assets/js/game.js?v=game-1" defer></script>\n</head>')
     text=re.sub(r'game\.css\?v=[^"\s]+',f'game.css?v={GAME}',text)
