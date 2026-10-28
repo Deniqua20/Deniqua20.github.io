@@ -6,7 +6,7 @@ for(const viewport of [{width:1440,height:900},{width:390,height:844}]){
  await page.locator('.studio-explore').click();await page.waitForFunction(()=>document.querySelector('.cinema-door')?.dataset.phase==='camera');assert(await page.locator('.hq-scene').evaluate(e=>getComputedStyle(e).transform!=='none'));
  await page.waitForFunction(()=>document.querySelector('.cinema-door')?.dataset.phase==='doorway');assert(await page.locator('.cinema-panel-left').evaluate(e=>getComputedStyle(e).transform!=='none'));
  await page.waitForFunction(()=>document.querySelector('.cinema-door')?.dataset.phase==='access');assert.equal(await page.locator('.cinema-title').innerText(),'NEW LEVEL UNLOCKED');await page.screenshot({path:`/tmp/dee-cinema-${viewport.width}.png`});
- await page.waitForFunction(()=>document.querySelector('.cinema-door')?.dataset.phase==='level');await page.waitForURL('**/about.html');assert.match(await page.locator('main').innerText(),/Deniqua/);
+ await page.waitForFunction(()=>document.querySelector('.cinema-door')?.dataset.phase==='level');await page.waitForURL('**/about.html');assert.match(await page.locator('main').innerText(),/Hey, I’m Dee/);
  await page.goBack();assert.equal(await page.locator('.cinema-door').count(),0);assert.equal(await page.locator('main').evaluate(e=>e.inert),false);
  await page.locator('.studio-explore').click();await page.keyboard.press('Escape');assert.equal(await page.locator('.cinema-door').count(),0);assert.equal(await page.locator('.studio-explore').evaluate(e=>e===document.activeElement),true);
  await page.emulateMedia({reducedMotion:'reduce'});await page.locator('.studio-explore').click();await page.waitForURL('**/about.html');assert.deepEqual(errors,[]);await page.close();
