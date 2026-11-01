@@ -81,6 +81,28 @@ PORTFOLIO = [
     ("Keep it current", "Add new labs as you grow and update the old ones. Your portfolio grows with you."),
 ]
 
+# Resume process, in Dee's words.
+RESUME = [
+    ("Start with a base resume", "Put all your experience on it. If you don’t have quote-unquote hands-on, production experience in the field, add labs. I had three labs max, and everyone kept asking about my honeypot lab, so I learned it front to back. The first time I interviewed, I didn’t."),
+    ("Grab the job description", "Make sure the labs on your resume line up with that job."),
+    ("Put both into AI with your prompt", "I use Claude (I used to use ChatGPT). Ask it to use the keywords from the job description and align your resume to the role. It took me a few tries to get it doing exactly what I wanted."),
+    ("Review everything", "AI will embellish. Tell it to align and reword, but not to embellish. If it does, have it fix it."),
+    ("If you can’t speak to it, don’t put it on there", "Everything on your resume is up for grabs in the interview. If there’s something you can’t talk about, go do the lab and learn it, or take it off."),
+]
+
+RESUME_PROMPT = """Here is a job description and my base resume. Align my resume to this job:
+- Use relevant keywords from the job description.
+- Reword my bullet points to highlight the security side of my experience and labs.
+- Keep my real jobs, dates, tools, and results. Do not add, invent, or exaggerate anything.
+- Keep it ATS-friendly: simple formatting and standard section headings, no tables or graphics.
+- If the job asks for something my resume doesn’t support, list it separately as a gap instead of adding it.
+
+Job description:
+[paste it here]
+
+My resume:
+[paste it here, with your phone number, address, and email removed]"""
+
 COLLEGE = [
     "Finding study methods that fit how you learn.",
     "Breaking assignments and difficult topics into smaller pieces.",
@@ -139,6 +161,7 @@ def grail():
     prep = "".join(f'<li><strong>{e(t)}</strong><span>{e(d)}</span></li>' for t, d in CERT_PREP)
     tips = "".join(f"<li>{e(x)}</li>" for x in COLLEGE)
     folio = "".join(f'<li><strong>{e(t)}</strong><span>{e(d)}</span></li>' for t, d in PORTFOLIO)
+    resume = "".join(f'<li><strong>{e(t)}</strong><span>{e(d)}</span></li>' for t, d in RESUME)
     return _bold_adhd(f'''<section class="world-shell grail-box" id="holy-grail" aria-labelledby="grail-title">
 <div class="grail-box-head"><p class="grail-kicker">What actually worked for me</p><h2 id="grail-title">Dee’s <em>Holy Grail</em></h2>
 </div>
@@ -159,7 +182,14 @@ def grail():
 <div class="grail-part-body"><p class="grail-intro">My Azure honeypot lab is the one hiring managers kept asking about. What made the difference wasn’t how many labs I had. It was being able to explain that one, step by step.</p>
 <ol class="grail-checklist grail-steps">{folio}</ol>
 <p class="grail-yougotthis">Depth beats a long list.</p></div></details>
-<details class="grail-part"><summary><span class="grail-part-n">04</span><span>College survival tips <small>Lessons from finishing college with ADHD</small></span></summary>
+<details class="grail-part" id="resume"><summary><span class="grail-part-n">04</span><span>My resume process <small>The steps behind the resume that landed my job</small></span></summary>
+<div class="grail-part-body"><p class="grail-intro">I’ve been getting a lot of questions about the resume that landed me my cybersecurity job, so here’s what I did.</p>
+<aside class="grail-callout grail-salt"><p class="grail-kicker">Take this with a grain of salt</p><p>I already had tech experience, so this is what worked for me. Every job and background is different. Use what helps and leave what doesn’t.</p></aside>
+<ol class="grail-checklist grail-steps">{resume}</ol>
+<div class="resume-prompt"><div class="resume-prompt-head"><p class="grail-kicker">The prompt I use</p><button type="button" class="resume-copy" data-copy="resume-prompt-text">Copy prompt</button></div>
+<pre id="resume-prompt-text">{e(RESUME_PROMPT)}</pre><p class="resume-note">Before pasting your resume into any AI tool, remove your phone number, address, and email.</p></div>
+<p class="grail-yougotthis">Labs, an ATS-friendly resume, and being able to speak to every line made the difference for me.</p></div></details>
+<details class="grail-part"><summary><span class="grail-part-n">05</span><span>College survival tips <small>Lessons from finishing college with ADHD</small></span></summary>
 <div class="grail-part-body"><p class="grail-intro">Lessons from completing college while managing ADHD and other responsibilities.</p><ul class="grail-tips">{tips}</ul></div></details>
 </section>''')
 
@@ -177,7 +207,7 @@ def write(name, main, title, desc, body_class):
     head = re.sub(r'<meta property="og:[^>]*>\n|<meta name="twitter:[^>]*>\n', "", head)
     head = re.sub(r'<body class="[^"]*"', f'<body class="{body_class}"', head, count=1)
     head = re.sub(r'\n?<link rel="stylesheet" href="assets/css/resources\.css[^>]*>|\n?<script src="assets/js/resources\.js[^>]*></script>', "", head)
-    head = head.replace("</head>", '<link rel="stylesheet" href="assets/css/resources.css?v=9" />\n<script src="assets/js/resources.js?v=10" defer></script>\n</head>', 1)
+    head = head.replace("</head>", '<link rel="stylesheet" href="assets/css/resources.css?v=10" />\n<script src="assets/js/resources.js?v=11" defer></script>\n</head>', 1)
     (ROOT / name).write_text(head + main + tail)
 
 

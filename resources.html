@@ -17,16 +17,16 @@
 <script src="assets/js/rooms.js?v=ca3bdca1a0" defer></script>
 <link rel="stylesheet" href="assets/css/game.css?v=bd2aae23c3" />
 <script src="assets/js/game.js?v=bd2aae23c3" defer></script>
-<link rel="stylesheet" href="assets/css/resources.css?v=9" />
-<script src="assets/js/resources.js?v=10" defer></script>
+<link rel="stylesheet" href="assets/css/resources.css?v=10" />
+<script src="assets/js/resources.js?v=11" defer></script>
+<script src="assets/js/track.js?v=2450d19a93" defer></script>
+<script data-goatcounter="https://deescybercorner.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <meta property="og:title" content="Resources | Dee’s Cyber Corner" />
 <meta property="og:description" content="Cybersecurity resources Dee has used and recommends: funding, study tools, hands-on practice, and communities." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://deescybercorner.com/resources.html" />
 <meta property="og:image" content="https://deescybercorner.com/assets/images/share-card.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
-<script src="assets/js/track.js?v=2450d19a93" defer></script>
-<script data-goatcounter="https://deescybercorner.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
   <body class="interior room-resources cyber-world room-page">
     <a class="skip" href="#main">Skip to content</a>
@@ -62,7 +62,25 @@
 <div class="grail-part-body"><p class="grail-intro">My Azure honeypot lab is the one hiring managers kept asking about. What made the difference wasn’t how many labs I had. It was being able to explain that one, step by step.</p>
 <ol class="grail-checklist grail-steps"><li><strong>Quality over quantity</strong><span>You don’t need a thousand labs. Two to four labs you can explain front to back will do more for you than a long list you can’t talk about.</span></li><li><strong>Align it with what you’re applying to</strong><span>Make sure your labs match the roles you want. Read the job description, then build or highlight the labs that fit: a SOC role, show detection and investigation. An IAM role, show identity lifecycle and SSO. Cloud security, show cloud monitoring. GRC, show a risk assessment. If your labs don’t line up with the jobs you’re applying to, that’s your next lab.</span></li><li><strong>Know it front to back</strong><span>Be ready to explain what you built, why you built it, the choices you made, what went wrong, and what you’d do differently. The first time an interviewer asked me to walk through my lab, I wasn’t ready. After that, I made sure I knew every step.</span></li><li><strong>Practice “walk me through it” out loud</strong><span>Have a two-minute version of each lab: the problem, what you built, what you found, and what you learned. Say it out loud until it feels natural.</span></li><li><strong>Document as you go</strong><span>Take screenshots and notes while you work. It’s much harder to recreate them later, and they become your evidence.</span></li><li><strong>Write it up so others can follow</strong><span>For each lab, write the problem, the tools, the steps, the results, and your takeaways. Put it on GitHub or your own site so you can share one link.</span></li><li><strong>Keep it current</strong><span>Add new labs as you grow and update the old ones. Your portfolio grows with you.</span></li></ol>
 <p class="grail-yougotthis">Depth beats a long list.</p></div></details>
-<details class="grail-part"><summary><span class="grail-part-n">04</span><span>College survival tips <small>Lessons from finishing college with <strong class="adhd">ADHD</strong></small></span></summary>
+<details class="grail-part" id="resume"><summary><span class="grail-part-n">04</span><span>My resume process <small>The steps behind the resume that landed my job</small></span></summary>
+<div class="grail-part-body"><p class="grail-intro">I’ve been getting a lot of questions about the resume that landed me my cybersecurity job, so here’s what I did.</p>
+<aside class="grail-callout grail-salt"><p class="grail-kicker">Take this with a grain of salt</p><p>I already had tech experience, so this is what worked for me. Every job and background is different. Use what helps and leave what doesn’t.</p></aside>
+<ol class="grail-checklist grail-steps"><li><strong>Start with a base resume</strong><span>Put all your experience on it. If you don’t have quote-unquote hands-on, production experience in the field, add labs. I had three labs max, and everyone kept asking about my honeypot lab, so I learned it front to back. The first time I interviewed, I didn’t.</span></li><li><strong>Grab the job description</strong><span>Make sure the labs on your resume line up with that job.</span></li><li><strong>Put both into AI with your prompt</strong><span>I use Claude (I used to use ChatGPT). Ask it to use the keywords from the job description and align your resume to the role. It took me a few tries to get it doing exactly what I wanted.</span></li><li><strong>Review everything</strong><span>AI will embellish. Tell it to align and reword, but not to embellish. If it does, have it fix it.</span></li><li><strong>If you can’t speak to it, don’t put it on there</strong><span>Everything on your resume is up for grabs in the interview. If there’s something you can’t talk about, go do the lab and learn it, or take it off.</span></li></ol>
+<div class="resume-prompt"><div class="resume-prompt-head"><p class="grail-kicker">The prompt I use</p><button type="button" class="resume-copy" data-copy="resume-prompt-text">Copy prompt</button></div>
+<pre id="resume-prompt-text">Here is a job description and my base resume. Align my resume to this job:
+- Use relevant keywords from the job description.
+- Reword my bullet points to highlight the security side of my experience and labs.
+- Keep my real jobs, dates, tools, and results. Do not add, invent, or exaggerate anything.
+- Keep it ATS-friendly: simple formatting and standard section headings, no tables or graphics.
+- If the job asks for something my resume doesn’t support, list it separately as a gap instead of adding it.
+
+Job description:
+[paste it here]
+
+My resume:
+[paste it here, with your phone number, address, and email removed]</pre><p class="resume-note">Before pasting your resume into any AI tool, remove your phone number, address, and email.</p></div>
+<p class="grail-yougotthis">Labs, an ATS-friendly resume, and being able to speak to every line made the difference for me.</p></div></details>
+<details class="grail-part"><summary><span class="grail-part-n">05</span><span>College survival tips <small>Lessons from finishing college with <strong class="adhd">ADHD</strong></small></span></summary>
 <div class="grail-part-body"><p class="grail-intro">Lessons from completing college while managing <strong class="adhd">ADHD</strong> and other responsibilities.</p><ul class="grail-tips"><li>Finding study methods that fit how you learn.</li><li>Breaking assignments and difficult topics into smaller pieces.</li><li>Using short study sessions to avoid feeling overwhelmed.</li><li>Taking breaks when needed.</li><li>Testing your knowledge instead of only rereading material.</li><li>Explaining concepts out loud to improve understanding.</li><li>Finding supportive learning communities.</li><li>Staying consistent without expecting perfection.</li><li>Remembering that everyone’s learning journey is different.</li></ul></div></details>
 </section>
 <section class="world-shell lib" id="library" aria-labelledby="lib-title">

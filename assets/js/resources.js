@@ -98,3 +98,14 @@
   const open = () => { const t = location.hash && document.querySelector(`details${location.hash}`); if (t) { t.open = true; t.scrollIntoView({ block: "start" }); } };
   open(); addEventListener("hashchange", open);
 })();
+
+/* Copy buttons (the resume prompt). */
+document.querySelectorAll("[data-copy]").forEach(btn => btn.addEventListener("click", async () => {
+  const text = document.getElementById(btn.dataset.copy).textContent;
+  const done = msg => { btn.textContent = msg; setTimeout(() => { btn.textContent = "Copy prompt"; }, 2000); };
+  try { await navigator.clipboard.writeText(text); done("Copied ✓"); }
+  catch {
+    const range = document.createRange(); range.selectNodeContents(document.getElementById(btn.dataset.copy));
+    const sel = getSelection(); sel.removeAllRanges(); sel.addRange(range); done("Selected, press copy");
+  }
+}));

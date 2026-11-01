@@ -227,3 +227,11 @@
 .grail-small { font-size:12.5px!important; color:#bba98f!important; }
 .lib-card-top:empty { display:none; }
 .lib-stats .lib-fav { color:var(--gold); }
+.grail-salt { margin-bottom:16px; }
+.resume-prompt { margin-top:16px; padding:18px 20px; border:1px solid #ff8e9855; border-radius:14px; background:#120b10; }
+.resume-prompt-head { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+.resume-prompt-head .grail-kicker { margin:0; }
+.resume-copy { padding:9px 16px; border:1px solid #ff8e98; border-radius:30px; background:#ff4d6233; color:#fff4ef; font:600 11px ui-monospace,Menlo,monospace; letter-spacing:1.2px; text-transform:uppercase; cursor:pointer; }
+.resume-copy:hover,.resume-copy:focus-visible { background:#ff4d6255; }
+.resume-prompt pre { margin:0; padding:16px; border-radius:10px; background:#0a0709; color:#ece0de; font:13.5px/1.6 ui-monospace,Menlo,monospace; white-space:pre-wrap; word-break:break-word; overflow-x:auto; }
+.resume-note { margin:10px 0 0; color:#c8bab8; font-size:13px; }
