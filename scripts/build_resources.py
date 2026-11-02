@@ -83,25 +83,29 @@ PORTFOLIO = [
 
 # Resume process, in Dee's words.
 RESUME = [
-    ("Start with a base resume", "Put all your experience on it. If you don’t have quote-unquote hands-on, production experience in the field, add labs. I had three labs max, and everyone kept asking about my honeypot lab, so I learned it front to back. The first time I interviewed, I didn’t."),
+    ("Start with a base resume", "Put the experience on there that fits the field. You’d be surprised how much of your current job you can tie into security. If you don’t have quote-unquote hands-on, production experience in the field, add labs. I had three labs max, and everyone kept asking about my honeypot lab, so I learned it front to back. The first time I interviewed, I didn’t."),
     ("Grab the job description", "Make sure the labs on your resume line up with that job."),
     ("Put both into AI with your prompt", "I use Claude (I used to use ChatGPT). Ask it to use the keywords from the job description and align your resume to the role. It took me a few tries to get it doing exactly what I wanted."),
     ("Review everything", "AI will embellish. Tell it to align and reword, but not to embellish. If it does, have it fix it."),
     ("If you can’t speak to it, don’t put it on there", "Everything on your resume is up for grabs in the interview. If there’s something you can’t talk about, go do the lab and learn it, or take it off."),
 ]
 
-RESUME_PROMPT = """Here is a job description and my base resume. Align my resume to this job:
-- Use relevant keywords from the job description.
-- Reword my bullet points to highlight the security side of my experience and labs.
-- Keep my real jobs, dates, tools, and results. Do not add, invent, or exaggerate anything.
-- Keep it ATS-friendly: simple formatting and standard section headings, no tables or graphics.
-- If the job asks for something my resume doesn’t support, list it separately as a gap instead of adding it.
+RESUME_PROMPT = """Tailor my resume to the job description below.
 
-Job description:
-[paste it here]
+- Match my resume to the job's keywords, using the job's wording wherever it honestly describes my experience.
+- Reorder my skills and bullets so the most relevant come first.
+- Only include the certifications and projects that are relevant to this job.
+- Only use what's already in my resume. Never add or exaggerate experience, tools, skills, or numbers.
+- If the job asks for something that might be in my background but isn't clear from my resume, ask me before adding it.
+- Keep my job titles, employers, and dates the same.
+- Write it in a natural, human voice with ATS-friendly formatting (no tables or columns).
+- After the resume, list any job requirements I don't meet so I can prepare for them.
 
-My resume:
-[paste it here, with your phone number, address, and email removed]"""
+MY RESUME:
+[paste here]
+
+JOB DESCRIPTION:
+[paste here]"""
 
 COLLEGE = [
     "Finding study methods that fit how you learn.",
@@ -188,6 +192,11 @@ def grail():
 <ol class="grail-checklist grail-steps">{resume}</ol>
 <div class="resume-prompt"><div class="resume-prompt-head"><p class="grail-kicker">The prompt I use</p><button type="button" class="resume-copy" data-copy="resume-prompt-text">Copy prompt</button></div>
 <pre id="resume-prompt-text">{e(RESUME_PROMPT)}</pre><p class="resume-note">Before pasting your resume into any AI tool, remove your phone number, address, and email.</p></div>
+<div class="resume-downloads"><p class="grail-kicker">Grab the files</p><div class="resume-files">
+<a class="resume-file" href="assets/resume/dees-cyber-corner-resume-template.docx" download><span class="resume-file-icon" aria-hidden="true">W</span><span><strong>Resume template</strong><small>Fill-in-the-blank, ATS-friendly · Word (.docx)</small></span><span class="resume-file-go" aria-hidden="true">Download ↓</span></a>
+<a class="resume-file" href="assets/resume/dees-cyber-corner-resume-example.docx" download><span class="resume-file-icon" aria-hidden="true">W</span><span><strong>Example resume</strong><small>A filled-in SOC Analyst example (fictional person) · Word (.docx)</small></span><span class="resume-file-go" aria-hidden="true">Download ↓</span></a>
+<a class="resume-file" href="assets/resume/dees-cyber-corner-resume-example.pdf" target="_blank" rel="noopener"><span class="resume-file-icon pdf" aria-hidden="true">PDF</span><span><strong>Preview the example</strong><small>Opens the example as a PDF<span class="visually-hidden"> (opens in a new tab)</span></small></span><span class="resume-file-go" aria-hidden="true">View ↗</span></a>
+</div><p class="resume-note">The example is a made-up person with made-up jobs. It shows how to fill in the template, not my real resume.</p></div>
 <p class="grail-yougotthis">Labs, an ATS-friendly resume, and being able to speak to every line made the difference for me.</p></div></details>
 <details class="grail-part"><summary><span class="grail-part-n">05</span><span>College survival tips <small>Lessons from finishing college with ADHD</small></span></summary>
 <div class="grail-part-body"><p class="grail-intro">Lessons from completing college while managing ADHD and other responsibilities.</p><ul class="grail-tips">{tips}</ul></div></details>
@@ -207,7 +216,7 @@ def write(name, main, title, desc, body_class):
     head = re.sub(r'<meta property="og:[^>]*>\n|<meta name="twitter:[^>]*>\n', "", head)
     head = re.sub(r'<body class="[^"]*"', f'<body class="{body_class}"', head, count=1)
     head = re.sub(r'\n?<link rel="stylesheet" href="assets/css/resources\.css[^>]*>|\n?<script src="assets/js/resources\.js[^>]*></script>', "", head)
-    head = head.replace("</head>", '<link rel="stylesheet" href="assets/css/resources.css?v=10" />\n<script src="assets/js/resources.js?v=11" defer></script>\n</head>', 1)
+    head = head.replace("</head>", '<link rel="stylesheet" href="assets/css/resources.css?v=11" />\n<script src="assets/js/resources.js?v=11" defer></script>\n</head>', 1)
     (ROOT / name).write_text(head + main + tail)
 
 

@@ -235,3 +235,14 @@
 .resume-copy:hover,.resume-copy:focus-visible { background:#ff4d6255; }
 .resume-prompt pre { margin:0; padding:16px; border-radius:10px; background:#0a0709; color:#ece0de; font:13.5px/1.6 ui-monospace,Menlo,monospace; white-space:pre-wrap; word-break:break-word; overflow-x:auto; }
 .resume-note { margin:10px 0 0; color:#c8bab8; font-size:13px; }
+.resume-downloads { margin-top:16px; }
+.resume-downloads .grail-kicker { margin:0 0 10px; }
+.resume-files { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.cyber-world main a.resume-file { display:flex; align-items:center; gap:12px; padding:16px; border:1px solid #e8c27a55; border-radius:14px; background:radial-gradient(ellipse at 0 0,#e8c27a14,transparent 60%),#120b10; color:#f6eeea; text-decoration:none; transition:transform .25s,border-color .25s; }
+.cyber-world main a.resume-file:hover,.cyber-world main a.resume-file:focus-visible { transform:translateY(-3px); border-color:#e8c27a; }
+.resume-file-icon { flex:none; width:40px; height:48px; display:grid; place-items:center; border-radius:6px; background:#2b579a; color:#fff; font:700 15px/1 ui-monospace,Menlo,monospace; }
+.resume-file-icon.pdf { background:#b3261e; font-size:11px; }
+.resume-file strong { display:block; font:500 18px/1.2 var(--serif); color:#fff4ef; }
+.resume-file small { display:block; margin-top:3px; color:#c8bab8; font-size:12.5px; line-height:1.4; }
+.resume-file-go { margin-left:auto; flex:none; color:#e8c27a; font:600 11px ui-monospace,Menlo,monospace; letter-spacing:1px; text-transform:uppercase; }
+@media (max-width:900px) { .resume-files { grid-template-columns:1fr; } }
