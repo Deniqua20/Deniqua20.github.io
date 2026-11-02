@@ -468,7 +468,7 @@ def block(b):
     if kind == "ol":
         return "<ol>" + "".join(f"<li>{x}</li>" for x in b[1]) + "</ol>"
     if kind == "code":
-        return (f'<div class="lab-code"><div class="lab-code-bar"><span>{e(b[1])}</span><button type="button" class="lab-copy">Copy</button></div>'
+        return (f'<div class="lab-code lab-code-{e(b[1])}"><div class="lab-code-bar"><span>{e(b[1])}</span><button type="button" class="lab-copy">Copy</button></div>'
                 f'<pre><code>{e(b[2])}</code></pre></div>')
     if kind == "tip":
         return f'<p class="lab-tip"><strong>Tip</strong> {b[1]}</p>'
