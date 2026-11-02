@@ -64,7 +64,175 @@ SCENARIO_BAYOU = '''
 </section>'''
 
 # Each step is (heading, [blocks]); a block is a paragraph string, ("ul", [...]), ("code", lang, text) or ("tip", text).
+IMPORT_SCRIPT = r'''<#
+  Import-LabUsers.ps1  (Dee's Cyber Corner)
+  Bulk-creates lab users in Active Directory from a CSV file.
+  For lab use only. Use fictional data, never real employee records.
+
+  Usage (in an elevated PowerShell window on your domain controller):
+    cd C:\IAMLab
+    Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+    .\Import-LabUsers.ps1
+
+  Change -CsvPath or -OU if your file name or domain is different.
+#>
+param(
+  [string]$CsvPath = "C:\IAMLab\AD_BulkUpload_50Users.csv",
+  [string]$OU = "OU=LabUsers,DC=ad,DC=lab,DC=example,DC=com"
+)
+
+Import-Module ActiveDirectory
+
+# One temporary password for every new user. Users must change it at first sign-in.
+# It has to meet your domain's password rules (length and complexity).
+$password = Read-Host -AsSecureString "Enter a temporary password for the new users"
+
+$users   = Import-Csv -Path $CsvPath
+$created = 0
+$skipped = 0
+
+foreach ($u in $users) {
+  # Skip anyone who already exists, so the script is safe to run more than once
+  if (Get-ADUser -Filter "SamAccountName -eq '$($u.SamAccountName)'" -ErrorAction SilentlyContinue) {
+    Write-Host "Skipped (already exists): $($u.SamAccountName)" -ForegroundColor Yellow
+    $skipped++
+    continue
+  }
+  try {
+    New-ADUser -Name $u.DisplayName `
+      -GivenName $u.FirstName -Surname $u.LastName `
+      -SamAccountName $u.SamAccountName -UserPrincipalName $u.UserPrincipalName `
+      -DisplayName $u.DisplayName -EmailAddress $u.EmailAddress `
+      -Department $u.Department -Title $u.Title `
+      -Path $OU -AccountPassword $password `
+      -ChangePasswordAtLogon $true -Enabled $true
+    Write-Host "Created: $($u.SamAccountName)" -ForegroundColor Green
+    $created++
+  } catch {
+    Write-Host "Failed: $($u.SamAccountName) - $($_.Exception.Message)" -ForegroundColor Red
+    $skipped++
+  }
+}
+
+Write-Host ""
+Write-Host "Import complete"
+Write-Host "Created: $created"
+Write-Host "Skipped: $skipped"'''
+
+DOWNLOADS_ADLAB = '''
+<section class="lab-scenario" aria-labelledby="adlab-files">
+  <p class="lab-why-kicker">Lab files · fictional data</p>
+  <h2 id="adlab-files">Grab the files</h2>
+  <div class="scenario-downloads">
+    <a class="lab-download" href="../assets/labs/ad-bulk-users/AD_BulkUpload_50Users.csv" download>⬇ Sample CSV, 50 fictional users (.csv)</a>
+    <a class="lab-download" href="../assets/labs/ad-bulk-users/Import-LabUsers.ps1" download>⬇ PowerShell script (Import-LabUsers.ps1)</a>
+    <p>Every name in the sample CSV is made up. The AI prompt is in step 4.</p>
+  </div>
+</section>
+'''
+
 LABS = [
+    {
+        "slug": "ad-bulk-users-walkthrough",
+        "why": "Creating users one at a time doesn’t scale. I wanted to practice bulk provisioning with PowerShell, then see how on-premises Active Directory accounts sync to the cloud with Microsoft Entra Connect, the hybrid identity setup a lot of companies still run.",
+        "overview": "../labs.html",
+        "overview_label": "Back to Projects",
+        "title": "Bulk Active Directory Users Walkthrough",
+        "desc": "Beginner-friendly walkthrough: bulk-create 50 Active Directory users from a CSV with PowerShell, then sync them to Microsoft Entra ID with Entra Connect.",
+        "eyebrow": "Identity and access / Lab walkthrough · Beginner",
+        "h1": ("Bulk-create 50 AD users", "and sync to Entra ID."),
+        "lead": "Build a lab domain, generate 50 fictional users, create them all at once with PowerShell, and watch them show up in Microsoft Entra ID.",
+        "tags": ["Windows Server", "Active Directory", "PowerShell", "CSV", "Microsoft Entra Connect", "Microsoft Entra ID"],
+        "repo": "",
+        "need": [
+            "<a href=\"https://www.microsoft.com/en-us/evalcenter/\">Windows Server</a> (the free evaluation ISO).",
+            "<a href=\"https://www.virtualbox.org/\">VirtualBox</a> or Hyper-V to run the server as a virtual machine.",
+            "Excel or Google Sheets to check the CSV.",
+            "An AI tool like ChatGPT or Claude to generate fictional users (or use my sample CSV below).",
+            "A <a href=\"https://entra.microsoft.com\">Microsoft Entra ID</a> tenant you can test in. A free Azure account comes with one.",
+            "Fictional data only. Never use real employee information.",
+        ],
+        "learn": ["Installing Active Directory and creating an organizational unit (OU)", "Building a CSV that maps to Active Directory attributes", "Bulk-creating users with a PowerShell script", "Hybrid identity with Microsoft Entra Connect", "Verifying users on-premises and in the cloud"],
+        "flow": [("AI prompt", "Generates 50 fictional users."), ("CSV file", "One row per user, one column per attribute."), ("PowerShell", "Creates every user in the LabUsers OU."), ("Entra Connect", "Syncs the OU to the cloud."), ("Microsoft Entra ID", "The users appear, synced from on-premises AD.")],
+        "scenario": DOWNLOADS_ADLAB,
+        "steps": [
+            ("Build your Windows Server virtual machine", [
+                ("ul", ["Download the Windows Server evaluation ISO from the Microsoft Evaluation Center.",
+                        "Create a VM in VirtualBox or Hyper-V. I’d give it at least 2 CPUs, 4 GB of RAM, and 60 GB of disk.",
+                        "Install Windows Server and pick the <strong>Desktop Experience</strong> option so you get the full interface.",
+                        "Give the server a simple name (for example <code>DC01</code>) and restart."]),
+            ]),
+            ("Install Active Directory and create your domain", [
+                ("ol", ["Open <strong>Server Manager</strong>.",
+                        "Click <strong>Manage → Add Roles and Features</strong>.",
+                        "Select <strong>Active Directory Domain Services</strong>, then click <strong>Install</strong>.",
+                        "When it finishes, click <strong>Promote this server to a domain controller</strong>.",
+                        "Choose <strong>Add a new forest</strong> and enter your lab domain. I used <code>ad.lab.example.com</code>.",
+                        "Set a DSRM password, finish the wizard, and let the server restart."]),
+                "Prefer PowerShell? This does the same thing:",
+                ("code", "powershell", 'Install-WindowsFeature AD-Domain-Services -IncludeManagementTools\nInstall-ADDSForest -DomainName "ad.lab.example.com"'),
+            ]),
+            ("Create an organizational unit (OU)", [
+                ("ol", ["Open <strong>Active Directory Users and Computers</strong>.",
+                        "Right-click your domain, then <strong>New → Organizational Unit</strong>.",
+                        "Name it <code>LabUsers</code> and click <strong>OK</strong>."]),
+                ("code", "powershell", 'New-ADOrganizationalUnit -Name "LabUsers" -Path "DC=ad,DC=lab,DC=example,DC=com"'),
+                ("tip", "Keeping lab users in their own OU makes them easy to find, sync, and clean up later."),
+            ]),
+            ("Generate 50 fictional users with AI", [
+                "Paste this prompt into ChatGPT or Claude. Change the domain if yours is different.",
+                ("code", "prompt", 'Create 50 fictional employee records for an Active Directory lab. Use these CSV headers: FirstName,LastName,SamAccountName,UserPrincipalName,DisplayName,EmailAddress,Department,Title. Use unique usernames, the domain ad.lab.example.com, and example.com email addresses. Include IT, HR, Finance, Operations, Marketing, and Cybersecurity. Return only valid CSV data.'),
+                ("tip", "Don’t want to use AI? Download my sample CSV above. It’s 50 made-up users, ready to go."),
+            ]),
+            ("Save the CSV file", [
+                ("ol", ["Paste the data into Excel. If everything lands in one column, use <strong>Data → Text to Columns</strong> with a comma delimiter.",
+                        "Create a folder: <code>C:\\IAMLab</code>.",
+                        "Save as <code>AD_BulkUpload_50Users.csv</code> and choose <strong>CSV UTF-8 (Comma delimited)</strong>."]),
+                "Check it: you should have 1 header row and 50 user rows.",
+            ]),
+            ("Test the CSV in PowerShell", [
+                "Open <strong>Windows PowerShell as Administrator</strong> and make sure the file loads:",
+                ("code", "powershell", 'Import-Module ActiveDirectory\n$Users = Import-Csv "C:\\IAMLab\\AD_BulkUpload_50Users.csv"\n$Users.Count'),
+                "Expected result: <strong>50</strong>.",
+            ]),
+            ("Run the bulk import script", [
+                "Save this script as <code>C:\\IAMLab\\Import-LabUsers.ps1</code> (or download it above), then run it. It asks for one temporary password, creates every user in the LabUsers OU, and skips anyone who already exists.",
+                ("code", "powershell", IMPORT_SCRIPT),
+                ("code", "powershell", 'cd C:\\IAMLab\nSet-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass\n.\\Import-LabUsers.ps1'),
+                "Expected result: <strong>Created: 50</strong>, <strong>Skipped: 0</strong>.",
+                ("tip", "The temporary password has to meet your domain’s password rules (length and complexity), or every user will fail. Users must change it at first sign-in."),
+            ]),
+            ("Verify the users in Active Directory", [
+                "Open <strong>Active Directory Users and Computers</strong>, expand your domain, and click <strong>LabUsers</strong>. Or count them with PowerShell:",
+                ("code", "powershell", '(Get-ADUser -SearchBase "OU=LabUsers,DC=ad,DC=lab,DC=example,DC=com" -Filter *).Count'),
+                "Expected result: <strong>50</strong>.",
+            ]),
+            ("Install Microsoft Entra Connect Sync", [
+                ("ol", ["Sign in to the <strong>Microsoft Entra admin center</strong> and go to <strong>Identity → Hybrid management → Microsoft Entra Connect</strong>, then download <strong>Connect Sync</strong>.",
+                        "Run the installer on your server. In this lab that’s the domain controller.",
+                        "Choose <strong>Customize</strong>, then <strong>Password Hash Synchronization</strong>.",
+                        "Sign in with your Entra admin account, then connect your Active Directory domain with an enterprise admin account.",
+                        "On the sign-in warning, choose <strong>Continue without matching all UPN suffixes to verified domains</strong>.",
+                        "Under <strong>Domain and OU filtering</strong>, select <strong>only LabUsers</strong>.",
+                        "Finish the setup and let it start the first sync."]),
+                ("tip", "In a real company, Entra Connect runs on its own server, not the domain controller. For a lab, one server is fine."),
+            ]),
+            ("Run a sync with PowerShell", [
+                "The first sync starts automatically. To push changes right away, run:",
+                ("code", "powershell", 'Import-Module ADSync\nStart-ADSyncSyncCycle -PolicyType Delta'),
+                "Expected result: the sync request is accepted with no errors. Use <code>-PolicyType Initial</code> for a full sync after changing settings.",
+            ]),
+            ("Verify the users in Microsoft Entra ID", [
+                ("ol", ["Go to <a href=\"https://entra.microsoft.com\">entra.microsoft.com</a> → <strong>Users → All users</strong>.",
+                        "Search for one of your users (for example, Andrea McKee).",
+                        "Open the user and check that <strong>On-premises sync enabled</strong> says <strong>Yes</strong>."]),
+                ("tip", "Because <code>example.com</code> isn’t a domain you own, the synced users sign in as <code>name@yourtenant.onmicrosoft.com</code>. That’s normal for a lab."),
+            ]),
+        ],
+        "check": ["Your CSV has 1 header row and 50 users.", "The script reports Created: 50.", "All 50 users are in the LabUsers OU.", "Entra Connect is installed and syncing only LabUsers.", "The sync ran with no errors.", "Your users show in Entra ID with on-premises sync enabled."],
+        "cleanup": "Uninstall Microsoft Entra Connect, then delete the synced test users in Entra ID. Synced users stay in the cloud until you remove them. Delete the VM when you’re done.",
+        "interview": ["Why bulk provisioning with a script beats creating users by hand.", "How each CSV column maps to an Active Directory attribute.", "Why the script skips existing users, so it’s safe to run more than once.", "What Entra Connect does, and why password hash sync is a common choice.", "Why you filtered the sync to one OU, and what the UPN suffix warning means."],
+    },
     {
         "slug": "identity-lifecycle-walkthrough",
         "why": "Orphaned accounts, where people keep access after they leave, are one of the most common identity risks. I wanted to go beyond creating users and show offboarding that is automatic, auditable, and has no manual steps, the way enterprise IAM teams handle terminations at scale.",
@@ -299,13 +467,13 @@ def block(b):
 def page(lab):
     flow = "".join(f"<li><strong>{e(t)}</strong><span>{e(d)}</span></li>" for t, d in lab["flow"])
     steps = "".join(f'<li class="lab-step"><h3>{e(h)}</h3>{"".join(block(b) for b in bs)}</li>' for h, bs in lab["steps"])
-    repos = f'<a href="{lab["repo"]}">See my original write-up on GitHub</a>'
+    repos = f'<a href="{lab["repo"]}">See my original write-up on GitHub</a>' if lab["repo"] else ""
     if lab.get("repo2"):
         repos += f' · <a href="{lab["repo2"]}">SSO app integration write-up</a>'
     cleanup = f'<h2>Clean up</h2><p class="lab-cleanup">{lab["cleanup"]}</p>' if lab["cleanup"] else ""
     return f'''<main id="main" class="lab-walkthrough">
       <section class="interior-hero shell">
-        <a class="text-link" href="{lab["overview"]}">Back to the project overview</a>
+        <a class="text-link" href="{lab["overview"]}">{lab.get("overview_label", "Back to the project overview")}</a>
         <p class="eyebrow">{e(lab["eyebrow"])}</p>
         <h1>{e(lab["h1"][0])}<br /><em>{e(lab["h1"][1])}</em></h1>
         <p class="lead">{e(lab["lead"])}</p>
@@ -329,7 +497,7 @@ def page(lab):
         <div class="lab-interview"><p class="lab-interview-kicker">Interview ready</p><h2>Be ready to explain</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in lab["interview"])}</ul>
         <p>Know your work front to back and you’ll be ready when someone says “walk me through it.”</p></div>
         <p class="lab-source">This walkthrough follows my lab. Portals and menus change over time, so names may look slightly different when you try it. {repos}</p>
-        <a class="button" href="{lab["overview"]}">Back to the project overview</a>
+        <a class="button" href="{lab["overview"]}">{lab.get("overview_label", "Back to the project overview")}</a>
       </section>
     </main>'''
 

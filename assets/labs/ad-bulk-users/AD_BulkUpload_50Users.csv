@@ -1,0 +1,51 @@
+﻿FirstName,LastName,SamAccountName,UserPrincipalName,DisplayName,EmailAddress,Department,Title
+Andrea,McKee,amckee,andrea.mckee@ad.lab.example.com,Andrea McKee,andrea.mckee@ad.lab.example.com,IT,Help Desk Technician
+James,Anderson,janderson,james.anderson@ad.lab.example.com,James Anderson,james.anderson@ad.lab.example.com,HR,HR Generalist
+Maria,Garcia,mgarcia,maria.garcia@ad.lab.example.com,Maria Garcia,maria.garcia@ad.lab.example.com,Finance,Accountant
+Robert,Brown,rbrown,robert.brown@ad.lab.example.com,Robert Brown,robert.brown@ad.lab.example.com,Operations,Operations Coordinator
+Emily,Davis,edavis,emily.davis@ad.lab.example.com,Emily Davis,emily.davis@ad.lab.example.com,Marketing,Marketing Specialist
+Marcus,Whitfield,mwhitfield,marcus.whitfield@ad.lab.example.com,Marcus Whitfield,marcus.whitfield@ad.lab.example.com,Cybersecurity,SOC Analyst
+Tanya,Ellison,tellison,tanya.ellison@ad.lab.example.com,Tanya Ellison,tanya.ellison@ad.lab.example.com,IT,Systems Administrator
+Kevin,Park,kpark,kevin.park@ad.lab.example.com,Kevin Park,kevin.park@ad.lab.example.com,HR,Recruiter
+Aisha,Rahman,arahman,aisha.rahman@ad.lab.example.com,Aisha Rahman,aisha.rahman@ad.lab.example.com,Finance,Financial Analyst
+Brian,Foster,bfoster,brian.foster@ad.lab.example.com,Brian Foster,brian.foster@ad.lab.example.com,Operations,Logistics Analyst
+Sofia,Delgado,sdelgado,sofia.delgado@ad.lab.example.com,Sofia Delgado,sofia.delgado@ad.lab.example.com,Marketing,Content Coordinator
+Darnell,Hayes,dhayes,darnell.hayes@ad.lab.example.com,Darnell Hayes,darnell.hayes@ad.lab.example.com,Cybersecurity,IAM Analyst
+Lauren,Mitchell,lmitchell,lauren.mitchell@ad.lab.example.com,Lauren Mitchell,lauren.mitchell@ad.lab.example.com,IT,Network Engineer
+Miguel,Torres,mtorres,miguel.torres@ad.lab.example.com,Miguel Torres,miguel.torres@ad.lab.example.com,HR,HR Coordinator
+Keisha,Coleman,kcoleman,keisha.coleman@ad.lab.example.com,Keisha Coleman,keisha.coleman@ad.lab.example.com,Finance,Payroll Specialist
+Ethan,Brooks,ebrooks,ethan.brooks@ad.lab.example.com,Ethan Brooks,ethan.brooks@ad.lab.example.com,Operations,Project Manager
+Priya,Nair,pnair,priya.nair@ad.lab.example.com,Priya Nair,priya.nair@ad.lab.example.com,Marketing,Social Media Manager
+Jordan,Bishop,jbishop,jordan.bishop@ad.lab.example.com,Jordan Bishop,jordan.bishop@ad.lab.example.com,Cybersecurity,Security Engineer
+Nia,Okafor,nokafor,nia.okafor@ad.lab.example.com,Nia Okafor,nia.okafor@ad.lab.example.com,IT,Help Desk Technician
+Carlos,Ramirez,cramirez,carlos.ramirez@ad.lab.example.com,Carlos Ramirez,carlos.ramirez@ad.lab.example.com,HR,HR Generalist
+Hannah,Price,hprice,hannah.price@ad.lab.example.com,Hannah Price,hannah.price@ad.lab.example.com,Finance,Accountant
+Andre,Sutton,asutton,andre.sutton@ad.lab.example.com,Andre Sutton,andre.sutton@ad.lab.example.com,Operations,Operations Coordinator
+Grace,Kim,gkim,grace.kim@ad.lab.example.com,Grace Kim,grace.kim@ad.lab.example.com,Marketing,Marketing Specialist
+Tyler,Lawson,tlawson,tyler.lawson@ad.lab.example.com,Tyler Lawson,tyler.lawson@ad.lab.example.com,Cybersecurity,SOC Analyst
+Imani,Pierce,ipierce,imani.pierce@ad.lab.example.com,Imani Pierce,imani.pierce@ad.lab.example.com,IT,Systems Administrator
+Victor,Castillo,vcastillo,victor.castillo@ad.lab.example.com,Victor Castillo,victor.castillo@ad.lab.example.com,HR,Recruiter
+Chloe,Bennett,cbennett,chloe.bennett@ad.lab.example.com,Chloe Bennett,chloe.bennett@ad.lab.example.com,Finance,Financial Analyst
+Isaiah,Grant,igrant,isaiah.grant@ad.lab.example.com,Isaiah Grant,isaiah.grant@ad.lab.example.com,Operations,Logistics Analyst
+Leah,Holloway,lholloway,leah.holloway@ad.lab.example.com,Leah Holloway,leah.holloway@ad.lab.example.com,Marketing,Content Coordinator
+Omar,Farouk,ofarouk,omar.farouk@ad.lab.example.com,Omar Farouk,omar.farouk@ad.lab.example.com,Cybersecurity,IAM Analyst
+Jasmine,Reed,jreed,jasmine.reed@ad.lab.example.com,Jasmine Reed,jasmine.reed@ad.lab.example.com,IT,Network Engineer
+Derek,Hampton,dhampton,derek.hampton@ad.lab.example.com,Derek Hampton,derek.hampton@ad.lab.example.com,HR,HR Coordinator
+Monica,Vaughn,mvaughn,monica.vaughn@ad.lab.example.com,Monica Vaughn,monica.vaughn@ad.lab.example.com,Finance,Payroll Specialist
+Xavier,Moreno,xmoreno,xavier.moreno@ad.lab.example.com,Xavier Moreno,xavier.moreno@ad.lab.example.com,Operations,Project Manager
+Rachel,Stewart,rstewart,rachel.stewart@ad.lab.example.com,Rachel Stewart,rachel.stewart@ad.lab.example.com,Marketing,Social Media Manager
+Malik,Jennings,mjennings,malik.jennings@ad.lab.example.com,Malik Jennings,malik.jennings@ad.lab.example.com,Cybersecurity,Security Engineer
+Olivia,Carter,ocarter,olivia.carter@ad.lab.example.com,Olivia Carter,olivia.carter@ad.lab.example.com,IT,Help Desk Technician
+Terrence,Booker,tbooker,terrence.booker@ad.lab.example.com,Terrence Booker,terrence.booker@ad.lab.example.com,HR,HR Generalist
+Bianca,Navarro,bnavarro,bianca.navarro@ad.lab.example.com,Bianca Navarro,bianca.navarro@ad.lab.example.com,Finance,Accountant
+Noah,Fleming,nfleming,noah.fleming@ad.lab.example.com,Noah Fleming,noah.fleming@ad.lab.example.com,Operations,Operations Coordinator
+Kendra,Dawson,kdawson,kendra.dawson@ad.lab.example.com,Kendra Dawson,kendra.dawson@ad.lab.example.com,Marketing,Marketing Specialist
+Luis,Ortega,lortega,luis.ortega@ad.lab.example.com,Luis Ortega,luis.ortega@ad.lab.example.com,Cybersecurity,SOC Analyst
+Megan,Russell,mrussell,megan.russell@ad.lab.example.com,Megan Russell,megan.russell@ad.lab.example.com,IT,Systems Administrator
+Jamal,Tatum,jtatum,jamal.tatum@ad.lab.example.com,Jamal Tatum,jamal.tatum@ad.lab.example.com,HR,Recruiter
+Vanessa,Wells,vwells,vanessa.wells@ad.lab.example.com,Vanessa Wells,vanessa.wells@ad.lab.example.com,Finance,Financial Analyst
+Caleb,Monroe,cmonroe,caleb.monroe@ad.lab.example.com,Caleb Monroe,caleb.monroe@ad.lab.example.com,Operations,Logistics Analyst
+Tiana,Figueroa,tfigueroa,tiana.figueroa@ad.lab.example.com,Tiana Figueroa,tiana.figueroa@ad.lab.example.com,Marketing,Content Coordinator
+Ryan,Barnes,rbarnes,ryan.barnes@ad.lab.example.com,Ryan Barnes,ryan.barnes@ad.lab.example.com,Cybersecurity,IAM Analyst
+Alexis,Quinn,aquinn,alexis.quinn@ad.lab.example.com,Alexis Quinn,alexis.quinn@ad.lab.example.com,IT,Network Engineer
+Devin,Chambers,dchambers,devin.chambers@ad.lab.example.com,Devin Chambers,devin.chambers@ad.lab.example.com,HR,HR Coordinator
