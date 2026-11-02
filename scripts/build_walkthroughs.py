@@ -241,7 +241,15 @@ LABS = [
             ]),
         ],
         "check": ["Your CSV has 1 header row and 50 users.", "The script reports Created: 50.", "All 50 users are in the LabUsers OU.", "Entra Connect is installed and syncing only LabUsers.", "The sync ran with no errors.", "Your users show in Entra ID with on-premises sync enabled."],
-        "cleanup": "Uninstall Microsoft Entra Connect, then delete the synced test users in Entra ID. Synced users stay in the cloud until you remove them. Delete the VM when you’re done.",
+        "cleanup": [
+            "<strong>Remove the users from Active Directory.</strong> In PowerShell (as administrator) on your server, run <code>Get-ADUser -SearchBase \"OU=LabUsers,DC=ad,DC=lab,DC=example,DC=com\" -Filter * | Remove-ADUser -Confirm:$false</code>",
+            "<strong>Sync the deletion to the cloud.</strong> Run <code>Start-ADSyncSyncCycle -PolicyType Delta</code>. The users move to <strong>Deleted users</strong> in Entra ID.",
+            "<strong>Delete them for good.</strong> In the Entra admin center, go to <strong>Users → Deleted users</strong>, select your lab users, and choose <strong>Delete permanently</strong>. Otherwise they stay there for 30 days.",
+            "<strong>Uninstall Microsoft Entra Connect.</strong> On the server, open <strong>Settings → Apps</strong>, find <strong>Microsoft Entra Connect Sync</strong>, and uninstall it.",
+            "<strong>Remove the leftover sync account.</strong> Entra Connect creates an account in your tenant whose name starts with <code>Sync_</code> (it may show as On-Premises Directory Synchronization Service Account). Find it in <strong>Users → All users</strong> and delete it.",
+            "<strong>Delete the VM.</strong> In VirtualBox, right-click the VM, choose <strong>Remove</strong>, then <strong>Delete all files</strong> to free up disk space.",
+            "<strong>Check your Azure account.</strong> This lab doesn’t create paid Azure resources, but if you made any while exploring, delete them so nothing bills after your free credit ends.",
+        ],
         "interview": ["Why bulk provisioning with a script beats creating users by hand.", "How each CSV column maps to an Active Directory attribute.", "Why the script skips existing users, so it’s safe to run more than once.", "What Entra Connect does, and why password hash sync is a common choice.", "Why you filtered the sync to one OU, and what the UPN suffix warning means."],
     },
     {
@@ -481,7 +489,10 @@ def page(lab):
     repos = f'<a href="{lab["repo"]}">See my original write-up on GitHub</a>' if lab["repo"] else ""
     if lab.get("repo2"):
         repos += f' · <a href="{lab["repo2"]}">SSO app integration write-up</a>'
-    cleanup = f'<h2>Clean up</h2><p class="lab-cleanup">{lab["cleanup"]}</p>' if lab["cleanup"] else ""
+    if isinstance(lab["cleanup"], list):
+        cleanup = '<h2>Clean up</h2><ol class="lab-cleanup lab-cleanup-steps">' + "".join(f"<li>{x}</li>" for x in lab["cleanup"]) + "</ol>"
+    else:
+        cleanup = f'<h2>Clean up</h2><p class="lab-cleanup">{lab["cleanup"]}</p>' if lab["cleanup"] else ""
     return f'''<main id="main" class="lab-walkthrough">
       <section class="interior-hero shell">
         <a class="text-link" href="{lab["overview"]}">{lab.get("overview_label", "Back to the project overview")}</a>
