@@ -504,6 +504,7 @@ def page(lab):
       <section class="shell prose">
         <div class="lab-why"><p class="lab-why-kicker">Why I built this lab</p><p>{e(lab["why"])}</p></div>
         <p class="lab-adjust"><strong>Make it your own.</strong> This is how I did it, not the only way. Feel free to adjust the lab to your liking: change the names, tools, or scope, or take it further. What matters is that you understand what you built and why.</p>
+        <div class="lab-stuck"><p class="lab-why-kicker">Stuck on an error?</p><p>It happens to everyone, me included. Copy the <strong>full error message</strong> and paste it into an AI tool like ChatGPT or Claude. Tell it which step you’re on and what you were trying to do, and ask it to explain the error and help you fix it. Never paste passwords, keys, or personal information.</p></div>
         <div class="lab-start">
           <div><h2>Before you start</h2><ul>{"".join(f"<li>{x}</li>" for x in lab["need"])}</ul></div>
           <div><h2>What you’ll learn</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in lab["learn"])}</ul></div>

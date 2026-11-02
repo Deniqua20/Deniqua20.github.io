@@ -378,3 +378,6 @@
 .lab-cleanup-steps { display:grid; gap:10px; margin:0; padding:18px 20px 18px 42px; line-height:1.6; }
 .lab-cleanup-steps li::marker { color:#ff8e98; font-weight:600; }
 .lab-cleanup-steps code { white-space:normal; word-break:break-word; }
+.lab-stuck { margin:0 0 22px; padding:16px 20px; border:1px solid #7ed3a155; border-left:4px solid #7ed3a1; border-radius:12px; background:#0f1a14; }
+.lab-stuck .lab-why-kicker { color:#9fe3bb; margin:0 0 6px; }
+.lab-stuck p:last-child { margin:0; color:#e6efe9; line-height:1.6; }
