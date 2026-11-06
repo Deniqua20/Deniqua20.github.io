@@ -86,7 +86,7 @@ RESUME = [
     ("Start with a base resume", "Put the experience on there that fits the field. You’d be surprised how much of your current job you can tie into security. If you don’t have quote-unquote hands-on, production experience in the field, add labs. I had three labs max, and everyone kept asking about my honeypot lab, so I learned it front to back. The first time I interviewed, I didn’t."),
     ("Grab the job description", "Make sure the labs on your resume line up with that job."),
     ("Put both into AI with your prompt", "I use Claude (I used to use ChatGPT). Ask it to use the keywords from the job description and align your resume to the role. It took me a few tries to get it doing exactly what I wanted."),
-    ("Review everything", "AI will embellish. Tell it to align and reword, but not to embellish. If it does, have it fix it."),
+    ("Review everything, then adjust it yourself", "AI will embellish. Tell it to align and reword, but not to embellish, and if it does, have it fix it. Then go through and adjust the wording yourself. A lot of people are using AI for their resumes, so many sound the same. Resumes that read as AI-written or stuffed with keywords can get filtered out by ATS or passed over by recruiters. Make sure it sounds like you."),
     ("If you can’t speak to it, don’t put it on there", "Everything on your resume is up for grabs in the interview. If there’s something you can’t talk about, go do the lab and learn it, or take it off."),
 ]
 
